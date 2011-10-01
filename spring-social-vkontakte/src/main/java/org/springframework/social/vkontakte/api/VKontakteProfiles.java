@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * TODO: add description
+ * Collection of profiles.
  * @author vkolodrevskiy
  */
 public class VKontakteProfiles extends VKResponse implements Serializable {

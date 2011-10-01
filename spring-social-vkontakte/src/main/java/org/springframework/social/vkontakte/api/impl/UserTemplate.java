@@ -61,7 +61,7 @@ class UserTemplate extends AbstractVKontakteOperations implements UserOperations
         VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
         checkForError(profiles);
 
-        return restTemplate.getForObject(uri, VKontakteProfiles.class).getProfiles();
+        return profiles.getProfiles();
     }
 
     @Override

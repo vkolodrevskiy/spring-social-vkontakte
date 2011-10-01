@@ -15,10 +15,25 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 /**
  * {@link VKontakteTemplate} test.
  * @author vkolodrevskiy
  */
 public class VKontakteTemplateTest {
-    // TODO: need to come back on this
+    @Test
+    public void isAuthorizedForUser() {
+        VKontakteTemplate twitter = new VKontakteTemplate("ACCESS_TOKEN", "USER_ID");
+        assertTrue(twitter.isAuthorized());
+    }
+
+    @Test
+    public void isAuthorizedForUser_notAuthorized() {
+        VKontakteTemplate twitter = new VKontakteTemplate();
+        assertFalse(twitter.isAuthorized());
+    }
 }

@@ -20,7 +20,7 @@ import org.springframework.social.ApiBinding;
 /**
  * Interface specifying a basic set of operations for interacting with VKontakte.
  * Implemented by {@link org.springframework.social.vkontakte.api.impl.VKontakteTemplate}.
- * @author Craig Walls
+ * @author vkolodrevskiy
  */
 public interface VKontakte extends ApiBinding {
 
