@@ -57,7 +57,7 @@ class AbstractVKontakteOperations {
     //       like for error code 113 that would be let's say InvalidUserIdVKException
     protected <T extends VKResponse> void checkForError(T toCheck) {
         if(toCheck.getError() != null) {
-            throw new VKontakteErrorException(toCheck.getError().getErrorCode(), toCheck.getError().getErrorMsg());
+            throw new VKontakteErrorException(toCheck.getError());
         }
     }
 }

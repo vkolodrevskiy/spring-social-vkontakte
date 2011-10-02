@@ -16,7 +16,7 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.springframework.social.support.URIBuilder;
-import org.springframework.social.vkontakte.api.FriendOperations;
+import org.springframework.social.vkontakte.api.FriendsOperations;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
 import org.springframework.social.vkontakte.api.VKontakteProfiles;
 import org.springframework.web.client.RestTemplate;
@@ -26,10 +26,10 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * {@link FriendOperations} implementation.
+ * {@link org.springframework.social.vkontakte.api.FriendsOperations} implementation.
  * @author vkolodrevskiy
  */
-class FriendsTemplate extends AbstractVKontakteOperations implements FriendOperations {
+class FriendsTemplate extends AbstractVKontakteOperations implements FriendsOperations {
     private final RestTemplate restTemplate;
 
     public FriendsTemplate(RestTemplate restTemplate, String accessToken, boolean isAuthorizedForUser) {
@@ -38,7 +38,7 @@ class FriendsTemplate extends AbstractVKontakteOperations implements FriendOpera
     }
 
     @Override
-    public List<VKontakteProfile> getFriends() {
+    public List<VKontakteProfile> get() {
         requireAuthorization();
         Properties props = new Properties();
 
@@ -52,7 +52,7 @@ class FriendsTemplate extends AbstractVKontakteOperations implements FriendOpera
     }
 
     @Override
-    public List<VKontakteProfile> getFriends(String userId) {
+    public List<VKontakteProfile> get(String userId) {
         requireAuthorization();
         Properties props = new Properties();
 

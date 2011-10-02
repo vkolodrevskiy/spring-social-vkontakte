@@ -27,15 +27,15 @@ public interface VKontakte extends ApiBinding {
     /**
 	 * API for performing operations on VKontakte user profiles.
 	 */
-    public UserOperations userOperations();
+    public UsersOperations usersOperations();
 
 	/**
 	 * API for performing operations on feeds.
 	 */
-    public FeedOperations feedOperations();
+    public WallOperations wallOperations();
 
 	/**
 	 * API for performing operations with a user's set of friends.
 	 */
-    public FriendOperations friendOperations();
+    public FriendsOperations friendsOperations();
 }

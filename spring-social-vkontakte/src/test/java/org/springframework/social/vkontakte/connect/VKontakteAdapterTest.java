@@ -15,14 +15,15 @@
  */
 package org.springframework.social.vkontakte.connect;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.social.connect.UserProfile;
-import org.springframework.social.vkontakte.api.UserOperations;
+import org.springframework.social.vkontakte.api.UsersOperations;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * {@link VKontakteAdapter} test.
@@ -32,12 +33,12 @@ public class VKontakteAdapterTest {
 	private VKontakteAdapter apiAdapter = new VKontakteAdapter();
 	
 	private VKontakte vkontakte = Mockito.mock(VKontakte.class);
-    private UserOperations userOperations = Mockito.mock(UserOperations.class);
+    private UsersOperations usersOperations = Mockito.mock(UsersOperations.class);
 	
 	@Test
 	public void fetchProfile() {
-		Mockito.when(userOperations.getUserProfile()).thenReturn(new VKontakteProfile("123", "Viktor", "Kolodrevskiy", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg"));
-        Mockito.when(vkontakte.userOperations()).thenReturn(userOperations);
+		Mockito.when(usersOperations.getProfile()).thenReturn(new VKontakteProfile("123", "Viktor", "Kolodrevskiy", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg"));
+        Mockito.when(vkontakte.usersOperations()).thenReturn(usersOperations);
 
         UserProfile profile = apiAdapter.fetchUserProfile(vkontakte);
 		assertEquals("Viktor Kolodrevskiy", profile.getName());

@@ -16,7 +16,7 @@
 package org.springframework.social.vkontakte.api;
 
 /**
- * Model class representing an entry in a feed.
+ * Model class representing an entry in a wall.
  * @author vkolodrevskiy
  */
 public class Post {

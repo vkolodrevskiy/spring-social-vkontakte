@@ -19,9 +19,11 @@ import java.io.Serializable;
 
 /**
  * VKontakte returns multiple posts.
- * * @author vkolodrevskiy
+ * @author vkolodrevskiy
  */
 public class Posts extends VKResponse implements Serializable {
+    public static final long serialVersionUID = -1;
+
     private Post post;
 
     public Post getPost() {

@@ -23,6 +23,8 @@ import java.util.List;
  * @author vkolodrevskiy
  */
 public class VKontakteProfiles extends VKResponse implements Serializable {
+    public static final long serialVersionUID = -1;
+
     private List<VKontakteProfile> profiles;
 
     public List<VKontakteProfile> getProfiles() {

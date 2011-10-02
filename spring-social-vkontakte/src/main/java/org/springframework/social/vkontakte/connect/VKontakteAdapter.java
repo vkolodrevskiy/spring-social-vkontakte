@@ -30,7 +30,7 @@ import org.springframework.social.vkontakte.api.VKontakteProfile;
 public class VKontakteAdapter implements ApiAdapter<VKontakte> {
 	public boolean test(VKontakte vkontakte) {
 		try {
-			vkontakte.userOperations().getUserProfile();
+			vkontakte.usersOperations().getProfile();
 			return true;
 		} catch (ApiException e) {
 			return false;
@@ -38,7 +38,7 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
 	}
 
 	public void setConnectionValues(VKontakte vkontakte, ConnectionValues values) {
-		VKontakteProfile profile = vkontakte.userOperations().getUserProfile();
+		VKontakteProfile profile = vkontakte.usersOperations().getProfile();
 		values.setProviderUserId(profile.getUid());
 		values.setDisplayName(profile.getFirstName() + " " + profile.getLastName());
 		values.setProfileUrl("http://vkontakte.ru/id" + profile.getUid());
@@ -46,7 +46,7 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
 	}
 
 	public UserProfile fetchUserProfile(VKontakte vkontakte) {
-		VKontakteProfile profile = vkontakte.userOperations().getUserProfile();
+		VKontakteProfile profile = vkontakte.usersOperations().getProfile();
 		return new UserProfileBuilder()
                 .setFirstName(profile.getFirstName())
                 .setLastName(profile.getLastName())
@@ -55,6 +55,6 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
 	}
 
 	public void updateStatus(VKontakte vkontakte, String message) {
-		vkontakte.feedOperations().updateStatus(message);
+		vkontakte.wallOperations().post(message);
 	}
 }

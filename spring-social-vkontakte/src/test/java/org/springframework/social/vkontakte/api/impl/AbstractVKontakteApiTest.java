@@ -27,13 +27,9 @@ import org.springframework.social.test.client.MockRestServiceServer;
  * @author vkolodrevskiy
  */
 public class AbstractVKontakteApiTest {
-
 	protected VKontakteTemplate vkontakte;
-
-	protected VKontakteTemplate unauthorizedTwitter;
-
+	protected VKontakteTemplate unauthorizedVKontakte;
 	protected MockRestServiceServer mockServer;
-
 	protected HttpHeaders responseHeaders;
 
 	@Before
@@ -42,9 +38,9 @@ public class AbstractVKontakteApiTest {
 		mockServer = MockRestServiceServer.createServer(vkontakte.getRestTemplate());
 		responseHeaders = new HttpHeaders();
 		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
-		unauthorizedTwitter = new VKontakteTemplate();
+		unauthorizedVKontakte = new VKontakteTemplate();
 		// create a mock server just to avoid hitting real vkontakte if something gets past the authorization check
-		MockRestServiceServer.createServer(unauthorizedTwitter.getRestTemplate());
+		MockRestServiceServer.createServer(unauthorizedVKontakte.getRestTemplate());
 	}
 
 	protected Resource jsonResource(String filename) {

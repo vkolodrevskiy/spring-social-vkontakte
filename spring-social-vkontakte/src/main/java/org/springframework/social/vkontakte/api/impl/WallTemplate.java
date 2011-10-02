@@ -16,27 +16,27 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.springframework.social.support.URIBuilder;
-import org.springframework.social.vkontakte.api.FeedOperations;
 import org.springframework.social.vkontakte.api.Posts;
+import org.springframework.social.vkontakte.api.WallOperations;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.Properties;
 
 /**
- * {@link FeedOperations} implementation.
+ * {@link org.springframework.social.vkontakte.api.WallOperations} implementation.
  * @author vkolodrevskiy
  */
-public class FeedTemplate extends AbstractVKontakteOperations implements FeedOperations {
+public class WallTemplate extends AbstractVKontakteOperations implements WallOperations {
     private final RestTemplate restTemplate;
 
-    public FeedTemplate(RestTemplate restTemplate, String accessToken, boolean isAuthorizedForUser) {
+    public WallTemplate(RestTemplate restTemplate, String accessToken, boolean isAuthorizedForUser) {
         super(isAuthorizedForUser, accessToken);
         this.restTemplate = restTemplate;
     }
 
     @Override
-    public String updateStatus(String message) {
+    public String post(String message) {
         requireAuthorization();
         Properties props = new Properties();
         props.put("message", message);

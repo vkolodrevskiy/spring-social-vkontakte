@@ -18,24 +18,27 @@ package org.springframework.social.vkontakte.api;
 import java.util.List;
 
 /**
- * Defines operations for interacting with a user's friends.
+ * User operations.
  * @author vkolodrevskiy
  */
-public interface FriendOperations {
-    /**
-     * Retrieves a list of user friends for the current authorized user.
-     * @return a list of user friends profiles.
+public interface UsersOperations {
+	/**
+	 * Retrieves the profile for the authenticated user.
+	 * @return the user's profile information.
 	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
 	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
-     */
-    public List<VKontakteProfile> getFriends();
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+	 */
+	VKontakteProfile getProfile();
 
-    /**
-     * Retrieves a list of user friends for specified user unique identifier.
-     * @param userId user unique identifier for which to get friends.
-     * @return a list of user friends profiles.
+	/**
+	 * Retrieves profiles for specified user unique identifiers.
+	 * @param userIds VKontakte user profile unique identifiers, for which to gt data.
+     * If <code>null<code/> is passed user profile or the current user will be returned.
+	 * @return the user's profile information.
 	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
 	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
-     */
-    public List<VKontakteProfile> getFriends(String userId);
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+	 */
+	List<VKontakteProfile> getProfiles(List<String> userIds);
 }

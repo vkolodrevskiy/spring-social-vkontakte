@@ -15,8 +15,8 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
-import org.springframework.social.vkontakte.api.UserOperations;
 import org.springframework.social.support.URIBuilder;
+import org.springframework.social.vkontakte.api.UsersOperations;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
 import org.springframework.social.vkontakte.api.VKontakteProfiles;
 import org.springframework.web.client.RestTemplate;
@@ -29,19 +29,19 @@ import java.util.Properties;
  * User operations.
  * @author vkolodrevskiy
  */
-class UserTemplate extends AbstractVKontakteOperations implements UserOperations {
+class UsersTemplate extends AbstractVKontakteOperations implements UsersOperations {
     private final RestTemplate restTemplate;
 
     private final String uid;
 
-    public UserTemplate(RestTemplate restTemplate, String accessToken, String uid, boolean isAuthorizedForUser) {
+    public UsersTemplate(RestTemplate restTemplate, String accessToken, String uid, boolean isAuthorizedForUser) {
         super(isAuthorizedForUser, accessToken);
         this.restTemplate = restTemplate;
         this.uid = uid;
     }
 
     @Override
-    public List<VKontakteProfile> getUserProfiles(List<String> userIds) {
+    public List<VKontakteProfile> getProfiles(List<String> userIds) {
         requireAuthorization();
         Properties props = new Properties();
 
@@ -65,7 +65,7 @@ class UserTemplate extends AbstractVKontakteOperations implements UserOperations
     }
 
     @Override
-    public VKontakteProfile getUserProfile() {
-        return getUserProfiles(null).get(0);
+    public VKontakteProfile getProfile() {
+        return getProfiles(null).get(0);
     }
 }

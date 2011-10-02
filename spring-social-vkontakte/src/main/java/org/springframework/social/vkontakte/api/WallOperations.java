@@ -15,28 +15,19 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import java.util.List;
-
 /**
- * User operations.
+ * Interface defining operations that can be performed on a VKontakte wall.
  * @author vkolodrevskiy
  */
-public interface UserOperations {
+public interface WallOperations {
 	/**
-	 * Retrieves the profile for the authenticated user.
-	 * @return the user's profile information.
+	 * Posts a status update to the authenticated user's wall.
+	 * Requires "publish_stream" permission.
+	 * @param message the message to post.
+	 * @return the ID of the new wall entry.
 	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
 	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
 	 */
-	VKontakteProfile getUserProfile();
-
-	/**
-	 * Retrieves profiles for specified user unique identifiers.
-	 * @param userIds VKontakte user profile unique identifiers, for which to gt data.
-     * If <code>null<code/> is passed user profile or the current user will be returned.
-	 * @return the user's profile information.
-	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
-	 */
-	List<VKontakteProfile> getUserProfiles(List<String> userIds);
+	String post(String message);
 }

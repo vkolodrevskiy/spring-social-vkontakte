@@ -17,22 +17,22 @@ package org.springframework.social.vkontakte.api;
 
 /**
  * Represents error that VKontakte can return.
- * * @author vkolodrevskiy
+ * @author vkolodrevskiy
  */
 public class Error {
-    private final String errorCode;
-    private final String errorMsg;
+    private final String code;
+    private final String message;
 
-    public Error(String errorCode, String errorMsg) {
-        this.errorCode = errorCode;
-        this.errorMsg = errorMsg;
+    public Error(String code, String message) {
+        this.code = code;
+        this.message = message;
     }
 
-    public String getErrorCode() {
-        return errorCode;
+    public String getCode() {
+        return code;
     }
 
-    public String getErrorMsg() {
-        return errorMsg;
+    public String getMessage() {
+        return message;
     }
 }

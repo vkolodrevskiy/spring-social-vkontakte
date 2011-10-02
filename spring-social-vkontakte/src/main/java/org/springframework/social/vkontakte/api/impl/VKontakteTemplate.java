@@ -16,12 +16,12 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.social.vkontakte.api.*;
-import org.springframework.social.vkontakte.api.impl.json.VKontakteModule;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
+import org.springframework.social.vkontakte.api.*;
+import org.springframework.social.vkontakte.api.impl.json.VKontakteModule;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -39,9 +39,9 @@ import java.util.List;
  */
 public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKontakte {
 
-    private UserOperations userOperations;
-    private FeedOperations feedOperations;
-    private FriendOperations friendOperations;
+    private UsersOperations usersOperations;
+    private WallOperations wallOperations;
+    private FriendsOperations friendsOperations;
 
     private final String accessToken;
     private final String uid;
@@ -83,23 +83,23 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     }
 
     private void initSubApis() {
-        userOperations = new UserTemplate(getRestTemplate(), accessToken, uid, isAuthorized());
-        friendOperations = new FriendsTemplate(getRestTemplate(), accessToken, isAuthorized());
-        feedOperations = new FeedTemplate(getRestTemplate(), accessToken, isAuthorized());
+        usersOperations = new UsersTemplate(getRestTemplate(), accessToken, uid, isAuthorized());
+        friendsOperations = new FriendsTemplate(getRestTemplate(), accessToken, isAuthorized());
+        wallOperations = new WallTemplate(getRestTemplate(), accessToken, isAuthorized());
     }
 
     @Override
-    public UserOperations userOperations() {
-        return userOperations;
+    public UsersOperations usersOperations() {
+        return usersOperations;
     }
 
     @Override
-    public FeedOperations feedOperations() {
-        return feedOperations;
+    public WallOperations wallOperations() {
+        return wallOperations;
     }
 
     @Override
-    public FriendOperations friendOperations() {
-        return friendOperations;
+    public FriendsOperations friendsOperations() {
+        return friendsOperations;
     }
 }

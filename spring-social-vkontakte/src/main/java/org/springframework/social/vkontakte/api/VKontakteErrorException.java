@@ -23,7 +23,14 @@ import org.springframework.social.OperationNotPermittedException;
  */
 @SuppressWarnings("serial")
 public class VKontakteErrorException extends OperationNotPermittedException {
-	public VKontakteErrorException(String errorCode, String errorMsg) {
-		super("VKontakte returned error_code=" + errorCode + " error_msg=" + errorMsg);
+    private Error error;
+
+	public VKontakteErrorException(Error error) {
+		super("VKontakte returned error_code=" + error.getCode() + " error_msg=" + error.getMessage());
+        this.error = error;
+    }
+
+    public Error getError() {
+        return error;
     }
 }
