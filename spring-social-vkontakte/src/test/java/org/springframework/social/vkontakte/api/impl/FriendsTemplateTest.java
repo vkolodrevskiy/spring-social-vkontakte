@@ -15,6 +15,7 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
@@ -35,7 +36,7 @@ import static org.springframework.social.test.client.ResponseCreators.withRespon
 public class FriendsTemplateTest extends AbstractVKontakteApiTest {
     @Test
 	public void get_currentUser() {
-		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big"))
+		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
@@ -50,7 +51,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
     @Test
 	public void get_byUserId() {
-		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big&uid=123"))
+		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uid=123"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
@@ -65,7 +66,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
 	@Test(expected = VKontakteErrorException.class)
 	public void get_expiredToken() {
-		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big&uid=123"))
+		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uid=123"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("error-code-5"), responseHeaders));
 

@@ -27,15 +27,19 @@ public class VKontakteProfile {
     private final String photo;
     private final String photoMedium;
     private final String photoBig;
+    private final String homePhone;
+    private final String mobilePhone;
 
     public VKontakteProfile(String uid, String firstName, String lastName,
-                            String photo, String photoMedium, String photoBig) {
+                            String photo, String photoMedium, String photoBig, String homePhone, String mobilePhone) {
         this.uid = uid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.photo = photo;
         this.photoMedium = photoMedium;
         this.photoBig = photoBig;
+        this.homePhone = homePhone;
+        this.mobilePhone = mobilePhone;
     }
 
     /**
@@ -72,5 +76,13 @@ public class VKontakteProfile {
 
     public String getPhotoBig() {
         return photoBig;
+    }
+
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public String getMobilePhone() {
+        return mobilePhone;
     }
 }
