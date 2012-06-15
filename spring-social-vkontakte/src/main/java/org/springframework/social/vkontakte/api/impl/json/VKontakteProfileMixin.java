@@ -31,5 +31,7 @@ class VKontakteProfileMixin {
                           @JsonProperty("last_name") String lastName,
                           @JsonProperty("photo") String photo,
                           @JsonProperty("photo_medium") String photoMedium,
-                          @JsonProperty("photo_big") String photoBig) { }
+                          @JsonProperty("photo_big") String photoBig,
+                          @JsonProperty("home_phone") String homePhone,
+                          @JsonProperty("mobile_phone") String mobilePhone) { }
 }
