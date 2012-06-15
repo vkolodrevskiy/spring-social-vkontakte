@@ -15,6 +15,7 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
@@ -36,7 +37,7 @@ import static org.springframework.social.test.client.ResponseCreators.withRespon
 public class UsersTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void getProfile_currentUser() {
-        mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big&uids=USER_ID"))
+        mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uids=USER_ID"))
                 .andExpect(method(GET))
                 .andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
@@ -52,7 +53,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
 
     @Test
     public void getProfiles_currentUser() {
-        mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big&uids=1,2,3"))
+        mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uids=1,2,3"))
                 .andExpect(method(GET))
                 .andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
@@ -79,7 +80,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
 
     @Test(expected = VKontakteErrorException.class)
     public void getProfile_expiredToken() {
-		mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big&uids=USER_ID"))
+		mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uids=USER_ID"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("error-code-5"), responseHeaders));
 
@@ -88,7 +89,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
 
     @Test(expected = VKontakteErrorException.class)
     public void getProfiles_expiredToken() {
-		mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big&uids=1,2"))
+		mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uids=1,2"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("error-code-5"), responseHeaders));
 

@@ -37,7 +37,7 @@ public class VKontakteAdapterTest {
 	
 	@Test
 	public void fetchProfile() {
-		Mockito.when(usersOperations.getProfile()).thenReturn(new VKontakteProfile("123", "Viktor", "Kolodrevskiy", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg"));
+		Mockito.when(usersOperations.getProfile()).thenReturn(new VKontakteProfile("123", "Viktor", "Kolodrevskiy", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg", "http://cs9686.vkontakte.ru/u6398868/a_4e041afa.jpg", "1111", "222"));
         Mockito.when(vkontakte.usersOperations()).thenReturn(usersOperations);
 
         UserProfile profile = apiAdapter.fetchUserProfile(vkontakte);
