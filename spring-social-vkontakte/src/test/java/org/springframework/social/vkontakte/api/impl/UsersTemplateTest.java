@@ -15,31 +15,31 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
-import org.junit.Ignore;
-import org.junit.Test;
-import org.springframework.social.MissingAuthorizationException;
-import org.springframework.social.vkontakte.api.VKontakteErrorException;
-import org.springframework.social.vkontakte.api.VKontakteProfile;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.social.test.client.RequestMatchers.method;
 import static org.springframework.social.test.client.RequestMatchers.requestTo;
 import static org.springframework.social.test.client.ResponseCreators.withResponse;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.vkontakte.api.VKontakteErrorException;
+import org.springframework.social.vkontakte.api.VKontakteProfile;
+
 /**
  * {@link UsersTemplate} test
+ * 
  * @author vkolodrevskiy
  */
 public class UsersTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void getProfile_currentUser() {
-        mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uids=USER_ID"))
-                .andExpect(method(GET))
-                .andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+        mockServer
+                .expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate&uids=USER_ID"))
+                .andExpect(method(GET)).andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
         VKontakteProfile profile = vkontakte.usersOperations().getProfile();
 
@@ -53,16 +53,20 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
 
     @Test
     public void getProfiles_currentUser() {
-        mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uids=1,2,3"))
-                .andExpect(method(GET))
-                .andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+        mockServer
+                .expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate&uids=1,2,3"))
+                .andExpect(method(GET)).andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
-        List<VKontakteProfile> profiles = vkontakte.usersOperations().getProfiles(new ArrayList<String>() {{
-            add("1");
-            add("2");
-            add("3");
-        }});
-        
+        List<VKontakteProfile> profiles = vkontakte.usersOperations().getProfiles(new ArrayList<String>() {
+            private static final long serialVersionUID = 583451105415032388L;
+
+            {
+                add("1");
+                add("2");
+                add("3");
+            }
+        });
+
         assertProfiles(profiles);
     }
 
@@ -73,30 +77,38 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
 
     @Test(expected = MissingAuthorizationException.class)
     public void getProfiles_unauthorized() {
-        unauthorizedVKontakte.usersOperations().getProfiles(new ArrayList<String>() {{
-            add("1");
-            add("2");}});
+        unauthorizedVKontakte.usersOperations().getProfiles(new ArrayList<String>() {
+            private static final long serialVersionUID = 9175797703832707981L;
+
+            {
+                add("1");
+                add("2");
+            }
+        });
     }
 
     @Test(expected = VKontakteErrorException.class)
     public void getProfile_expiredToken() {
-		mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uids=USER_ID"))
-			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("error-code-5"), responseHeaders));
+        mockServer
+                .expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate&uids=USER_ID"))
+                .andExpect(method(GET)).andRespond(withResponse(jsonResource("error-code-5"), responseHeaders));
 
-		vkontakte.usersOperations().getProfile();
+        vkontakte.usersOperations().getProfile();
     }
 
     @Test(expected = VKontakteErrorException.class)
     public void getProfiles_expiredToken() {
-		mockServer.expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uids=1,2"))
-			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("error-code-5"), responseHeaders));
+        mockServer
+                .expect(requestTo("https://api.vkontakte.ru/method/getProfiles?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate&uids=1,2"))
+                .andExpect(method(GET)).andRespond(withResponse(jsonResource("error-code-5"), responseHeaders));
 
-		vkontakte.usersOperations().getProfiles(new ArrayList<String>() {{
-            add("1");
-            add("2");
-        }});
+        vkontakte.usersOperations().getProfiles(new ArrayList<String>() {
+            private static final long serialVersionUID = 4211781776280003660L;
+            {
+                add("1");
+                add("2");
+            }
+        });
     }
 
     private void assertProfiles(List<VKontakteProfile> profiles) {
