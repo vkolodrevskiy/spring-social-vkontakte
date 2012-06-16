@@ -15,6 +15,8 @@
  */
 package org.springframework.social.vkontakte.api;
 
+import java.util.Date;
+
 /**
  * Model class containing a VKontakte user's profile information.
  * @author vkolodrevskiy
@@ -29,9 +31,10 @@ public class VKontakteProfile {
     private final String photoBig;
     private final String homePhone;
     private final String mobilePhone;
+    private final Date birthDate;
 
     public VKontakteProfile(String uid, String firstName, String lastName,
-                            String photo, String photoMedium, String photoBig, String homePhone, String mobilePhone) {
+                            String photo, String photoMedium, String photoBig, String homePhone, String mobilePhone, Date birthDate) {
         this.uid = uid;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,6 +43,7 @@ public class VKontakteProfile {
         this.photoBig = photoBig;
         this.homePhone = homePhone;
         this.mobilePhone = mobilePhone;
+        this.birthDate = birthDate;
     }
 
     /**
@@ -84,5 +88,9 @@ public class VKontakteProfile {
 
     public String getMobilePhone() {
         return mobilePhone;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
     }
 }

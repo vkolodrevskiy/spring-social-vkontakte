@@ -21,6 +21,9 @@ import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -34,9 +37,10 @@ import static org.springframework.social.test.client.ResponseCreators.withRespon
  * @author vkolodrevskiy
  */
 public class FriendsTemplateTest extends AbstractVKontakteApiTest {
+    final private DateFormat DATE_FORMATER = new SimpleDateFormat("yyyy.MM.dd");
     @Test
-	public void get_currentUser() {
-		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts"))
+	public void get_currentUser() throws ParseException {
+		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
@@ -50,8 +54,8 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 	}
 
     @Test
-	public void get_byUserId() {
-		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uid=123"))
+	public void get_byUserId() throws ParseException {
+		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate&uid=123"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
@@ -66,19 +70,20 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
 	@Test(expected = VKontakteErrorException.class)
 	public void get_expiredToken() {
-		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts&uid=123"))
+		mockServer.expect(requestTo("https://api.vkontakte.ru/method/friends.get?access_token=ACCESS_TOKEN&fields=uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate&uid=123"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("error-code-5"), responseHeaders));
 
 		vkontakte.friendsOperations().get("123");
 	}
 
-    private void assertFriends(List<VKontakteProfile> profiles) {
+    private void assertFriends(List<VKontakteProfile> profiles) throws ParseException {
         assertEquals(3, profiles.size());
 
         assertEquals("24840", profiles.get(0).getUid());
         assertEquals("John", profiles.get(0).getFirstName());
         assertEquals("Doe", profiles.get(0).getLastName());
+        assertEquals(DATE_FORMATER.parse("1977.7.7"), profiles.get(0).getBirthDate());
         assertEquals("http://cs9889.vkontakte.ru/u24840/e_5b02b7ad.jpg", profiles.get(0).getPhoto());
         assertEquals("http://cs9889.vkontakte.ru/u24840/b_04d9723f.jpg", profiles.get(0).getPhotoMedium());
         assertEquals("http://cs9889.vkontakte.ru/u24840/a_f934a8e6.jpg", profiles.get(0).getPhotoBig());
@@ -86,6 +91,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
         assertEquals("135474", profiles.get(1).getUid());
         assertEquals("William", profiles.get(1).getFirstName());
         assertEquals("Peters", profiles.get(1).getLastName());
+        assertEquals(DATE_FORMATER.parse("1977.7.8"), profiles.get(1).getBirthDate());
         assertEquals("http://cs5596.vkontakte.ru/u135474/e_148bbf42.jpg", profiles.get(1).getPhoto());
         assertEquals("http://cs5596.vkontakte.ru/u135474/b_176664e7.jpg", profiles.get(1).getPhotoMedium());
         assertEquals("http://cs5596.vkontakte.ru/u135474/a_ead98900.jpg", profiles.get(1).getPhotoBig());
@@ -93,6 +99,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
         assertEquals("501245", profiles.get(2).getUid());
         assertEquals("Ivan", profiles.get(2).getFirstName());
         assertEquals("Petrov", profiles.get(2).getLastName());
+        assertEquals(DATE_FORMATER.parse("1977.7.9"), profiles.get(2).getBirthDate());
         assertEquals("http://vkontakte.ru/images/question_c.gif", profiles.get(2).getPhoto());
         assertEquals("http://vkontakte.ru/images/question_b.gif", profiles.get(2).getPhotoMedium());
         assertEquals("http://vkontakte.ru/images/question_a.gif", profiles.get(2).getPhotoBig());
