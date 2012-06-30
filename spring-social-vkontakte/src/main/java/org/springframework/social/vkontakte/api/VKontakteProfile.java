@@ -30,10 +30,11 @@ public class VKontakteProfile {
     private final String photoBig;
     private final String homePhone;
     private final String mobilePhone;
+    private final String gender;
     private final VKontakteDate birthDate;
 
     public VKontakteProfile(String uid, String firstName, String lastName,
-                            String photo, String photoMedium, String photoBig, String homePhone, String mobilePhone, VKontakteDate birthDate) {
+                            String photo, String photoMedium, String photoBig, String homePhone, String mobilePhone, VKontakteDate birthDate, String gender) {
         this.uid = uid;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -43,6 +44,7 @@ public class VKontakteProfile {
         this.homePhone = homePhone;
         this.mobilePhone = mobilePhone;
         this.birthDate = birthDate;
+        this.gender = gender;
     }
 
     /**
@@ -91,5 +93,9 @@ public class VKontakteProfile {
 
     public VKontakteDate getBirthDate() {
         return birthDate;
+    }
+
+    public String getGender() {
+        return gender;
     }
 }
