@@ -15,14 +15,18 @@
  */
 package org.springframework.social.vkontakte.api;
 
-
 /**
  * Model class containing a VKontakte user's profile information.
+ * 
  * @author vkolodrevskiy
  */
 public class VKontakteProfile {
 
+    private final static String PROFILE_URL_EXTESTION = "http://vk.com/";
+
     private final String uid;
+    private final String screenName;
+    private final String profileURL;
     private final String firstName;
     private final String lastName;
     private final String photo;
@@ -33,9 +37,11 @@ public class VKontakteProfile {
     private final String gender;
     private final VKontakteDate birthDate;
 
-    public VKontakteProfile(String uid, String firstName, String lastName,
-                            String photo, String photoMedium, String photoBig, String homePhone, String mobilePhone, VKontakteDate birthDate, String gender) {
+    public VKontakteProfile(String uid, String screeName, String firstName, String lastName, String photo, String photoMedium, String photoBig,
+            String homePhone, String mobilePhone, VKontakteDate birthDate, String gender) {
         this.uid = uid;
+        this.screenName = screeName;
+        this.profileURL = PROFILE_URL_EXTESTION + screeName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.photo = photo;
@@ -48,25 +54,36 @@ public class VKontakteProfile {
     }
 
     /**
-	 * The user's VKontskte ID
-	 * @return The user's VKontakte ID
-	 */
+     * The user's VKontskte ID
+     * 
+     * @return The user's VKontakte ID
+     */
     public String getUid() {
         return uid;
     }
 
+    public String getScreenName() {
+        return screenName;
+    }
+
+    public String getProfileURL() {
+        return profileURL;
+    }
+
     /**
-	 * The user's first name
-	 * @return The user's first name
-	 */
+     * The user's first name
+     * 
+     * @return The user's first name
+     */
     public String getFirstName() {
         return firstName;
     }
 
-	/**
-	 * The user's last name
-	 * @return The user's last name
-	 */
+    /**
+     * The user's last name
+     * 
+     * @return The user's last name
+     */
     public String getLastName() {
         return lastName;
     }

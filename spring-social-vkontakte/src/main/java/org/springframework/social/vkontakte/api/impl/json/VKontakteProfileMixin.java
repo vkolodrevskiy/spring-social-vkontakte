@@ -35,7 +35,7 @@ import org.springframework.social.vkontakte.api.VKontakteDate;
 @JsonIgnoreProperties(ignoreUnknown = true)
 class VKontakteProfileMixin {
     @JsonCreator
-    VKontakteProfileMixin(@JsonProperty("uid") String uid, @JsonProperty("first_name") String firstName, @JsonProperty("last_name") String lastName,
+    VKontakteProfileMixin(@JsonProperty("uid") String uid, @JsonProperty("screen_name") String screnName,@JsonProperty("first_name") String firstName, @JsonProperty("last_name") String lastName,
             @JsonProperty("photo") String photo, @JsonProperty("photo_medium") String photoMedium, @JsonProperty("photo_big") String photoBig,
             @JsonProperty("home_phone") String homePhone, @JsonProperty("mobile_phone") String mobilePhone,
             @JsonProperty("bdate") @JsonDeserialize(using = VKDateDeserializer.class) VKontakteDate birthDate, 
