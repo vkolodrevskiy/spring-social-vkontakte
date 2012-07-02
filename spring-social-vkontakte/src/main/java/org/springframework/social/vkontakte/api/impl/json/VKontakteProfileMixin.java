@@ -35,10 +35,25 @@ import org.springframework.social.vkontakte.api.VKontakteDate;
 @JsonIgnoreProperties(ignoreUnknown = true)
 class VKontakteProfileMixin {
     @JsonCreator
-    VKontakteProfileMixin(@JsonProperty("uid") String uid, @JsonProperty("first_name") String firstName, @JsonProperty("last_name") String lastName,
+    VKontakteProfileMixin(@JsonProperty("uid") String uid, @JsonProperty("screen_name") String screnName,@JsonProperty("first_name") String firstName, @JsonProperty("last_name") String lastName,
             @JsonProperty("photo") String photo, @JsonProperty("photo_medium") String photoMedium, @JsonProperty("photo_big") String photoBig,
             @JsonProperty("home_phone") String homePhone, @JsonProperty("mobile_phone") String mobilePhone,
-            @JsonProperty("bdate") @JsonDeserialize(using = VKDateDeserializer.class) VKontakteDate birthDate) {
+            @JsonProperty("bdate") @JsonDeserialize(using = VKDateDeserializer.class) VKontakteDate birthDate, 
+            @JsonProperty("sex") @JsonDeserialize(using = VKGenderDeserializer.class) String gender) {
+    }
+    
+    static class VKGenderDeserializer extends JsonDeserializer<String> {
+        @Override
+        public String deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+            String genderValue = jp.getText();
+            if(genderValue.equals("1")) {
+                return "W";
+            } else if(genderValue.equals("2")){
+                return "M";
+            }
+            return null;
+        }
+        
     }
 
     static class VKDateDeserializer extends JsonDeserializer<VKontakteDate> {
