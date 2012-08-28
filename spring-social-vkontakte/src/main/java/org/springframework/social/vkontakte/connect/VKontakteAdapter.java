@@ -41,7 +41,7 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
 		VKontakteProfile profile = vkontakte.usersOperations().getProfile();
 		values.setProviderUserId(profile.getUid());
 		values.setDisplayName(profile.getFirstName() + " " + profile.getLastName());
-		values.setProfileUrl("http://vkontakte.ru/id" + profile.getUid());
+		values.setProfileUrl("http://vk.com/id" + profile.getUid());
 		values.setImageUrl(profile.getPhoto());
 	}
 
