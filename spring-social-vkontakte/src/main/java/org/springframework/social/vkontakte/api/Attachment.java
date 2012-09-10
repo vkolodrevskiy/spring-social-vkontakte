@@ -15,19 +15,14 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
- * VKontakte returns multiple posts.
- * @author vkolodrevskiy
+ * VK post attachment.
  */
-public class Posts extends VKResponse implements Serializable {
-    public static final long serialVersionUID = -1;
+public abstract class Attachment {
 
-    private List<Post> posts;
-
-    public List<Post> getPosts() {
-        return posts;
+    public static enum AttachmentType {
+        PHOTO, POSTED_PHOTO, VIDEO, AUDIO, DOCUMENT, GRAFFITI, LINK, NOTE, APPLICATION, POLL, PAGE
     }
+
+    private AttachmentType type;
 }

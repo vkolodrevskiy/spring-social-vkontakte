@@ -17,15 +17,23 @@ package org.springframework.social.vkontakte.api.impl.json;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.social.vkontakte.api.Post;
 
-/**
- * TODO: add description
- *
- * @author vkolodrevskiy
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PostsMixin extends VKResponseMixin {
-    @JsonProperty("response")
-    Post post;
+public class AudioAttachmentMixin extends AttachmentMixin {
+
+    @JsonProperty("aid")
+    private String id;
+
+    @JsonProperty("owner_id")
+    private String ownerId;
+
+    @JsonProperty("performer")
+    private String performer;
+
+    @JsonProperty("title")
+    private String title;
+
+    @JsonProperty("duration")
+    private int duration;
+
 }

@@ -15,19 +15,20 @@
  */
 package org.springframework.social.vkontakte.api;
 
+import org.springframework.social.vkontakte.api.impl.json.VKArray;
+
 import java.io.Serializable;
-import java.util.List;
 
 /**
- * VKontakte returns multiple posts.
- * @author vkolodrevskiy
+ * VKontakte list-based response.
  */
-public class Posts extends VKResponse implements Serializable {
+public class VKArrayResponse<T> extends VKResponse implements Serializable {
+
     public static final long serialVersionUID = -1;
 
-    private List<Post> posts;
+    private VKArray<T> array;
 
-    public List<Post> getPosts() {
-        return posts;
+    public VKArray<T> getArray() {
+        return array;
     }
 }

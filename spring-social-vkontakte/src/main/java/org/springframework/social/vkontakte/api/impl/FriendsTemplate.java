@@ -15,6 +15,7 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.social.support.URIBuilder;
 import org.springframework.social.vkontakte.api.FriendsOperations;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
@@ -32,8 +33,8 @@ import java.util.Properties;
 class FriendsTemplate extends AbstractVKontakteOperations implements FriendsOperations {
     private final RestTemplate restTemplate;
 
-    public FriendsTemplate(RestTemplate restTemplate, String accessToken, boolean isAuthorizedForUser) {
-        super(isAuthorizedForUser, accessToken);
+    public FriendsTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {
+        super(isAuthorizedForUser, accessToken, objectMapper);
         this.restTemplate = restTemplate;
     }
 
@@ -43,7 +44,7 @@ class FriendsTemplate extends AbstractVKontakteOperations implements FriendsOper
         Properties props = new Properties();
 
         props.put("fields", "uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate,sex,screen_name");
-        URI uri = URIBuilder.fromUri(makeOperationURL("friends.get", props)).build();
+        URI uri = makeOperationURL("friends.get", props);
 
         VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
         checkForError(profiles);
@@ -58,7 +59,7 @@ class FriendsTemplate extends AbstractVKontakteOperations implements FriendsOper
 
         props.put("uid", userId.trim());
         props.put("fields", "uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate,sex,screen_name");
-        URI uri = URIBuilder.fromUri(makeOperationURL("friends.get", props)).build();
+        URI uri = makeOperationURL("friends.get", props);
 
         VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
         checkForError(profiles);

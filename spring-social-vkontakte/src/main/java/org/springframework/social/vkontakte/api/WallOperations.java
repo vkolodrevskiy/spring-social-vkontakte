@@ -15,6 +15,8 @@
  */
 package org.springframework.social.vkontakte.api;
 
+import java.util.List;
+
 /**
  * Interface defining operations that can be performed on a VKontakte wall.
  * @author vkolodrevskiy
@@ -30,4 +32,32 @@ public interface WallOperations {
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
 	 */
 	String post(String message);
+
+
+    /**
+   	 * Posts a status update with an external link to the authenticated user's wall.
+   	 * Requires "publish_stream" permission.
+   	 * @param message the message to post.
+     * @param link external link to be shared on user's wall
+   	 * @return the ID of the new wall entry.
+   	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+   	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+        * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+   	 */
+   	String post(String message, String link);
+
+
+    /**
+     * Retrieve wall posts for the authenticated user.
+     * @return list of wall posts, up to 100 (VK default)
+     */
+    List<Post> getPosts();
+
+    /**
+     * Retrieve wall posts for the authenticated user.
+     * @param offset the offset to start retrieving posts.
+   	 * @param limit the maximum number of posts to return.
+     * @return list of wall posts
+     */
+    List<Post> getPosts(int offset, int limit);
 }

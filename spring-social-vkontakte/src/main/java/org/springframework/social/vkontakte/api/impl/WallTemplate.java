@@ -15,12 +15,12 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
-import org.springframework.social.support.URIBuilder;
-import org.springframework.social.vkontakte.api.Posts;
-import org.springframework.social.vkontakte.api.WallOperations;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.social.vkontakte.api.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -30,8 +30,8 @@ import java.util.Properties;
 public class WallTemplate extends AbstractVKontakteOperations implements WallOperations {
     private final RestTemplate restTemplate;
 
-    public WallTemplate(RestTemplate restTemplate, String accessToken, boolean isAuthorizedForUser) {
-        super(isAuthorizedForUser, accessToken);
+    public WallTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {
+        super(isAuthorizedForUser, accessToken, objectMapper);
         this.restTemplate = restTemplate;
     }
 
@@ -40,11 +40,47 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
         requireAuthorization();
         Properties props = new Properties();
         props.put("message", message);
-        URI uri = URIBuilder.fromUri(makeOperationURL("wall.post", props)).build();
+        URI uri = makeOperationURL("wall.post", props);
 
-        Posts posts = restTemplate.getForObject(uri, Posts.class);
-        checkForError(posts);
+        PostStatusResponse status = restTemplate.getForObject(uri, PostStatusResponse.class);
+        checkForError(status);
 
-        return posts.getPost().getPostId();
+        return status.getStatus().getPostId();
+    }
+
+
+    @Override
+    public String post(String message, String link) {
+        requireAuthorization();
+        Properties props = new Properties();
+        props.put("message", message);
+        props.put("attachments", link);
+        URI uri = makeOperationURL("wall.post", props);
+
+        PostStatusResponse status = restTemplate.getForObject(uri, PostStatusResponse.class);
+        checkForError(status);
+
+        return status.getStatus().getPostId();
+    }
+
+    @Override
+    public List<Post> getPosts() {
+        return getPosts(-1, -1);
+    }
+
+    @Override
+    public List<Post> getPosts(int offset, int limit) {
+        requireAuthorization();
+        Properties props = new Properties();
+        if (offset >= 0) {
+            props.put("offset", offset);
+        }
+        if (limit > 0) {
+            props.put("count", limit);
+        }
+        URI uri = makeOperationURL("wall.get", props);
+        VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
+        checkForError(response);
+        return deserializeArray(response, Post.class).getItems();
     }
 }
