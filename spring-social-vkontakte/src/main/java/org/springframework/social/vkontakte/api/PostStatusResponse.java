@@ -15,19 +15,22 @@
  */
 package org.springframework.social.vkontakte.api;
 
+import org.springframework.social.vkontakte.api.Post;
+import org.springframework.social.vkontakte.api.VKResponse;
+
 import java.io.Serializable;
-import java.util.List;
 
 /**
- * VKontakte returns multiple posts.
+ * VKontakte post status.
  * @author vkolodrevskiy
  */
-public class Posts extends VKResponse implements Serializable {
+public class PostStatusResponse extends VKResponse implements Serializable {
+
     public static final long serialVersionUID = -1;
 
-    private List<Post> posts;
+    private PostStatus status;
 
-    public List<Post> getPosts() {
-        return posts;
+    public PostStatus getStatus() {
+        return status;
     }
 }

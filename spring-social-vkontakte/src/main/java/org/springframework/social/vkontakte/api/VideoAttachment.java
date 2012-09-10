@@ -15,19 +15,29 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
- * VKontakte returns multiple posts.
- * @author vkolodrevskiy
+ * Video attachment.
  */
-public class Posts extends VKResponse implements Serializable {
-    public static final long serialVersionUID = -1;
+public class VideoAttachment extends Attachment {
 
-    private List<Post> posts;
+    private String videoId;
+    private String ownerId;
+    private String title;
+    private int duration;
 
-    public List<Post> getPosts() {
-        return posts;
+    public String getVideoId() {
+        return videoId;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getDuration() {
+        return duration;
     }
 }

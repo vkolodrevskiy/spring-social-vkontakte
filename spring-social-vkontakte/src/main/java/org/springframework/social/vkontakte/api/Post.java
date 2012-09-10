@@ -15,18 +15,90 @@
  */
 package org.springframework.social.vkontakte.api;
 
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+
+import java.util.Date;
+import java.util.List;
+
 /**
  * Model class representing an entry in a wall.
  * @author vkolodrevskiy
  */
 public class Post {
-    private final String postId;
 
-    public Post(String postId) {
-        this.postId = postId;
+    private final String id;
+    private final Date createdDate;
+    private final String text;
+
+    private Likes likes;
+    private Reposts reposts;
+
+    private List<Attachment> attachments;
+
+    public Post(String id, Date createdDate, String text) {
+        this.id = id;
+        this.createdDate = createdDate;
+        this.text = text;
     }
 
-    public String getPostId() {
-        return postId;
+    public String getId() {
+        return id;
+    }
+
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public static class Likes {
+
+        private final int count;
+        private boolean userLikes;
+        private boolean canLike;
+        private boolean canPublish;
+
+        public Likes(int count) {
+            this.count = count;
+        }
+
+        @Override
+        public String toString() {
+            return "Likes{" +
+                    "count=" + count +
+                    ", userLikes=" + userLikes +
+                    ", canLike=" + canLike +
+                    ", canPublish=" + canPublish +
+                    '}';
+        }
+    }
+
+
+    public static class Reposts {
+        private final int count;
+        private boolean userReposted;
+
+        public Reposts(int count) {
+            this.count = count;
+        }
+
+        @Override
+        public String toString() {
+            return "Reposts{" +
+                    "count=" + count +
+                    ", userReposted=" + userReposted +
+                    '}';
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id='" + id + '\'' +
+                ", createdDate=" + createdDate +
+                ", text='" + text + '\'' +
+                ", likes=" + likes +
+                ", reposts=" + reposts +
+                ", attachments=" + (attachments == null ? null : StringUtils.collectionToDelimitedString(attachments, ",\n")) +
+                '}';
     }
 }

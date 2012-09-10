@@ -15,19 +15,24 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import java.io.Serializable;
-import java.util.List;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.springframework.social.vkontakte.api.impl.json.VKResponseMixin;
+
+import java.util.Map;
 
 /**
- * VKontakte returns multiple posts.
- * @author vkolodrevskiy
+ * Used for manual JSON conversions within the response.
  */
-public class Posts extends VKResponse implements Serializable {
-    public static final long serialVersionUID = -1;
+public class VKGenericResponse extends VKResponse {
 
-    private List<Post> posts;
+    private JsonNode response;
 
-    public List<Post> getPosts() {
-        return posts;
+    public VKGenericResponse() {
+    }
+
+    public JsonNode getResponse() {
+        return response;
     }
 }
