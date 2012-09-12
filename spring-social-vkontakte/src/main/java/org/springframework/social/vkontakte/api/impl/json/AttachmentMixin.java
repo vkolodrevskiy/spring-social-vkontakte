@@ -36,9 +36,15 @@ import java.io.IOException;
 @JsonSubTypes({
     @JsonSubTypes.Type(name="link", value=LinkAttachment.class),
     @JsonSubTypes.Type(name="photo", value=PhotoAttachment.class),
+    @JsonSubTypes.Type(name="posted_photo", value=PhotoAttachment.class),
     @JsonSubTypes.Type(name="video", value=VideoAttachment.class),
     @JsonSubTypes.Type(name="audio", value=AudioAttachment.class),
-    @JsonSubTypes.Type(name="graffiti", value=GraffitiAttachment.class)
+    @JsonSubTypes.Type(name="graffiti", value=GraffitiAttachment.class),
+    @JsonSubTypes.Type(name="doc", value=DocumentAttachmentMixin.class),
+    @JsonSubTypes.Type(name="note", value=NoteAttachmentMixin.class),
+    @JsonSubTypes.Type(name="app", value=ApplicationAttachmentMixin.class),
+    @JsonSubTypes.Type(name="poll", value=PollAttachmentMixin.class),
+    @JsonSubTypes.Type(name="page", value=PageAttachmentMixin.class)
 })
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AttachmentMixin {

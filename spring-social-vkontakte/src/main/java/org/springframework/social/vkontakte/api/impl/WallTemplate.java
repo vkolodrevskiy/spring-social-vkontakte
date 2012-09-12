@@ -16,9 +16,11 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.vkontakte.api.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Properties;
@@ -82,5 +84,20 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
         return deserializeArray(response, Post.class).getItems();
+    }
+
+    @Override
+    public Post getPost(String userId, String postId) {
+        requireAuthorization();
+        Properties props = new Properties();
+        props.put("posts", userId + "_" + postId);
+        URI uri = makeOperationURL("wall.getById", props);
+        VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
+        checkForError(response);
+        try {
+            return objectMapper.readValue(response.getResponse(), Post.class);
+        } catch (IOException e) {
+            throw new UncategorizedApiException("Error deserializing: " + response.getResponse(), e);
+        }
     }
 }

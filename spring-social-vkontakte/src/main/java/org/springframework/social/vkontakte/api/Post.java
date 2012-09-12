@@ -50,6 +50,22 @@ public class Post {
         return attachments;
     }
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public Likes getLikes() {
+        return likes;
+    }
+
+    public Reposts getReposts() {
+        return reposts;
+    }
+
     public static class Likes {
 
         private final int count;
@@ -59,6 +75,22 @@ public class Post {
 
         public Likes(int count) {
             this.count = count;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public boolean isUserLikes() {
+            return userLikes;
+        }
+
+        public boolean isCanLike() {
+            return canLike;
+        }
+
+        public boolean isCanPublish() {
+            return canPublish;
         }
 
         @Override
@@ -79,6 +111,14 @@ public class Post {
 
         public Reposts(int count) {
             this.count = count;
+        }
+
+        public int getCount() {
+            return count;
+        }
+
+        public boolean isUserReposted() {
+            return userReposted;
         }
 
         @Override

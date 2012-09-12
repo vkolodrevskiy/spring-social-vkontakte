@@ -113,24 +113,13 @@ public class VKontakteModule extends SimpleModule {
                                 }
                             };
                         } else {
-                            return super.buildTypeDeserializer(config, baseType, subtypes, property);    //To change body of overridden methods use File | Settings | File Templates.
+                            return super.buildTypeDeserializer(config, baseType, subtypes, property);
                         }
                     }
                 };
             }
 
         });
-
-        SimpleDeserializers deserializers = new SimpleDeserializers();
-        deserializers.addDeserializer(Attachment.class, new JsonDeserializer<Attachment>() {
-            @Override
-            public Attachment deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-                System.err.println(ctxt.getConfig().getAnnotationIntrospector().findTypeResolver(ctxt.getConfig(), AnnotatedClass.construct(Attachment.class, ctxt.getConfig().getAnnotationIntrospector(), ctxt.getConfig()),
-                        ctxt.getTypeFactory().constructType(Attachment.class)));
-                return null;  //To change body of implemented methods use File | Settings | File Templates.
-            }
-        });
-        context.addDeserializers(deserializers);
 
         context.setMixInAnnotations(VKontakteProfile.class, VKontakteProfileMixin.class);
         context.setMixInAnnotations(VKontakteProfiles.class, VKontakteProfilesMixin.class);
@@ -149,5 +138,11 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(PhotoAttachment.class, PhotoAttachmentMixin.class);
         context.setMixInAnnotations(VideoAttachment.class, VideoAttachmentMixin.class);
         context.setMixInAnnotations(AudioAttachment.class, AudioAttachmentMixin.class);
+        context.setMixInAnnotations(DocumentAttachment.class, DocumentAttachmentMixin.class);
+        context.setMixInAnnotations(NoteAttachment.class, NoteAttachmentMixin.class);
+        context.setMixInAnnotations(GraffitiAttachment.class, GraffitiAttachmentMixin.class);
+        context.setMixInAnnotations(ApplicationAttachment.class, ApplicationAttachmentMixin.class);
+        context.setMixInAnnotations(PollAttachment.class, PollAttachmentMixin.class);
+        context.setMixInAnnotations(PageAttachment.class, PageAttachmentMixin.class);
     }
 }

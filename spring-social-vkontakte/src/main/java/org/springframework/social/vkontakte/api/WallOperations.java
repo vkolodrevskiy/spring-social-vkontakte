@@ -42,7 +42,7 @@ public interface WallOperations {
    	 * @return the ID of the new wall entry.
    	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
    	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
-        * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
    	 */
    	String post(String message, String link);
 
@@ -60,4 +60,13 @@ public interface WallOperations {
      * @return list of wall posts
      */
     List<Post> getPosts(int offset, int limit);
+
+    /**
+     * Get current user's post by post_id.
+     * @param userId vkontakte user id
+     * @param postId post_id
+     * @return existing user's wall post
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    Post getPost(String userId, String postId);
 }
