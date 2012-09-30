@@ -15,39 +15,22 @@
  */
 package org.springframework.social.vkontakte.api.impl.json;
 
-import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.social.vkontakte.api.Attachment;
-import org.springframework.social.vkontakte.api.Post;
 
-import java.util.Date;
-import java.util.List;
-
-/**
- * Mixin for {@link org.springframework.social.vkontakte.api.Post}
- * @author vkolodrevskiy
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PostMixin {
-	@JsonCreator
-	PostMixin(@JsonProperty("id") String postId, @JsonProperty("date") Date createdDate, @JsonProperty("text") String text) {}
+public class ApplicationAttachmentMixin extends AttachmentMixin {
 
-    @JsonProperty("date")
-    Date createdDate;
+    @JsonProperty("app_id")
+    private String applicationId;
 
-    @JsonProperty("id")
-    String id;
+    @JsonProperty("app_name")
+    private String applicationName;
 
-    @JsonProperty("text")
-    String text;
+    @JsonProperty("src")
+    private String src;
 
-    @JsonProperty("likes")
-    Post.Likes likes;
+    @JsonProperty("src_big")
+    private String srcBig;
 
-    @JsonProperty("reposts")
-    Post.Reposts reposts;
-
-    @JsonProperty("attachments")
-    List<Attachment> attachments;
 }

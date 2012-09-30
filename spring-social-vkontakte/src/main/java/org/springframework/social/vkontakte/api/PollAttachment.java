@@ -15,19 +15,19 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
- * VKontakte returns multiple posts.
- * @author vkolodrevskiy
+ * Poll.
  */
-public class Posts extends VKResponse implements Serializable {
-    public static final long serialVersionUID = -1;
+public class PollAttachment extends Attachment {
 
-    private List<Post> posts;
+    private String pollId;
+    private String question;
 
-    public List<Post> getPosts() {
-        return posts;
+    public String getPollId() {
+        return pollId;
+    }
+
+    public String getQuestion() {
+        return question;
     }
 }

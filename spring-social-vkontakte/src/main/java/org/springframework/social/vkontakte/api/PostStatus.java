@@ -15,19 +15,24 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
- * VKontakte returns multiple posts.
- * @author vkolodrevskiy
+ * Posting status; either have valid postId OR {@link #isProcessing()} is <code>true</code> (for delaying posting).
  */
-public class Posts extends VKResponse implements Serializable {
-    public static final long serialVersionUID = -1;
+public class PostStatus {
 
-    private List<Post> posts;
+    private final String postId;
+    private final boolean processing;
 
-    public List<Post> getPosts() {
-        return posts;
+    public PostStatus(String postId, boolean processing) {
+        this.postId = postId;
+        this.processing = processing;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public boolean isProcessing() {
+        return processing;
     }
 }

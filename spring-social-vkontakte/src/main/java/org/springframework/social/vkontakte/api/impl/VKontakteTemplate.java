@@ -42,6 +42,9 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     private UsersOperations usersOperations;
     private WallOperations wallOperations;
     private FriendsOperations friendsOperations;
+    private FeedOperations feedOperations;
+
+    private ObjectMapper objectMapper;
 
     private final String accessToken;
     private final String uid;
@@ -60,6 +63,8 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     }
 
     private void initialize() {
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new VKontakteModule());
         registerJsonModule();
         getRestTemplate().setErrorHandler(new VKontakteErrorHandler());
         initSubApis();
@@ -75,17 +80,16 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
                 mTypes.add(new MediaType("text", "javascript", MappingJacksonHttpMessageConverter.DEFAULT_CHARSET));
                 jsonConverter.setSupportedMediaTypes(mTypes);
 
-                ObjectMapper objectMapper = new ObjectMapper();
-                objectMapper.registerModule(new VKontakteModule());
                 jsonConverter.setObjectMapper(objectMapper);
             }
         }
     }
 
     private void initSubApis() {
-        usersOperations = new UsersTemplate(getRestTemplate(), accessToken, uid, isAuthorized());
-        friendsOperations = new FriendsTemplate(getRestTemplate(), accessToken, isAuthorized());
-        wallOperations = new WallTemplate(getRestTemplate(), accessToken, isAuthorized());
+        usersOperations = new UsersTemplate(getRestTemplate(), accessToken, uid, objectMapper, isAuthorized());
+        friendsOperations = new FriendsTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
+        wallOperations = new WallTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
+        feedOperations = new FeedTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
     }
 
     @Override
@@ -101,5 +105,10 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     @Override
     public FriendsOperations friendsOperations() {
         return friendsOperations;
+    }
+
+    @Override
+    public FeedOperations feedOperations() {
+        return feedOperations;
     }
 }

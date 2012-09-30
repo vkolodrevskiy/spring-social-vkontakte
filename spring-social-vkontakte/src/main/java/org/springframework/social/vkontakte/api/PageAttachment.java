@@ -15,19 +15,24 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import java.io.Serializable;
-import java.util.List;
-
 /**
- * VKontakte returns multiple posts.
- * @author vkolodrevskiy
+ * Wiki page reference attachment.
  */
-public class Posts extends VKResponse implements Serializable {
-    public static final long serialVersionUID = -1;
+public class PageAttachment extends Attachment {
 
-    private List<Post> posts;
+    private String pageId;
+    private String groupId;
+    private String title;
 
-    public List<Post> getPosts() {
-        return posts;
+    public String getPageId() {
+        return pageId;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public String getTitle() {
+        return title;
     }
 }

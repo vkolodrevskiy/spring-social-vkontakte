@@ -20,7 +20,10 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.*;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Subclass of {@link DefaultResponseErrorHandler} that handles errors from VKontakte's
@@ -47,6 +50,7 @@ public class VKontakteErrorHandler extends DefaultResponseErrorHandler {
 
 	private void handleClientErrors(ClientHttpResponse response) throws IOException {
 		HttpStatus statusCode = response.getStatusCode();
+        String responseBody = readFully(response.getBody());
 
 		if (statusCode == HttpStatus.UNAUTHORIZED) {
 			throw new NotAuthorizedException("User was not authorised.");
@@ -66,4 +70,14 @@ public class VKontakteErrorHandler extends DefaultResponseErrorHandler {
 			throw new ServerOverloadedException("VKontakte is overloaded with requests. Try again later.");
 		}
 	}
+
+    private String readFully(InputStream in) throws IOException {
+   		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+   		StringBuilder sb = new StringBuilder();
+   		while (reader.ready()) {
+   			sb.append(reader.readLine());
+   		}
+   		return sb.toString();
+   	}
+
 }

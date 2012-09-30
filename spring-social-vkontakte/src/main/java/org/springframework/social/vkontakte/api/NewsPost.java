@@ -15,19 +15,14 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 
 /**
- * VKontakte returns multiple posts.
- * @author vkolodrevskiy
+ * Defines post information for News Feed, slightly different from {@link Post}.
  */
-public class Posts extends VKResponse implements Serializable {
-    public static final long serialVersionUID = -1;
+public class NewsPost extends Post {
 
-    private List<Post> posts;
-
-    public List<Post> getPosts() {
-        return posts;
+    public NewsPost(String postId, Date createdDate, String text) {
+        super(postId, createdDate, text);
     }
 }

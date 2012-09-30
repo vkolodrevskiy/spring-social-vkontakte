@@ -15,6 +15,7 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.social.support.URIBuilder;
 import org.springframework.social.vkontakte.api.UsersOperations;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
@@ -34,8 +35,8 @@ class UsersTemplate extends AbstractVKontakteOperations implements UsersOperatio
 
     private final String uid;
 
-    public UsersTemplate(RestTemplate restTemplate, String accessToken, String uid, boolean isAuthorizedForUser) {
-        super(isAuthorizedForUser, accessToken);
+    public UsersTemplate(RestTemplate restTemplate, String accessToken, String uid, ObjectMapper objectMapper, boolean isAuthorizedForUser) {
+        super(isAuthorizedForUser, accessToken, objectMapper);
         this.restTemplate = restTemplate;
         this.uid = uid;
     }
@@ -56,7 +57,7 @@ class UsersTemplate extends AbstractVKontakteOperations implements UsersOperatio
 
         props.put("uids", userIds == null ? uid : uids.toString());
         props.put("fields", "uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate,sex,screen_name");
-        URI uri = URIBuilder.fromUri(makeOperationURL("getProfiles", props)).build();
+        URI uri = makeOperationURL("getProfiles", props);
 
         VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
         checkForError(profiles);
