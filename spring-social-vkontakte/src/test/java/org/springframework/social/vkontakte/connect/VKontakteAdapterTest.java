@@ -42,10 +42,10 @@ public class VKontakteAdapterTest {
         Mockito.when(vkontakte.usersOperations()).thenReturn(usersOperations);
 
         UserProfile profile = apiAdapter.fetchUserProfile(vkontakte);
+        assertEquals("id123", profile.getUsername());
 		assertEquals("Viktor Kolodrevskiy", profile.getName());
 		assertEquals("Viktor", profile.getFirstName());
 		assertEquals("Kolodrevskiy", profile.getLastName());
 		assertNull(profile.getEmail());
-		assertNull(profile.getUsername());
 	}
 }

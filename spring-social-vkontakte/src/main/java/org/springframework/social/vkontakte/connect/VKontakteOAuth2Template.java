@@ -28,6 +28,7 @@ public class VKontakteOAuth2Template extends OAuth2Template {
 
 	public VKontakteOAuth2Template(String clientId, String clientSecret) {
 		super(clientId, clientSecret, "http://oauth.vk.com/authorize", "https://oauth.vk.com/access_token");
+        setUseParametersForClientAuthentication(true);
 	}
 
     // override this method simply to get uid, didn't find better way,
