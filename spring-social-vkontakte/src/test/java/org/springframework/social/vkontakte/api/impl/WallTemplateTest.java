@@ -21,9 +21,9 @@ import org.springframework.social.vkontakte.api.VKontakteErrorException;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.social.test.client.RequestMatchers.method;
-import static org.springframework.social.test.client.RequestMatchers.requestTo;
-import static org.springframework.social.test.client.ResponseCreators.withResponse;
+import static org.springframework.http.MediaType.*;
+import static org.springframework.test.web.client.match.RequestMatchers.*;
+import static org.springframework.test.web.client.response.ResponseCreators.*;
 
 /**
  * {@link WallTemplate} test.
@@ -32,18 +32,18 @@ import static org.springframework.social.test.client.ResponseCreators.withRespon
 public class WallTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void post() {
-        mockServer.expect(requestTo("https://api.vkontakte.ru/method/wall.post?access_token=ACCESS_TOKEN&message=hello"))
+        mockServer.expect(requestTo("https://api.vk.com/method/wall.post?access_token=ACCESS_TOKEN&message=hello"))
                 .andExpect(method(GET))
-                .andRespond(withResponse(jsonResource("wall-post-response"), responseHeaders));
+                .andRespond(withSuccess(jsonResource("wall-post-response"), APPLICATION_JSON));
         String postId = vkontakte.wallOperations().post("hello");
         assertEquals("511", postId);
     }
 
     @Test(expected = VKontakteErrorException.class)
     public void post_expiredToken() {
-		mockServer.expect(requestTo("https://api.vkontakte.ru/method/wall.post?access_token=ACCESS_TOKEN&message=hello"))
+		mockServer.expect(requestTo("https://api.vk.com/method/wall.post?access_token=ACCESS_TOKEN&message=hello"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("error-code-5"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
 
 		vkontakte.wallOperations().post("hello");
     }
