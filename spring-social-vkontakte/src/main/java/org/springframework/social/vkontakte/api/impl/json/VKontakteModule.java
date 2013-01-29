@@ -126,6 +126,7 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(Post.class, PostMixin.class);
         context.setMixInAnnotations(NewsPost.class, NewsPostMixin.class);
         context.setMixInAnnotations(PostStatusResponse.class, PostStatusResponseMixin.class);
+        context.setMixInAnnotations(PostStatus.class, PostStatusMixin.class);
         context.setMixInAnnotations(VKResponse.class, VKResponseMixin.class);
         context.setMixInAnnotations(VKGenericResponse.class, VKGenericResponseMixin.class);
         context.setMixInAnnotations(org.springframework.social.vkontakte.api.Error.class, ErrorMixin.class);

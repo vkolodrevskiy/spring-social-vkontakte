@@ -48,6 +48,7 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
 	public UserProfile fetchUserProfile(VKontakte vkontakte) {
 		VKontakteProfile profile = vkontakte.usersOperations().getProfile();
 		return new UserProfileBuilder()
+                .setUsername(profile.getScreenName())
                 .setFirstName(profile.getFirstName())
                 .setLastName(profile.getLastName())
                 .setName(profile.getFirstName() + " " + profile.getLastName())
