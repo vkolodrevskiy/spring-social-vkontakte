@@ -16,5 +16,4 @@
 
 rootProject.name = 'spring-social-vkontakte'
 
-include 'docs'
 include 'spring-social-vkontakte'
