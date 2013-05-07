@@ -17,7 +17,6 @@ package org.springframework.social.vkontakte.api.impl.json;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LinkAttachmentMixin extends AttachmentMixin {

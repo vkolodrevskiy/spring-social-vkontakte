@@ -44,7 +44,7 @@ public class VKontakteErrorHandler extends DefaultResponseErrorHandler {
 		try {
 			super.handleError(response);
 		} catch(Exception e) {
-			throw new UncategorizedApiException("Error consuming VKontakte REST API", e);
+			throw new UncategorizedApiException("vkontakte", "Error consuming VKontakte REST API", e);
 		}
 	}
 
@@ -53,21 +53,21 @@ public class VKontakteErrorHandler extends DefaultResponseErrorHandler {
         String responseBody = readFully(response.getBody());
 
 		if (statusCode == HttpStatus.UNAUTHORIZED) {
-			throw new NotAuthorizedException("User was not authorised.");
+			throw new NotAuthorizedException("vkontakte", "User was not authorised.");
 		} else if (statusCode == HttpStatus.FORBIDDEN) {
-			throw new OperationNotPermittedException("User is forbidden to access this resource.");
+			throw new OperationNotPermittedException("vkontakte", "User is forbidden to access this resource.");
 		} else if (statusCode == HttpStatus.NOT_FOUND) {
-			throw new ResourceNotFoundException("Resource was not found.");
+			throw new ResourceNotFoundException("vkontakte", "Resource was not found.");
         }
 	}
 
 	private void handleServerErrors(HttpStatus statusCode) throws IOException {
 		if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR) {
-			throw new InternalServerErrorException("Something is broken at VKontakte.");
+			throw new InternalServerErrorException("vkontakte", "Something is broken at VKontakte.");
 		} else if (statusCode == HttpStatus.BAD_GATEWAY) {
-			throw new ServerDownException("VKontakte is down or is being upgraded.");
+			throw new ServerDownException("vkontakte", "VKontakte is down or is being upgraded.");
 		} else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE) {
-			throw new ServerOverloadedException("VKontakte is overloaded with requests. Try again later.");
+			throw new ServerOverloadedException("vkontakte", "VKontakte is overloaded with requests. Try again later.");
 		}
 	}
 
@@ -79,5 +79,4 @@ public class VKontakteErrorHandler extends DefaultResponseErrorHandler {
    		}
    		return sb.toString();
    	}
-
 }

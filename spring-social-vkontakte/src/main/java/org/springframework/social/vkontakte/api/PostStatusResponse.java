@@ -15,9 +15,6 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import org.springframework.social.vkontakte.api.Post;
-import org.springframework.social.vkontakte.api.VKResponse;
-
 import java.io.Serializable;
 
 /**

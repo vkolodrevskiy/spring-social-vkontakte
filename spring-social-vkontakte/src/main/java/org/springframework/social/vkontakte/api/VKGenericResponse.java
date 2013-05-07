@@ -16,11 +16,6 @@
 package org.springframework.social.vkontakte.api;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.social.vkontakte.api.impl.json.VKResponseMixin;
-
-import java.util.Map;
 
 /**
  * Used for manual JSON conversions within the response.

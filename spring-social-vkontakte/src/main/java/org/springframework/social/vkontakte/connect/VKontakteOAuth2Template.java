@@ -17,6 +17,7 @@ package org.springframework.social.vkontakte.connect;
 
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Template;
+
 import java.util.Map;
 
 /**

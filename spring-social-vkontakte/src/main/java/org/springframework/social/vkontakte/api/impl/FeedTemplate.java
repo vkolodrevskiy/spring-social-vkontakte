@@ -18,7 +18,10 @@ package org.springframework.social.vkontakte.api.impl;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 import org.springframework.social.UncategorizedApiException;
-import org.springframework.social.vkontakte.api.*;
+import org.springframework.social.vkontakte.api.FeedOperations;
+import org.springframework.social.vkontakte.api.NewsPost;
+import org.springframework.social.vkontakte.api.Post;
+import org.springframework.social.vkontakte.api.VKGenericResponse;
 import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
@@ -128,7 +131,7 @@ public class FeedTemplate extends AbstractVKontakteOperations implements FeedOpe
             try {
                 posts.add(objectMapper.readValue(items.get(i), NewsPost.class));
             } catch (IOException e) {
-                throw new UncategorizedApiException("Error deserializing: " + items.get(i), e);
+                throw new UncategorizedApiException("vkontakte", "Error deserializing: " + items.get(i), e);
             }
         }
 

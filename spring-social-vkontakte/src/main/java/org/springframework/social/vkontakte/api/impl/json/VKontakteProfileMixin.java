@@ -15,8 +15,6 @@
  */
 package org.springframework.social.vkontakte.api.impl.json;
 
-import java.io.IOException;
-
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.annotate.JsonCreator;
@@ -26,6 +24,8 @@ import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.springframework.social.vkontakte.api.VKontakteDate;
+
+import java.io.IOException;
 
 /**
  * Mixin for {@link org.springframework.social.vkontakte.api.VKontakteProfile}

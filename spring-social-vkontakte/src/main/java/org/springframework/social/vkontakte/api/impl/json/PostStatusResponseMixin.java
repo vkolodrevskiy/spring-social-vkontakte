@@ -17,7 +17,6 @@ package org.springframework.social.vkontakte.api.impl.json;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import org.springframework.social.vkontakte.api.Post;
 import org.springframework.social.vkontakte.api.PostStatus;
 
 /**

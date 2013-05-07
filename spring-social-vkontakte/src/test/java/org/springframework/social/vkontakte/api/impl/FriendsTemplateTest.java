@@ -15,19 +15,20 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.springframework.http.HttpMethod.*;
-import static org.springframework.http.MediaType.*;
-import static org.springframework.test.web.client.match.RequestMatchers.*;
-import static org.springframework.test.web.client.response.ResponseCreators.*;
-
-import java.text.ParseException;
-import java.util.List;
-
 import org.junit.Test;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
+
+import java.text.ParseException;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
  * {@link FriendsTemplate} test.

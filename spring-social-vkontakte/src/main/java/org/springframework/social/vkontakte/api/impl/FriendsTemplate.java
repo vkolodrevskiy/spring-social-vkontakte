@@ -16,7 +16,6 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.social.support.URIBuilder;
 import org.springframework.social.vkontakte.api.FriendsOperations;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
 import org.springframework.social.vkontakte.api.VKontakteProfiles;

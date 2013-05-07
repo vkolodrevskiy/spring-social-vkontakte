@@ -15,7 +15,6 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;

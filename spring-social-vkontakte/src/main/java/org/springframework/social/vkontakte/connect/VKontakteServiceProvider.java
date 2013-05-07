@@ -15,9 +15,9 @@
  */
 package org.springframework.social.vkontakte.connect;
 
+import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.social.vkontakte.api.impl.VKontakteTemplate;
-import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 
 /**
  * VKontakte ServiceProvider implementation.
