@@ -98,7 +98,7 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
         try {
-            return objectMapper.readValue(response.getResponse(), Post.class);
+            return objectMapper.readValue(response.getResponse().get(0), Post.class);
         } catch (IOException e) {
             throw new UncategorizedApiException("vkontakte", "Error deserializing: " + response.getResponse(), e);
         }
