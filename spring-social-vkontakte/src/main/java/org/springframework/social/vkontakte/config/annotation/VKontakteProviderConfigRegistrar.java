@@ -66,7 +66,5 @@ public class VKontakteProviderConfigRegistrar extends AbstractProviderConfigRegi
 		}
 		
 		private final static Log logger = LogFactory.getLog(VKontakteApiHelper.class);
-
 	}
-
 }
