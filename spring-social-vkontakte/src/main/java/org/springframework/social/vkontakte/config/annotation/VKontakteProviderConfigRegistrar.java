@@ -22,10 +22,10 @@ import org.springframework.social.config.annotation.AbstractProviderConfigRegist
 import org.springframework.social.config.xml.ApiHelper;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.security.provider.SocialAuthenticationService;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.social.vkontakte.connect.VKontakteConnectionFactory;
 import org.springframework.social.vkontakte.security.VKontakteAuthenticationService;
-import org.springframework.social.security.provider.SocialAuthenticationService;
 
 /**
  * {@link org.springframework.context.annotation.ImportBeanDefinitionRegistrar} for configuring a {@link VKontakteConnectionFactory} bean and a request-scoped {@link VKontakte} bean.

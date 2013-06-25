@@ -15,8 +15,8 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ArrayNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.vkontakte.api.FeedOperations;
 import org.springframework.social.vkontakte.api.NewsPost;
@@ -77,7 +77,7 @@ public class FeedTemplate extends AbstractVKontakteOperations implements FeedOpe
         List<NewsPost> posts = new ArrayList<NewsPost>();
         for (int i = 0; i < items.size(); i++) {
             try {
-                posts.add(objectMapper.readValue(items.get(i), NewsPost.class));
+                posts.add(objectMapper.readValue(items.get(i).asText(), NewsPost.class));
             } catch (IOException e) {
                 throw new UncategorizedApiException("vkontakte", "Error deserializing: " + items.get(i), e);
             }

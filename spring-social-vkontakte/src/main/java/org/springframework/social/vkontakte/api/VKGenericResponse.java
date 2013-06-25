@@ -15,7 +15,7 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import org.codehaus.jackson.JsonNode;
+import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * Used for manual JSON conversions within the response.
