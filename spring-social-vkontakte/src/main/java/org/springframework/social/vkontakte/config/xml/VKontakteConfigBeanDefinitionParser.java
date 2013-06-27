@@ -22,10 +22,10 @@ import org.springframework.social.config.xml.AbstractProviderConfigBeanDefinitio
 import org.springframework.social.config.xml.ApiHelper;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.security.provider.SocialAuthenticationService;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.social.vkontakte.connect.VKontakteConnectionFactory;
 import org.springframework.social.vkontakte.security.VKontakteAuthenticationService;
-import org.springframework.social.security.provider.SocialAuthenticationService;
 
 /**
  * Implementation of {@link AbstractProviderConfigBeanDefinitionParser} that creates a {@link VKontakteConnectionFactory}.
