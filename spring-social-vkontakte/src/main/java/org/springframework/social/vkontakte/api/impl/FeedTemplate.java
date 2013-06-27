@@ -35,6 +35,7 @@ import java.util.Properties;
  * Implements VK's {@link FeedOperations}.
  */
 public class FeedTemplate extends AbstractVKontakteOperations implements FeedOperations {
+    private final int DEFAULT_NUMBER_OF_POSTS = 25;
 
     private final RestTemplate restTemplate;
 
@@ -45,7 +46,7 @@ public class FeedTemplate extends AbstractVKontakteOperations implements FeedOpe
 
     @Override
     public List<NewsPost> getFeed() {
-        return getFeed(null, 0, 25);
+        return getFeed(null, 0, DEFAULT_NUMBER_OF_POSTS);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class FeedTemplate extends AbstractVKontakteOperations implements FeedOpe
 
     @Override
     public List<NewsPost> getFeed(String ownerId) {
-        return getFeed(ownerId, 0, 25);
+        return getFeed(ownerId, 0, DEFAULT_NUMBER_OF_POSTS);
     }
 
     @Override
@@ -88,7 +89,7 @@ public class FeedTemplate extends AbstractVKontakteOperations implements FeedOpe
 
     @Override
     public List<Post> searchUserFeed(String query) {
-        return searchUserFeed(query, 0, 25);
+        return searchUserFeed(query, 0, DEFAULT_NUMBER_OF_POSTS);
     }
 
     @Override
