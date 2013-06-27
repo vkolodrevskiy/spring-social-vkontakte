@@ -22,7 +22,7 @@ import org.springframework.social.vkontakte.connect.VKontakteConnectionFactory;
 import java.lang.annotation.*;
 
 /**
- * Annotation to enable LinkedIn in a Spring Social application.
+ * Annotation to enable VKontakte in a Spring Social application.
  * Configures a {@link VKontakteConnectionFactory} bean (and a {@link org.springframework.social.connect.ConnectionFactoryLocator} bean if one isn't already registered).
  * Also configures a request-scoped {@link VKontakte} bean fetched from the current user's {@link org.springframework.social.connect.ConnectionRepository}.
  * @author vkolodrevskiy

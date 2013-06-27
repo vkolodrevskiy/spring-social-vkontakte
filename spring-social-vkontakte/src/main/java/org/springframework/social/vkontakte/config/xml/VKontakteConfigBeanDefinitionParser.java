@@ -13,37 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.config.annotation;
+package org.springframework.social.vkontakte.config.xml;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.social.UserIdSource;
-import org.springframework.social.config.annotation.AbstractProviderConfigRegistrarSupport;
+import org.springframework.social.config.xml.AbstractProviderConfigBeanDefinitionParser;
 import org.springframework.social.config.xml.ApiHelper;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.security.provider.SocialAuthenticationService;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.social.vkontakte.connect.VKontakteConnectionFactory;
 import org.springframework.social.vkontakte.security.VKontakteAuthenticationService;
+import org.springframework.social.security.provider.SocialAuthenticationService;
 
 /**
- * {@link org.springframework.context.annotation.ImportBeanDefinitionRegistrar} for configuring a {@link VKontakteConnectionFactory} bean and a request-scoped {@link VKontakte} bean.
+ * Implementation of {@link AbstractProviderConfigBeanDefinitionParser} that creates a {@link VKontakteConnectionFactory}.
  * @author Craig Walls
  */
-public class VKontakteProviderConfigRegistrar extends AbstractProviderConfigRegistrarSupport {
+class VKontakteConfigBeanDefinitionParser extends AbstractProviderConfigBeanDefinitionParser {
 
-	public VKontakteProviderConfigRegistrar() {
-		super(EnableVKontakte.class, VKontakteConnectionFactory.class, VKontakteApiHelper.class);
+	public VKontakteConfigBeanDefinitionParser() {
+		super(VKontakteConnectionFactory.class, VKontakteApiHelper.class);
 	}
-
+	
 	@Override
 	protected Class<? extends SocialAuthenticationService<?>> getAuthenticationServiceClass() {
 		return VKontakteAuthenticationService.class;
 	}
-	
+
 	static class VKontakteApiHelper implements ApiHelper<VKontakte> {
-		
+
 		private final UsersConnectionRepository usersConnectionRepository;
 
 		private final UserIdSource userIdSource;
@@ -55,16 +55,18 @@ public class VKontakteProviderConfigRegistrar extends AbstractProviderConfigRegi
 
 		public VKontakte getApi() {
 			if (logger.isDebugEnabled()) {
-				logger.debug("Getting API binding instance for VKontakte provider");
+				logger.debug("Getting API binding instance for VKontakte");
 			}
-					
+			
 			Connection<VKontakte> connection = usersConnectionRepository.createConnectionRepository(userIdSource.getUserId()).findPrimaryConnection(VKontakte.class);
 			if (logger.isDebugEnabled() && connection == null) {
 				logger.debug("No current connection; Returning default VKontakteTemplate instance.");
 			}
 			return connection != null ? connection.getApi() : null;
 		}
-		
+
 		private final static Log logger = LogFactory.getLog(VKontakteApiHelper.class);
+
 	}
+	
 }

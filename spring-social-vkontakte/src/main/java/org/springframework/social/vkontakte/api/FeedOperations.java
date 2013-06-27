@@ -29,7 +29,7 @@ public interface FeedOperations {
      * Returns up to the most recent 25 posts.
      *
      * @return a list of {@link Post}s for the authenticated user.
-     * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
      * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      */
     List<NewsPost> getFeed();
@@ -41,7 +41,7 @@ public interface FeedOperations {
      * @param offset the offset into the feed to start retrieving posts.
      * @param limit the maximum number of posts to return.
      * @return a list of {@link Post}s for the authenticated user.
-     * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
      * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      */
     List<NewsPost> getFeed(int offset, int limit);
@@ -53,7 +53,7 @@ public interface FeedOperations {
      *
      * @param ownerId the Facebook ID or alias for the owner (user, group, event, page, etc) of the feed.
      * @return a list of {@link Post}s for the specified user.
-     * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
      * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      */
     List<NewsPost> getFeed(String ownerId);
@@ -67,7 +67,7 @@ public interface FeedOperations {
      * @param offset the offset into the feed to start retrieving posts.
      * @param limit the maximum number of posts to return.
      * @return a list of {@link Post}s for the specified user.
-     * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
      * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      */
     List<NewsPost> getFeed(String ownerId, int offset, int limit);
@@ -78,7 +78,7 @@ public interface FeedOperations {
      *
      * @param query the search query (e.g., "football")
      * @return a list of {@link Post}s that match the search query
-     * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
      * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      */
     List<Post> searchUserFeed(String query);
@@ -90,7 +90,7 @@ public interface FeedOperations {
      * @param offset the offset into the feed to start retrieving posts.
      * @param limit the maximum number of posts to return.
      * @return a list of {@link Post}s that match the search query
-     * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
      * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      */
     List<Post> searchUserFeed(String query, int offset, int limit);
