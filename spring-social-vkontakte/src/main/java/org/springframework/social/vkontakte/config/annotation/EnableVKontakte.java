@@ -43,5 +43,4 @@ public @interface EnableVKontakte {
 	 * The application's consumer secret as issued by vkontakte.
 	 */
 	String appSecret();
-	
 }
