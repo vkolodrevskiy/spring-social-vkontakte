@@ -43,7 +43,6 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     private WallOperations wallOperations;
     private FriendsOperations friendsOperations;
     private FeedOperations feedOperations;
-    private StatusOperations statusOperations;
 
     private ObjectMapper objectMapper;
 
@@ -92,7 +91,6 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
         friendsOperations = new FriendsTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         wallOperations = new WallTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         feedOperations = new FeedTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
-        statusOperations = new StatusTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
     }
 
     @Override
@@ -113,10 +111,5 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     @Override
     public FeedOperations feedOperations() {
         return feedOperations;
-    }
-
-    @Override
-    public StatusOperations statusOperations() {
-        return statusOperations;
     }
 }
