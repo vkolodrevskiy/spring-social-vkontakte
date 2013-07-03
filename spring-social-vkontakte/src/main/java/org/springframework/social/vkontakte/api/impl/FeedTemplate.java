@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * Implements VK's {@link FeedOperations}.
+ * {@link FeedOperations} implementation.
  */
 public class FeedTemplate extends AbstractVKontakteOperations implements FeedOperations {
     private final int DEFAULT_NUMBER_OF_POSTS = 25;
@@ -94,6 +94,7 @@ public class FeedTemplate extends AbstractVKontakteOperations implements FeedOpe
 
     @Override
     public List<Post> searchUserFeed(String query, int offset, int limit) {
+        requireAuthorization();
         Properties props = new Properties();
         props.put("q", query);
         props.put("count", limit);
