@@ -40,10 +40,10 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
         this.restTemplate = restTemplate;
     }
 
-    @Override
-    public String post(String message) {
+    public String post(String message, Properties params) {
         requireAuthorization();
         Properties props = new Properties();
+        props.putAll(params);
         props.put("message", message);
         URI uri = makeOperationURL("wall.post", props);
 
@@ -53,19 +53,16 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
         return status.getStatus().getPostId();
     }
 
+    @Override
+    public String post(String message) {
+        return this.post(message, (Properties)null);
+    }
 
     @Override
     public String post(String message, String link) {
-        requireAuthorization();
         Properties props = new Properties();
-        props.put("message", message);
         props.put("attachments", link);
-        URI uri = makeOperationURL("wall.post", props);
-
-        PostStatusResponse status = restTemplate.getForObject(uri, PostStatusResponse.class);
-        checkForError(status);
-
-        return status.getStatus().getPostId();
+        return this.post(message, props);
     }
 
     @Override
