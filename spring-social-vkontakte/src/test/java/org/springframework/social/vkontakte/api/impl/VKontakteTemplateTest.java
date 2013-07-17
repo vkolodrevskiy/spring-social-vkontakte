@@ -27,13 +27,13 @@ import static org.junit.Assert.assertTrue;
 public class VKontakteTemplateTest {
     @Test
     public void isAuthorizedForUser() {
-        VKontakteTemplate twitter = new VKontakteTemplate("ACCESS_TOKEN", "USER_ID");
-        assertTrue(twitter.isAuthorized());
+        VKontakteTemplate vkontakte = new VKontakteTemplate("ACCESS_TOKEN", "USER_ID");
+        assertTrue(vkontakte.isAuthorized());
     }
 
     @Test
     public void isAuthorizedForUser_notAuthorized() {
-        VKontakteTemplate twitter = new VKontakteTemplate();
-        assertFalse(twitter.isAuthorized());
+        VKontakteTemplate vkontakte = new VKontakteTemplate();
+        assertFalse(vkontakte.isAuthorized());
     }
 }

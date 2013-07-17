@@ -15,7 +15,6 @@
  */
 package org.springframework.social.vkontakte.api;
 
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
@@ -28,7 +27,7 @@ import java.util.List;
 public class Post {
 
     private final String id;
-    private final Date createdDate;
+    private final Date date;
     private final String text;
 
     private Likes likes;
@@ -36,9 +35,9 @@ public class Post {
 
     private List<Attachment> attachments;
 
-    public Post(String id, Date createdDate, String text) {
+    public Post(String id, Date date, String text) {
         this.id = id;
-        this.createdDate = createdDate;
+        this.date = date;
         this.text = text;
     }
 
@@ -46,12 +45,8 @@ public class Post {
         return id;
     }
 
-    public List<Attachment> getAttachments() {
-        return attachments;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
+    public Date getDate() {
+        return date;
     }
 
     public String getText() {
@@ -67,15 +62,10 @@ public class Post {
     }
 
     public static class Likes {
-
-        private final int count;
+        private int count;
         private boolean userLikes;
         private boolean canLike;
         private boolean canPublish;
-
-        public Likes(int count) {
-            this.count = count;
-        }
 
         public int getCount() {
             return count;
@@ -104,14 +94,9 @@ public class Post {
         }
     }
 
-
     public static class Reposts {
-        private final int count;
+        private int count;
         private boolean userReposted;
-
-        public Reposts(int count) {
-            this.count = count;
-        }
 
         public int getCount() {
             return count;
@@ -134,7 +119,7 @@ public class Post {
     public String toString() {
         return "Post{" +
                 "id='" + id + '\'' +
-                ", createdDate=" + createdDate +
+                ", date=" + date +
                 ", text='" + text + '\'' +
                 ", likes=" + likes +
                 ", reposts=" + reposts +

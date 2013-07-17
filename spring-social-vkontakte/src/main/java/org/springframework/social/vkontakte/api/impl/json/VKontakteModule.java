@@ -15,20 +15,20 @@
  */
 package org.springframework.social.vkontakte.api.impl.json;
 
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.JsonToken;
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.*;
-import org.codehaus.jackson.map.introspect.AnnotatedClass;
-import org.codehaus.jackson.map.introspect.JacksonAnnotationIntrospector;
-import org.codehaus.jackson.map.jsontype.NamedType;
-import org.codehaus.jackson.map.jsontype.TypeIdResolver;
-import org.codehaus.jackson.map.jsontype.impl.AsWrapperTypeDeserializer;
-import org.codehaus.jackson.map.jsontype.impl.StdTypeResolverBuilder;
-import org.codehaus.jackson.map.module.SimpleDeserializers;
-import org.codehaus.jackson.map.module.SimpleModule;
-import org.codehaus.jackson.type.JavaType;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.DeserializationConfig;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
+import com.fasterxml.jackson.databind.jsontype.NamedType;
+import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
+import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
+import com.fasterxml.jackson.databind.jsontype.impl.AsWrapperTypeDeserializer;
+import com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.social.vkontakte.api.*;
 
 import java.io.IOException;
@@ -43,7 +43,7 @@ import java.util.Collection;
 public class VKontakteModule extends SimpleModule {
 
     public VKontakteModule() {
-        super("VKontakteModule", new Version(1, 0, 0, null));
+        super("VKontakteModule");
     }
 
     @Override
@@ -53,17 +53,15 @@ public class VKontakteModule extends SimpleModule {
             @Override
             protected StdTypeResolverBuilder _constructStdTypeResolverBuilder() {
                 return new StdTypeResolverBuilder() {
-
-
                     @Override
-                    public TypeDeserializer buildTypeDeserializer(DeserializationConfig config, JavaType baseType, Collection<NamedType> subtypes, BeanProperty property) {
+                    public TypeDeserializer buildTypeDeserializer(DeserializationConfig config, JavaType baseType, Collection<NamedType> subtypes) {
                         if (Attachment.class.isAssignableFrom(baseType.getRawClass())) {
                             TypeIdResolver idRes = idResolver(config, baseType, subtypes, false, true);
-                            return new AsWrapperTypeDeserializer(baseType, idRes, property, _defaultImpl) {
+                            return new AsWrapperTypeDeserializer(baseType, idRes, baseType.toString(), true, _defaultImpl) {
 
                                 @Override
                                 public Object deserializeTypedFromAny(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-                                    return deserializeTypedFromObject(jp, ctxt);    //To change body of overridden methods use File | Settings | File Templates.
+                                    return deserializeTypedFromObject(jp, ctxt);
                                 }
 
                                 @Override
@@ -113,7 +111,7 @@ public class VKontakteModule extends SimpleModule {
                                 }
                             };
                         } else {
-                            return super.buildTypeDeserializer(config, baseType, subtypes, property);
+                            return super.buildTypeDeserializer(config, baseType, subtypes);
                         }
                     }
                 };

@@ -15,10 +15,10 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.vkontakte.api.*;
 import org.springframework.social.vkontakte.api.impl.json.VKontakteModule;
@@ -49,6 +49,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     private final String accessToken;
     private final String uid;
 
+    // TODO: remove?
     public VKontakteTemplate() {
         initialize();
         this.accessToken = null;
@@ -63,8 +64,6 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     }
 
     private void initialize() {
-        objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new VKontakteModule());
         registerJsonModule();
         getRestTemplate().setErrorHandler(new VKontakteErrorHandler());
         initSubApis();
@@ -73,13 +72,15 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     private void registerJsonModule() {
         List<HttpMessageConverter<?>> converters = getRestTemplate().getMessageConverters();
         for (HttpMessageConverter<?> converter : converters) {
-            if (converter instanceof MappingJacksonHttpMessageConverter) {
-                MappingJacksonHttpMessageConverter jsonConverter = (MappingJacksonHttpMessageConverter) converter;
+            if (converter instanceof MappingJackson2HttpMessageConverter) {
+                MappingJackson2HttpMessageConverter jsonConverter = (MappingJackson2HttpMessageConverter) converter;
 
                 List<MediaType> mTypes = new LinkedList<MediaType>(jsonConverter.getSupportedMediaTypes());
-                mTypes.add(new MediaType("text", "javascript", MappingJacksonHttpMessageConverter.DEFAULT_CHARSET));
+                mTypes.add(new MediaType("text", "javascript", MappingJackson2HttpMessageConverter.DEFAULT_CHARSET));
                 jsonConverter.setSupportedMediaTypes(mTypes);
 
+                objectMapper = new ObjectMapper();
+                objectMapper.registerModule(new VKontakteModule());
                 jsonConverter.setObjectMapper(objectMapper);
             }
         }

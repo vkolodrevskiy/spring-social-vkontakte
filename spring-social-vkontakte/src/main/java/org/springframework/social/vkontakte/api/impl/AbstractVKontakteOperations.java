@@ -15,20 +15,19 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ArrayNode;
-import org.codehaus.jackson.node.ObjectNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.support.URIBuilder;
-import org.springframework.social.vkontakte.api.*;
+import org.springframework.social.vkontakte.api.VKGenericResponse;
+import org.springframework.social.vkontakte.api.VKResponse;
+import org.springframework.social.vkontakte.api.VKontakteErrorException;
 import org.springframework.social.vkontakte.api.impl.json.VKArray;
 import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +52,7 @@ class AbstractVKontakteOperations {
 
     protected void requireAuthorization() {
         if (!isAuthorized) {
-            throw new MissingAuthorizationException();
+            throw new MissingAuthorizationException("vkontakte");
         }
     }
 
@@ -80,17 +79,16 @@ class AbstractVKontakteOperations {
 
         Assert.isTrue(response.getResponse().isArray());
         ArrayNode items = (ArrayNode) response.getResponse();
-        int count = items.get(0).getIntValue();
+        int count = items.get(0).asInt();
         List<T> elements = new ArrayList<T>();
         for (int i = 1; i < items.size(); i++) {
             try {
-                elements.add(objectMapper.readValue(items.get(i), itemClass));
+                elements.add(objectMapper.readValue(items.get(i).asText(), itemClass));
             } catch (IOException e) {
-                throw new UncategorizedApiException("Error deserializing: " + items.get(i), e);
+                throw new UncategorizedApiException("vkontakte", "Error deserializing: " + items.get(i), e);
             }
         }
 
         return new VKArray<T>(count, elements);
     }
-
 }

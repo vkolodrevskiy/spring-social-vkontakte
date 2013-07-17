@@ -24,74 +24,74 @@ import java.util.List;
 public interface FeedOperations {
 
     /**
-   	 * Retrieves recent posts for the authenticated user.
-   	 * Requires "read_stream" permission to read non-public posts.
-   	 * Returns up to the most recent 25 posts.
-   	 * @return a list of {@link Post}s for the authenticated user.
-   	 * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
-   	 * @throws org.springframework.social.MissingAuthorizationException if FacebookTemplate was not created with an access token.
-   	 */
-   	List<NewsPost> getFeed();
-
-   	/**
-   	 * Retrieves recent posts for the authenticated user.
-   	 * Requires "read_stream" permission to read non-public posts.
-   	 *
-        * @param offset the offset into the feed to start retrieving posts.
-        * @param limit the maximum number of posts to return.
-        * @return a list of {@link Post}s for the authenticated user.
-   	 * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
-   	 * @throws org.springframework.social.MissingAuthorizationException if FacebookTemplate was not created with an access token.
-   	 */
-   	List<NewsPost> getFeed(int offset, int limit);
-
-   	/**
-   	 * Retrieves recent feed entries for a given user.
-   	 * Returns up to the most recent 25 posts.
-   	 * Requires "read_stream" permission to read non-public posts.
-   	 *
-        * @param ownerId the Facebook ID or alias for the owner (user, group, event, page, etc) of the feed.
-        * @return a list of {@link Post}s for the specified user.
-   	 * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
-   	 * @throws org.springframework.social.MissingAuthorizationException if FacebookTemplate was not created with an access token.
-   	 */
-   	List<NewsPost> getFeed(String ownerId);
-
-   	/**
-   	 * Retrieves recent feed entries for a given user.
-   	 * Requires "read_stream" permission to read non-public posts.
-   	 * Returns up to the most recent 25 posts.
-   	 *
-        * @param ownerId the Facebook ID or alias for the owner (user, group, event, page, etc) of the feed.
-        * @param offset the offset into the feed to start retrieving posts.
-        * @param limit the maximum number of posts to return.
-        * @return a list of {@link Post}s for the specified user.
-   	 * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
-   	 * @throws org.springframework.social.MissingAuthorizationException if FacebookTemplate was not created with an access token.
-   	 */
-   	List<NewsPost> getFeed(String ownerId, int offset, int limit);
-
+     * Retrieves recent posts for the authenticated user.
+     * Requires "read_stream" permission to read non-public posts.
+     * Returns up to the most recent 25 posts.
+     *
+     * @return a list of {@link Post}s for the authenticated user.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     */
+    List<NewsPost> getFeed();
 
     /**
-   	 * Searches the authenticated user's feed.
-   	 * Returns up to 25 posts that match the query.
-   	 *
+     * Retrieves recent posts for the authenticated user.
+     * Requires "read_stream" permission to read non-public posts.
+     *
+     * @param offset the offset into the feed to start retrieving posts.
+     * @param limit the maximum number of posts to return.
+     * @return a list of {@link Post}s for the authenticated user.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     */
+    List<NewsPost> getFeed(int offset, int limit);
+
+    /**
+     * Retrieves recent feed entries for a given user.
+     * Returns up to the most recent 25 posts.
+     * Requires "read_stream" permission to read non-public posts.
+     *
+     * @param ownerId the Facebook ID or alias for the owner (user, group, event, page, etc) of the feed.
+     * @return a list of {@link Post}s for the specified user.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     */
+    List<NewsPost> getFeed(String ownerId);
+
+    /**
+     * Retrieves recent feed entries for a given user.
+     * Requires "read_stream" permission to read non-public posts.
+     * Returns up to the most recent 25 posts.
+     *
+     * @param ownerId the Facebook ID or alias for the owner (user, group, event, page, etc) of the feed.
+     * @param offset the offset into the feed to start retrieving posts.
+     * @param limit the maximum number of posts to return.
+     * @return a list of {@link Post}s for the specified user.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     */
+    List<NewsPost> getFeed(String ownerId, int offset, int limit);
+
+    /**
+     * Searches the authenticated user's feed.
+     * Returns up to 25 posts that match the query.
+     *
      * @param query the search query (e.g., "football")
      * @return a list of {@link Post}s that match the search query
-   	 * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
-   	 * @throws org.springframework.social.MissingAuthorizationException if FacebookTemplate was not created with an access token.
-   	 */
-   	List<Post> searchUserFeed(String query);
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     */
+    List<Post> searchUserFeed(String query);
 
-   	/**
-   	 * Searches the authenticated user's feed.
-   	 *
-        * @param query the search query (e.g., "football")
-        * @param offset the offset into the feed to start retrieving posts.
-        * @param limit the maximum number of posts to return.
-        * @return a list of {@link Post}s that match the search query
-   	 * @throws org.springframework.social.ApiException if there is an error while communicating with Facebook.
-   	 * @throws org.springframework.social.MissingAuthorizationException if FacebookTemplate was not created with an access token.
-   	 */
-   	List<Post> searchUserFeed(String query, int offset, int limit);
+    /**
+     * Searches the authenticated user's feed.
+     *
+     * @param query the search query (e.g., "football")
+     * @param offset the offset into the feed to start retrieving posts.
+     * @param limit the maximum number of posts to return.
+     * @return a list of {@link Post}s that match the search query
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     */
+    List<Post> searchUserFeed(String query, int offset, int limit);
 }

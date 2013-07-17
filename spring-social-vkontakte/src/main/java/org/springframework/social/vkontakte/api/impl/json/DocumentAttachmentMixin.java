@@ -15,8 +15,8 @@
  */
 package org.springframework.social.vkontakte.api.impl.json;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DocumentAttachmentMixin extends AttachmentMixin {
@@ -35,5 +35,4 @@ public class DocumentAttachmentMixin extends AttachmentMixin {
 
     @JsonProperty("ext")
     private String extension;
-
 }

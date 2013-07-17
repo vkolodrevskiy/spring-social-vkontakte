@@ -17,6 +17,7 @@ package org.springframework.social.vkontakte.connect;
 
 import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.oauth2.OAuth2Template;
+
 import java.util.Map;
 
 /**
@@ -35,7 +36,7 @@ public class VKontakteOAuth2Template extends OAuth2Template {
     // using it while getting profile info for the current user
     // also when scope has "offline" option VKontakte returns expires_in=0, setting it to null in this case
     @Override
-    protected AccessGrant createAccessGrant(String accessToken, String scope, String refreshToken, Integer expiresIn, Map<String, Object> response) {
+    protected AccessGrant createAccessGrant(String accessToken, String scope, String refreshToken, Long expiresIn, Map<String, Object> response) {
         uid = Integer.toString((Integer) response.get("user_id"));
         return super.createAccessGrant(accessToken, scope, refreshToken, expiresIn == 0 ? null : expiresIn, response);
     }

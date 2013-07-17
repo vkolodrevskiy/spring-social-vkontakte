@@ -15,7 +15,7 @@
  */
 package org.springframework.social.vkontakte.api.impl.json;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * {@link org.springframework.social.vkontakte.api.VKResponse} mixin.

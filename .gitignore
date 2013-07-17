@@ -1,13 +1,13 @@
 .classpath
-.gradle
-.idea
 .project
 .settings
 .DS_Store
 build
-*.iml
+**/build
+**/src/test/java/exploration
+.gradle
+spring-social-core/src/test/java/exploration
 **/.classpath
 **/.project
 **/.settings
 **/bin
-**/build

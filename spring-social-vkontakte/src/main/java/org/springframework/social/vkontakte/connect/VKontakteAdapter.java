@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,28 +15,30 @@
  */
 package org.springframework.social.vkontakte.connect;
 
-import org.springframework.social.ApiException;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
+import org.springframework.web.client.HttpClientErrorException;
 
 /**
  * VKontakte ApiAdapter implementation.
  * @author vkolodrevskiy
  */
 public class VKontakteAdapter implements ApiAdapter<VKontakte> {
+    @Override
 	public boolean test(VKontakte vkontakte) {
 		try {
 			vkontakte.usersOperations().getProfile();
 			return true;
-		} catch (ApiException e) {
+		} catch (HttpClientErrorException e) {
 			return false;
 		}
 	}
 
+    @Override
 	public void setConnectionValues(VKontakte vkontakte, ConnectionValues values) {
 		VKontakteProfile profile = vkontakte.usersOperations().getProfile();
 		values.setProviderUserId(profile.getUid());
@@ -45,6 +47,7 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
 		values.setImageUrl(profile.getPhoto());
 	}
 
+    @Override
 	public UserProfile fetchUserProfile(VKontakte vkontakte) {
 		VKontakteProfile profile = vkontakte.usersOperations().getProfile();
 		return new UserProfileBuilder()
@@ -55,7 +58,9 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
                 .build();
 	}
 
+    @Override
 	public void updateStatus(VKontakte vkontakte, String message) {
+        // TODO: change to status api
 		vkontakte.wallOperations().post(message);
 	}
 }

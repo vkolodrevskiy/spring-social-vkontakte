@@ -15,9 +15,6 @@
  */
 package org.springframework.social.vkontakte.connect;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.social.connect.UserProfile;
@@ -25,6 +22,9 @@ import org.springframework.social.vkontakte.api.UsersOperations;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.social.vkontakte.api.VKontakteDate;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * {@link VKontakteAdapter} test.
