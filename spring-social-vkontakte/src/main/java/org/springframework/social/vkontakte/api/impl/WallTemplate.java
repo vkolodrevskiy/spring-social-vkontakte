@@ -55,7 +55,7 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
 
     @Override
     public String post(String message) {
-        return this.post(message, (Properties)null);
+        return this.post(message, new Properties());
     }
 
     @Override
