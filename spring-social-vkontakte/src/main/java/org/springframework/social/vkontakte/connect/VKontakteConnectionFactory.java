@@ -22,7 +22,7 @@ import org.springframework.social.vkontakte.api.VKontakte;
  * VKontakte ConnectionFactory implementation.
  * @author vkolodrevskiy
  */
-public class  VKontakteConnectionFactory extends OAuth2ConnectionFactory<VKontakte> {
+public class VKontakteConnectionFactory extends OAuth2ConnectionFactory<VKontakte> {
 
 	public VKontakteConnectionFactory(String clientId, String clientSecret) {
 		super("vkontakte", new VKontakteServiceProvider(clientId, clientSecret), new VKontakteAdapter());
