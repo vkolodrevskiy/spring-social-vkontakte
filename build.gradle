@@ -3,7 +3,8 @@ buildscript {
         maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
-        classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.2.2'
+        classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.2.8'
+        classpath 'me.champeau.gradle:gradle-javadoc-hotfix-plugin:0.1'
     }
 }
 
@@ -11,6 +12,7 @@ configure(allprojects) {
     apply plugin: 'java'
     apply plugin: 'eclipse'
     apply plugin: 'idea'
+    apply plugin: 'javadocHotfix'
 
     group = 'org.springframework.social'
 
@@ -35,7 +37,10 @@ configure(allprojects) {
     test.systemProperty("java.awt.headless", "true")
 
     repositories {
+        maven { url "http://repo.spring.io/libs-release" }
+        maven { url "http://repo.spring.io/libs-milestone" }
         maven { url "http://repo.spring.io/libs-snapshot" }
+        maven { url "http://repo.spring.io/ebr-maven-external" }
     }
 
     dependencies {
@@ -100,9 +105,10 @@ project('spring-social-vkontakte') {
         compile ("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
         compile ("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
         compile ("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
-        compile ("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
         compile ("javax.servlet:servlet-api:$servletApiVersion", provided)
         testCompile ("org.springframework:spring-test:$springVersion")
+        testCompile ("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
+        testCompile ("org.apache.httpcomponents:httpclient:4.2.1", optional)
     }
 }
 
@@ -208,9 +214,9 @@ configure(rootProject) {
             into "${baseDir}/docs"
         }
 
-//        from(zipTree(schemaZip.archivePath)) {
-//            into "${baseDir}/schema"
-//        }
+        from(zipTree(schemaZip.archivePath)) {
+            into "${baseDir}/schema"
+        }
 
         subprojects.each { subproject ->
             into ("${baseDir}/libs") {
@@ -233,7 +239,7 @@ configure(rootProject) {
 
     task wrapper(type: Wrapper) {
         description = 'Generates gradlew[.bat] scripts'
-        gradleVersion = '1.4'
+        gradleVersion = '1.10'
     }
 
 }
