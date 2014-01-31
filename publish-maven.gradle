@@ -12,6 +12,18 @@ install {
     }
 }
 
+// upload artifact to Fugru maven repository
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            env = "$System.env.HOME"
+            snapshotRepository(url: 'http://fugru.com/archiva/repository/snapshots/') {
+                authentication(userName: fugruUser, password: fugruPassword);
+            }
+        }
+    }
+}
+
 def customizePom(pom, gradleProject) {
     pom.whenConfigured { generatedPom ->
         // respect 'optional' and 'provided' dependencies
