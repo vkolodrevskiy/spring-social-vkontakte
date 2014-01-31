@@ -21,7 +21,6 @@ import org.springframework.social.vkontakte.connect.VKontakteConnectionFactory;
 
 /**
  * VKontakte Authentication Service.
- *
  * @author vkolodrevskiy
  */
 public class VKontakteAuthenticationService extends OAuth2AuthenticationService<VKontakte> {
