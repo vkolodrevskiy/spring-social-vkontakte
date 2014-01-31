@@ -13,12 +13,14 @@ install {
 }
 
 // upload artifact to Fugru maven repository
+// store fugruUser and fugruPassword in environment variables
+// as ORG_GRADLE_PROJECT_fugruPassword and ORG_GRADLE_PROJECT_fugruUser
+// this was done for security issues
 uploadArchives {
     repositories {
         mavenDeployer {
-            env = "$System.env.HOME"
             snapshotRepository(url: 'http://fugru.com/archiva/repository/snapshots/') {
-                authentication(userName: fugruUser, password: fugruPassword);
+                authentication(userName: project.fugruUser, password: project.fugruPassword);
             }
         }
     }
