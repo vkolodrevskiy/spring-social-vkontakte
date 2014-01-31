@@ -18,9 +18,20 @@ install {
 // this was done for security issues
 uploadArchives {
     repositories {
+        def user, password
+        if(project.hasProperty('fugruUser')) {
+            user = project.fugruUser
+        } else {
+            user = 'guest'
+        }
+        if(project.hasProperty('fugruPassword')) {
+            password = project.fugruPassword
+        } else {
+            password = ''
+        }
         mavenDeployer {
             snapshotRepository(url: 'http://fugru.com/archiva/repository/snapshots/') {
-                authentication(userName: project.fugruUser, password: project.fugruPassword);
+                authentication(userName: user, password: password);
             }
         }
     }
