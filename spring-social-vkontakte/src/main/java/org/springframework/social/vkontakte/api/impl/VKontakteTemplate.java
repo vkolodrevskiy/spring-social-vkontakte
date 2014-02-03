@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,19 +47,16 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     private ObjectMapper objectMapper;
 
     private final String accessToken;
-    private final String uid;
 
     // TODO: remove?
     public VKontakteTemplate() {
         initialize();
         this.accessToken = null;
-        this.uid = null;
     }
 
-    public VKontakteTemplate(String accessToken, String uid) {
+    public VKontakteTemplate(String accessToken) {
         super(accessToken);
         this.accessToken = accessToken;
-        this.uid = uid;
         initialize();
     }
 
@@ -87,7 +84,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     }
 
     private void initSubApis() {
-        usersOperations = new UsersTemplate(getRestTemplate(), accessToken, uid, objectMapper, isAuthorized());
+        usersOperations = new UsersTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         friendsOperations = new FriendsTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         wallOperations = new WallTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         feedOperations = new FeedTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());

@@ -25,7 +25,6 @@ import java.util.Map;
  * @author vkolodrevskiy
  */
 public class VKontakteOAuth2Template extends OAuth2Template {
-    private String uid = null;
 
 	public VKontakteOAuth2Template(String clientId, String clientSecret) {
 		super(clientId, clientSecret, "http://oauth.vk.com/authorize", "https://oauth.vk.com/access_token");
@@ -37,11 +36,6 @@ public class VKontakteOAuth2Template extends OAuth2Template {
     // also when scope has "offline" option VKontakte returns expires_in=0, setting it to null in this case
     @Override
     protected AccessGrant createAccessGrant(String accessToken, String scope, String refreshToken, Long expiresIn, Map<String, Object> response) {
-        uid = Integer.toString((Integer) response.get("user_id"));
         return super.createAccessGrant(accessToken, scope, refreshToken, expiresIn == 0 ? null : expiresIn, response);
-    }
-
-    public String getUid() {
-        return uid;
     }
 }

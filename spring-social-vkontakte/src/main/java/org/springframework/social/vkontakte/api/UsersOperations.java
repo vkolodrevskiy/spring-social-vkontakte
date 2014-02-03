@@ -29,7 +29,7 @@ public interface UsersOperations {
 	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
 	 */
-	VKontakteProfile getProfile();
+	VKontakteProfile getUser();
 
 	/**
 	 * Retrieves profiles for specified user unique identifiers.
@@ -40,5 +40,5 @@ public interface UsersOperations {
 	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
 	 */
-	List<VKontakteProfile> getProfiles(List<String> userIds);
+	List<VKontakteProfile> getUsers(List<String> userIds);
 }

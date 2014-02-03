@@ -29,7 +29,6 @@ public class VKontakteServiceProvider extends AbstractOAuth2ServiceProvider<VKon
 	}
 
     public VKontakte getApi(String accessToken) {
-        VKontakteOAuth2Template v = (VKontakteOAuth2Template) getOAuthOperations();
-		return new VKontakteTemplate(accessToken, v.getUid());
+		return new VKontakteTemplate(accessToken);
 	}
 }

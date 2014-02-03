@@ -31,7 +31,7 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
     @Override
 	public boolean test(VKontakte vkontakte) {
 		try {
-			vkontakte.usersOperations().getProfile();
+			vkontakte.usersOperations().getUser();
 			return true;
 		} catch (HttpClientErrorException e) {
 			return false;
@@ -40,7 +40,7 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
 
     @Override
 	public void setConnectionValues(VKontakte vkontakte, ConnectionValues values) {
-		VKontakteProfile profile = vkontakte.usersOperations().getProfile();
+		VKontakteProfile profile = vkontakte.usersOperations().getUser();
 		values.setProviderUserId(profile.getUid());
 		values.setDisplayName(profile.getFirstName() + " " + profile.getLastName());
 		values.setProfileUrl("http://vk.com/id" + profile.getUid());
@@ -49,7 +49,7 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
 
     @Override
 	public UserProfile fetchUserProfile(VKontakte vkontakte) {
-		VKontakteProfile profile = vkontakte.usersOperations().getProfile();
+		VKontakteProfile profile = vkontakte.usersOperations().getUser();
 		return new UserProfileBuilder()
                 .setUsername(profile.getScreenName())
                 .setFirstName(profile.getFirstName())

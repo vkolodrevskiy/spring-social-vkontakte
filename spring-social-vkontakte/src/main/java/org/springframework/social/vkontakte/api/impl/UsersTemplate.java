@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,21 +27,19 @@ import java.util.Properties;
 
 /**
  * User operations.
+ * <br>Here should be implemented methods, that can be found under http://vk.com/dev/methods <code>Users</code> section.
  * @author vkolodrevskiy
  */
 class UsersTemplate extends AbstractVKontakteOperations implements UsersOperations {
     private final RestTemplate restTemplate;
 
-    private final String uid;
-
-    public UsersTemplate(RestTemplate restTemplate, String accessToken, String uid, ObjectMapper objectMapper, boolean isAuthorizedForUser) {
+    public UsersTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {
         super(isAuthorizedForUser, accessToken, objectMapper);
         this.restTemplate = restTemplate;
-        this.uid = uid;
     }
 
     @Override
-    public List<VKontakteProfile> getProfiles(List<String> userIds) {
+    public List<VKontakteProfile> getUsers(List<String> userIds) {
         requireAuthorization();
         Properties props = new Properties();
 
@@ -54,9 +52,11 @@ class UsersTemplate extends AbstractVKontakteOperations implements UsersOperatio
             }
         }
 
-        props.put("uids", userIds == null ? uid : uids.toString());
+        props.put("user_ids", userIds == null ? "" : uids.toString());
         props.put("fields", "uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate,sex,screen_name");
-        URI uri = makeOperationURL("getProfiles", props);
+
+        // see documentation under http://vk.com/dev/users.get
+        URI uri = makeOperationURL("users.get", props);
 
         VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
         checkForError(profiles);
@@ -65,7 +65,7 @@ class UsersTemplate extends AbstractVKontakteOperations implements UsersOperatio
     }
 
     @Override
-    public VKontakteProfile getProfile() {
-        return getProfiles(null).get(0);
+    public VKontakteProfile getUser() {
+        return getUsers(null).get(0);
     }
 }
