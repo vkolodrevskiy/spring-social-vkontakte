@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,36 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api;
+package org.springframework.social.vkontakte.api.impl.json.attachment;
 
-/**
- * Document attachment.
- */
-public class DocumentAttachment extends Attachment {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    private String documentId;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class AudioAttachmentMixin extends AttachmentMixin {
+
+    @JsonProperty("aid")
+    private String id;
+
+    @JsonProperty("owner_id")
     private String ownerId;
+
+    @JsonProperty("performer")
+    private String performer;
+
+    @JsonProperty("title")
     private String title;
-    private long size;
-    private String extension;
 
-    public String getDocumentId() {
-        return documentId;
-    }
+    @JsonProperty("duration")
+    private int duration;
 
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public long getSize() {
-        return size;
-    }
-
-    public String getExtension() {
-        return extension;
-    }
 }

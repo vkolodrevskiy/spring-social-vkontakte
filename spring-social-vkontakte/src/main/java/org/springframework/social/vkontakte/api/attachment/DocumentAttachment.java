@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api;
+package org.springframework.social.vkontakte.api.attachment;
 
 /**
- * Video attachment.
+ * Document attachment.
  */
-public class VideoAttachment extends Attachment {
+public class DocumentAttachment extends Attachment {
 
-    private String videoId;
+    private String documentId;
     private String ownerId;
     private String title;
-    private int duration;
+    private long size;
+    private String extension;
 
-    public String getVideoId() {
-        return videoId;
+    public String getDocumentId() {
+        return documentId;
     }
 
     public String getOwnerId() {
@@ -37,7 +38,11 @@ public class VideoAttachment extends Attachment {
         return title;
     }
 
-    public int getDuration() {
-        return duration;
+    public long getSize() {
+        return size;
+    }
+
+    public String getExtension() {
+        return extension;
     }
 }

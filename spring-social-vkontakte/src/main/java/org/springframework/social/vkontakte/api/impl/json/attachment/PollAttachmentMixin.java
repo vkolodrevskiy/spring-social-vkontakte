@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api;
+package org.springframework.social.vkontakte.api.impl.json.attachment;
 
-/**
- * Poll.
- */
-public class PollAttachment extends Attachment {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PollAttachmentMixin extends AttachmentMixin {
+
+    @JsonProperty("poll_id")
     private String pollId;
+
+    @JsonProperty("question")
     private String question;
 
-    public String getPollId() {
-        return pollId;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
 }

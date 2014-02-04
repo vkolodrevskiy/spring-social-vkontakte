@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api;
+package org.springframework.social.vkontakte.api.attachment;
 
 /**
- * Application image attachment.
+ * Attachment associated with an external photo.
  */
-public class ApplicationAttachment extends Attachment {
+public class PhotoAttachment extends Attachment {
 
-    private String applicationId;
-    private String applicationName;
+    private String photoId;
+    private String ownerId;
     private String src;
     private String srcBig;
 
-    public String getApplicationId() {
-        return applicationId;
+    public String getPhotoId() {
+        return photoId;
     }
 
-    public String getApplicationName() {
-        return applicationName;
+    public String getOwnerId() {
+        return ownerId;
     }
 
     public String getSrc() {
@@ -39,5 +39,15 @@ public class ApplicationAttachment extends Attachment {
 
     public String getSrcBig() {
         return srcBig;
+    }
+
+    @Override
+    public String toString() {
+        return "PhotoAttachment{" +
+                "photoId='" + photoId + '\'' +
+                ", ownerId='" + ownerId + '\'' +
+                ", src='" + src + '\'' +
+                ", srcBig='" + srcBig + '\'' +
+                '}';
     }
 }

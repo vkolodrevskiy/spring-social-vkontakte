@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api.impl.json;
+package org.springframework.social.vkontakte.api.impl.json.attachment;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DocumentAttachmentMixin extends AttachmentMixin {
+public class PageAttachmentMixin extends AttachmentMixin {
 
-    @JsonProperty("did")
-    private String documentId;
+    @JsonProperty("pid")
+    private String pageId;
 
-    @JsonProperty("owner_id")
-    private String ownerId;
+    @JsonProperty("gid")
+    private String groupId;
 
     @JsonProperty("title")
     private String title;
-
-    @JsonProperty("size")
-    private long duration;
-
-    @JsonProperty("ext")
-    private String extension;
 }

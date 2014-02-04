@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,28 @@ import com.fasterxml.jackson.databind.jsontype.impl.AsWrapperTypeDeserializer;
 import com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.social.vkontakte.api.*;
+import org.springframework.social.vkontakte.api.attachment.ApplicationAttachment;
+import org.springframework.social.vkontakte.api.attachment.Attachment;
+import org.springframework.social.vkontakte.api.attachment.AudioAttachment;
+import org.springframework.social.vkontakte.api.attachment.DocumentAttachment;
+import org.springframework.social.vkontakte.api.attachment.GraffitiAttachment;
+import org.springframework.social.vkontakte.api.attachment.LinkAttachment;
+import org.springframework.social.vkontakte.api.attachment.NoteAttachment;
+import org.springframework.social.vkontakte.api.attachment.PageAttachment;
+import org.springframework.social.vkontakte.api.attachment.PhotoAttachment;
+import org.springframework.social.vkontakte.api.attachment.PollAttachment;
+import org.springframework.social.vkontakte.api.attachment.VideoAttachment;
+import org.springframework.social.vkontakte.api.impl.json.attachment.ApplicationAttachmentMixin;
+import org.springframework.social.vkontakte.api.impl.json.attachment.AttachmentMixin;
+import org.springframework.social.vkontakte.api.impl.json.attachment.AudioAttachmentMixin;
+import org.springframework.social.vkontakte.api.impl.json.attachment.DocumentAttachmentMixin;
+import org.springframework.social.vkontakte.api.impl.json.attachment.GraffitiAttachmentMixin;
+import org.springframework.social.vkontakte.api.impl.json.attachment.LinkAttachmentMixin;
+import org.springframework.social.vkontakte.api.impl.json.attachment.NoteAttachmentMixin;
+import org.springframework.social.vkontakte.api.impl.json.attachment.PageAttachmentMixin;
+import org.springframework.social.vkontakte.api.impl.json.attachment.PhotoAttachmentMixin;
+import org.springframework.social.vkontakte.api.impl.json.attachment.PollAttachmentMixin;
+import org.springframework.social.vkontakte.api.impl.json.attachment.VideoAttachmentMixin;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -122,7 +144,6 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(VKontakteProfile.class, VKontakteProfileMixin.class);
         context.setMixInAnnotations(VKontakteProfiles.class, VKontakteProfilesMixin.class);
         context.setMixInAnnotations(Post.class, PostMixin.class);
-        context.setMixInAnnotations(NewsPost.class, NewsPostMixin.class);
         context.setMixInAnnotations(PostStatusResponse.class, PostStatusResponseMixin.class);
         context.setMixInAnnotations(PostStatus.class, PostStatusMixin.class);
         context.setMixInAnnotations(VKResponse.class, VKResponseMixin.class);

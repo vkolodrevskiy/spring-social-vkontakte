@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,6 +80,8 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
         if (limit > 0) {
             props.put("count", limit);
         }
+
+        // http://vk.com/dev/wall.get
         URI uri = makeOperationURL("wall.get", props);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
@@ -91,6 +93,8 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
         requireAuthorization();
         Properties props = new Properties();
         props.put("posts", userId + "_" + postId);
+
+        // http://vk.com/dev/wall.getById
         URI uri = makeOperationURL("wall.getById", props);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);

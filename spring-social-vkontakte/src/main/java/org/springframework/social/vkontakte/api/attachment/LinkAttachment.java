@@ -1,4 +1,4 @@
-package org.springframework.social.vkontakte.api;
+package org.springframework.social.vkontakte.api.attachment;
 
 /**
  * Attachment associated with a website link.

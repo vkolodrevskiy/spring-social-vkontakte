@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api.impl.json;
+package org.springframework.social.vkontakte.api.attachment;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+/**
+ * VK post attachment.
+ */
+public abstract class Attachment {
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class PageAttachmentMixin extends AttachmentMixin {
+    public static enum AttachmentType {
+        PHOTO, POSTED_PHOTO, VIDEO, AUDIO, DOCUMENT, GRAFFITI, LINK, NOTE, APPLICATION, POLL, PAGE
+    }
 
-    @JsonProperty("pid")
-    private String pageId;
+    private AttachmentType type;
 
-    @JsonProperty("gid")
-    private String groupId;
-
-    @JsonProperty("title")
-    private String title;
+    public AttachmentType getType() {
+        return type;
+    }
 }

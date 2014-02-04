@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,31 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api;
+package org.springframework.social.vkontakte.api.impl.json.attachment;
 
-/**
- * Note attachment.
- */
-public class NoteAttachment extends Attachment {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    private String noteId;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PhotoAttachmentMixin extends AttachmentMixin {
+
+    @JsonProperty("pid")
+    private String photoId;
+
+    @JsonProperty("owner_id")
     private String ownerId;
-    private String title;
-    private int commentCount;
 
-    public String getNoteId() {
-        return noteId;
-    }
+    @JsonProperty("src")
+    private String src;
 
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public int getCommentCount() {
-        return commentCount;
-    }
+    @JsonProperty("src_big")
+    private String srcBig;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api.impl.json;
+package org.springframework.social.vkontakte.api.attachment;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+/**
+ * Video attachment.
+ */
+public class VideoAttachment extends Attachment {
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class LinkAttachmentMixin extends AttachmentMixin {
+    private String videoId;
+    private String ownerId;
+    private String title;
+    private int duration;
 
-    @JsonProperty("url")
-    String url;
+    public String getVideoId() {
+        return videoId;
+    }
 
-    @JsonProperty("title")
-    String title;
+    public String getOwnerId() {
+        return ownerId;
+    }
 
-    @JsonProperty("description")
-    String description;
+    public String getTitle() {
+        return title;
+    }
 
-    @JsonProperty("image_src")
-    String image;
+    public int getDuration() {
+        return duration;
+    }
 }
