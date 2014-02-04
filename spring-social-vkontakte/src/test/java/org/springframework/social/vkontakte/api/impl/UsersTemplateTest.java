@@ -39,7 +39,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void getUser_currentUser() {
         mockServer
-                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids="))
+                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids="))
                 .andExpect(method(GET)).andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 
         VKontakteProfile profile = vkontakte.usersOperations().getUser();
@@ -55,7 +55,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void getUsers_currentUser() {
         mockServer
-                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids=1%2C2%2C3"))
+                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids=1%2C2%2C3"))
                 .andExpect(method(GET)).andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 
         List<VKontakteProfile> profiles = vkontakte.usersOperations().getUsers(new ArrayList<String>() {
@@ -91,7 +91,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
     @Test(expected = VKontakteErrorException.class)
     public void getUser_expiredToken() {
         mockServer
-                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids="))
+                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids="))
                 .andExpect(method(GET)).andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
 
         vkontakte.usersOperations().getUser();
@@ -100,7 +100,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
     @Test(expected = VKontakteErrorException.class)
     public void getUsers_expiredToken() {
         mockServer
-                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids=1%2C2"))
+                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids=1%2C2"))
                 .andExpect(method(GET)).andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
 
         vkontakte.usersOperations().getUsers(new ArrayList<String>() {

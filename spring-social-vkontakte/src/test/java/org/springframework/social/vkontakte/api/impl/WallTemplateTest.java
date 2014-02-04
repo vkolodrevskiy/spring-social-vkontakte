@@ -33,7 +33,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 public class WallTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void post() {
-        mockServer.expect(requestTo("https://api.vk.com/method/wall.post?access_token=ACCESS_TOKEN&message=hello"))
+        mockServer.expect(requestTo("https://api.vk.com/method/wall.post?access_token=ACCESS_TOKEN&v=3.0&message=hello"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("wall-post-response"), APPLICATION_JSON));
         String postId = vkontakte.wallOperations().post("hello");
@@ -42,7 +42,7 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
 
     @Test(expected = VKontakteErrorException.class)
     public void post_expiredToken() {
-		mockServer.expect(requestTo("https://api.vk.com/method/wall.post?access_token=ACCESS_TOKEN&message=hello"))
+		mockServer.expect(requestTo("https://api.vk.com/method/wall.post?access_token=ACCESS_TOKEN&v=3.0&message=hello"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
 

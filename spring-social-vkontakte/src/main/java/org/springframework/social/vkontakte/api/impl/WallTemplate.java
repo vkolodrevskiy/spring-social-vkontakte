@@ -17,6 +17,7 @@ package org.springframework.social.vkontakte.api.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.social.UncategorizedApiException;
+import org.springframework.social.vkontakte.api.ApiVersion;
 import org.springframework.social.vkontakte.api.Post;
 import org.springframework.social.vkontakte.api.PostStatusResponse;
 import org.springframework.social.vkontakte.api.VKGenericResponse;
@@ -45,7 +46,7 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
         Properties props = new Properties();
         props.putAll(params);
         props.put("message", message);
-        URI uri = makeOperationURL("wall.post", props);
+        URI uri = makeOperationURL("wall.post", props, ApiVersion.VERSION_3_0);
 
         PostStatusResponse status = restTemplate.getForObject(uri, PostStatusResponse.class);
         checkForError(status);
@@ -82,7 +83,7 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
         }
 
         // http://vk.com/dev/wall.get
-        URI uri = makeOperationURL("wall.get", props);
+        URI uri = makeOperationURL("wall.get", props, ApiVersion.VERSION_3_0);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
         return deserializeArray(response, Post.class).getItems();
@@ -95,7 +96,7 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
         props.put("posts", userId + "_" + postId);
 
         // http://vk.com/dev/wall.getById
-        URI uri = makeOperationURL("wall.getById", props);
+        URI uri = makeOperationURL("wall.getById", props, ApiVersion.VERSION_3_0);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
         try {

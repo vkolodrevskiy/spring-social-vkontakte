@@ -16,6 +16,7 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.social.vkontakte.api.ApiVersion;
 import org.springframework.social.vkontakte.api.UsersOperations;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
 import org.springframework.social.vkontakte.api.VKontakteProfiles;
@@ -56,7 +57,7 @@ class UsersTemplate extends AbstractVKontakteOperations implements UsersOperatio
         props.put("fields", "uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate,sex,screen_name");
 
         // see documentation under http://vk.com/dev/users.get
-        URI uri = makeOperationURL("users.get", props);
+        URI uri = makeOperationURL("users.get", props, ApiVersion.VERSION_3_0);
 
         VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
         checkForError(profiles);

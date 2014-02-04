@@ -19,14 +19,16 @@ import java.util.List;
 
 /**
  * VK array is a JSON array where:
- * - first element denotes total count
- * - all elements that follow contain JSON objects.
+ * <ul>
+ * <li>first element denotes total count</li>
+ * <li>all elements that follow contain JSON objects.</li>
+ * </ul>
  */
 public class VKArray<T> {
 
-    /** Total count */
+    // Total count
     private final int count;
-    /** Items retrieved */
+    // Items retrieved
     private List<T> items;
 
     /**

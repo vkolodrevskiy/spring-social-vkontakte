@@ -16,6 +16,7 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.social.vkontakte.api.ApiVersion;
 import org.springframework.social.vkontakte.api.FriendsOperations;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
 import org.springframework.social.vkontakte.api.VKontakteProfiles;
@@ -43,7 +44,7 @@ class FriendsTemplate extends AbstractVKontakteOperations implements FriendsOper
         Properties props = new Properties();
 
         props.put("fields", "uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate,sex,screen_name");
-        URI uri = makeOperationURL("friends.get", props);
+        URI uri = makeOperationURL("friends.get", props, ApiVersion.VERSION_3_0);
 
         VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
         checkForError(profiles);
@@ -58,7 +59,7 @@ class FriendsTemplate extends AbstractVKontakteOperations implements FriendsOper
 
         props.put("uid", userId.trim());
         props.put("fields", "uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate,sex,screen_name");
-        URI uri = makeOperationURL("friends.get", props);
+        URI uri = makeOperationURL("friends.get", props, ApiVersion.VERSION_3_0);
 
         VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
         checkForError(profiles);

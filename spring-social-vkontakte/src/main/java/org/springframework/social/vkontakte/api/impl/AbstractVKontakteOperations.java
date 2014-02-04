@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.support.URIBuilder;
+import org.springframework.social.vkontakte.api.ApiVersion;
 import org.springframework.social.vkontakte.api.VKGenericResponse;
 import org.springframework.social.vkontakte.api.VKResponse;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
@@ -56,16 +57,24 @@ class AbstractVKontakteOperations {
         }
     }
 
-    protected URI makeOperationURL(String method, Properties params) {
+    protected URI makeOperationURL(String method, Properties params, ApiVersion apiVersion) {
         URIBuilder uri = URIBuilder.fromUri(VK_REST_URL + method);
+
+        // 1. add access_token
+        // TODO: for some methods we do not need access token, so think about it.
         uri.queryParam("access_token", accessToken);
+
+        // 2. add api version
+        // TODO: I think finally we should migrate to latest api
+        uri.queryParam("v", apiVersion.toString());
+
         for (Map.Entry<Object, Object> objectObjectEntry : params.entrySet()) {
             uri.queryParam(objectObjectEntry.getKey().toString(), objectObjectEntry.getValue().toString());
         }
         return uri.build();
     }
 
-    /* throw exception if VKontakte response contains error */
+    // throw exception if VKontakte response contains error
     // TODO: consider to throw specific exceptions for each error code.
     //       like for error code 113 that would be let's say InvalidUserIdVKException
     protected <T extends VKResponse> void checkForError(T toCheck) {

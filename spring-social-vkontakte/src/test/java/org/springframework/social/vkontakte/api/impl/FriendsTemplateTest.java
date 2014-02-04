@@ -37,7 +37,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 public class FriendsTemplateTest extends AbstractVKontakteApiTest {
     @Test
 	public void get_currentUser() throws ParseException {
-		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name"))
+		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 
@@ -52,7 +52,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
     @Test
 	public void get_byUserId() throws ParseException {
-		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&uid=123"))
+		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&uid=123"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 
@@ -67,7 +67,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
 	@Test(expected = VKontakteErrorException.class)
 	public void get_expiredToken() {
-		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&uid=123"))
+		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&uid=123"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
 
