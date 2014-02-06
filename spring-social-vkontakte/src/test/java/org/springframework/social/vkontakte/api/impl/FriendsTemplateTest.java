@@ -39,7 +39,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 	public void get_currentUser() throws ParseException {
 		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name"))
 			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
+			.andRespond(withSuccess(jsonResource("list-of-profiles-3_0"), APPLICATION_JSON));
 
 		List<VKontakteProfile> friends = vkontakte.friendsOperations().get();
         assertFriends(friends);
@@ -54,7 +54,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 	public void get_byUserId() throws ParseException {
 		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&uid=123"))
 			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
+			.andRespond(withSuccess(jsonResource("list-of-profiles-3_0"), APPLICATION_JSON));
 
 		List<VKontakteProfile> friends = vkontakte.friendsOperations().get("123");
         assertFriends(friends);
@@ -73,6 +73,64 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
 		vkontakte.friendsOperations().get("123");
 	}
+
+    @Test(expected = VKontakteErrorException.class)
+    public void getOnline_expiredToken() {
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
+
+        vkontakte.friendsOperations().getOnline(false, -1, -1);
+    }
+
+    @Test(expected = VKontakteErrorException.class)
+    public void getOnline_tooManyRequests() {
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("error-code-6-too-many-requests"), APPLICATION_JSON));
+
+        vkontakte.friendsOperations().getOnline(false, -1, -1);
+    }
+
+    @Test(expected = MissingAuthorizationException.class)
+    public void getOnline_unauthorized() {
+        unauthorizedVKontakte.friendsOperations().getOnline("1", false, -1, -1);
+    }
+
+    @Test(expected = MissingAuthorizationException.class)
+    public void getOnline_currentUser_unauthorized() {
+        unauthorizedVKontakte.friendsOperations().getOnline(false, -1, -1);
+    }
+
+    @Test
+    public void getOnlineSiteAndMobile() {
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8&user_id=1&online_mobile=1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("friends-getonline-site-and-mobile-5_8"), APPLICATION_JSON));
+
+        List<List<String>> friends = vkontakte.friendsOperations().getOnline("1", true, -1, -1);
+        assertEquals(15, friends.get(0).size());
+        assertEquals(6, friends.get(1).size());
+    }
+
+    @Test
+    public void getOnlineSiteOnly() {
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("friends-getonline-site-only-5_8"), APPLICATION_JSON));
+
+        List<List<String>> friends = vkontakte.friendsOperations().getOnline(false, -1, -1);
+        assertEquals(20, friends.get(0).size());
+    }
+
+    @Test
+    public void getOnlineAllParametersPresent() {
+        // check that access_token=ACCESS_TOKEN&v=5.8&user_id=123&count=5&online_mobile=1 parameters are present
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8&user_id=123&count=5&online_mobile=1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("friends-getonline-site-only-5_8"), APPLICATION_JSON));
+        vkontakte.friendsOperations().getOnline("123", true, 5, 6);
+    }
 
     private void assertFriends(List<VKontakteProfile> profiles) throws ParseException {
         assertEquals(3, profiles.size());

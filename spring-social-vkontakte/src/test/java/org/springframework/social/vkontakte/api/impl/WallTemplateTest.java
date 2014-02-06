@@ -35,7 +35,7 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
     public void post() {
         mockServer.expect(requestTo("https://api.vk.com/method/wall.post?access_token=ACCESS_TOKEN&v=3.0&message=hello"))
                 .andExpect(method(GET))
-                .andRespond(withSuccess(jsonResource("wall-post-response"), APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("wall-post-response-3_0"), APPLICATION_JSON));
         String postId = vkontakte.wallOperations().post("hello");
         assertEquals("511", postId);
     }

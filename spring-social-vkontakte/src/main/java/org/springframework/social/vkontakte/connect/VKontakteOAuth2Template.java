@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,9 +31,7 @@ public class VKontakteOAuth2Template extends OAuth2Template {
         setUseParametersForClientAuthentication(true);
 	}
 
-    // override this method simply to get uid, didn't find better way,
-    // using it while getting profile info for the current user
-    // also when scope has "offline" option VKontakte returns expires_in=0, setting it to null in this case
+    // When scope has "offline" option VKontakte returns expires_in=0, setting it to null in this case
     @Override
     protected AccessGrant createAccessGrant(String accessToken, String scope, String refreshToken, Long expiresIn, Map<String, Object> response) {
         return super.createAccessGrant(accessToken, scope, refreshToken, expiresIn == 0 ? null : expiresIn, response);
