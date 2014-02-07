@@ -104,7 +104,7 @@ class FriendsTemplate extends AbstractVKontakteOperations implements FriendsOper
         }
 
         if (offset > 0) {
-            props.put("offset", String.valueOf(count));
+            props.put("offset", String.valueOf(offset));
         }
 
         // http://vk.com/dev/friends.getOnlineю.
