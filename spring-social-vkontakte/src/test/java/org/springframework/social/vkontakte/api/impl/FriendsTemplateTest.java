@@ -126,7 +126,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void getOnlineAllParametersPresent() {
         // check that access_token=ACCESS_TOKEN&v=5.8&user_id=123&count=5&online_mobile=1 parameters are present
-        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8&user_id=123&count=5&online_mobile=1"))
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8&user_id=123&count=5&offset=5&online_mobile=1"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("friends-getonline-site-only-5_8"), APPLICATION_JSON));
         vkontakte.friendsOperations().getOnline("123", true, 5, 6);

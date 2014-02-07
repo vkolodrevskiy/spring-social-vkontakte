@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import org.springframework.social.vkontakte.api.FriendsOperations;
 import org.springframework.social.vkontakte.api.VKGenericResponse;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
 import org.springframework.social.vkontakte.api.VKontakteProfiles;
-import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -105,7 +104,7 @@ class FriendsTemplate extends AbstractVKontakteOperations implements FriendsOper
         }
 
         if (offset > 0) {
-            props.put("count", String.valueOf(count));
+            props.put("offset", String.valueOf(count));
         }
 
         // http://vk.com/dev/friends.getOnlineю.
