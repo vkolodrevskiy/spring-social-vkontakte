@@ -62,6 +62,10 @@ public class Post {
         return reposts;
     }
 
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
     public static class Likes {
         private int count;
         private boolean userLikes;

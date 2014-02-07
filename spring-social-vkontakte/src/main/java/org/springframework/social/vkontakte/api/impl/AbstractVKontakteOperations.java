@@ -91,11 +91,7 @@ class AbstractVKontakteOperations {
         int count = items.get(0).asInt();
         List<T> elements = new ArrayList<T>();
         for (int i = 1; i < items.size(); i++) {
-            try {
-                elements.add(objectMapper.readValue(items.get(i).asText(), itemClass));
-            } catch (IOException e) {
-                throw new UncategorizedApiException("vkontakte", "Error deserializing: " + items.get(i), e);
-            }
+            elements.add(objectMapper.convertValue(items.get(i), itemClass));
         }
 
         return new VKArray<T>(count, elements);

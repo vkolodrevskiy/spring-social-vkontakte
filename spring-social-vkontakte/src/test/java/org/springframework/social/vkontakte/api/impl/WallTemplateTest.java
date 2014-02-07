@@ -15,9 +15,13 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.vkontakte.api.Post;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.http.HttpMethod.GET;
@@ -52,5 +56,14 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
     @Test(expected = MissingAuthorizationException.class)
     public void post_unauthorized() {
         unauthorizedVKontakte.wallOperations().post("hello");
+    }
+
+    @Test
+    @Ignore
+    public void getPosts() {
+        mockServer.expect(requestTo("https://api.vk.com/method/wall.get?access_token=ACCESS_TOKEN&v=3.0"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("wall-getposts-response-3_0"), APPLICATION_JSON));
+        List<Post> posts = vkontakte.wallOperations().getPosts();
     }
 }
