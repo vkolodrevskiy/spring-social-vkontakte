@@ -34,7 +34,7 @@ public class Post {
     private Likes likes;
     private Reposts reposts;
 
-    private List<Attachment> attachments;
+    private List<? extends Attachment> attachments;
 
     public Post(String id, Date date, String text) {
         this.id = id;
@@ -62,7 +62,7 @@ public class Post {
         return reposts;
     }
 
-    public List<Attachment> getAttachments() {
+    public List<? extends Attachment> getAttachments() {
         return attachments;
     }
 

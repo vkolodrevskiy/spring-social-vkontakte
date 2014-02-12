@@ -24,11 +24,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.social.vkontakte.api.attachment.ApplicationAttachment;
 import org.springframework.social.vkontakte.api.attachment.Attachment;
 import org.springframework.social.vkontakte.api.attachment.AudioAttachment;
+import org.springframework.social.vkontakte.api.attachment.DocumentAttachment;
 import org.springframework.social.vkontakte.api.attachment.GraffitiAttachment;
 import org.springframework.social.vkontakte.api.attachment.LinkAttachment;
+import org.springframework.social.vkontakte.api.attachment.NoteAttachment;
+import org.springframework.social.vkontakte.api.attachment.PageAttachment;
 import org.springframework.social.vkontakte.api.attachment.PhotoAttachment;
+import org.springframework.social.vkontakte.api.attachment.PollAttachment;
 import org.springframework.social.vkontakte.api.attachment.VideoAttachment;
 
 import java.io.IOException;
@@ -37,7 +42,7 @@ import java.io.IOException;
  * We use non-standard TypeDeserializer to deal with VK "duplicated" type info, eg:
  * [ type: link, link:  Link Object ]
  */
-@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.WRAPPER_OBJECT)
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
     @JsonSubTypes.Type(name="link", value=LinkAttachment.class),
     @JsonSubTypes.Type(name="photo", value=PhotoAttachment.class),
@@ -45,11 +50,11 @@ import java.io.IOException;
     @JsonSubTypes.Type(name="video", value=VideoAttachment.class),
     @JsonSubTypes.Type(name="audio", value=AudioAttachment.class),
     @JsonSubTypes.Type(name="graffiti", value=GraffitiAttachment.class),
-    @JsonSubTypes.Type(name="doc", value=DocumentAttachmentMixin.class),
-    @JsonSubTypes.Type(name="note", value=NoteAttachmentMixin.class),
-    @JsonSubTypes.Type(name="app", value=ApplicationAttachmentMixin.class),
-    @JsonSubTypes.Type(name="poll", value=PollAttachmentMixin.class),
-    @JsonSubTypes.Type(name="page", value=PageAttachmentMixin.class)
+    @JsonSubTypes.Type(name="doc", value=DocumentAttachment.class),
+    @JsonSubTypes.Type(name="note", value=NoteAttachment.class),
+    @JsonSubTypes.Type(name="app", value=ApplicationAttachment.class),
+    @JsonSubTypes.Type(name="poll", value=PollAttachment.class),
+    @JsonSubTypes.Type(name="page", value=PageAttachment.class)
 })
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AttachmentMixin {

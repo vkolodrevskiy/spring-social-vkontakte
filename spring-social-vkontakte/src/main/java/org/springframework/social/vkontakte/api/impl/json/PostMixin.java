@@ -49,5 +49,5 @@ public class PostMixin {
     Post.Reposts reposts;
 
     @JsonProperty("attachments")
-    List<Attachment> attachments;
+    List<? extends Attachment> attachments;
 }

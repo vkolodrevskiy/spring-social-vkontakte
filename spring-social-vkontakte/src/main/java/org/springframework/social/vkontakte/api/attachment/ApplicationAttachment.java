@@ -19,7 +19,6 @@ package org.springframework.social.vkontakte.api.attachment;
  * Application image attachment.
  */
 public class ApplicationAttachment extends Attachment {
-
     private String applicationId;
     private String applicationName;
     private String src;
