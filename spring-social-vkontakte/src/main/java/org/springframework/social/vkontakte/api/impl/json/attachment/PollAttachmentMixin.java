@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PollAttachmentMixin extends AttachmentMixin {
+public class PollAttachmentMixin {
 
     @JsonProperty("poll_id")
     private String pollId;

@@ -19,20 +19,9 @@ package org.springframework.social.vkontakte.api.attachment;
  * Wiki page reference attachment.
  */
 public class PageAttachment extends Attachment {
+    private Page page;
 
-    private String pageId;
-    private String groupId;
-    private String title;
-
-    public String getPageId() {
-        return pageId;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public String getTitle() {
-        return title;
+    public Page getPage() {
+        return page;
     }
 }

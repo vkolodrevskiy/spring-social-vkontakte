@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class VideoAttachmentMixin extends AttachmentMixin {
+public class VideoAttachmentMixin {
 
     @JsonProperty("vid")
     private String videoId;
@@ -32,5 +32,4 @@ public class VideoAttachmentMixin extends AttachmentMixin {
 
     @JsonProperty("duration")
     private int duration;
-
 }

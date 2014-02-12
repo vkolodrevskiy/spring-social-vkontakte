@@ -19,15 +19,9 @@ package org.springframework.social.vkontakte.api.attachment;
  * Poll.
  */
 public class PollAttachment extends Attachment {
+    private Poll poll;
 
-    private String pollId;
-    private String question;
-
-    public String getPollId() {
-        return pollId;
-    }
-
-    public String getQuestion() {
-        return question;
+    public Poll getPoll() {
+        return poll;
     }
 }

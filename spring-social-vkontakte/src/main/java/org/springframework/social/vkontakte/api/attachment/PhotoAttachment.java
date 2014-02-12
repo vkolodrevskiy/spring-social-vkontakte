@@ -19,35 +19,9 @@ package org.springframework.social.vkontakte.api.attachment;
  * Attachment associated with an external photo.
  */
 public class PhotoAttachment extends Attachment {
+    private Photo photo;
 
-    private String photoId;
-    private String ownerId;
-    private String src;
-    private String srcBig;
-
-    public String getPhotoId() {
-        return photoId;
-    }
-
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public String getSrc() {
-        return src;
-    }
-
-    public String getSrcBig() {
-        return srcBig;
-    }
-
-    @Override
-    public String toString() {
-        return "PhotoAttachment{" +
-                "photoId='" + photoId + '\'' +
-                ", ownerId='" + ownerId + '\'' +
-                ", src='" + src + '\'' +
-                ", srcBig='" + srcBig + '\'' +
-                '}';
+    public Photo getPhoto() {
+        return photo;
     }
 }

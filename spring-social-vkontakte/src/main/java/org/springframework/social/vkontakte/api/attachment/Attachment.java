@@ -19,11 +19,6 @@ package org.springframework.social.vkontakte.api.attachment;
  * VK post attachment.
  */
 public abstract class Attachment {
-
-    public static enum AttachmentType {
-        PHOTO, POSTED_PHOTO, VIDEO, AUDIO, DOC, GRAFFITI, LINK, NOTE, APPLICATION, POLL, PAGE
-    }
-
     private AttachmentType type;
 
     public AttachmentType getType() {

@@ -19,25 +19,9 @@ package org.springframework.social.vkontakte.api.attachment;
  * Video attachment.
  */
 public class VideoAttachment extends Attachment {
+    private Video video;
 
-    private String videoId;
-    private String ownerId;
-    private String title;
-    private int duration;
-
-    public String getVideoId() {
-        return videoId;
-    }
-
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public int getDuration() {
-        return duration;
+    public Video getVideo() {
+        return video;
     }
 }

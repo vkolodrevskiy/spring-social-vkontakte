@@ -17,17 +17,17 @@ package org.springframework.social.vkontakte.api.impl.json;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.social.vkontakte.api.*;
-import org.springframework.social.vkontakte.api.attachment.ApplicationAttachment;
+import org.springframework.social.vkontakte.api.attachment.Application;
 import org.springframework.social.vkontakte.api.attachment.Attachment;
-import org.springframework.social.vkontakte.api.attachment.AudioAttachment;
-import org.springframework.social.vkontakte.api.attachment.DocumentAttachment;
-import org.springframework.social.vkontakte.api.attachment.GraffitiAttachment;
-import org.springframework.social.vkontakte.api.attachment.LinkAttachment;
-import org.springframework.social.vkontakte.api.attachment.NoteAttachment;
-import org.springframework.social.vkontakte.api.attachment.PageAttachment;
-import org.springframework.social.vkontakte.api.attachment.PhotoAttachment;
-import org.springframework.social.vkontakte.api.attachment.PollAttachment;
-import org.springframework.social.vkontakte.api.attachment.VideoAttachment;
+import org.springframework.social.vkontakte.api.attachment.Audio;
+import org.springframework.social.vkontakte.api.attachment.Document;
+import org.springframework.social.vkontakte.api.attachment.Graffiti;
+import org.springframework.social.vkontakte.api.attachment.Link;
+import org.springframework.social.vkontakte.api.attachment.Note;
+import org.springframework.social.vkontakte.api.attachment.Page;
+import org.springframework.social.vkontakte.api.attachment.Photo;
+import org.springframework.social.vkontakte.api.attachment.Poll;
+import org.springframework.social.vkontakte.api.attachment.Video;
 import org.springframework.social.vkontakte.api.impl.json.attachment.ApplicationAttachmentMixin;
 import org.springframework.social.vkontakte.api.impl.json.attachment.AttachmentMixin;
 import org.springframework.social.vkontakte.api.impl.json.attachment.AudioAttachmentMixin;
@@ -67,15 +67,15 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(Post.Reposts.class, PostRepostsMixin.class);
 
         context.setMixInAnnotations(Attachment.class, AttachmentMixin.class);
-        context.setMixInAnnotations(LinkAttachment.class, LinkAttachmentMixin.class);
-        context.setMixInAnnotations(PhotoAttachment.class, PhotoAttachmentMixin.class);
-        context.setMixInAnnotations(VideoAttachment.class, VideoAttachmentMixin.class);
-        context.setMixInAnnotations(AudioAttachment.class, AudioAttachmentMixin.class);
-        context.setMixInAnnotations(DocumentAttachment.class, DocumentAttachmentMixin.class);
-        context.setMixInAnnotations(NoteAttachment.class, NoteAttachmentMixin.class);
-        context.setMixInAnnotations(GraffitiAttachment.class, GraffitiAttachmentMixin.class);
-        context.setMixInAnnotations(ApplicationAttachment.class, ApplicationAttachmentMixin.class);
-        context.setMixInAnnotations(PollAttachment.class, PollAttachmentMixin.class);
-        context.setMixInAnnotations(PageAttachment.class, PageAttachmentMixin.class);
+        context.setMixInAnnotations(Link.class, LinkAttachmentMixin.class);
+        context.setMixInAnnotations(Photo.class, PhotoAttachmentMixin.class);
+        context.setMixInAnnotations(Video.class, VideoAttachmentMixin.class);
+        context.setMixInAnnotations(Audio.class, AudioAttachmentMixin.class);
+        context.setMixInAnnotations(Document.class, DocumentAttachmentMixin.class);
+        context.setMixInAnnotations(Note.class, NoteAttachmentMixin.class);
+        context.setMixInAnnotations(Graffiti.class, GraffitiAttachmentMixin.class);
+        context.setMixInAnnotations(Application.class, ApplicationAttachmentMixin.class);
+        context.setMixInAnnotations(Poll.class, PollAttachmentMixin.class);
+        context.setMixInAnnotations(Page.class, PageAttachmentMixin.class);
     }
 }

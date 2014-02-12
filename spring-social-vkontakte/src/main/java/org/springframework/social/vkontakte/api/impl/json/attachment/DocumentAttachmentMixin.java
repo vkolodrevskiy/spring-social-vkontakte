@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DocumentAttachmentMixin extends AttachmentMixin {
+public class DocumentAttachmentMixin {
 
     @JsonProperty("did")
     private String documentId;

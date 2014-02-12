@@ -19,25 +19,9 @@ package org.springframework.social.vkontakte.api.attachment;
  * Note attachment.
  */
 public class NoteAttachment extends Attachment {
+    private Note note;
 
-    private String noteId;
-    private String ownerId;
-    private String title;
-    private int commentCount;
-
-    public String getNoteId() {
-        return noteId;
-    }
-
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public int getCommentCount() {
-        return commentCount;
+    public Note getNote() {
+        return note;
     }
 }

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApplicationAttachmentMixin extends AttachmentMixin {
+public class ApplicationAttachmentMixin {
 
     @JsonProperty("app_id")
     private String applicationId;

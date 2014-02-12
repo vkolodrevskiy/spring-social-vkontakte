@@ -57,6 +57,7 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
         unauthorizedVKontakte.wallOperations().post("hello");
     }
 
+    // TODO: add more tests for posts
     @Test
     public void getPosts() {
         mockServer.expect(requestTo("https://api.vk.com/method/wall.get?access_token=ACCESS_TOKEN&v=3.0"))
@@ -64,5 +65,7 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
                 .andRespond(withSuccess(jsonResource("wall-getposts-response-3_0"), APPLICATION_JSON));
         List<Post> posts = vkontakte.wallOperations().getPosts();
         assertEquals(20, posts.size());
+        assertEquals("1627", posts.get(0).getId());
+        assertEquals(3, posts.get(0).getAttachments().size());
     }
 }

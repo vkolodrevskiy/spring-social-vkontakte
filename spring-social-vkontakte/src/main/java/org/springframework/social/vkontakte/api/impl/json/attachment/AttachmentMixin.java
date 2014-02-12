@@ -20,12 +20,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.social.vkontakte.api.attachment.ApplicationAttachment;
-import org.springframework.social.vkontakte.api.attachment.Attachment;
+import org.springframework.social.vkontakte.api.attachment.AttachmentType;
 import org.springframework.social.vkontakte.api.attachment.AudioAttachment;
 import org.springframework.social.vkontakte.api.attachment.DocumentAttachment;
 import org.springframework.social.vkontakte.api.attachment.GraffitiAttachment;
@@ -61,12 +60,12 @@ public class AttachmentMixin {
 
     @JsonProperty("type")
    	@JsonDeserialize(using = AttachmentTypeDeserializer.class)
-    Attachment.AttachmentType type;
+    AttachmentType type;
 
-    private static class AttachmentTypeDeserializer extends JsonDeserializer<Attachment.AttachmentType> {
+    private static class AttachmentTypeDeserializer extends JsonDeserializer<AttachmentType> {
    		@Override
-   		public Attachment.AttachmentType deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-   			return Attachment.AttachmentType.valueOf(jp.getText().toUpperCase());
+   		public AttachmentType deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+   			return AttachmentType.valueOf(jp.getText().toUpperCase());
    		}
    	}
 }

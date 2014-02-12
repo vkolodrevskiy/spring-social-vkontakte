@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PageAttachmentMixin extends AttachmentMixin {
+public class PageAttachmentMixin {
 
     @JsonProperty("pid")
     private String pageId;
