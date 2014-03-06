@@ -42,20 +42,25 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     private UsersOperations usersOperations;
     private WallOperations wallOperations;
     private FriendsOperations friendsOperations;
+    private SecureOperations secureOperations;
 
     private ObjectMapper objectMapper;
 
     private final String accessToken;
+    
+    protected final String clientSecret;
 
     // TODO: remove?
     public VKontakteTemplate() {
         initialize();
         this.accessToken = null;
+        this.clientSecret = null;
     }
 
-    public VKontakteTemplate(String accessToken) {
+    public VKontakteTemplate(String accessToken, String clientSecret) {
         super(accessToken);
         this.accessToken = accessToken;
+        this.clientSecret = clientSecret;
         initialize();
     }
 
@@ -86,6 +91,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
         usersOperations = new UsersTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         friendsOperations = new FriendsTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         wallOperations = new WallTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
+        secureOperations = new SecureTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized(), clientSecret);
     }
 
     @Override
@@ -101,5 +107,10 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     @Override
     public FriendsOperations friendsOperations() {
         return friendsOperations;
+    }
+
+    @Override
+    public SecureOperations secureOperations() {
+        return secureOperations;
     }
 }

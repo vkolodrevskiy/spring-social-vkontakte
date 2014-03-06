@@ -1,0 +1,40 @@
+{
+    "error": {
+        "error_code": 15,
+        "error_msg": "Access denied: Application should be native",
+        "request_params": [
+            {
+                "key": "sig",
+                "value": "bba11ce030f625dfcb946f7f2ee30ddd"
+            },
+            {
+                "key": "oauth",
+                "value": "1"
+            },
+            {
+                "key": "method",
+                "value": "secure.sendNotification"
+            },
+            {
+                "key": "message",
+                "value": "hello"
+            },
+            {
+                "key": "user_ids",
+                "value": "1,2,3"
+            },
+            {
+                "key": "v",
+                "value": "5.14"
+            },
+            {
+                "key": "client_secret",
+                "value": "*************"
+            },
+            {
+                "key": "access_token",
+                "value": "c6f4923cc6f4923cc644bc0755c6c54736cc6f4c6f4923c95ec421c1e821d70aa771b89"
+            }
+        ]
+    }
+}
