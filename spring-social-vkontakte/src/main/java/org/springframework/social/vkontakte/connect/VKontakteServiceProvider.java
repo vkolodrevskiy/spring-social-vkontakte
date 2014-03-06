@@ -24,11 +24,15 @@ import org.springframework.social.vkontakte.api.impl.VKontakteTemplate;
  * @author vkolodrevskiy
  */
 public class VKontakteServiceProvider extends AbstractOAuth2ServiceProvider<VKontakte> {
+
+    protected final String clientSecret;
+
 	public VKontakteServiceProvider(String clientId, String clientSecret) {
         super(new VKontakteOAuth2Template(clientId, clientSecret));
+        this.clientSecret = clientSecret;
 	}
 
     public VKontakte getApi(String accessToken) {
-		return new VKontakteTemplate(accessToken);
+		return new VKontakteTemplate(accessToken, clientSecret);
 	}
 }

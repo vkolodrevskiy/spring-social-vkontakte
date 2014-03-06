@@ -27,7 +27,7 @@ import static org.junit.Assert.assertTrue;
 public class VKontakteTemplateTest {
     @Test
     public void isAuthorizedForUser() {
-        VKontakteTemplate vkontakte = new VKontakteTemplate("ACCESS_TOKEN");
+        VKontakteTemplate vkontakte = new VKontakteTemplate("ACCESS_TOKEN", "CLIENT_SECRET");
         assertTrue(vkontakte.isAuthorized());
     }
 

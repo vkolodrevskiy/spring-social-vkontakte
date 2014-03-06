@@ -60,11 +60,9 @@ class AbstractVKontakteOperations {
     protected URI makeOperationURL(String method, Properties params, ApiVersion apiVersion) {
         URIBuilder uri = URIBuilder.fromUri(VK_REST_URL + method);
 
-        // 1. add access_token
-        // TODO: for some methods we do not need access token, so think about it.
-        uri.queryParam("access_token", accessToken);
+        preProcessURI(uri);
 
-        // 2. add api version
+        // add api version
         // TODO: I think finally we should migrate to latest api
         uri.queryParam("v", apiVersion.toString());
 
@@ -72,6 +70,12 @@ class AbstractVKontakteOperations {
             uri.queryParam(objectObjectEntry.getKey().toString(), objectObjectEntry.getValue().toString());
         }
         return uri.build();
+    }
+
+    protected void preProcessURI(URIBuilder uri) {
+        // add access_token
+        // TODO: for some methods we do not need access token, so think about it.
+        uri.queryParam("access_token", accessToken);
     }
 
     // throw exception if VKontakte response contains error
