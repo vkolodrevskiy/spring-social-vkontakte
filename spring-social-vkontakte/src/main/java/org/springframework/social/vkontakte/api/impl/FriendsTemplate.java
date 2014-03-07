@@ -107,7 +107,7 @@ class FriendsTemplate extends AbstractVKontakteOperations implements FriendsOper
             props.put("offset", String.valueOf(offset));
         }
 
-        // http://vk.com/dev/friends.getOnlineю.
+        // http://vk.com/dev/friends.getOnline
         URI uri = makeOperationURL("friends.getOnline", props, ApiVersion.VERSION_5_8);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
