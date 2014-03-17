@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.vkontakte.api.ApiVersion;
 import org.springframework.social.vkontakte.api.Post;
-import org.springframework.social.vkontakte.api.PostStatusResponse;
 import org.springframework.social.vkontakte.api.VKGenericResponse;
 import org.springframework.social.vkontakte.api.WallOperations;
 import org.springframework.web.client.RestTemplate;
@@ -39,31 +38,6 @@ public class WallTemplate extends AbstractVKontakteOperations implements WallOpe
     public WallTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {
         super(isAuthorizedForUser, accessToken, objectMapper);
         this.restTemplate = restTemplate;
-    }
-
-    public String post(String message, Properties params) {
-        requireAuthorization();
-        Properties props = new Properties();
-        props.putAll(params);
-        props.put("message", message);
-        URI uri = makeOperationURL("wall.post", props, ApiVersion.VERSION_3_0);
-
-        PostStatusResponse status = restTemplate.getForObject(uri, PostStatusResponse.class);
-        checkForError(status);
-
-        return status.getStatus().getPostId();
-    }
-
-    @Override
-    public String post(String message) {
-        return this.post(message, new Properties());
-    }
-
-    @Override
-    public String post(String message, String link) {
-        Properties props = new Properties();
-        props.put("attachments", link);
-        return this.post(message, props);
     }
 
     @Override

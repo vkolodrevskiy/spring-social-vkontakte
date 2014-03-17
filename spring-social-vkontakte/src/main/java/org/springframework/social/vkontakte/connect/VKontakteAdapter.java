@@ -60,7 +60,7 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
 
     @Override
 	public void updateStatus(VKontakte vkontakte, String message) {
-        // TODO: change to status api
-		vkontakte.wallOperations().post(message);
+        // vk api does not allow to perform status.set or wall.post methods for websites,
+        // so according to method contract we do nothing here
 	}
 }
