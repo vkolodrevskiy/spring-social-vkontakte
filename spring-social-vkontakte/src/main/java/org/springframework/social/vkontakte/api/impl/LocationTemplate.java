@@ -16,10 +16,10 @@ import org.springframework.social.vkontakte.api.CityList;
 import org.springframework.social.vkontakte.api.LocationOperations;
 
 /**
- * Реализация API Геолокации.
+ * Implementation VK geolocation API.
  * 
- * @see http://vk.com/developers.php?o=-1&p=Описание_методов_API&s=0#Геолокация
- * @author screw
+ * @see http://vk.com/dev/places
+ * @author badbob
  *
  */
 public class LocationTemplate extends AbstractVKontakteOperations implements LocationOperations {
