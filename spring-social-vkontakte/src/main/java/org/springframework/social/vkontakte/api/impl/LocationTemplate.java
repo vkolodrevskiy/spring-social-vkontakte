@@ -37,12 +37,11 @@ public class LocationTemplate extends AbstractVKontakteOperations implements Loc
 		return cities.size() > 0 ? cities.get(0) : null;
 	}
 	
-	/**
-	 * Метод собирает из коллекции целочисленных идентификаторов городов
-	 * строку, где идентификаторы перечислены через запятую.
-	 * Вообще, можно было бы заменить этот метод на вызов StringUtils.join(ids, ',')
-         * но тянуть ради этого зависимость, вряд ли стоит.
-	 */
+        /**
+         * This method compile a coma-separated string from collection of integer city identifier.	 
+         * Actually, this method do the same thing as org.apache.commons.lang.StringUtils.join(ids, ',').
+         * But, I decide, that there is to many overheads to include commons-lang lib to use one single method.
+         */
 	private String buildCidsAsString(Collection<Integer> ids) {
 		String delim = "";
 		final StringBuffer sb = new StringBuffer();

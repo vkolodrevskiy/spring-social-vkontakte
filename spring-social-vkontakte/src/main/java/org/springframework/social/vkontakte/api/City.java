@@ -4,16 +4,17 @@ import java.io.Serializable;
 
 public class City implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 162578751841414977L;
 
 	/**
-	 * Идентификатор города во внутренней системе локации ВКонтакте
+	 * City identifier in internal Vkontakte format.
+	 * It doesn't correlate with KLADR or FIAS databases.
 	 */
 	private Integer id;
 	
+	/**
+	 * City name in nominative (russian language).
+	 */
 	private String name;
 
 	public Integer getId() {

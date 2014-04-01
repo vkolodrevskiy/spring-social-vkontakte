@@ -29,7 +29,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
- * {@link WallTemplate} test.
+ * {@link LocationTemplate} test.
  * @author badbob
  */
 public class LocationTemplateTest extends AbstractVKontakteApiTest {
