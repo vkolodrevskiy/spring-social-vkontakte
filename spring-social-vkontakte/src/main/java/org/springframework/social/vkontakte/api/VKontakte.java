@@ -38,4 +38,6 @@ public interface VKontakte extends ApiBinding {
 	 * API for performing operations with a user's set of friends.
 	 */
     public FriendsOperations friendsOperations();
+    
+    public LocationOperations locationOperations();
 }

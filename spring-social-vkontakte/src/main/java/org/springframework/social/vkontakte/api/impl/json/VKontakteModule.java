@@ -164,5 +164,7 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(ApplicationAttachment.class, ApplicationAttachmentMixin.class);
         context.setMixInAnnotations(PollAttachment.class, PollAttachmentMixin.class);
         context.setMixInAnnotations(PageAttachment.class, PageAttachmentMixin.class);
+        context.setMixInAnnotations(City.class, CityMixin.class);
+	context.setMixInAnnotations(CityList.class, CityListMixin.class);
     }
 }
