@@ -32,8 +32,8 @@ import org.springframework.social.vkontakte.api.LocationOperations;
 
 /**
  * Implementation VK geolocation API.
- * 
- * @see http://vk.com/dev/places
+ *
+ * @see <a href="http://vk.com/dev/places">http://vk.com/dev/places</a>
  * @author badbob
  */
 public class LocationTemplate extends AbstractVKontakteOperations implements LocationOperations {
@@ -65,7 +65,6 @@ public class LocationTemplate extends AbstractVKontakteOperations implements Loc
 
         return cityList.getCities();
     }
-
 
     // This method compile a coma-separated string from collection of integer city identifier.
     // Actually, this method do the same thing as org.apache.commons.lang.StringUtils.join(ids, ',').
