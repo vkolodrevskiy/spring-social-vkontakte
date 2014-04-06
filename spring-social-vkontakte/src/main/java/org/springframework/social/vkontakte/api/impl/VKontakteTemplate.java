@@ -43,6 +43,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     private WallOperations wallOperations;
     private FriendsOperations friendsOperations;
     private SecureOperations secureOperations;
+    private LocationOperations locationOperations;
 
     private ObjectMapper objectMapper;
 
@@ -92,6 +93,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
         friendsOperations = new FriendsTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         wallOperations = new WallTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         secureOperations = new SecureTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized(), clientSecret);
+        locationOperations = new LocationTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
     }
 
     @Override
@@ -112,5 +114,10 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     @Override
     public SecureOperations secureOperations() {
         return secureOperations;
+    }
+
+    @Override
+    public LocationOperations locationOperations() {
+        return locationOperations;
     }
 }
