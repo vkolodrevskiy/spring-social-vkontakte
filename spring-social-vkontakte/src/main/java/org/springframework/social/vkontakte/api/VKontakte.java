@@ -40,13 +40,12 @@ public interface VKontakte extends ApiBinding {
     public FriendsOperations friendsOperations();
 
     /**
-<<<<<<< HEAD
      * API for performing secure operations.
      */
     public SecureOperations secureOperations();
-=======
+
+    /**
      * API for performing operations with a location info. 
      */    
     public LocationOperations locationOperations();
->>>>>>> pr/18
 }

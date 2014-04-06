@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2014 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.junit.Test;
-import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
 
 import org.springframework.social.vkontakte.api.City;
