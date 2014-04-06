@@ -7,7 +7,12 @@ build
 **/src/test/java/exploration
 .gradle
 spring-social-core/src/test/java/exploration
+# Eclipse
 **/.classpath
 **/.project
 **/.settings
 **/bin
+# Intellij
+.idea/
+*.iml
+*.iws
