@@ -60,7 +60,6 @@ public class LocationTemplate extends AbstractVKontakteOperations implements Loc
         URI uri = makeOperationURL("places.getCityById", props, ApiVersion.VERSION_3_0);
 
         CityList cityList = restTemplate.getForObject(uri, CityList.class);
-        assert cityList != null;
         checkForError(cityList);
 
         return cityList.getCities();
