@@ -45,7 +45,12 @@ public interface VKontakte extends ApiBinding {
     public SecureOperations secureOperations();
 
     /**
-     * API for performing operations with a location info. 
-     */    
+     * API for performing operations with a location info.
+     */
     public LocationOperations locationOperations();
+
+    /**
+     * API for performing operations with audio.
+     */
+    public AudioOperations audioOperations();
 }

@@ -1,0 +1,31 @@
+{
+    "error": {
+        "error_code": 201,
+        "error_msg": "Access denied: Access to users audio is denied",
+        "request_params": [{
+            "key": "sig",
+            "value": "7a7d8974ed1f689f85e280121211e2d4"
+        }, {
+            "key": "oauth",
+            "value": "1"
+        }, {
+            "key": "method",
+            "value": "audio.get"
+        }, {
+            "key": "count",
+            "value": "30"
+        }, {
+            "key": "need_user",
+            "value": "1"
+        }, {
+            "key": "owner_id",
+            "value": "1"
+        }, {
+            "key": "v",
+            "value": "5.21"
+        }, {
+            "key": "access_token",
+            "value": "d09442f44855cb1ae587ab8d96348092c6b007505331d4e2ef926288a9d5a0f7f28dbb10a0ec773b7f22b"
+        }]
+    }
+}

@@ -1,0 +1,95 @@
+{
+    "response": {
+        "count": 1534,
+        "items": [{
+            "id": "6398868",
+            "photo": "http://cs617326.vk.me/v617326868/6507/QQOO9rnuv4c.jpg",
+            "name": "Viktor Petrov",
+            "name_gen": "Viktor"
+        }, {
+            "id": 279102627,
+            "owner_id": 6398868,
+            "artist": "Ляпис Трубецкой",
+            "title": "Воины света",
+            "duration": 224,
+            "url": "http://cs7-2v4.vk.me/p14/8322a903e489d0.mp3?extra=uGINe7dbxpwI2KZB8fzelXdtqsaILiOKkdI70u8O2PS6tbLGL0JTzi8wrSSUGQOtzqcVWuFMaNB_UaIWGJ99XEz3wGs1",
+            "lyrics_id": 168691541,
+            "genre_id": 9
+        }, {
+            "id": 278703630,
+            "owner_id": 6398868,
+            "artist": "Foals",
+            "title": "Late Night",
+            "duration": 327,
+            "url": "http://cs7-2v4.vk.me/p18/0e2be9d1966f2e.mp3?extra=IT4RaNwxTbsB85_IGS4lejEvYRzZ8zjp8-8pPiuhovBA-t_f36RSw_eG-1ozafOnvEee5NPeKCDvm0z9wDJ3nxn3vbBY",
+            "lyrics_id": 61541166,
+            "genre_id": 18
+        }, {
+            "id": 278702582,
+            "owner_id": 6398868,
+            "artist": "Foals",
+            "title": "Spanish Sahara",
+            "duration": 411,
+            "url": "http://cs7-3v4.vk.me/p24/4e7ee029562d76.mp3?extra=4vYj-fjMbt_LqyV-S8uNC_xugEchy59RZGLpT89CbnJ0svm9I_BnzQn1vWhKEskWuqbrLGPT6LWF1ir95sGKQIWZu1KL",
+            "lyrics_id": 3862711
+        }, {
+            "id": 278637532,
+            "owner_id": 6398868,
+            "artist": "Foals",
+            "title": "My Number",
+            "duration": 236,
+            "url": "http://cs7-2v4.vk.me/p14/a1bae6ffc2578c.mp3?extra=4lcQ206VX3gG547c0n1QAXVEMstZ4WG84NDdnDoNBax2Cz86s8xozi2H5dbMC91g9iGRDfCX7HPFZZ_pV9pkxB5Mb9_w"
+        }, {
+            "id": 276313979,
+            "owner_id": 6398868,
+            "artist": "U2",
+            "title": "Ordinary Love",
+            "duration": 218,
+            "url": "http://cs7-2v4.vk.me/p7/20ecfd71218991.mp3?extra=cAIgHEfQUisJbcreA2dtnppwDvgw3R0jMmeeLY6XJ2LLmf_BN1DRTzKxkZHqSnO-ZemZ9h4FpKmw8O16UyiSvSJMoean",
+            "genre_id": 9
+        }, {
+            "id": 276262284,
+            "owner_id": 6398868,
+            "artist": "Calvin Harris ft Alesso ft Hurts",
+            "title": "Under Control",
+            "duration": 183,
+            "url": "http://cs7-4v4.vk.me/p22/946c465442478f.mp3?extra=MlmYdlNlZMQwnuOcga__sZYxh0Uzs4clgPxLG3g7NOAyLZ1M0mpybIUrAAIFbR3YbcRiMuUq6HKFcQzVmRVrrOle76fO",
+            "lyrics_id": 122982484,
+            "genre_id": 5
+        }, {
+            "id": 275818071,
+            "owner_id": 6398868,
+            "artist": "Esthetic Education",
+            "title": "Machine",
+            "duration": 203,
+            "url": "http://cs4408.vk.me/u3360569/audios/96debf8c742e.mp3?extra=gUq36mQWF1s_1vyJGbbxiaD4xcr4ZbYh_zw6wYTlrhvFlsAOPIqSBqhIM191M-YwHHzIrueR4v1uvE5uMAnHUnidh1OP",
+            "lyrics_id": 2141843,
+            "genre_id": 1
+        }, {
+            "id": 275616117,
+            "owner_id": 6398868,
+            "artist": "Pharrell Williams ",
+            "title": "Happy (NEUS Remix)",
+            "duration": 280,
+            "url": "http://cs7-1v4.vk.me/p17/addc20469a972a.mp3?extra=4oIdObvJPyZkdZAN6ji6SU3zWYKCLggwb-ktZm0PZu0QeEhv4JSmy4NZ9OkiXS8dc9cTDk8xCwHsNq4bsuk5AsK1iIDI",
+            "genre_id": 9
+        }, {
+            "id": 275615917,
+            "owner_id": 6398868,
+            "artist": "Magic Man",
+            "title": "Paris",
+            "duration": 212,
+            "url": "http://cs7-3v4.vk.me/p17/1961c7d2de8a1a.mp3?extra=U69VY8gpWYxWT03-1PguSAgwrwU4v8u1x2PFACREMKCdIdCXew_3Jn3i0VyfCst4VuZO2QOUJw1i71mEL2biOtdYiIVT",
+            "lyrics_id": 71847888
+        }, {
+            "id": 273830186,
+            "owner_id": 6398868,
+            "artist": "Macklemore & Ryan Lewis (feat. Ray Dalton)",
+            "title": "Can't Hold Us",
+            "duration": 264,
+            "url": "http://cs7-1v4.vk.me/p12/8245f3d6e26c8f.mp3?extra=m--DFs__tr-lN96b6BV5v6PcrLa2JvcZfjGbNhcfhOP3cVz4zEKwGBkzoTL02aAefDngV2ZMUXS9LaYrmvSolPrOKz4-",
+            "lyrics_id": 82003921,
+            "genre_id": 18
+        }]
+    }
+}

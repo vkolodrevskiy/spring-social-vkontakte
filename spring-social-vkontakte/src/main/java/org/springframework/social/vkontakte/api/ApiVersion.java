@@ -8,7 +8,8 @@ package org.springframework.social.vkontakte.api;
 public enum ApiVersion {
     VERSION_3_0("3.0"),
     VERSION_5_7("5.7"),
-    VERSION_5_8("5.8");
+    VERSION_5_8("5.8"),
+    VERSION_5_21("5.21");
 
     private String version;
 
