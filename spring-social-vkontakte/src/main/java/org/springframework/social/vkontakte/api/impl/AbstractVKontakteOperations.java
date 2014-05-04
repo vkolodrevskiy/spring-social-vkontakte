@@ -18,7 +18,6 @@ package org.springframework.social.vkontakte.api.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.social.MissingAuthorizationException;
-import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.support.URIBuilder;
 import org.springframework.social.vkontakte.api.ApiVersion;
 import org.springframework.social.vkontakte.api.VKGenericResponse;
@@ -27,7 +26,6 @@ import org.springframework.social.vkontakte.api.VKontakteErrorException;
 import org.springframework.social.vkontakte.api.impl.json.VKArray;
 import org.springframework.util.Assert;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;

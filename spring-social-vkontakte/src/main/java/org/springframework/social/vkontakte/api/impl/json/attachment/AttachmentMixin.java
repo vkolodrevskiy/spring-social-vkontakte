@@ -23,17 +23,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.springframework.social.vkontakte.api.attachment.ApplicationAttachment;
-import org.springframework.social.vkontakte.api.attachment.AttachmentType;
-import org.springframework.social.vkontakte.api.attachment.AudioAttachment;
-import org.springframework.social.vkontakte.api.attachment.DocumentAttachment;
-import org.springframework.social.vkontakte.api.attachment.GraffitiAttachment;
-import org.springframework.social.vkontakte.api.attachment.LinkAttachment;
-import org.springframework.social.vkontakte.api.attachment.NoteAttachment;
-import org.springframework.social.vkontakte.api.attachment.PageAttachment;
-import org.springframework.social.vkontakte.api.attachment.PhotoAttachment;
-import org.springframework.social.vkontakte.api.attachment.PollAttachment;
-import org.springframework.social.vkontakte.api.attachment.VideoAttachment;
+import org.springframework.social.vkontakte.api.attachment.*;
 
 import java.io.IOException;
 

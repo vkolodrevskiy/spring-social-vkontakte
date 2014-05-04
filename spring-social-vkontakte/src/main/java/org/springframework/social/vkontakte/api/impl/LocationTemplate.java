@@ -15,23 +15,21 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.social.vkontakte.api.ApiVersion;
+import org.springframework.social.vkontakte.api.City;
+import org.springframework.social.vkontakte.api.CityList;
+import org.springframework.social.vkontakte.api.ILocationOperations;
+import org.springframework.web.client.RestTemplate;
+
 import java.net.URI;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.social.vkontakte.api.ILocationOperations;
-import org.springframework.web.client.RestTemplate;
-
-import org.springframework.social.vkontakte.api.ApiVersion;
-import org.springframework.social.vkontakte.api.City;
-import org.springframework.social.vkontakte.api.CityList;
-
 /**
- * Implementation VK geolocation API.
+ * Implementation VK geo location API.
  *
  * @see <a href="http://vk.com/dev/places">http://vk.com/dev/places</a>
  * @author badbob
@@ -70,7 +68,7 @@ public class LocationTemplate extends AbstractVKontakteOperations implements ILo
     // But, I decide, that there is to many overheads to include commons-lang lib to use one single method.
 	private String buildCidsAsString(Collection<Integer> ids) {
 		String delim = "";
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 
 		for (Integer i : ids) {
 		    sb.append(delim).append(i);

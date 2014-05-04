@@ -2,11 +2,6 @@
     "response": {
         "count": 1534,
         "items": [{
-            "id": "6398868",
-            "photo": "http://cs617326.vk.me/v617326868/6507/QQOO9rnuv4c.jpg",
-            "name": "Viktor Petrov",
-            "name_gen": "Viktor"
-        }, {
             "id": 279102627,
             "owner_id": 6398868,
             "artist": "Ляпис Трубецкой",

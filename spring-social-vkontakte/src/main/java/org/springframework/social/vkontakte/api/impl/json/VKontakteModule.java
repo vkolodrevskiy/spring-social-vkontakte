@@ -17,28 +17,9 @@ package org.springframework.social.vkontakte.api.impl.json;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.social.vkontakte.api.*;
-import org.springframework.social.vkontakte.api.attachment.Application;
-import org.springframework.social.vkontakte.api.attachment.Attachment;
+import org.springframework.social.vkontakte.api.attachment.*;
 import org.springframework.social.vkontakte.api.attachment.Audio;
-import org.springframework.social.vkontakte.api.attachment.Document;
-import org.springframework.social.vkontakte.api.attachment.Graffiti;
-import org.springframework.social.vkontakte.api.attachment.Link;
-import org.springframework.social.vkontakte.api.attachment.Note;
-import org.springframework.social.vkontakte.api.attachment.Page;
-import org.springframework.social.vkontakte.api.attachment.Photo;
-import org.springframework.social.vkontakte.api.attachment.Poll;
-import org.springframework.social.vkontakte.api.attachment.Video;
-import org.springframework.social.vkontakte.api.impl.json.attachment.ApplicationAttachmentMixin;
-import org.springframework.social.vkontakte.api.impl.json.attachment.AttachmentMixin;
-import org.springframework.social.vkontakte.api.impl.json.attachment.AudioAttachmentMixin;
-import org.springframework.social.vkontakte.api.impl.json.attachment.DocumentAttachmentMixin;
-import org.springframework.social.vkontakte.api.impl.json.attachment.GraffitiAttachmentMixin;
-import org.springframework.social.vkontakte.api.impl.json.attachment.LinkAttachmentMixin;
-import org.springframework.social.vkontakte.api.impl.json.attachment.NoteAttachmentMixin;
-import org.springframework.social.vkontakte.api.impl.json.attachment.PageAttachmentMixin;
-import org.springframework.social.vkontakte.api.impl.json.attachment.PhotoAttachmentMixin;
-import org.springframework.social.vkontakte.api.impl.json.attachment.PollAttachmentMixin;
-import org.springframework.social.vkontakte.api.impl.json.attachment.VideoAttachmentMixin;
+import org.springframework.social.vkontakte.api.impl.json.attachment.*;
 
 /**
  * Jackson module for setting up mixin annotations on VKontakte model types.

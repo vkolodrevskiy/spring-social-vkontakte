@@ -18,8 +18,8 @@ package org.springframework.social.vkontakte.api.impl.json;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.social.vkontakte.api.attachment.Attachment;
 import org.springframework.social.vkontakte.api.Post;
+import org.springframework.social.vkontakte.api.attachment.Attachment;
 
 import java.util.Date;
 import java.util.List;

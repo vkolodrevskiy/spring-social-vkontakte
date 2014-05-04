@@ -33,7 +33,8 @@ import java.util.Properties;
 public class AudioTemplate extends AbstractVKontakteOperations implements IAudioOperations {
     private final RestTemplate restTemplate;
 
-    public AudioTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {
+    public AudioTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper,
+                         boolean isAuthorizedForUser) {
         super(isAuthorizedForUser, accessToken, objectMapper);
         this.restTemplate = restTemplate;
     }
@@ -42,7 +43,13 @@ public class AudioTemplate extends AbstractVKontakteOperations implements IAudio
     public List<Audio> get() {
         requireAuthorization();
         Properties props = new Properties();
-        props.put("need_user", "1");
+
+        // right now decided for simplicity
+        // not to get user information(need_user=0)
+        // coz having ownerId in response you can get this information
+        // also when you specify ownerId as negative(for communities)
+        // response does not contain user information
+        props.put("need_user", "0");
 
         // http://vk.com/dev/wall.get
         URI uri = makeOperationURL("audio.get", props, ApiVersion.VERSION_5_21);
@@ -55,7 +62,7 @@ public class AudioTemplate extends AbstractVKontakteOperations implements IAudio
     public List<Audio> get(Integer ownerId) {
         requireAuthorization();
         Properties props = new Properties();
-        props.put("need_user", "1");
+        props.put("need_user", "0");
         props.put("owner_id", String.valueOf(ownerId));
 
         // http://vk.com/dev/wall.get
