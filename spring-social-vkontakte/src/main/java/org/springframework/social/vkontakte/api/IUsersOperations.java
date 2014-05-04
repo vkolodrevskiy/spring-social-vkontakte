@@ -21,7 +21,7 @@ import java.util.List;
  * User operations.
  * @author vkolodrevskiy
  */
-public interface UsersOperations {
+public interface IUsersOperations {
 	/**
 	 * Retrieves the profile for the authenticated user.
 	 * @return the user's profile information.

@@ -27,30 +27,30 @@ public interface VKontakte extends ApiBinding {
     /**
 	 * API for performing operations on VKontakte user profiles.
 	 */
-    public UsersOperations usersOperations();
+    public IUsersOperations usersOperations();
 
 	/**
 	 * API for performing operations on feeds.
 	 */
-    public WallOperations wallOperations();
+    public IWallOperations wallOperations();
 
 	/**
 	 * API for performing operations with a user's set of friends.
 	 */
-    public FriendsOperations friendsOperations();
+    public IFriendsOperations friendsOperations();
 
     /**
      * API for performing secure operations.
      */
-    public SecureOperations secureOperations();
+    public ISecureOperations secureOperations();
 
     /**
      * API for performing operations with a location info.
      */
-    public LocationOperations locationOperations();
+    public ILocationOperations locationOperations();
 
     /**
      * API for performing operations with audio.
      */
-    public AudioOperations audioOperations();
+    public IAudioOperations audioOperations();
 }

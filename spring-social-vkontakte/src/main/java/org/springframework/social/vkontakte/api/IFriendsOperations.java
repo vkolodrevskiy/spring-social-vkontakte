@@ -21,7 +21,7 @@ import java.util.List;
  * Defines operations for interacting with a user's friends.
  * @author vkolodrevskiy
  */
-public interface FriendsOperations {
+public interface IFriendsOperations {
     /**
      * Retrieves a list of user friends for the current authorized user.
      * @return a list of user friends profiles.

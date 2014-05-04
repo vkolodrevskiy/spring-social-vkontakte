@@ -39,12 +39,12 @@ import java.util.List;
  */
 public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKontakte {
 
-    private UsersOperations usersOperations;
-    private WallOperations wallOperations;
-    private FriendsOperations friendsOperations;
-    private SecureOperations secureOperations;
-    private LocationOperations locationOperations;
-    private AudioOperations audioOperations;
+    private IUsersOperations usersOperations;
+    private IWallOperations wallOperations;
+    private IFriendsOperations friendsOperations;
+    private ISecureOperations secureOperations;
+    private ILocationOperations locationOperations;
+    private IAudioOperations audioOperations;
 
     private ObjectMapper objectMapper;
 
@@ -99,32 +99,32 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     }
 
     @Override
-    public UsersOperations usersOperations() {
+    public IUsersOperations usersOperations() {
         return usersOperations;
     }
 
     @Override
-    public WallOperations wallOperations() {
+    public IWallOperations wallOperations() {
         return wallOperations;
     }
 
     @Override
-    public FriendsOperations friendsOperations() {
+    public IFriendsOperations friendsOperations() {
         return friendsOperations;
     }
 
     @Override
-    public SecureOperations secureOperations() {
+    public ISecureOperations secureOperations() {
         return secureOperations;
     }
 
     @Override
-    public LocationOperations locationOperations() {
+    public ILocationOperations locationOperations() {
         return locationOperations;
     }
 
     @Override
-    public AudioOperations audioOperations() {
+    public IAudioOperations audioOperations() {
         return audioOperations;
     }
 }

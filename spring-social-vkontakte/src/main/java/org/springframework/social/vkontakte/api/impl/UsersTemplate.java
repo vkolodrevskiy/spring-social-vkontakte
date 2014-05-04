@@ -17,7 +17,7 @@ package org.springframework.social.vkontakte.api.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.social.vkontakte.api.ApiVersion;
-import org.springframework.social.vkontakte.api.UsersOperations;
+import org.springframework.social.vkontakte.api.IUsersOperations;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
 import org.springframework.social.vkontakte.api.VKontakteProfiles;
 import org.springframework.web.client.RestTemplate;
@@ -31,7 +31,7 @@ import java.util.Properties;
  * <br>Here should be implemented methods, that can be found under http://vk.com/dev/methods <code>Users</code> section.
  * @author vkolodrevskiy
  */
-class UsersTemplate extends AbstractVKontakteOperations implements UsersOperations {
+class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperations {
     private final RestTemplate restTemplate;
 
     public UsersTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {

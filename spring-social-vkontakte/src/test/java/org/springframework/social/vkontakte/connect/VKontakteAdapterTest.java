@@ -18,7 +18,7 @@ package org.springframework.social.vkontakte.connect;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.social.connect.UserProfile;
-import org.springframework.social.vkontakte.api.UsersOperations;
+import org.springframework.social.vkontakte.api.IUsersOperations;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.social.vkontakte.api.VKontakteDate;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
@@ -34,7 +34,7 @@ public class VKontakteAdapterTest {
 	private VKontakteAdapter apiAdapter = new VKontakteAdapter();
 	
 	private VKontakte vkontakte = Mockito.mock(VKontakte.class);
-    private UsersOperations usersOperations = Mockito.mock(UsersOperations.class);
+    private IUsersOperations usersOperations = Mockito.mock(IUsersOperations.class);
 	
 	@Test
 	public void fetchProfile() {

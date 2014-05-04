@@ -18,7 +18,7 @@ package org.springframework.social.vkontakte.api.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.social.vkontakte.api.ApiVersion;
 import org.springframework.social.vkontakte.api.Audio;
-import org.springframework.social.vkontakte.api.AudioOperations;
+import org.springframework.social.vkontakte.api.IAudioOperations;
 import org.springframework.social.vkontakte.api.VKGenericResponse;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,10 +27,10 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * {@link org.springframework.social.vkontakte.api.AudioOperations} implementation.
+ * {@link org.springframework.social.vkontakte.api.IAudioOperations} implementation.
  * @author vkolodrevskiy
  */
-public class AudioTemplate extends AbstractVKontakteOperations implements AudioOperations {
+public class AudioTemplate extends AbstractVKontakteOperations implements IAudioOperations {
     private final RestTemplate restTemplate;
 
     public AudioTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {

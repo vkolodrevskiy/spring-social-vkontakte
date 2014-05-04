@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author vkolodrevskiy
  */
-public interface AudioOperations {
+public interface IAudioOperations {
     /**
      * Returns a list of audio files for current user.
      * You need the following rights to call this method: audio.

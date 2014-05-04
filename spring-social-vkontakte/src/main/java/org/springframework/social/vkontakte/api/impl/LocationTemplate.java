@@ -23,12 +23,12 @@ import java.util.Properties;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.social.vkontakte.api.ILocationOperations;
 import org.springframework.web.client.RestTemplate;
 
 import org.springframework.social.vkontakte.api.ApiVersion;
 import org.springframework.social.vkontakte.api.City;
 import org.springframework.social.vkontakte.api.CityList;
-import org.springframework.social.vkontakte.api.LocationOperations;
 
 /**
  * Implementation VK geolocation API.
@@ -36,7 +36,7 @@ import org.springframework.social.vkontakte.api.LocationOperations;
  * @see <a href="http://vk.com/dev/places">http://vk.com/dev/places</a>
  * @author badbob
  */
-public class LocationTemplate extends AbstractVKontakteOperations implements LocationOperations {
+public class LocationTemplate extends AbstractVKontakteOperations implements ILocationOperations {
 
 	private final RestTemplate restTemplate;
 

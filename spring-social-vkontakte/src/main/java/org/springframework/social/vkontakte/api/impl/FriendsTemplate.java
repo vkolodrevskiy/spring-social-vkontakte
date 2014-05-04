@@ -17,11 +17,8 @@ package org.springframework.social.vkontakte.api.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.social.vkontakte.api.ApiVersion;
-import org.springframework.social.vkontakte.api.FriendsOperations;
-import org.springframework.social.vkontakte.api.VKGenericResponse;
-import org.springframework.social.vkontakte.api.VKontakteProfile;
-import org.springframework.social.vkontakte.api.VKontakteProfiles;
+import org.springframework.social.vkontakte.api.*;
+import org.springframework.social.vkontakte.api.IFriendsOperations;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -31,10 +28,10 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * {@link org.springframework.social.vkontakte.api.FriendsOperations} implementation.
+ * {@link org.springframework.social.vkontakte.api.IFriendsOperations} implementation.
  * @author vkolodrevskiy
  */
-class FriendsTemplate extends AbstractVKontakteOperations implements FriendsOperations {
+class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOperations {
     private final RestTemplate restTemplate;
 
     public FriendsTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {

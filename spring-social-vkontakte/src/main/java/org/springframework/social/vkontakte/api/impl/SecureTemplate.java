@@ -17,7 +17,7 @@ package org.springframework.social.vkontakte.api.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.social.vkontakte.api.ApiVersion;
-import org.springframework.social.vkontakte.api.SecureOperations;
+import org.springframework.social.vkontakte.api.ISecureOperations;
 import org.springframework.social.vkontakte.api.VKGenericResponse;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
@@ -26,10 +26,10 @@ import java.net.URI;
 import java.util.Collection;
 import java.util.Properties;
 /**
- * {@link org.springframework.social.vkontakte.api.SecureOperations} implementation.
+ * {@link org.springframework.social.vkontakte.api.ISecureOperations} implementation.
  * @author bsideup
  */
-public class SecureTemplate extends AbstractVKontakteSecureOperations implements SecureOperations {
+public class SecureTemplate extends AbstractVKontakteSecureOperations implements ISecureOperations {
 
     protected RestTemplate restTemplate;
 

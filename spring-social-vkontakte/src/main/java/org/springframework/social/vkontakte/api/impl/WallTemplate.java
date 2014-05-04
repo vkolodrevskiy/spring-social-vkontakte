@@ -18,9 +18,9 @@ package org.springframework.social.vkontakte.api.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.vkontakte.api.ApiVersion;
+import org.springframework.social.vkontakte.api.IWallOperations;
 import org.springframework.social.vkontakte.api.Post;
 import org.springframework.social.vkontakte.api.VKGenericResponse;
-import org.springframework.social.vkontakte.api.WallOperations;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -29,10 +29,10 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * {@link org.springframework.social.vkontakte.api.WallOperations} implementation.
+ * {@link org.springframework.social.vkontakte.api.IWallOperations} implementation.
  * @author vkolodrevskiy
  */
-public class WallTemplate extends AbstractVKontakteOperations implements WallOperations {
+public class WallTemplate extends AbstractVKontakteOperations implements IWallOperations {
     private final RestTemplate restTemplate;
 
     public WallTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {

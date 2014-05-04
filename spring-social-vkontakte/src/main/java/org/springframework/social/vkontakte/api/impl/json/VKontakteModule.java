@@ -47,6 +47,7 @@ import org.springframework.social.vkontakte.api.impl.json.attachment.VideoAttach
  * @author vkolodrevskiy
  */
 public class VKontakteModule extends SimpleModule {
+    private static final long serialVersionUID = -4982240047547778595L;
 
     public VKontakteModule() {
         super("VKontakteModule");

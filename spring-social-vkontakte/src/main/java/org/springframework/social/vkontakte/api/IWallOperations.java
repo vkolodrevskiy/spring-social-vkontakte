@@ -21,7 +21,7 @@ import java.util.List;
  * Interface defining operations that can be performed on a VKontakte wall.
  * @author vkolodrevskiy
  */
-public interface WallOperations {
+public interface IWallOperations {
     /**
      * Retrieve wall posts for the authenticated user.
      * @return list of wall posts, up to 100 (VK default)
