@@ -15,17 +15,35 @@
  */
 package org.springframework.social.vkontakte.api;
 
+import java.util.List;
+
 /**
  * Defines operations for working with audios.
+ *
  * @author vkolodrevskiy
  */
 public interface AudioOperations {
     /**
-     * Retrieves a list of user friends for the current authorized user.
-     * @return a list of user friends profiles.
+     * Returns a list of audio files for current user.
+     * You need the following rights to call this method: audio.
+     * See http://vk.com/dev/audio.get
+     * @return a list of audio files.
      * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
      * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
+    public List<Audio> get();
 
+    /**
+     * Returns a list of audio files of a user or community specified by ownerId.
+     * You need the following rights to call this method: audio.
+     * See http://vk.com/dev/audio.get
+     * @param ownerId ID of the user or community that owns the audio file.
+     *                Use a negative value to designate a community ID.
+     * @return a {@code List} of audio files.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    public List<Audio> get(Integer ownerId);
 }

@@ -17,6 +17,12 @@ package org.springframework.social.vkontakte.api;
 
 import java.io.Serializable;
 
+/**
+ * City.
+ *
+ * @author badbob
+ * @author vkolodrevskiy
+ */
 public class City implements Serializable {
 
 	private static final long serialVersionUID = 162578751841414977L;
