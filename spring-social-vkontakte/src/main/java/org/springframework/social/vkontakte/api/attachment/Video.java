@@ -9,6 +9,7 @@ public class Video {
     private String videoId;
     private String ownerId;
     private String title;
+    private String description;
     private int duration;
 
     public String getVideoId() {
@@ -21,6 +22,10 @@ public class Video {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public int getDuration() {
