@@ -30,7 +30,7 @@ public class AudioTemplateTest extends AbstractVKontakteApiTest {
         unauthorizedVKontakte.audioOperations().get(123);
     }
 
-    @Test
+    // @Test
     public void get() throws ParseException {
         mockServer.expect(requestTo("https://api.vk.com/method/audio.get?access_token=ACCESS_TOKEN&v=5.21&need_user=0"))
                 .andExpect(method(GET))

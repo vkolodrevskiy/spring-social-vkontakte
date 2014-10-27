@@ -26,10 +26,10 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * {@link org.springframework.social.vkontakte.api.WallOperations} implementation.
+ * {@link org.springframework.social.vkontakte.api.IWallOperations} implementation.
  * @author vkolodrevskiy
  */
-public class WallTemplate extends AbstractVKontakteOperations implements WallOperations {
+public class WallTemplate extends AbstractVKontakteOperations implements IWallOperations {
     private final RestTemplate restTemplate;
 
     public WallTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {
