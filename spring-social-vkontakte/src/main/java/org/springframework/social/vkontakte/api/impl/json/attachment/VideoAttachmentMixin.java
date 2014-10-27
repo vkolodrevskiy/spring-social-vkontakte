@@ -30,6 +30,9 @@ public class VideoAttachmentMixin {
     @JsonProperty("title")
     private String title;
 
+    @JsonProperty("description")
+    private String description;
+
     @JsonProperty("duration")
     private int duration;
 }
