@@ -22,7 +22,6 @@ package org.springframework.social.vkontakte.api;
 public class VKResponse {
     private Error error;
 
-    just testing
     public Error getError() {
         return error;
     }
