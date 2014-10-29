@@ -29,6 +29,10 @@ uploadArchives {
         } else {
             password = ''
         }
+
+        println user;
+        println password;
+
         mavenDeployer {
             snapshotRepository(url: 'http://fugru.com/archiva/repository/snapshots/') {
                 authentication(userName: user, password: password);
