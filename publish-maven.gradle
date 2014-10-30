@@ -18,8 +18,6 @@ install {
 // this was done for security issues
 uploadArchives {
     repositories {
-        customizePom(pom, project)
-
         def user, password
         if(project.hasProperty('fugruUser')) {
             user = project.fugruUser
@@ -33,6 +31,8 @@ uploadArchives {
         }
 
         mavenDeployer {
+            customizePom(pom, project)
+
             snapshotRepository(url: 'http://fugru.com/archiva/repository/snapshots/') {
                 authentication(userName: user, password: password);
             }
