@@ -5,7 +5,7 @@ import java.util.Properties;
 /**
  * An object that represents a new post to be created.
  * Offers a builder-like way of creating a new post.
- * Given to {@link org.springframework.social.vkontakte.api.WallOperations#post(PostData)}.
+ * Given to {@link org.springframework.social.vkontakte.api.IWallOperations#post(PostData)}.
  *
  * @author Nikolay Papakha
  */
