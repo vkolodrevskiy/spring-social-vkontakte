@@ -31,6 +31,16 @@ public interface IWallOperations {
     List<Post> getPosts();
 
     /**
+     * Retrieve wall posts for the specified user.
+     *
+     * @param userId vkontakte user id
+     * @param offset the offset to start retrieving posts.
+     * @param limit  the maximum number of posts to return.
+     * @return list of wall posts
+     */
+    List<Post> getPostsForUser(String userId, int offset, int limit);
+
+    /**
      * Retrieve wall posts for the authenticated user.
      *
      * @param offset the offset to start retrieving posts.
