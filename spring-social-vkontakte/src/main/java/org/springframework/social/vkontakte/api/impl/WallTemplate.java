@@ -37,13 +37,11 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
         this.restTemplate = restTemplate;
     }
 
-    @Override
     public List<Post> getPosts() {
         return getPosts(-1, -1);
     }
 
-    @Override
-    public List<Post> getPosts(int offset, int limit) {
+    public List<Post> getPostsForUser(String userId, int offset, int limit) {
         requireAuthorization();
         Properties props = new Properties();
         if (offset >= 0) {
@@ -52,7 +50,9 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
         if (limit > 0) {
             props.put("count", limit);
         }
-
+        if (userId != null) {
+            props.put("owner_id", userId);
+        }
         // http://vk.com/dev/wall.get
         URI uri = makeOperationURL("wall.get", props, ApiVersion.VERSION_3_0);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
@@ -60,7 +60,10 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
         return deserializeArray(response, Post.class).getItems();
     }
 
-    @Override
+    public List<Post> getPosts(int offset, int limit) {
+        return getPostsForUser(null, offset, limit);
+    }
+
     public Post getPost(String userId, String postId) {
         requireAuthorization();
         Properties props = new Properties();
@@ -77,7 +80,6 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
         }
     }
 
-    @Override
     public PostStatus post(PostData postData) {
         requireAuthorization();
 
