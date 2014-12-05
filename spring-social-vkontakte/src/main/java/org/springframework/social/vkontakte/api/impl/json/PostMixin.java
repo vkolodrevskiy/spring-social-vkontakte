@@ -18,9 +18,15 @@ package org.springframework.social.vkontakte.api.impl.json;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.social.vkontakte.api.Post;
 import org.springframework.social.vkontakte.api.attachment.Attachment;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -31,9 +37,10 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PostMixin {
 	@JsonCreator
-	PostMixin(@JsonProperty("id") String postId, @JsonProperty("date") Date createdDate, @JsonProperty("text") String text) {}
+	PostMixin(@JsonProperty("id") String postId, @JsonProperty("date") @JsonDeserialize(using = UnixTimeDeserializer.class) Date createdDate, @JsonProperty("text") String text) {}
 
     @JsonProperty("date")
+    @JsonDeserialize(using = UnixTimeDeserializer.class)
     Date createdDate;
 
     @JsonProperty("id")
@@ -50,4 +57,14 @@ public class PostMixin {
 
     @JsonProperty("attachments")
     List<? extends Attachment> attachments;
+
+    static class UnixTimeDeserializer  extends JsonDeserializer<Date> {
+        @Override
+        public Date deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+            Date result = null;
+            long unixTime = jp.getLongValue();
+            result = new Date(unixTime * 1000);
+            return result;
+        }
+    }
 }
