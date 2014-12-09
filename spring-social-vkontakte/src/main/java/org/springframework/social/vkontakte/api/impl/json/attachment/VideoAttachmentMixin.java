@@ -17,15 +17,19 @@ package org.springframework.social.vkontakte.api.impl.json.attachment;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.social.vkontakte.api.impl.json.deserializers.UnixTimeDeserializer;
+
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VideoAttachmentMixin {
 
-    @JsonProperty("vid")
-    private String videoId;
+    @JsonProperty("id")
+    private long videoId;
 
     @JsonProperty("owner_id")
-    private String ownerId;
+    private long ownerId;
 
     @JsonProperty("title")
     private String title;
@@ -33,6 +37,31 @@ public class VideoAttachmentMixin {
     @JsonProperty("description")
     private String description;
 
+    @JsonProperty("link")
+    private String link;
+
+    @JsonProperty("player")
+    private String player;
+
+    @JsonProperty("photo_130")
+    private String photo130;
+
+    @JsonProperty("photo_320")
+    private String photo320;
+
+    @JsonProperty("photo_640")
+    private String photo640;
+
     @JsonProperty("duration")
     private int duration;
+
+    @JsonProperty("date")
+    @JsonDeserialize(using = UnixTimeDeserializer.class)
+    private Date date;
+
+    @JsonProperty("views")
+    private long views;
+
+    @JsonProperty("comments")
+    private long comments;
 }

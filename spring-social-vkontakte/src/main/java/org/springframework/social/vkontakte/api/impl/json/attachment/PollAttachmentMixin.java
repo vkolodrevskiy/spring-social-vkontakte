@@ -21,8 +21,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PollAttachmentMixin {
 
-    @JsonProperty("poll_id")
-    private String pollId;
+    @JsonProperty("id")
+    private long pollId;
 
     @JsonProperty("question")
     private String question;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2014 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,37 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api.impl.json.attachment;
+package org.springframework.social.vkontakte.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.social.vkontakte.api.impl.json.deserializers.UnixTimeDeserializer;
+
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AudioAttachmentMixin {
+public class PostGeoPlaceMixin {
     @JsonProperty("id")
     private long id;
-
-    @JsonProperty("owner_id")
-    private long ownerId;
-
-    @JsonProperty("artist")
-    private String artist;
 
     @JsonProperty("title")
     private String title;
 
-    @JsonProperty("duration")
-    private int duration;
+    @JsonProperty("latitude")
+    private double latitude;
 
-    @JsonProperty("url")
-    private String url;
+    @JsonProperty("longitude")
+    private double longitude;
 
-    @JsonProperty("lyrics_id")
-    private long lyricsId;
+    @JsonProperty("created")
+    @JsonDeserialize(using = UnixTimeDeserializer.class)
+    private Date createdDate;
 
-    @JsonProperty("album_id")
-    private long albumId;
+    @JsonProperty("icon")
+    private String iconUrl;
 
-    @JsonProperty("genre_id")
-    private long genreId;
+    @JsonProperty("country")
+    private String country;
+
+    @JsonProperty("city")
+    private String city;
+
+    @JsonProperty("address")
+    private String address;
 }

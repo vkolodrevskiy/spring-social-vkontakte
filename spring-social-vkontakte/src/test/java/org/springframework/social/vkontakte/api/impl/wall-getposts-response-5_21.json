@@ -645,7 +645,7 @@
                 "date":1325435109,
                 "post_type":"post",
                 "text":"С Днём рождения! =)",
-                post_source:{
+                "post_source":{
                     "type":"vk"
                 },
                 "comments":{
@@ -670,7 +670,7 @@
                 "date":1317663133,
                 "post_type":"post",
                 "text":"1317663137073",
-                post_source:{
+                "post_source":{
                     "type":"api"
                 },
                 "comments":{
@@ -695,7 +695,7 @@
                 "date":1317634137,
                 "post_type":"post",
                 "text":"hello world",
-                post_source:{
+                "post_source":{
                     "type":"vk"
                 },
                 "comments":{
@@ -720,7 +720,7 @@
                 "date":1261245926,
                 "post_type":"post",
                 "text":"Прочитай полностью : Это мне прислал один человек и я пересылаю тебе! ДЕЙСТВИТЕЛЬНО СБЫЛОСЬ.",
-                post_source:{
+                "post_source":{
                     "type":"vk"
                 },
                 "comments":{

@@ -6,25 +6,25 @@ package org.springframework.social.vkontakte.api.attachment;
  * @author vkolodrevskiy
  */
 public class Graffiti {
-    private String graffitiId;
-    private String ownerId;
-    private String src;
-    private String srcBig;
+    private long graffitiId;
+    private long ownerId;
+    private String photo200;
+    private String photo586;
 
-    public String getGraffitiId() {
+    public long getGraffitiId() {
         return graffitiId;
     }
 
-    public String getOwnerId() {
+    public long getOwnerId() {
         return ownerId;
     }
 
-    public String getSrc() {
-        return src;
+    public String getPhoto200() {
+        return photo200;
     }
 
-    public String getSrcBig() {
-        return srcBig;
+    public String getPhoto586() {
+        return photo586;
     }
 
     @Override
@@ -32,8 +32,8 @@ public class Graffiti {
         return "GraffitiAttachment{" +
                 "graffitiId='" + graffitiId + '\'' +
                 ", ownerId='" + ownerId + '\'' +
-                ", src='" + src + '\'' +
-                ", srcBig='" + srcBig + '\'' +
+                ", photo200='" + photo200 + '\'' +
+                ", photo586='" + photo586 + '\'' +
                 '}';
     }
 }

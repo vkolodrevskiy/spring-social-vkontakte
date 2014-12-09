@@ -21,17 +21,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DocumentAttachmentMixin {
 
-    @JsonProperty("did")
-    private String documentId;
+    @JsonProperty("id")
+    private long documentId;
 
     @JsonProperty("owner_id")
-    private String ownerId;
+    private long ownerId;
 
     @JsonProperty("title")
     private String title;
 
+    @JsonProperty("url")
+    private String url;
+
+    @JsonProperty("photo_100")
+    private String photo100;
+
+    @JsonProperty("photo_130")
+    private String photo130;
+
     @JsonProperty("size")
-    private long duration;
+    private long size;
 
     @JsonProperty("ext")
     private String extension;

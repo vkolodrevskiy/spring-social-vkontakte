@@ -98,32 +98,26 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
         audioOperations = new AudioTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
     }
 
-    @Override
     public IUsersOperations usersOperations() {
         return usersOperations;
     }
 
-    @Override
     public IWallOperations wallOperations() {
         return wallOperations;
     }
 
-    @Override
     public IFriendsOperations friendsOperations() {
         return friendsOperations;
     }
 
-    @Override
     public ISecureOperations secureOperations() {
         return secureOperations;
     }
 
-    @Override
     public ILocationOperations locationOperations() {
         return locationOperations;
     }
 
-    @Override
     public IAudioOperations audioOperations() {
         return audioOperations;
     }

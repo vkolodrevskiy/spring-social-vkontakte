@@ -17,19 +17,45 @@ package org.springframework.social.vkontakte.api.impl.json.attachment;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.social.vkontakte.api.impl.json.deserializers.UnixTimeDeserializer;
+
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PhotoAttachmentMixin {
 
     @JsonProperty("pid")
-    private String photoId;
+    private long photoId;
 
     @JsonProperty("owner_id")
-    private String ownerId;
+    private long ownerId;
 
-    @JsonProperty("src")
-    private String src;
+    @JsonProperty("album_id")
+    private long albumId;
 
-    @JsonProperty("src_big")
-    private String srcBig;
+    @JsonProperty("photo_75")
+    private String src75;
+
+    @JsonProperty("photo_130")
+    private String src130;
+
+    @JsonProperty("photo_604")
+    private String src604;
+
+    @JsonProperty("photo_807")
+    private String src807;
+
+    @JsonProperty("width")
+    private long width;
+
+    @JsonProperty("height")
+    private long height;
+
+    @JsonProperty("text")
+    private String text;
+
+    @JsonProperty("date")
+    @JsonDeserialize(using = UnixTimeDeserializer.class)
+    private Date date;
 }

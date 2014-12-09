@@ -21,15 +21,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GraffitiAttachmentMixin {
 
-    @JsonProperty("gid")
+    @JsonProperty("id")
     private String graffitiId;
 
     @JsonProperty("owner_id")
     private String ownerId;
 
-    @JsonProperty("src")
-    private String src;
+    @JsonProperty("photo_200")
+    private String photo200;
 
-    @JsonProperty("src_big")
-    private String srcBig;
+    @JsonProperty("photo_586")
+    private String photo586;
 }

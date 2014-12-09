@@ -30,15 +30,14 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  * @author vkolodrevskiy
  */
 public class WallTemplateTest extends AbstractVKontakteApiTest {
-    // TODO: add more tests for posts
     @Test
     public void getPosts() {
-        mockServer.expect(requestTo("https://api.vk.com/method/wall.get?access_token=ACCESS_TOKEN&v=3.0"))
-                .andExpect(method(GET))
-                .andRespond(withSuccess(jsonResource("wall-getposts-response-3_0"), APPLICATION_JSON));
+        mockServer.expect(requestTo("https://api.vk.com/method/wall.get?access_token=ACCESS_TOKEN&v=5.27"))
+            .andExpect(method(GET))
+            .andRespond(withSuccess(jsonResource("wall-getposts-response-5_21"), APPLICATION_JSON));
         List<Post> posts = vkontakte.wallOperations().getPosts();
-        assertEquals(20, posts.size());
-        assertEquals("1627", posts.get(0).getId());
-        assertEquals(3, posts.get(0).getAttachments().size());
+        assertEquals(19, posts.size());
+        assertEquals(27, posts.get(0).getId());
+        assertEquals(1, posts.get(0).getAttachments().size());
     }
 }

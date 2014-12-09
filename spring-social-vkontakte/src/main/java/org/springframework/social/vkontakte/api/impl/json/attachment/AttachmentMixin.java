@@ -43,7 +43,8 @@ import java.io.IOException;
     @JsonSubTypes.Type(name="note", value=NoteAttachment.class),
     @JsonSubTypes.Type(name="app", value=ApplicationAttachment.class),
     @JsonSubTypes.Type(name="poll", value=PollAttachment.class),
-    @JsonSubTypes.Type(name="page", value=PageAttachment.class)
+    @JsonSubTypes.Type(name="page", value=PageAttachment.class),
+    @JsonSubTypes.Type(name="album", value=AlbumAttachment.class)
 })
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AttachmentMixin {

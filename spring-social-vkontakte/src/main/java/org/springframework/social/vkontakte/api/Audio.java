@@ -28,11 +28,11 @@ public class Audio implements Serializable {
 
     // Audio ID.
     // positive number
-    private Integer id;
+    private long id;
 
     // Audio owner ID.
     // positive number
-    private Integer ownerId;
+    private long ownerId;
 
     // Artist name.
     private String artist;
@@ -42,27 +42,27 @@ public class Audio implements Serializable {
 
     // Duration (in seconds).
     // positive number
-    private Integer duration;
+    private long duration;
 
     // Link to mp3.
     private String url;
 
     // ID of the lyrics (if available) of the audio file.
-    private String lyricsId;
+    private long lyricsId;
 
     // ID of the album containing the audio file (if assigned).
     // positive number
-    private Integer albumId;
+    private long albumId;
 
     // Genre ID. See the list of audio genres.
     // positive number
     private Integer genreId;
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public Integer getOwnerId() {
+    public long getOwnerId() {
         return ownerId;
     }
 
@@ -74,7 +74,7 @@ public class Audio implements Serializable {
         return title;
     }
 
-    public Integer getDuration() {
+    public long getDuration() {
         return duration;
     }
 
@@ -82,11 +82,11 @@ public class Audio implements Serializable {
         return url;
     }
 
-    public String getLyricsId() {
+    public long getLyricsId() {
         return lyricsId;
     }
 
-    public Integer getAlbumId() {
+    public long getAlbumId() {
         return albumId;
     }
 

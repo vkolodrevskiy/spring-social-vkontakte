@@ -15,6 +15,7 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.social.MissingAuthorizationException;
@@ -93,6 +94,28 @@ class AbstractVKontakteOperations {
         int count = items.get(0).asInt();
         List<T> elements = new ArrayList<T>();
         for (int i = 1; i < items.size(); i++) {
+            elements.add(objectMapper.convertValue(items.get(i), itemClass));
+        }
+
+        return new VKArray<T>(count, elements);
+    }
+
+    /**
+     * for responses of VK API 5.0+
+     * @param response
+     * @param itemClass
+     * @param <T>
+     * @return
+     */
+    protected <T> VKArray<T> deserializeVK50ItemsResponse(VKGenericResponse response, Class<T> itemClass) {
+        checkForError(response);
+        JsonNode jsonNode = response.getResponse();
+        JsonNode itemsNode = jsonNode.get("items");
+        Assert.isTrue(itemsNode.isArray());
+        int count = jsonNode.get("count").asInt();
+        ArrayNode items = (ArrayNode) itemsNode;
+        List<T> elements = new ArrayList<T>();
+        for (int i = 0; i < items.size(); i++) {
             elements.add(objectMapper.convertValue(items.get(i), itemClass));
         }
 

@@ -54,10 +54,10 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
             props.put("owner_id", userId);
         }
         // http://vk.com/dev/wall.get
-        URI uri = makeOperationURL("wall.get", props, ApiVersion.VERSION_3_0);
+        URI uri = makeOperationURL("wall.get", props, ApiVersion.VERSION_5_27);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
-        return deserializeArray(response, Post.class).getItems();
+        return deserializeVK50ItemsResponse(response, Post.class).getItems();
     }
 
     public List<Post> getPosts(int offset, int limit) {
@@ -70,7 +70,7 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
         props.put("posts", userId + "_" + postId);
 
         // http://vk.com/dev/wall.getById
-        URI uri = makeOperationURL("wall.getById", props, ApiVersion.VERSION_3_0);
+        URI uri = makeOperationURL("wall.getById", props, ApiVersion.VERSION_5_27);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
         try {

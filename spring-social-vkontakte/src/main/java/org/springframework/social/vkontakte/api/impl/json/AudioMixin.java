@@ -11,28 +11,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AudioMixin {
     @JsonProperty("id")
-    Integer id;
+    long id;
 
     @JsonProperty("owner_id")
-    Integer ownerId;
+    long ownerId;
 
-    @JsonProperty("artis")
-    String artis;
+    @JsonProperty("artist")
+    String artist;
 
     @JsonProperty("title")
     String title;
 
     @JsonProperty("duration")
-    Integer duration;
+    long duration;
 
     @JsonProperty("url")
     String url;
 
     @JsonProperty("lyrics_id")
-    String lyricsId;
+    long lyricsId;
 
     @JsonProperty("album_id")
-    Integer albumId;
+    long albumId;
 
     @JsonProperty("genre_id")
     Integer genreId;
