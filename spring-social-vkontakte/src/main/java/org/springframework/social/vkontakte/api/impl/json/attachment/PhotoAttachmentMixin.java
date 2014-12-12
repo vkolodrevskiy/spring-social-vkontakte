@@ -25,7 +25,7 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PhotoAttachmentMixin {
 
-    @JsonProperty("pid")
+    @JsonProperty("id")
     private long photoId;
 
     @JsonProperty("owner_id")
@@ -35,16 +35,16 @@ public class PhotoAttachmentMixin {
     private long albumId;
 
     @JsonProperty("photo_75")
-    private String src75;
+    private String photo75;
 
     @JsonProperty("photo_130")
-    private String src130;
+    private String photo130;
 
     @JsonProperty("photo_604")
-    private String src604;
+    private String photo604;
 
     @JsonProperty("photo_807")
-    private String src807;
+    private String photo807;
 
     @JsonProperty("width")
     private long width;

@@ -11,10 +11,10 @@ public class Photo {
     private long photoId;
     private long ownerId;
     private long albumId;
-    private String src75;
-    private String src130;
-    private String src604;
-    private String src807;
+    private String photo75;
+    private String photo130;
+    private String photo604;
+    private String photo807;
     private String text;
     private long width;
     private long height;
@@ -32,20 +32,20 @@ public class Photo {
         return albumId;
     }
 
-    public String getSrc75() {
-        return src75;
+    public String getPhoto75() {
+        return photo75;
     }
 
-    public String getSrc130() {
-        return src130;
+    public String getPhoto130() {
+        return photo130;
     }
 
-    public String getSrc604() {
-        return src604;
+    public String getPhoto604() {
+        return photo604;
     }
 
-    public String getSrc807() {
-        return src807;
+    public String getPhoto807() {
+        return photo807;
     }
 
     public String getText() {
