@@ -39,6 +39,7 @@ public class Post {
     private Comments comments;
     private Geo geo;
     private List<? extends Attachment> attachments;
+    private List<Post> copyHistory;
 
     public Geo getGeo() {
         return geo;

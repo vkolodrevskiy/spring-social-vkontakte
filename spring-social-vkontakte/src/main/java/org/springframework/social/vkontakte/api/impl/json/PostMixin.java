@@ -59,4 +59,7 @@ public class PostMixin {
 
     @JsonProperty("attachments")
     List<? extends Attachment> attachments;
+
+    @JsonProperty("copy_history")
+    List<Post> copyHistory;
 }
