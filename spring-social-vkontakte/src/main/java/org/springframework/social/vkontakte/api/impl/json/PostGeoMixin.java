@@ -17,7 +17,7 @@ package org.springframework.social.vkontakte.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.social.vkontakte.api.Post;
+import org.springframework.social.vkontakte.api.Place;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PostGeoMixin {
@@ -28,5 +28,5 @@ public class PostGeoMixin {
     private String coordinates;
 
     @JsonProperty("place")
-    private Post.Place place;
+    private Place place;
 }
