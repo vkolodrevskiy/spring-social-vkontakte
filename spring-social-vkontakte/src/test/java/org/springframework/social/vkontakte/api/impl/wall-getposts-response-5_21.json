@@ -1,7 +1,28 @@
 {
     "response":{
-        "count":19,
+        "count":22,
         "items":[
+            {
+                "id": 704,
+                "from_id": 4394939,
+                "owner_id": 2135587,
+                "date": 1289613954,
+                "post_type": "post",
+                "text": "Помоги мне, пожалуйста, выиграть личную встречу с самим Paul van Dyk - диджеем №1 в мире!\nhttps:\/\/vk.com\/clublifeg?mid=2135587&from_id=4394939&loc=78dae3e266e42cc82f2e6161632fcd4c616938384d9917c4f74c61b9f93381110084c909ee",
+                "attachments": [{
+                                    "type": "posted_photo",
+                                    "posted_photo": {
+                                        "id": 0,
+                                        "owner_id": 0,
+                                        "photo_130": "https:\/\/pp.vk.me\/c898\/u4394939\/m_5dcaa994.jpg",
+                                        "photo_604": "https:\/\/pp.vk.me\/c898\/u4394939\/x_4d36849e.jpg"
+                                    }
+                                }],
+                "post_source": {"type": "api"},
+                "comments": {"count": 0, "can_post": 1},
+                "likes": {"count": 0, "user_likes": 0, "can_like": 1, "can_publish": 0},
+                "reposts": {"count": 0, "user_reposted": 0}
+            },
             {
                 "id": 45555,
                 "from_id": 1,

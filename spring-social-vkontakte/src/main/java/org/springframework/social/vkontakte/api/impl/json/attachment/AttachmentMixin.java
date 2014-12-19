@@ -35,7 +35,7 @@ import java.io.IOException;
 @JsonSubTypes({
     @JsonSubTypes.Type(name="link", value=LinkAttachment.class),
     @JsonSubTypes.Type(name="photo", value=PhotoAttachment.class),
-    @JsonSubTypes.Type(name="posted_photo", value=PhotoAttachment.class),
+    @JsonSubTypes.Type(name="posted_photo", value=PostedPhotoAttachment.class),
     @JsonSubTypes.Type(name="photos_list", value=PhotosListAttachment.class),
     @JsonSubTypes.Type(name="video", value=VideoAttachment.class),
     @JsonSubTypes.Type(name="audio", value=AudioAttachment.class),

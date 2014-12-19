@@ -57,6 +57,7 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(Link.class, LinkAttachmentMixin.class);
         context.setMixInAnnotations(Photo.class, PhotoAttachmentMixin.class);
         context.setMixInAnnotations(PhotosListAttachment.class, PhotosListAttachmentMixin.class);
+        context.setMixInAnnotations(PostedPhotoAttachment.class, PostedPhotoAttachmentMixin.class);
         context.setMixInAnnotations(Album.class, AlbumAttachmentMixin.class);
         context.setMixInAnnotations(Video.class, VideoAttachmentMixin.class);
         context.setMixInAnnotations(Audio.class, AudioAttachmentMixin.class);
