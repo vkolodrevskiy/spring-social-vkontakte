@@ -26,8 +26,8 @@ import java.util.List;
 import java.util.Properties;
 
 /**
- * {@link org.springframework.social.vkontakte.api.IWallOperations} implementation.
- * @author vkolodrevskiy
+ * {@link org.springframework.social.vkontakte.api.IGroupsOperations} implementation.
+ * @author dIsoVi
  */
 public class GroupsTemplate extends AbstractVKontakteOperations implements IGroupsOperations {
     private final RestTemplate restTemplate;
@@ -63,7 +63,7 @@ public class GroupsTemplate extends AbstractVKontakteOperations implements IGrou
             props.put("count", count);
         }
         if (userId > 0) {
-            props.put("owner_id", userId);
+            props.put("user_id", userId);
         }
         if (filter != null) {
             props.put("filter", filter);

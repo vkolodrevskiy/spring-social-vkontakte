@@ -2,6 +2,10 @@ package org.springframework.social.vkontakte.api;
 
 import java.util.List;
 
+/**
+ * Defines operations for interacting with a user's groups.
+ * @author dIsoVi
+ */
 public interface IGroupsOperations {
     List<Group> getGroups();
 
