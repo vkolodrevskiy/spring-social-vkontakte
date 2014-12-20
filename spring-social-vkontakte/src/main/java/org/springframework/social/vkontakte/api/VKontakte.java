@@ -59,4 +59,9 @@ public interface VKontakte extends ApiBinding {
      * API for performing operations with groups.
      */
     public IGroupsOperations groupsOperations();
+
+    /**
+     * API for performing operations with newsfeed.
+     */
+    public INewsFeedOperations newsFeedOperations();
 }

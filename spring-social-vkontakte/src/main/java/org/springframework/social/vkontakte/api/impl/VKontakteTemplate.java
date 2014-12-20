@@ -46,6 +46,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     private ILocationOperations locationOperations;
     private IAudioOperations audioOperations;
     private IGroupsOperations groupsOperations;
+    private INewsFeedOperations newsFeedOperations;
 
     private ObjectMapper objectMapper;
 
@@ -98,6 +99,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
         locationOperations = new LocationTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         audioOperations = new AudioTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         groupsOperations = new GroupsTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
+        newsFeedOperations = new NewsFeedTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
     }
 
     public IUsersOperations usersOperations() {
@@ -126,5 +128,9 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
 
     public IGroupsOperations groupsOperations() {
         return groupsOperations;
+    }
+
+    public INewsFeedOperations newsFeedOperations() {
+        return newsFeedOperations;
     }
 }
