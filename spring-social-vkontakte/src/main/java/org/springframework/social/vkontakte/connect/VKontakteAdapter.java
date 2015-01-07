@@ -54,6 +54,7 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
                 .setUsername(profile.getScreenName())
                 .setFirstName(profile.getFirstName())
                 .setLastName(profile.getLastName())
+				.setEmail(profile.getEmail())
                 .setName(profile.getFirstName() + " " + profile.getLastName())
                 .build();
 	}

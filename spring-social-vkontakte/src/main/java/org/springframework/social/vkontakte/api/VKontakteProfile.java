@@ -37,6 +37,8 @@ public class VKontakteProfile {
     private final String gender;
     private final VKontakteDate birthDate;
 
+    private String email;
+
     public VKontakteProfile(String uid, String screeName, String firstName, String lastName, String photo, String photoMedium, String photoBig,
             String homePhone, String mobilePhone, VKontakteDate birthDate, String gender) {
         this.uid = uid;
@@ -114,5 +116,13 @@ public class VKontakteProfile {
 
     public String getGender() {
         return gender;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

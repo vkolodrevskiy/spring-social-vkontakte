@@ -33,10 +33,12 @@ import java.util.Properties;
  */
 class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperations {
     private final RestTemplate restTemplate;
+    private final String userEmail;
 
-    public UsersTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {
+    public UsersTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser, String userEmail) {
         super(isAuthorizedForUser, accessToken, objectMapper);
         this.restTemplate = restTemplate;
+        this.userEmail = userEmail;
     }
 
     @Override
@@ -67,6 +69,8 @@ class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperati
 
     @Override
     public VKontakteProfile getUser() {
-        return getUsers(null).get(0);
+        VKontakteProfile vKontakteProfile = getUsers(null).get(0);
+        vKontakteProfile.setEmail(userEmail);
+        return vKontakteProfile;
     }
 }
