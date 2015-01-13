@@ -1,7 +1,158 @@
 {
     "response":{
-        "count":19,
+        "count":22,
         "items":[
+            {
+                "id": 704,
+                "from_id": 4394939,
+                "owner_id": 2135587,
+                "date": 1289613954,
+                "post_type": "post",
+                "text": "Помоги мне, пожалуйста, выиграть личную встречу с самим Paul van Dyk - диджеем №1 в мире!\nhttps:\/\/vk.com\/clublifeg?mid=2135587&from_id=4394939&loc=78dae3e266e42cc82f2e6161632fcd4c616938384d9917c4f74c61b9f93381110084c909ee",
+                "attachments": [{
+                                    "type": "posted_photo",
+                                    "posted_photo": {
+                                        "id": 0,
+                                        "owner_id": 0,
+                                        "photo_130": "https:\/\/pp.vk.me\/c898\/u4394939\/m_5dcaa994.jpg",
+                                        "photo_604": "https:\/\/pp.vk.me\/c898\/u4394939\/x_4d36849e.jpg"
+                                    }
+                                }],
+                "post_source": {"type": "api"},
+                "comments": {"count": 0, "can_post": 1},
+                "likes": {"count": 0, "user_likes": 0, "can_like": 1, "can_publish": 0},
+                "reposts": {"count": 0, "user_reposted": 0}
+            },
+            {
+                "id": 45555,
+                "from_id": 1,
+                "owner_id": 1,
+                "date": 1372533391,
+                "post_type": "post",
+                "text": "",
+                "attachments": [
+                    {
+                        "type": "photo",
+                        "photo": {
+                            "id": 306810815,
+                            "album_id": -7,
+                            "owner_id": 1,
+                            "photo_75": "https://pp.vk.me/...c/B_YrwYIxEjs.jpg",
+                            "photo_130": "https://pp.vk.me/...d/J7FH4wjkfms.jpg",
+                            "photo_604": "https://pp.vk.me/...e/Qxvsp28h7-Q.jpg",
+                            "photo_807": "https://pp.vk.me/...f/j6QIzjVJeGo.jpg",
+                            "photo_1280": "https://pp.vk.me/...0/quSTNI95t0c.jpg",
+                            "width": 726,
+                            "height": 1024,
+                            "text": "",
+                            "date": 1372533393,
+                            "access_key": "e87226d54a480107db"
+                        }
+                    },
+                    {
+                        "type": "photos_list",
+                        "photos_list": ["1_306810815"]
+                    }
+                ],
+                "post_source": {"type": "vk"},
+                "comments": {
+                    "count": 0,
+                    "can_post": 0
+                },
+                "likes": {
+                    "count": 22694,
+                    "user_likes": 0,
+                    "can_like": 1,
+                    "can_publish": 1
+                },
+                "reposts": {
+                    "count": 1026,
+                    "user_reposted": 0
+                }
+            },
+            {
+                "id": 1081,
+                "from_id": 2183,
+                "owner_id": 2183,
+                "date": 1408479611,
+                "post_type": "post",
+                "text": "",
+                "copy_history": [
+                    {
+                        "id": 5743,
+                        "owner_id": 73044,
+                        "from_id": 73044,
+                        "date": 1408477224,
+                        "post_type": "post",
+                        "text": "Атенсьон!!! Пятеро заключенных на свободе!!! И да, это, пожалуй, тот самый небывалый случай среди \"отсидевших\", когда хочется вернуться в камеру и снова совершить коллективный побег:))) Ждем новых сюжетов ))",
+                        "attachments": [
+                            {
+                                "type": "photo",
+                                "photo": {
+                                    "id": 337094263,
+                                    "album_id": -7,
+                                    "owner_id": 73044,
+                                    "photo_75": "https://pp.vk.me/...a/IQHI7yVr4So.jpg",
+                                    "photo_130": "https://pp.vk.me/...b/naLmJeTPwpM.jpg",
+                                    "photo_604": "https://pp.vk.me/...c/ZrzXLZOxiqs.jpg",
+                                    "photo_807": "https://pp.vk.me/...d/MD7mpQG-B7A.jpg",
+                                    "photo_1280": "https://pp.vk.me/...e/hiQX-0yYboA.jpg",
+                                    "photo_2560": "https://pp.vk.me/...f/6dcZbFQTRrE.jpg",
+                                    "width": 1632,
+                                    "height": 1224,
+                                    "text": "",
+                                    "date": 1408475944,
+                                    "lat": 59.932709,
+                                    "long": 30.322009,
+                                    "post_id": 5743,
+                                    "access_key": "db88141835eddaf424"
+                                }
+                            },
+                            {
+                                "type": "photo",
+                                "photo": {
+                                    "id": 337096635,
+                                    "album_id": -7,
+                                    "owner_id": 73044,
+                                    "photo_75": "https://pp.vk.me/...6/fJW8ZPgRfJw.jpg",
+                                    "photo_130": "https://pp.vk.me/...7/WTGGvNNDmxI.jpg",
+                                    "photo_604": "https://pp.vk.me/...8/hVSFx21U_us.jpg",
+                                    "photo_807": "https://pp.vk.me/...9/TTgtngoqCYM.jpg",
+                                    "width": 807,
+                                    "height": 538,
+                                    "text": "",
+                                    "date": 1408477420,
+                                    "access_key": "5530afdce931e8cbb2"
+                                }
+                            }
+                        ],
+                        "post_source": {
+                            "platform": "android",
+                            "type": "api"
+                        }
+                    }
+                ],
+                "can_delete": 1,
+                "can_pin": 1,
+                "post_source": {
+                    "platform": "android",
+                    "type": "api"
+                },
+                "comments": {
+                    "count": 4,
+                    "can_post": 1
+                },
+                "likes": {
+                    "count": 0,
+                    "user_likes": 0,
+                    "can_like": 1,
+                    "can_publish": 0
+                },
+                "reposts": {
+                    "count": 0,
+                    "user_reposted": 0
+                }
+            },
             {
                 "id":27,
                 "from_id":23201394,
@@ -645,7 +796,7 @@
                 "date":1325435109,
                 "post_type":"post",
                 "text":"С Днём рождения! =)",
-                post_source:{
+                "post_source":{
                     "type":"vk"
                 },
                 "comments":{
@@ -670,7 +821,7 @@
                 "date":1317663133,
                 "post_type":"post",
                 "text":"1317663137073",
-                post_source:{
+                "post_source":{
                     "type":"api"
                 },
                 "comments":{
@@ -695,7 +846,7 @@
                 "date":1317634137,
                 "post_type":"post",
                 "text":"hello world",
-                post_source:{
+                "post_source":{
                     "type":"vk"
                 },
                 "comments":{
@@ -720,7 +871,7 @@
                 "date":1261245926,
                 "post_type":"post",
                 "text":"Прочитай полностью : Это мне прислал один человек и я пересылаю тебе! ДЕЙСТВИТЕЛЬНО СБЫЛОСЬ.",
-                post_source:{
+                "post_source":{
                     "type":"vk"
                 },
                 "comments":{

@@ -45,6 +45,8 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     private ISecureOperations secureOperations;
     private ILocationOperations locationOperations;
     private IAudioOperations audioOperations;
+    private IGroupsOperations groupsOperations;
+    private INewsFeedOperations newsFeedOperations;
 
     private ObjectMapper objectMapper;
 
@@ -96,35 +98,39 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
         secureOperations = new SecureTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized(), clientSecret);
         locationOperations = new LocationTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         audioOperations = new AudioTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
+        groupsOperations = new GroupsTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
+        newsFeedOperations = new NewsFeedTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
     }
 
-    @Override
     public IUsersOperations usersOperations() {
         return usersOperations;
     }
 
-    @Override
     public IWallOperations wallOperations() {
         return wallOperations;
     }
 
-    @Override
     public IFriendsOperations friendsOperations() {
         return friendsOperations;
     }
 
-    @Override
     public ISecureOperations secureOperations() {
         return secureOperations;
     }
 
-    @Override
     public ILocationOperations locationOperations() {
         return locationOperations;
     }
 
-    @Override
     public IAudioOperations audioOperations() {
         return audioOperations;
+    }
+
+    public IGroupsOperations groupsOperations() {
+        return groupsOperations;
+    }
+
+    public INewsFeedOperations newsFeedOperations() {
+        return newsFeedOperations;
     }
 }

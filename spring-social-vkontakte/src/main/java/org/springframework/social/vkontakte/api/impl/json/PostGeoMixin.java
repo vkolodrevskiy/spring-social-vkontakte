@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2014 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,37 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api.impl.json.attachment;
+package org.springframework.social.vkontakte.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.social.vkontakte.api.Place;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AudioAttachmentMixin {
-    @JsonProperty("id")
-    private long id;
+public class PostGeoMixin {
+    @JsonProperty("type")
+    private String type;
 
-    @JsonProperty("owner_id")
-    private long ownerId;
+    @JsonProperty("coordinates")
+    private String coordinates;
 
-    @JsonProperty("artist")
-    private String artist;
-
-    @JsonProperty("title")
-    private String title;
-
-    @JsonProperty("duration")
-    private int duration;
-
-    @JsonProperty("url")
-    private String url;
-
-    @JsonProperty("lyrics_id")
-    private long lyricsId;
-
-    @JsonProperty("album_id")
-    private long albumId;
-
-    @JsonProperty("genre_id")
-    private long genreId;
+    @JsonProperty("place")
+    private Place place;
 }

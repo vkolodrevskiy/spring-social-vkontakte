@@ -17,33 +17,14 @@ package org.springframework.social.vkontakte.api.impl.json.attachment;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.social.vkontakte.api.attachment.Attachment;
+import org.springframework.social.vkontakte.api.attachment.Photo;
 
+/**
+ * Attachment associated with an external photo.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AudioAttachmentMixin {
-    @JsonProperty("id")
-    private long id;
-
-    @JsonProperty("owner_id")
-    private long ownerId;
-
-    @JsonProperty("artist")
-    private String artist;
-
-    @JsonProperty("title")
-    private String title;
-
-    @JsonProperty("duration")
-    private int duration;
-
-    @JsonProperty("url")
-    private String url;
-
-    @JsonProperty("lyrics_id")
-    private long lyricsId;
-
-    @JsonProperty("album_id")
-    private long albumId;
-
-    @JsonProperty("genre_id")
-    private long genreId;
+public class PostedPhotoAttachmentMixin extends Attachment {
+    @JsonProperty("posted_photo")
+    private Photo postedPhoto;
 }

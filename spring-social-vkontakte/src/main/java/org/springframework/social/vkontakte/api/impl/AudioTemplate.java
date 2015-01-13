@@ -39,7 +39,6 @@ public class AudioTemplate extends AbstractVKontakteOperations implements IAudio
         this.restTemplate = restTemplate;
     }
 
-    @Override
     public List<Audio> get() {
         requireAuthorization();
         Properties props = new Properties();
@@ -58,7 +57,6 @@ public class AudioTemplate extends AbstractVKontakteOperations implements IAudio
         return deserializeArray(response, Audio.class).getItems();
     }
 
-    @Override
     public List<Audio> get(Integer ownerId) {
         requireAuthorization();
         Properties props = new Properties();

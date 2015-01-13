@@ -6,12 +6,12 @@ package org.springframework.social.vkontakte.api.attachment;
  * @author vkolodrevskiy
  */
 public class Application {
-    private String applicationId;
+    private long applicationId;
     private String applicationName;
-    private String src;
-    private String srcBig;
+    private String photo130;
+    private String photo604;
 
-    public String getApplicationId() {
+    public long getApplicationId() {
         return applicationId;
     }
 
@@ -19,11 +19,11 @@ public class Application {
         return applicationName;
     }
 
-    public String getSrc() {
-        return src;
+    public String getPhoto130() {
+        return photo130;
     }
 
-    public String getSrcBig() {
-        return srcBig;
+    public String getPhoto604() {
+        return photo604;
     }
 }

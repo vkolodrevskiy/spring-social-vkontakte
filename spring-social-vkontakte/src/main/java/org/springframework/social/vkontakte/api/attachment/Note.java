@@ -1,21 +1,38 @@
 package org.springframework.social.vkontakte.api.attachment;
 
+import java.util.Date;
+
 /**
  * TODO: add description
  *
  * @author vkolodrevskiy
  */
 public class Note {
-    private String noteId;
-    private String ownerId;
+    private long noteId;
+    private long ownerId;
     private String title;
-    private int commentCount;
+    private String text;
+    private String url;
+    private Date date;
+    private int comments;
 
-    public String getNoteId() {
+    public Date getDate() {
+        return date;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public long getNoteId() {
         return noteId;
     }
 
-    public String getOwnerId() {
+    public long getOwnerId() {
         return ownerId;
     }
 
@@ -23,7 +40,7 @@ public class Note {
         return title;
     }
 
-    public int getCommentCount() {
-        return commentCount;
+    public int getComments() {
+        return comments;
     }
 }

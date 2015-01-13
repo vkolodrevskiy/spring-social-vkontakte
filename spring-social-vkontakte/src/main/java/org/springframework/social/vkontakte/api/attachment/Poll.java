@@ -6,10 +6,10 @@ package org.springframework.social.vkontakte.api.attachment;
  * @author vkolodrevskiy
  */
 public class Poll {
-    private String pollId;
+    private long pollId;
     private String question;
 
-    public String getPollId() {
+    public long getPollId() {
         return pollId;
     }
 

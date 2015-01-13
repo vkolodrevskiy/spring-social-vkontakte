@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2014 the original author or authors.
+ * Copyright 2011 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api.impl.json.attachment;
+package org.springframework.social.vkontakte.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,39 +23,32 @@ import org.springframework.social.vkontakte.api.impl.json.deserializers.UnixTime
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PhotoAttachmentMixin {
-
+public class PostGeoPlaceMixin {
     @JsonProperty("id")
-    private long photoId;
+    private long id;
 
-    @JsonProperty("owner_id")
-    private long ownerId;
+    @JsonProperty("title")
+    private String title;
 
-    @JsonProperty("album_id")
-    private long albumId;
+    @JsonProperty("latitude")
+    private double latitude;
 
-    @JsonProperty("photo_75")
-    private String photo75;
+    @JsonProperty("longitude")
+    private double longitude;
 
-    @JsonProperty("photo_130")
-    private String photo130;
-
-    @JsonProperty("photo_604")
-    private String photo604;
-
-    @JsonProperty("photo_807")
-    private String photo807;
-
-    @JsonProperty("width")
-    private long width;
-
-    @JsonProperty("height")
-    private long height;
-
-    @JsonProperty("text")
-    private String text;
-
-    @JsonProperty("date")
+    @JsonProperty("created")
     @JsonDeserialize(using = UnixTimeDeserializer.class)
-    private Date date;
+    private Date createdDate;
+
+    @JsonProperty("icon")
+    private String iconUrl;
+
+    @JsonProperty("country")
+    private String country;
+
+    @JsonProperty("city")
+    private String city;
+
+    @JsonProperty("address")
+    private String address;
 }

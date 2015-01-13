@@ -19,9 +19,9 @@ package org.springframework.social.vkontakte.api.attachment;
  * Document attachment.
  */
 public class DocumentAttachment extends Attachment {
-    private Document document;
+    private Document doc;
 
-    public Document getDocument() {
-        return document;
+    public Document getDoc() {
+        return doc;
     }
 }

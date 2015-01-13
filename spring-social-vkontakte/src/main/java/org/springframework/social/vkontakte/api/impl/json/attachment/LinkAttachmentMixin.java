@@ -20,9 +20,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LinkAttachmentMixin {
-
     @JsonProperty("url")
     String url;
+
+    @JsonProperty("preview_url")
+    String previewUrl;
 
     @JsonProperty("title")
     String title;
@@ -31,5 +33,5 @@ public class LinkAttachmentMixin {
     String description;
 
     @JsonProperty("image_src")
-    String image;
+    String imageSrc;
 }

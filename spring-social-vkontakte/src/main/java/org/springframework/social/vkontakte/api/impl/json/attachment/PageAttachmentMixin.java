@@ -17,16 +17,36 @@ package org.springframework.social.vkontakte.api.impl.json.attachment;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.social.vkontakte.api.impl.json.deserializers.UnixTimeDeserializer;
+
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PageAttachmentMixin {
+    @JsonProperty("id")
+    private long pageId;
 
-    @JsonProperty("pid")
-    private String pageId;
+    @JsonProperty("group_id")
+    private long groupId;
 
-    @JsonProperty("gid")
-    private String groupId;
+    @JsonProperty("creator_id")
+    private long creatorId;
 
     @JsonProperty("title")
     private String title;
+
+    @JsonProperty("created")
+    @JsonDeserialize(using = UnixTimeDeserializer.class)
+    private Date created;
+
+    @JsonProperty("edited")
+    @JsonDeserialize(using = UnixTimeDeserializer.class)
+    private Date edited;
+
+    @JsonProperty("views")
+    private long views;
+
+    @JsonProperty("view_url")
+    private String url;
 }

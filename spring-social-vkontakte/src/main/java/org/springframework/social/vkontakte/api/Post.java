@@ -23,26 +23,49 @@ import java.util.List;
 
 /**
  * Model class representing an entry in a wall.
+ *
  * @author vkolodrevskiy
  */
 public class Post {
-
-    private final String id;
-    private final Date date;
-    private final String text;
-
+    private long id;
+    private long fromId;
+    private long ownerId;
+    private long replyOwnerId;
+    private long replyPostId;
+    private Date date;
+    private String text;
     private Likes likes;
     private Reposts reposts;
-
+    private Comments comments;
+    private Geo geo;
     private List<? extends Attachment> attachments;
+    private List<Post> copyHistory;
 
-    public Post(String id, Date date, String text) {
-        this.id = id;
-        this.date = date;
-        this.text = text;
+    public Geo getGeo() {
+        return geo;
     }
 
-    public String getId() {
+    public long getReplyPostId() {
+        return replyPostId;
+    }
+
+    public long getReplyOwnerId() {
+        return replyOwnerId;
+    }
+
+    public long getFromId() {
+        return fromId;
+    }
+
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public Comments getComments() {
+        return comments;
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -64,6 +87,18 @@ public class Post {
 
     public List<? extends Attachment> getAttachments() {
         return attachments;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id='" + id + '\'' +
+                ", date=" + date +
+                ", text='" + text + '\'' +
+                ", likes=" + likes +
+                ", reposts=" + reposts +
+                ", attachments=" + (attachments == null ? null : StringUtils.collectionToDelimitedString(attachments, ",\n")) +
+                '}';
     }
 
     public static class Likes {
@@ -120,15 +155,29 @@ public class Post {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id='" + id + '\'' +
-                ", date=" + date +
-                ", text='" + text + '\'' +
-                ", likes=" + likes +
-                ", reposts=" + reposts +
-                ", attachments=" + (attachments == null ? null : StringUtils.collectionToDelimitedString(attachments, ",\n")) +
-                '}';
+    public static class Geo {
+        private String type;
+        private String coordinates;
+        private Place place;
+
+        public String getType() {
+            return type;
+        }
+
+        public String getCoordinates() {
+            return coordinates;
+        }
+
+        public Place getPlace() {
+            return place;
+        }
+    }
+
+    public static class Comments {
+        private int count;
+
+        public int getCount() {
+            return count;
+        }
     }
 }

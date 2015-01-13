@@ -6,17 +6,32 @@ package org.springframework.social.vkontakte.api.attachment;
  * @author vkolodrevskiy
  */
 public class Document {
-    private String documentId;
-    private String ownerId;
+    private long documentId;
+    private long ownerId;
     private String title;
+    private String url;
+    private String photo100;
+    private String photo130;
     private long size;
     private String extension;
 
-    public String getDocumentId() {
+    public String getUrl() {
+        return url;
+    }
+
+    public String getPhoto100() {
+        return photo100;
+    }
+
+    public String getPhoto130() {
+        return photo130;
+    }
+
+    public long getDocumentId() {
         return documentId;
     }
 
-    public String getOwnerId() {
+    public long getOwnerId() {
         return ownerId;
     }
 

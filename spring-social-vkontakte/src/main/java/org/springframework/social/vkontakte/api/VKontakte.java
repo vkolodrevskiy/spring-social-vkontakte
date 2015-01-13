@@ -53,4 +53,15 @@ public interface VKontakte extends ApiBinding {
      * API for performing operations with audio.
      */
     public IAudioOperations audioOperations();
+
+
+    /**
+     * API for performing operations with groups.
+     */
+    public IGroupsOperations groupsOperations();
+
+    /**
+     * API for performing operations with newsfeed.
+     */
+    public INewsFeedOperations newsFeedOperations();
 }

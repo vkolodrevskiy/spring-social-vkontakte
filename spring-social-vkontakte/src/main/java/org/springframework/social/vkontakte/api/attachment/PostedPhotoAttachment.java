@@ -13,23 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api.impl.json.attachment;
+package org.springframework.social.vkontakte.api.attachment;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+/**
+ * Attachment associated with an external photo.
+ */
+public class PostedPhotoAttachment extends Attachment {
+    private Photo postedPhoto;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class GraffitiAttachmentMixin {
-
-    @JsonProperty("id")
-    private String graffitiId;
-
-    @JsonProperty("owner_id")
-    private String ownerId;
-
-    @JsonProperty("photo_200")
-    private String photo200;
-
-    @JsonProperty("photo_586")
-    private String photo586;
+    public Photo getPhoto() {
+        return postedPhoto;
+    }
 }

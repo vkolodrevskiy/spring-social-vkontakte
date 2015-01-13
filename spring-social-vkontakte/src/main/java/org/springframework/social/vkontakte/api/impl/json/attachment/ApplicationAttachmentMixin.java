@@ -21,15 +21,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApplicationAttachmentMixin {
 
-    @JsonProperty("app_id")
+    @JsonProperty("id")
     private String applicationId;
 
-    @JsonProperty("app_name")
+    @JsonProperty("name")
     private String applicationName;
 
-    @JsonProperty("src")
-    private String src;
+    @JsonProperty("photo_130")
+    private String photo130;
 
-    @JsonProperty("src_big")
-    private String srcBig;
+    @JsonProperty("photo_604 ")
+    private String photo604;
 }

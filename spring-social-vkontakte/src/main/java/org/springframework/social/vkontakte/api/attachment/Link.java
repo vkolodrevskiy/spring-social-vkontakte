@@ -7,9 +7,14 @@ package org.springframework.social.vkontakte.api.attachment;
  */
 public class Link {
     private String url;
+    private String previewUrl;
     private String title;
     private String description;
-    private String image;
+    private String imageSrc;
+
+    public String getPreviewUrl() {
+        return previewUrl;
+    }
 
     public String getUrl() {
         return url;
@@ -23,8 +28,8 @@ public class Link {
         return description;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageSrc() {
+        return imageSrc;
     }
 
     @Override
@@ -33,7 +38,7 @@ public class Link {
                 "url='" + url + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", image='" + image + '\'' +
+                ", imageSrc='" + imageSrc + '\'' +
                 '}';
     }
 }

@@ -16,12 +16,10 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.junit.Test;
-import org.springframework.social.vkontakte.api.Post;
-import org.springframework.social.vkontakte.api.attachment.Attachment;
-import org.springframework.social.vkontakte.api.attachment.AttachmentType;
-import org.springframework.social.vkontakte.api.attachment.PhotosListAttachment;
+import org.springframework.social.vkontakte.api.Group;
 
 import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -30,21 +28,26 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
- * {@link WallTemplate} test.
- * @author vkolodrevskiy
+ * {@link org.springframework.social.vkontakte.api.impl.GroupsTemplate} test.
+ * @author dIsoVi
  */
-public class WallTemplateTest extends AbstractVKontakteApiTest {
+public class GroupsTemplateTest extends AbstractVKontakteApiTest {
     @Test
-    public void getPosts() {
-        mockServer.expect(requestTo("https://api.vk.com/method/wall.get?access_token=ACCESS_TOKEN&v=5.27"))
+    public void getGroups() {
+        mockServer.expect(requestTo("https://api.vk.com/method/groups.get?access_token=ACCESS_TOKEN&v=5.27&extended=1"))
             .andExpect(method(GET))
-            .andRespond(withSuccess(jsonResource("wall-getposts-response-5_21"), APPLICATION_JSON));
-        List<Post> posts = vkontakte.wallOperations().getPosts();
-        assertEquals(22, posts.size());
-        Attachment photosListAttachment = posts.get(1).getAttachments().get(1);
-        assertEquals(AttachmentType.PHOTOS_LIST, photosListAttachment.getType());
-        assertEquals(306810815, ((PhotosListAttachment)photosListAttachment).getPhotosList().get(0).getPhotoId());
-        assertEquals(45555, posts.get(1).getId());
-        assertEquals(2, posts.get(1).getAttachments().size());
+            .andRespond(withSuccess(jsonResource("groups-getgroups-response-5_27"), APPLICATION_JSON));
+        List<Group> groups = vkontakte.groupsOperations().getGroups();
+        assertEquals(40, groups.size());
+        assertEquals("roem", groups.get(0).getScreenName());
+    }
+
+    @Test
+    public void getGroupsShort() {
+        mockServer.expect(requestTo("https://api.vk.com/method/groups.get?access_token=ACCESS_TOKEN&v=5.27"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("groups-short-getgroups-response-5_27"), APPLICATION_JSON));
+        List<Group> groups = vkontakte.groupsOperations().getGroups(0, null, -1, 0, false);
+        assertEquals(53, groups.size());
     }
 }
