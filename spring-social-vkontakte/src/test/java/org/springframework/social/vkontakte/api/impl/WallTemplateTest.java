@@ -40,7 +40,7 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
             .andExpect(method(GET))
             .andRespond(withSuccess(jsonResource("wall-getposts-response-5_21"), APPLICATION_JSON));
         List<Post> posts = vkontakte.wallOperations().getPosts();
-        assertEquals(22, posts.size());
+        assertEquals(23, posts.size());
         Attachment photosListAttachment = posts.get(1).getAttachments().get(1);
         assertEquals(AttachmentType.PHOTOS_LIST, photosListAttachment.getType());
         assertEquals(306810815, ((PhotosListAttachment)photosListAttachment).getPhotosList().get(0).getPhotoId());
