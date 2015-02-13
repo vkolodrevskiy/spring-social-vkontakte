@@ -37,9 +37,9 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 public class FriendsTemplateTest extends AbstractVKontakteApiTest {
     @Test
 	public void get_currentUser() throws ParseException {
-		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name"))
+		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name"))
 			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("list-of-profiles-3_0"), APPLICATION_JSON));
+			.andRespond(withSuccess(jsonResource("list-of-profiles-5_27"), APPLICATION_JSON));
 
 		List<VKontakteProfile> friends = vkontakte.friendsOperations().get();
         assertFriends(friends);
@@ -52,11 +52,11 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
     @Test
 	public void get_byUserId() throws ParseException {
-		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&uid=123"))
+		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_id=123"))
 			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("list-of-profiles-3_0"), APPLICATION_JSON));
+			.andRespond(withSuccess(jsonResource("list-of-profiles-5_27"), APPLICATION_JSON));
 
-		List<VKontakteProfile> friends = vkontakte.friendsOperations().get("123");
+		List<VKontakteProfile> friends = vkontakte.friendsOperations().get(123L);
         assertFriends(friends);
     }
 
@@ -67,16 +67,16 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
 	@Test(expected = VKontakteErrorException.class)
 	public void get_expiredToken() {
-		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&uid=123"))
+		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_id=123"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
 
-		vkontakte.friendsOperations().get("123");
+		vkontakte.friendsOperations().get(123L);
 	}
 
     @Test(expected = VKontakteErrorException.class)
     public void getOnline_expiredToken() {
-        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8"))
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.27"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
 
@@ -85,7 +85,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
     @Test(expected = VKontakteErrorException.class)
     public void getOnline_tooManyRequests() {
-        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8"))
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.27"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("error-code-6-too-many-requests"), APPLICATION_JSON));
 
@@ -94,7 +94,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
     @Test(expected = MissingAuthorizationException.class)
     public void getOnline_unauthorized() {
-        unauthorizedVKontakte.friendsOperations().getOnline("1", false, -1, -1);
+        unauthorizedVKontakte.friendsOperations().getOnline(1L, false, -1, -1);
     }
 
     @Test(expected = MissingAuthorizationException.class)
@@ -104,20 +104,20 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
     @Test
     public void getOnlineSiteAndMobile() {
-        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8&user_id=1&online_mobile=1"))
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.27&user_id=1&online_mobile=1"))
                 .andExpect(method(GET))
-                .andRespond(withSuccess(jsonResource("friends-getonline-site-and-mobile-5_8"), APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("friends-getonline-site-and-mobile-5_27"), APPLICATION_JSON));
 
-        List<List<String>> friends = vkontakte.friendsOperations().getOnline("1", true, -1, -1);
+        List<List<String>> friends = vkontakte.friendsOperations().getOnline(1L, true, -1, -1);
         assertEquals(15, friends.get(0).size());
         assertEquals(6, friends.get(1).size());
     }
 
     @Test
     public void getOnlineSiteOnly() {
-        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8"))
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.27"))
                 .andExpect(method(GET))
-                .andRespond(withSuccess(jsonResource("friends-getonline-site-only-5_8"), APPLICATION_JSON));
+                .andRespond(withSuccess(jsonResource("friends-getonline-site-only-5_27"), APPLICATION_JSON));
 
         List<List<String>> friends = vkontakte.friendsOperations().getOnline(false, -1, -1);
         assertEquals(20, friends.get(0).size());
@@ -126,43 +126,36 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void getOnlineAllParametersPresent() {
         // check that access_token=ACCESS_TOKEN&v=5.8&user_id=123&count=5&online_mobile=1 parameters are present
-        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.8&user_id=123&count=5&offset=6&online_mobile=1"))
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.getOnline?access_token=ACCESS_TOKEN&v=5.27&user_id=123&count=5&offset=6&online_mobile=1"))
                 .andExpect(method(GET))
-                .andRespond(withSuccess(jsonResource("friends-getonline-site-only-5_8"), APPLICATION_JSON));
-        vkontakte.friendsOperations().getOnline("123", true, 5, 6);
+                .andRespond(withSuccess(jsonResource("friends-getonline-site-only-5_27"), APPLICATION_JSON));
+        vkontakte.friendsOperations().getOnline(123L, true, 5, 6);
     }
 
     private void assertFriends(List<VKontakteProfile> profiles) throws ParseException {
+        // TODO: write tests
         assertEquals(3, profiles.size());
 
-        assertEquals("24840", profiles.get(0).getUid());
-        assertEquals("John", profiles.get(0).getFirstName());
-        assertEquals("Doe", profiles.get(0).getLastName());
-        assertEquals(1977, profiles.get(0).getBirthDate().getYear());
-        assertEquals(7, profiles.get(0).getBirthDate().getMonth());
-        assertEquals(7, profiles.get(0).getBirthDate().getDay());
-        assertEquals("http://cs9889.vkontakte.ru/u24840/e_5b02b7ad.jpg", profiles.get(0).getPhoto());
-        assertEquals("http://cs9889.vkontakte.ru/u24840/b_04d9723f.jpg", profiles.get(0).getPhotoMedium());
-        assertEquals("http://cs9889.vkontakte.ru/u24840/a_f934a8e6.jpg", profiles.get(0).getPhotoBig());
+        assertEquals(1, profiles.get(0).getId());
+        assertEquals("Павел", profiles.get(0).getFirstName());
+        assertEquals("Дуров", profiles.get(0).getLastName());
+        assertEquals("Telegram", profiles.get(0).getOccupation().getName());
+        assertEquals(2006, profiles.get(0).getGraduation());
+        assertEquals(7, profiles.get(0).getPersonal().getLangs().size());
+        assertEquals(1, profiles.get(0).getUniversities().get(0).getCountryId());
+        assertEquals(1992, profiles.get(0).getSchools().get(0).getYearTo());
 
-        assertEquals("135474", profiles.get(1).getUid());
-        assertEquals("William", profiles.get(1).getFirstName());
-        assertEquals("Peters", profiles.get(1).getLastName());
-        assertEquals(1977, profiles.get(1).getBirthDate().getYear());
-        assertEquals(7, profiles.get(1).getBirthDate().getMonth());
-        assertEquals(8, profiles.get(1).getBirthDate().getDay());
-        assertEquals("http://cs5596.vkontakte.ru/u135474/e_148bbf42.jpg", profiles.get(1).getPhoto());
-        assertEquals("http://cs5596.vkontakte.ru/u135474/b_176664e7.jpg", profiles.get(1).getPhotoMedium());
-        assertEquals("http://cs5596.vkontakte.ru/u135474/a_ead98900.jpg", profiles.get(1).getPhotoBig());
+        assertEquals(2183, profiles.get(1).getId());
+        assertEquals("Владислав", profiles.get(1).getFirstName());
+        assertEquals("Ефремов", profiles.get(1).getLastName());
+        assertEquals(1988, profiles.get(1).getBirthDate().getYear());
+        assertEquals("№ 239", profiles.get(1).getSchools().get(0).getName());
 
-        assertEquals("501245", profiles.get(2).getUid());
-        assertEquals("Ivan", profiles.get(2).getFirstName());
-        assertEquals("Petrov", profiles.get(2).getLastName());
-        assertEquals(1977, profiles.get(2).getBirthDate().getYear());
-        assertEquals(7, profiles.get(2).getBirthDate().getMonth());
-        assertEquals(9, profiles.get(2).getBirthDate().getDay());
-        assertEquals("http://vkontakte.ru/images/question_c.gif", profiles.get(2).getPhoto());
-        assertEquals("http://vkontakte.ru/images/question_b.gif", profiles.get(2).getPhotoMedium());
-        assertEquals("http://vkontakte.ru/images/question_a.gif", profiles.get(2).getPhotoBig());
+        assertEquals(77478, profiles.get(2).getId());
+        assertEquals("Егор", profiles.get(2).getFirstName());
+        assertEquals("Иванов", profiles.get(2).getLastName());
+        assertEquals("M", profiles.get(2).getGender());
+        assertEquals(216966, profiles.get(2).getRelationPartner().getId());
+        assertEquals("sibling", profiles.get(2).getRelatives().get(0).getType());
     }
 }

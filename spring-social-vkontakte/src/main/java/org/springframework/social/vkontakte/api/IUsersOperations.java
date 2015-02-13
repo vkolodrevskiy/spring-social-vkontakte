@@ -31,6 +31,16 @@ public interface IUsersOperations {
 	 */
 	VKontakteProfile getUser();
 
+    /**
+     * Retrieves the profile for the authenticated user.
+     * @param fields VKontakte fields to retrieve, comma-delimited.
+     * @return the user's profile information.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    VKontakteProfile getUser(String fields);
+
 	/**
 	 * Retrieves profiles for specified user unique identifiers.
 	 * @param userIds VKontakte user profile unique identifiers, for which to gt data.
@@ -40,5 +50,17 @@ public interface IUsersOperations {
 	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
 	 */
-	List<VKontakteProfile> getUsers(List<String> userIds);
+	List<VKontakteProfile> getUsers(List<Long> userIds);
+
+    /**
+     * Retrieves profiles for specified user unique identifiers.
+     * @param userIds VKontakte user profile unique identifiers, for which to gt data.
+     * @param fields VKontakte fields to retrieve, comma-delimited.
+     * If <code>null<code/> is passed user profile or the current user will be returned.
+     * @return the user's profile information.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    List<VKontakteProfile> getUsers(List<Long> userIds, String fields);
 }
