@@ -38,7 +38,7 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
     public void getPosts() {
         mockServer.expect(requestTo("https://api.vk.com/method/wall.get?access_token=ACCESS_TOKEN&v=5.27"))
             .andExpect(method(GET))
-            .andRespond(withSuccess(jsonResource("wall-getposts-response-5_21"), APPLICATION_JSON));
+            .andRespond(withSuccess(jsonResource("wall-getposts-response-5_27"), APPLICATION_JSON));
         List<Post> posts = vkontakte.wallOperations().getPosts();
         assertEquals(23, posts.size());
         Attachment photosListAttachment = posts.get(1).getAttachments().get(1);

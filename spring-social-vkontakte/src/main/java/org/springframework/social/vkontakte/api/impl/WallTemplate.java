@@ -41,7 +41,7 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
         return getPosts(-1, -1);
     }
 
-    public List<Post> getPostsForUser(String userId, int offset, int limit) {
+    public List<Post> getPostsForUser(Long userId, int offset, int limit) {
         requireAuthorization();
         Properties props = new Properties();
         if (offset >= 0) {
@@ -64,7 +64,7 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
         return getPostsForUser(null, offset, limit);
     }
 
-    public Post getPost(String userId, String postId) {
+    public Post getPost(Long userId, String postId) {
         requireAuthorization();
         Properties props = new Properties();
         props.put("posts", userId + "_" + postId);
