@@ -31,14 +31,14 @@ public class City implements Serializable {
 	 * City identifier in internal Vkontakte format.
 	 * It doesn't correlate with KLADR or FIAS databases.
 	 */
-	private Integer id;
+	private long id;
 	
 	/**
-	 * City name in nominative (russian language).
+	 * City title in nominative (russian language).
 	 */
-	private String name;
+	private String title;
 
-	public Integer getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -46,16 +46,16 @@ public class City implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	@Override
 	public String toString() {
-		return name;
+		return title;
 	}
 }
