@@ -13,7 +13,9 @@ configure(allprojects) {
     apply plugin: 'eclipse'
     apply plugin: 'idea'
     apply plugin: 'javadocHotfix'
-
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
     group = 'org.springframework.social'
 
     sourceCompatibility=1.5
