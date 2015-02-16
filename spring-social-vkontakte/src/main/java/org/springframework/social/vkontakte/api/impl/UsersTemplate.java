@@ -50,9 +50,9 @@ class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperati
                     uids.append(uid);
                 else uids.append(",").append(uid);
             }
+            props.put("user_ids", uids.toString());
         }
 
-        props.put("user_ids", userIds == null ? "" : uids.toString());
         props.put("fields", fields);
 
         // see documentation under http://vk.com/dev/users.get
@@ -65,7 +65,7 @@ class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperati
     }
 
     public List<VKontakteProfile> getUsers(List<Long> userIds) {
-        return getUsers(userIds, "first_name,last_name,photo_50,photo_100,photo_200,contacts,bdate,sex,screen_name");
+        return getUsers(userIds, IUsersOperations.DEFAULT_FIELDS);
     }
 
     public VKontakteProfile getUser() {

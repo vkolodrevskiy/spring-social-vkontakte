@@ -22,7 +22,8 @@ import java.util.List;
  * @author vkolodrevskiy
  */
 public interface IUsersOperations {
-	/**
+    public final static String DEFAULT_FIELDS = "first_name,last_name,photo_50,photo_100,photo_200,contacts,bdate,sex,screen_name";
+    /**
 	 * Retrieves the profile for the authenticated user.
 	 * @return the user's profile information.
 	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
