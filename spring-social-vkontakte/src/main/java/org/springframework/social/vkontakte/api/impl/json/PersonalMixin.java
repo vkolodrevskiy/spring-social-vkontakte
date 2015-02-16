@@ -17,10 +17,7 @@ package org.springframework.social.vkontakte.api.impl.json;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.springframework.social.vkontakte.api.impl.json.deserializers.UnixTimeDeserializer;
 
-import java.util.Date;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown=true)

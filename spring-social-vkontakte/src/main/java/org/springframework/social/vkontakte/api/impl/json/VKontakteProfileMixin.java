@@ -21,6 +21,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.social.vkontakte.api.*;
 
@@ -141,6 +142,7 @@ class VKontakteProfileMixin {
     @JsonProperty("occupation")
     private Occupation occupation;
     @JsonProperty("personal")
+    @JsonDeserialize(using = PersonalDeserializer.class)
     private Personal personal;
     @JsonProperty("universities")
     private List<University> universities;
@@ -150,6 +152,22 @@ class VKontakteProfileMixin {
     private List<Relative> relatives;
     @JsonProperty("relation_partner")
     private VKontakteProfile relationPartner;
+
+    /**
+     * VK Api sometimes returns Personal as empty Array instead of Object (v5.27)
+     */
+    static class PersonalDeserializer extends JsonDeserializer<Personal>
+    {
+        @Override
+        public Personal deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException
+        {
+            JsonNode node = jp.readValueAsTree();
+            if (node.isObject()) {
+                return jp.getCodec().treeToValue(node, Personal.class);
+            }
+            return null;
+        }
+    }
 
     static class VKGenderDeserializer extends JsonDeserializer<String> {
         @Override
