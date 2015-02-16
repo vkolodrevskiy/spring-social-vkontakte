@@ -39,7 +39,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 	public void get_currentUser() throws ParseException {
 		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name"))
 			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("list-of-profiles-5_27"), APPLICATION_JSON));
+			.andRespond(withSuccess(jsonResource("list-of-friends-5_27"), APPLICATION_JSON));
 
 		List<VKontakteProfile> friends = vkontakte.friendsOperations().get();
         assertFriends(friends);
@@ -52,11 +52,11 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 
     @Test
 	public void get_byUserId() throws ParseException {
-		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_id=123"))
+		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_id=1"))
 			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("list-of-profiles-5_27"), APPLICATION_JSON));
+			.andRespond(withSuccess(jsonResource("list-of-friends-5_27"), APPLICATION_JSON));
 
-		List<VKontakteProfile> friends = vkontakte.friendsOperations().get(123L);
+		List<VKontakteProfile> friends = vkontakte.friendsOperations().get(1L);
         assertFriends(friends);
     }
 
@@ -133,29 +133,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
     }
 
     private void assertFriends(List<VKontakteProfile> profiles) throws ParseException {
-        // TODO: write tests
-        assertEquals(3, profiles.size());
-
-        assertEquals(1, profiles.get(0).getId());
-        assertEquals("Павел", profiles.get(0).getFirstName());
-        assertEquals("Дуров", profiles.get(0).getLastName());
-        assertEquals("Telegram", profiles.get(0).getOccupation().getName());
-        assertEquals(2006, profiles.get(0).getGraduation());
-        assertEquals(7, profiles.get(0).getPersonal().getLangs().size());
-        assertEquals(1, profiles.get(0).getUniversities().get(0).getCountryId());
-        assertEquals(1992, profiles.get(0).getSchools().get(0).getYearTo());
-
-        assertEquals(2183, profiles.get(1).getId());
-        assertEquals("Владислав", profiles.get(1).getFirstName());
-        assertEquals("Ефремов", profiles.get(1).getLastName());
-        assertEquals(1988, profiles.get(1).getBirthDate().getYear());
-        assertEquals("№ 239", profiles.get(1).getSchools().get(0).getName());
-
-        assertEquals(77478, profiles.get(2).getId());
-        assertEquals("Егор", profiles.get(2).getFirstName());
-        assertEquals("Иванов", profiles.get(2).getLastName());
-        assertEquals("M", profiles.get(2).getGender());
-        assertEquals(216966, profiles.get(2).getRelationPartner().getId());
-        assertEquals("sibling", profiles.get(2).getRelatives().get(0).getType());
+        assertEquals(5, profiles.size());
+        assertEquals(15439101, profiles.get(0).getId());
     }
 }

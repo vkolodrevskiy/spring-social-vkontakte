@@ -51,19 +51,29 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
     }
 
     public List<VKontakteProfile> get(Long userId, String fields) {
+        return get(userId, fields, -1, -1);
+    }
+
+    public List<VKontakteProfile> get(Long userId, String fields, int count, int offset) {
         requireAuthorization();
         Properties props = new Properties();
 
         if (userId != null) {
             props.put("user_id", userId);
         }
+        if (count != -1) {
+            props.put("count", count);
+        }
+        if (offset != -1) {
+            props.put("offset", offset);
+        }
         props.put("fields", fields);
         URI uri = makeOperationURL("friends.get", props, ApiVersion.VERSION_5_27);
 
-        VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
-        checkForError(profiles);
+        VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
+        checkForError(response);
 
-        return profiles.getProfiles();
+        return deserializeVK50ItemsResponse(response, VKontakteProfile.class).getItems();
     }
 
     public List<List<String>> getOnline(boolean onlineMobile, int count, int offset) {

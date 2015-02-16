@@ -64,6 +64,19 @@ public interface IFriendsOperations {
     public List<VKontakteProfile> get(Long userId, String fields);
 
     /**
+     * Retrieves a list of user friends for specified user unique identifier.
+     * @param userId user unique identifier for which to get friends.
+     * @param fields VKontakte fields to retrieve, comma-delimited.
+     * @param count Number(positive number) of friends to return. If you want to return all friends pass negative number.
+     * @param offset Offset(positive number) needed to return a specific subset of friends.
+     * @return a list of user friends profiles.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    public List<VKontakteProfile> get(Long userId, String fields, int count, int offset);
+
+    /**
      * Retrieves a list of user friends id's that are online for the current authorized user.
      * Result <code>List</code> will contain 2 lists if you set <code>onlineMobile</code> parameter to <code>true</code>.
      * First list will contain id's of online friends that use website, second list will contain id's of friends using mobile.
