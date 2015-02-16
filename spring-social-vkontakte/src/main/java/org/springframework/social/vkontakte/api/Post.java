@@ -89,6 +89,10 @@ public class Post {
         return attachments;
     }
 
+    public List<Post> getCopyHistory() {
+        return copyHistory;
+    }
+
     @Override
     public String toString() {
         return "Post{" +

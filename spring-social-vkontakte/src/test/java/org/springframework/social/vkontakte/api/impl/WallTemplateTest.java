@@ -17,9 +17,7 @@ package org.springframework.social.vkontakte.api.impl;
 
 import org.junit.Test;
 import org.springframework.social.vkontakte.api.Post;
-import org.springframework.social.vkontakte.api.attachment.Attachment;
-import org.springframework.social.vkontakte.api.attachment.AttachmentType;
-import org.springframework.social.vkontakte.api.attachment.PhotosListAttachment;
+import org.springframework.social.vkontakte.api.attachment.*;
 
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -46,5 +44,6 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
         assertEquals(306810815, ((PhotosListAttachment)photosListAttachment).getPhotosList().get(0).getPhotoId());
         assertEquals(45555, posts.get(1).getId());
         assertEquals(2, posts.get(1).getAttachments().size());
+        assertEquals(3, ((StickerAttachment)posts.get(22).getCopyHistory().get(0).getAttachments().get(0)).getSticker().getProductId());
     }
 }
