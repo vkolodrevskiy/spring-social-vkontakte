@@ -35,10 +35,13 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 public class NewsFeedTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void searchNews() {
-        mockServer.expect(requestTo("https://api.vk.com/method/newsfeed.search?access_token=ACCESS_TOKEN&v=5.27&q=VK+API"))
+        mockServer.expect(requestTo("https://api.vk.com/method/newsfeed.search?access_token=ACCESS_TOKEN&v=5.27&extended=1&q=VK+API"))
             .andExpect(method(GET))
             .andRespond(withSuccess(jsonResource("newsfeed-5_27"), APPLICATION_JSON));
-        NewsFeedResponse newsFeedResponse = vkontakte.newsFeedOperations().searchNews("VK API");
+        NewsFeedSearchRequest request = new NewsFeedSearchRequest("VK API", true, null);
+        NewsFeedResponse newsFeedResponse = vkontakte.newsFeedOperations().searchNews(request);
         assertEquals(3, newsFeedResponse.getNews().size());
+        assertEquals(69171335, newsFeedResponse.getGroups().get(0).getGroupId());
+        assertEquals("id271875268", newsFeedResponse.getProfiles().get(1).getScreenName());
     }
 }
