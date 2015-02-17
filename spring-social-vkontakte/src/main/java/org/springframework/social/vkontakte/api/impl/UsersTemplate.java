@@ -53,7 +53,7 @@ class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperati
             props.put("user_ids", uids.toString());
         }
 
-        props.put("fields", fields);
+        props.put("fields", fields != null? fields: IUsersOperations.DEFAULT_FIELDS);
 
         // see documentation under http://vk.com/dev/users.get
         URI uri = makeOperationURL("users.get", props, ApiVersion.VERSION_5_27);
@@ -65,7 +65,7 @@ class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperati
     }
 
     public List<VKontakteProfile> getUsers(List<Long> userIds) {
-        return getUsers(userIds, IUsersOperations.DEFAULT_FIELDS);
+        return getUsers(userIds, null);
     }
 
     public VKontakteProfile getUser() {
