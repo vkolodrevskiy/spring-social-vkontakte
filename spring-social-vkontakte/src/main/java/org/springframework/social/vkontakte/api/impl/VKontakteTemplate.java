@@ -61,6 +61,10 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
         this.clientSecret = null;
     }
 
+    public VKontakteTemplate(String accessToken, String clientSecret) {
+        this(accessToken, clientSecret, null);
+    }
+
     public VKontakteTemplate(String accessToken, String clientSecret, String userEmail) {
         super(accessToken);
         this.accessToken = accessToken;
@@ -68,6 +72,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
         this.clientSecret = clientSecret;
         initialize();
     }
+
 
     private void initialize() {
         registerJsonModule();
