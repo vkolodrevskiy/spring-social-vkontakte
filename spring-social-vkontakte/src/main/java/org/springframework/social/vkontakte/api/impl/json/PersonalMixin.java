@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2014 the original author or authors.
+ * Copyright 2011-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,24 @@ package org.springframework.social.vkontakte.api.impl.json;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class CityMixin extends VKResponseMixin {
-
-	@JsonProperty("id")
-	long id;
-
-	@JsonProperty("title")
-	String title;
+public class PersonalMixin {
+	@JsonProperty("political")
+    private int political;
+    @JsonProperty("langs")
+    private List<String> langs;
+    @JsonProperty("religion")
+    private String religion;
+    @JsonProperty("inspired_by")
+    private String inspiredBy;
+    @JsonProperty("people_main")
+    private int peopleMain;
+    @JsonProperty("life_main")
+    private int lifeMain;
+    @JsonProperty("smoking")
+    private int smoking;
+    @JsonProperty("alcohol")
+    private int alcohol;
 }

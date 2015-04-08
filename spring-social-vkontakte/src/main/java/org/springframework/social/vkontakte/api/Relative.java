@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2014 the original author or authors.
+ * Copyright 2011-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api.impl.json;
+package org.springframework.social.vkontakte.api;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+/**
+ * Relative.
+ *
+ * @author dIsoVi
+ */
+public class Relative {
+    private long id;
+    private String type;
+    private String name;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
-public class CityMixin extends VKResponseMixin {
+    public long getId() {
+        return id;
+    }
 
-	@JsonProperty("id")
-	long id;
+    public String getType() {
+        return type;
+    }
 
-	@JsonProperty("title")
-	String title;
+    public String getName() {
+        return name;
+    }
+
 }

@@ -17,9 +17,7 @@ package org.springframework.social.vkontakte.api.impl;
 
 import org.junit.Test;
 import org.springframework.social.vkontakte.api.Post;
-import org.springframework.social.vkontakte.api.attachment.Attachment;
-import org.springframework.social.vkontakte.api.attachment.AttachmentType;
-import org.springframework.social.vkontakte.api.attachment.PhotosListAttachment;
+import org.springframework.social.vkontakte.api.attachment.*;
 
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -38,13 +36,14 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
     public void getPosts() {
         mockServer.expect(requestTo("https://api.vk.com/method/wall.get?access_token=ACCESS_TOKEN&v=5.27"))
             .andExpect(method(GET))
-            .andRespond(withSuccess(jsonResource("wall-getposts-response-5_21"), APPLICATION_JSON));
+            .andRespond(withSuccess(jsonResource("wall-getposts-response-5_27"), APPLICATION_JSON));
         List<Post> posts = vkontakte.wallOperations().getPosts();
-        assertEquals(22, posts.size());
+        assertEquals(23, posts.size());
         Attachment photosListAttachment = posts.get(1).getAttachments().get(1);
         assertEquals(AttachmentType.PHOTOS_LIST, photosListAttachment.getType());
         assertEquals(306810815, ((PhotosListAttachment)photosListAttachment).getPhotosList().get(0).getPhotoId());
         assertEquals(45555, posts.get(1).getId());
         assertEquals(2, posts.get(1).getAttachments().size());
+        assertEquals(3, ((StickerAttachment)posts.get(22).getCopyHistory().get(0).getAttachments().get(0)).getSticker().getProductId());
     }
 }

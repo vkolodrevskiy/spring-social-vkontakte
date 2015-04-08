@@ -38,7 +38,7 @@ public interface IWallOperations {
      * @param limit  the maximum number of posts to return.
      * @return list of wall posts
      */
-    List<Post> getPostsForUser(String userId, int offset, int limit);
+    List<Post> getPostsForUser(Long userId, int offset, int limit);
 
     /**
      * Retrieve wall posts for the authenticated user.
@@ -57,7 +57,7 @@ public interface IWallOperations {
      * @return existing user's wall post
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
-    Post getPost(String userId, String postId);
+    Post getPost(Long userId, String postId);
 
 
     PostStatus post(PostData postData);

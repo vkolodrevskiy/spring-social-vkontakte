@@ -1,12 +1,11 @@
 package org.springframework.social.vkontakte.api.impl;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.social.vkontakte.api.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -22,29 +21,31 @@ public class NewsFeedTemplate extends AbstractVKontakteOperations implements INe
         this.restTemplate = restTemplate;
     }
 
-    public NewsFeedResponse searchNews(String q) {
-        return searchNews(q, 0, null, null, null, null, null);
-    }
-
-    public NewsFeedResponse searchNews(String q, long count, Double latitude, Double longitude, Date startTime, Date endTime, String startFrom) {
+    public NewsFeedResponse searchNews(NewsFeedSearchRequest request) {
         requireAuthorization();
         Properties props = new Properties();
-        props.put("q", q);
-        if (count > 0) {
-            props.put("count", count);
+        props.put("q", request.q);
+        if (request.count != null && request.count > 0) {
+            props.put("count", request.count);
         }
-        if (latitude != null && longitude != null) {
-            props.put("latitude", latitude);
-            props.put("longitude", longitude);
+        if (request.latitude != null && request.longitude != null) {
+            props.put("latitude", request.latitude);
+            props.put("longitude", request.longitude);
         }
-        if (startTime != null) {
-            props.put("start_time", startTime.getTime()/1000);
+        if (request.startTime != null) {
+            props.put("start_time", request.startTime.getTime()/1000);
         }
-        if (endTime != null) {
-            props.put("end_time", endTime.getTime()/1000);
+        if (request.endTime != null) {
+            props.put("end_time", request.endTime.getTime()/1000);
         }
-        if (startFrom != null) {
-            props.put("start_from", startFrom);
+        if (request.startFrom != null) {
+            props.put("start_from", request.startFrom);
+        }
+        if (request.extended) {
+            props.put("extended", 1);
+            if (request.fields != null) {
+                props.put("fields", request.fields);
+            }
         }
         // https://vk.com/dev/newsfeed.search
         URI uri = makeOperationURL("newsfeed.search", props, ApiVersion.VERSION_5_27);
@@ -55,8 +56,14 @@ public class NewsFeedTemplate extends AbstractVKontakteOperations implements INe
         if (response.getResponse().has("next_from")) {
             nextFrom = response.getResponse().get("next_from").textValue();
         }
-        count = response.getResponse().get("count").asLong();
+        List<VKontakteProfile> profiles = null;
+        List<Group> groups = null;
+        if (request.extended) {
+            profiles = deserializeItems((ArrayNode) response.getResponse().get("profiles"), VKontakteProfile.class);
+            groups = deserializeItems((ArrayNode) response.getResponse().get("groups"), Group.class);
+        }
+        long count = response.getResponse().get("count").asLong();
         long totalCount = response.getResponse().get("total_count").asLong();
-        return new NewsFeedResponse(news, nextFrom, count, totalCount);
+        return new NewsFeedResponse(news, nextFrom, count, totalCount, groups, profiles);
     }
 }

@@ -13,17 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.vkontakte.api.impl.json;
+package org.springframework.social.vkontakte.api.attachment;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+/**
+ * Attachment associated with an external photo.
+ */
+public class StickerAttachment extends Attachment {
+    private Sticker sticker;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
-public class CityMixin extends VKResponseMixin {
-
-	@JsonProperty("id")
-	long id;
-
-	@JsonProperty("title")
-	String title;
+    public Sticker getSticker() {
+        return sticker;
+    }
 }

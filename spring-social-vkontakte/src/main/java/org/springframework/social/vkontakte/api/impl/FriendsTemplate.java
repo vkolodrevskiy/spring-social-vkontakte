@@ -38,48 +38,53 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
         this.restTemplate = restTemplate;
     }
 
-    @Override
+    public List<VKontakteProfile> get(String fields) {
+        return get(null, fields);
+    }
+
     public List<VKontakteProfile> get() {
+        return get(null, IFriendsOperations.DEFAULT_FIELDS);
+    }
+
+    public List<VKontakteProfile> get(Long userId) {
+        return get(userId, IFriendsOperations.DEFAULT_FIELDS);
+    }
+
+    public List<VKontakteProfile> get(Long userId, String fields) {
+        return get(userId, fields, -1, -1);
+    }
+
+    public List<VKontakteProfile> get(Long userId, String fields, int count, int offset) {
         requireAuthorization();
         Properties props = new Properties();
 
-        props.put("fields", "uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate,sex,screen_name");
+        if (userId != null) {
+            props.put("user_id", userId);
+        }
+        if (count != -1) {
+            props.put("count", count);
+        }
+        if (offset != -1) {
+            props.put("offset", offset);
+        }
+        props.put("fields", fields);
+        URI uri = makeOperationURL("friends.get", props, ApiVersion.VERSION_5_27);
 
-        // http://vk.com/dev/friends.get
-        URI uri = makeOperationURL("friends.get", props, ApiVersion.VERSION_3_0);
+        VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
+        checkForError(response);
 
-        VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
-        checkForError(profiles);
-
-        return profiles.getProfiles();
+        return deserializeVK50ItemsResponse(response, VKontakteProfile.class).getItems();
     }
 
-    @Override
-    public List<VKontakteProfile> get(String userId) {
-        requireAuthorization();
-        Properties props = new Properties();
-
-        props.put("uid", userId.trim());
-        props.put("fields", "uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate,sex,screen_name");
-        URI uri = makeOperationURL("friends.get", props, ApiVersion.VERSION_3_0);
-
-        VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
-        checkForError(profiles);
-
-        return profiles.getProfiles();
-    }
-
-    @Override
     public List<List<String>> getOnline(boolean onlineMobile, int count, int offset) {
         return getOnlineFriends(null, onlineMobile, count, offset);
     }
 
-    @Override
-    public List<List<String>> getOnline(String userId, boolean onlineMobile, int count, int offset) {
+    public List<List<String>> getOnline(Long userId, boolean onlineMobile, int count, int offset) {
         return getOnlineFriends(userId, onlineMobile, count, offset);
     }
 
-    private List<List<String>> getOnlineFriends(String userId, boolean onlineMobile, int count, int offset) {
+    private List<List<String>> getOnlineFriends(Long userId, boolean onlineMobile, int count, int offset) {
         requireAuthorization();
 
         Properties props = new Properties();
@@ -104,7 +109,7 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
         }
 
         // http://vk.com/dev/friends.getOnline
-        URI uri = makeOperationURL("friends.getOnline", props, ApiVersion.VERSION_5_8);
+        URI uri = makeOperationURL("friends.getOnline", props, ApiVersion.VERSION_5_27);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
 

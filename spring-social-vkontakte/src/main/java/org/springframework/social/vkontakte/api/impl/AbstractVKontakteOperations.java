@@ -92,12 +92,7 @@ class AbstractVKontakteOperations {
         Assert.isTrue(response.getResponse().isArray());
         ArrayNode items = (ArrayNode) response.getResponse();
         int count = items.get(0).asInt();
-        List<T> elements = new ArrayList<T>();
-        for (int i = 1; i < items.size(); i++) {
-            elements.add(objectMapper.convertValue(items.get(i), itemClass));
-        }
-
-        return new VKArray<T>(count, elements);
+        return new VKArray<T>(count, deserializeItems(items, itemClass));
     }
 
     /**
@@ -113,12 +108,14 @@ class AbstractVKontakteOperations {
         JsonNode itemsNode = jsonNode.get("items");
         Assert.isTrue(itemsNode.isArray());
         int count = jsonNode.get("count").asInt();
-        ArrayNode items = (ArrayNode) itemsNode;
+        return new VKArray<T>(count, deserializeItems((ArrayNode)itemsNode, itemClass));
+    }
+
+    protected <T> List<T> deserializeItems(ArrayNode items, Class<T> itemClass) {
         List<T> elements = new ArrayList<T>();
         for (int i = 0; i < items.size(); i++) {
             elements.add(objectMapper.convertValue(items.get(i), itemClass));
         }
-
-        return new VKArray<T>(count, elements);
+        return elements;
     }
 }

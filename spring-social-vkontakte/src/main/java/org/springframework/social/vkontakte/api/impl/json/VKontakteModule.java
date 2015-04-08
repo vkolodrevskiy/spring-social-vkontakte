@@ -64,11 +64,18 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(Document.class, DocumentAttachmentMixin.class);
         context.setMixInAnnotations(Note.class, NoteAttachmentMixin.class);
         context.setMixInAnnotations(Graffiti.class, GraffitiAttachmentMixin.class);
+        context.setMixInAnnotations(Sticker.class, StickerAttachmentMixin.class);
         context.setMixInAnnotations(Application.class, ApplicationAttachmentMixin.class);
         context.setMixInAnnotations(Poll.class, PollAttachmentMixin.class);
         context.setMixInAnnotations(Page.class, PageAttachmentMixin.class);
         context.setMixInAnnotations(City.class, CityMixin.class);
+        context.setMixInAnnotations(Country.class, CountryMixin.class);
+        context.setMixInAnnotations(LastSeen.class, LastSeenMixin.class);
+        context.setMixInAnnotations(Occupation.class, OccupationMixin.class);
+        context.setMixInAnnotations(Personal.class, PersonalMixin.class);
+        context.setMixInAnnotations(University.class, UniversityMixin.class);
+        context.setMixInAnnotations(School.class, SchoolMixin.class);
+        context.setMixInAnnotations(Relative.class, RelativeMixin.class);
 	    context.setMixInAnnotations(CityList.class, CityListMixin.class);
-        context.setMixInAnnotations(Audio.class, AudioMixin.class);
     }
 }

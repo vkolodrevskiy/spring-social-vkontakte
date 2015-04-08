@@ -39,25 +39,24 @@ class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperati
         this.restTemplate = restTemplate;
     }
 
-    @Override
-    public List<VKontakteProfile> getUsers(List<String> userIds) {
+    public List<VKontakteProfile> getUsers(List<Long> userIds, String fields) {
         requireAuthorization();
         Properties props = new Properties();
 
         StringBuilder uids = new StringBuilder();
         if(userIds != null) {
-            for(String uid : userIds) {
+            for(Long uid : userIds) {
                 if(uids.toString().isEmpty())
-                    uids.append(uid.trim());
-                else uids.append(",").append(uid.trim());
+                    uids.append(uid);
+                else uids.append(",").append(uid);
             }
+            props.put("user_ids", uids.toString());
         }
 
-        props.put("user_ids", userIds == null ? "" : uids.toString());
-        props.put("fields", "uid,first_name,last_name,photo,photo_medium,photo_big,contacts,bdate,sex,screen_name");
+        props.put("fields", fields != null? fields: IUsersOperations.DEFAULT_FIELDS);
 
         // see documentation under http://vk.com/dev/users.get
-        URI uri = makeOperationURL("users.get", props, ApiVersion.VERSION_3_0);
+        URI uri = makeOperationURL("users.get", props, ApiVersion.VERSION_5_27);
 
         VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
         checkForError(profiles);
@@ -65,8 +64,15 @@ class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperati
         return profiles.getProfiles();
     }
 
-    @Override
+    public List<VKontakteProfile> getUsers(List<Long> userIds) {
+        return getUsers(userIds, null);
+    }
+
     public VKontakteProfile getUser() {
         return getUsers(null).get(0);
+    }
+
+    public VKontakteProfile getUser(String fields) {
+        return getUsers(null, fields).get(0);
     }
 }

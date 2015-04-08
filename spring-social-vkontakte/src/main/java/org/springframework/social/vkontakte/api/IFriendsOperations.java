@@ -22,6 +22,7 @@ import java.util.List;
  * @author vkolodrevskiy
  */
 public interface IFriendsOperations {
+    public final static String DEFAULT_FIELDS = "first_name,last_name,photo_50,photo_100,photo_200,contacts,bdate,sex,screen_name";
     /**
      * Retrieves a list of user friends for the current authorized user.
      * @return a list of user friends profiles.
@@ -32,6 +33,16 @@ public interface IFriendsOperations {
     public List<VKontakteProfile> get();
 
     /**
+     * Retrieves a list of user friends for the current authorized user.
+     * @param fields VKontakte fields to retrieve, comma-delimited.
+     * @return a list of user friends profiles.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    public List<VKontakteProfile> get(String fields);
+
+    /**
      * Retrieves a list of user friends for specified user unique identifier.
      * @param userId user unique identifier for which to get friends.
      * @return a list of user friends profiles.
@@ -39,7 +50,31 @@ public interface IFriendsOperations {
 	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
-    public List<VKontakteProfile> get(String userId);
+    public List<VKontakteProfile> get(Long userId);
+
+    /**
+     * Retrieves a list of user friends for specified user unique identifier.
+     * @param userId user unique identifier for which to get friends.
+     * @param fields VKontakte fields to retrieve, comma-delimited.
+     * @return a list of user friends profiles.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    public List<VKontakteProfile> get(Long userId, String fields);
+
+    /**
+     * Retrieves a list of user friends for specified user unique identifier.
+     * @param userId user unique identifier for which to get friends.
+     * @param fields VKontakte fields to retrieve, comma-delimited.
+     * @param count Number(positive number) of friends to return. If you want to return all friends pass negative number.
+     * @param offset Offset(positive number) needed to return a specific subset of friends.
+     * @return a list of user friends profiles.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    public List<VKontakteProfile> get(Long userId, String fields, int count, int offset);
 
     /**
      * Retrieves a list of user friends id's that are online for the current authorized user.
@@ -68,5 +103,5 @@ public interface IFriendsOperations {
      * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
-    public List<List<String>> getOnline(String userId, boolean onlineMobile, int count, int offset);
+    public List<List<String>> getOnline(Long userId, boolean onlineMobile, int count, int offset);
 }
