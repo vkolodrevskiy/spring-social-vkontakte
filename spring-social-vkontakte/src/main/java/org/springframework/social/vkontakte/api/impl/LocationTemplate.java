@@ -44,16 +44,16 @@ public class LocationTemplate extends AbstractVKontakteOperations implements ILo
 	}
 	
 	public City getCityById(Integer id) {
-		List<City> cities = getCityById(Collections.singletonList(id));
+		List<City> cities = getCitiesById(Collections.singletonList(id));
 		return cities.size() > 0 ? cities.get(0) : null;
 	}
 
-    public List<City> getCityById(Collection<Integer> ids) {
+    public List<City> getCitiesById(Collection<Integer> ids) {
         String idsString = buildCidsAsString(ids);
         Properties props = new Properties();
 
         props.put("city_ids", idsString);
-        URI uri = makeOperationURL("database.getCityById", props, ApiVersion.VERSION_5_27);
+        URI uri = makeOperationURL("database.getCitiesById", props, ApiVersion.VERSION_5_27);
 
         CityList cityList = restTemplate.getForObject(uri, CityList.class);
         checkForError(cityList);

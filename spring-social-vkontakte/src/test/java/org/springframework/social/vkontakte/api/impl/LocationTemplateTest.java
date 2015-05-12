@@ -35,7 +35,7 @@ public class LocationTemplateTest extends AbstractVKontakteApiTest {
 
     @Test
     public void getCity() {
-        mockServer.expect(requestTo("https://api.vk.com/method/database.getCityById?access_token=ACCESS_TOKEN&v=5.27&city_ids=1"))
+        mockServer.expect(requestTo("https://api.vk.com/method/database.getCitiesById?access_token=ACCESS_TOKEN&v=5.27&city_ids=1"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("location-post-response-5_27"), APPLICATION_JSON));
         City city = vkontakte.locationOperations().getCityById(1);
@@ -44,7 +44,7 @@ public class LocationTemplateTest extends AbstractVKontakteApiTest {
 
     @Test(expected = VKontakteErrorException.class)
     public void getCity_expiredToken() {
-	mockServer.expect(requestTo("https://api.vk.com/method/database.getCityById?access_token=ACCESS_TOKEN&v=5.27&city_ids=54"))
+	mockServer.expect(requestTo("https://api.vk.com/method/database.getCitiesById?access_token=ACCESS_TOKEN&v=5.27&city_ids=54"))
 		.andExpect(method(GET))
 		.andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
 
