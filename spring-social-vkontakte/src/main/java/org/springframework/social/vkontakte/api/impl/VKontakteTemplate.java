@@ -15,6 +15,7 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -87,6 +88,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
 
                 objectMapper = new ObjectMapper();
                 objectMapper.registerModule(new VKontakteModule());
+                objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT, true);
                 jsonConverter.setObjectMapper(objectMapper);
             }
         }

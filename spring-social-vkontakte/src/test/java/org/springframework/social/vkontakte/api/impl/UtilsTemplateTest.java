@@ -42,4 +42,13 @@ public class UtilsTemplateTest extends AbstractVKontakteApiTest {
         assertEquals("user", vkObject.getType());
         assertEquals(1, vkObject.getId());
     }
+
+    @Test
+    public void resolveScreenNameEmpty() {
+        mockServer.expect(requestTo("https://api.vk.com/method/utils.resolveScreenName?access_token=&v=5.27&screen_name=durov"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("utils-resolve-screen-name-empty-5.27"), APPLICATION_JSON));
+        VKObject vkObject = vkontakte.utilsOperations().resolveScreenName("durov");
+        assertEquals(null, vkObject);
+    }
 }
