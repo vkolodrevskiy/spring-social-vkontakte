@@ -118,4 +118,9 @@ class AbstractVKontakteOperations {
         }
         return elements;
     }
+
+    protected <T> T deserializeVK50Item( VKGenericResponse response, Class<T> itemClass) {
+        checkForError(response);
+        return objectMapper.convertValue(response.getResponse(), itemClass);
+    }
 }

@@ -91,7 +91,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
     }
 
     private void assertProfiles(List<VKontakteProfile> profiles) {
-        assertEquals(3, profiles.size());
+        assertEquals(4, profiles.size());
 
         assertEquals(1, profiles.get(0).getId());
         assertEquals("Павел", profiles.get(0).getFirstName());
@@ -114,5 +114,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
         assertEquals("M", profiles.get(2).getGender());
         assertEquals(216966, profiles.get(2).getRelationPartner().getId());
         assertEquals("sibling", profiles.get(2).getRelatives().get(0).getType());
+
+        assertEquals("banned", profiles.get(3).getDeactivated());
     }
 }

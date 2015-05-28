@@ -16,9 +16,7 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.junit.Test;
-import org.springframework.social.vkontakte.api.VKontakteErrorException;
-
-import org.springframework.social.vkontakte.api.City;
+import org.springframework.social.vkontakte.api.VKObject;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.http.HttpMethod.GET;
@@ -28,26 +26,26 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
- * {@link LocationTemplate} test.
- * @author badbob
+ * {@link UtilsTemplate} test.
+ * @author dIsoVi
  */
-public class LocationTemplateTest extends AbstractVKontakteApiTest {
-
+public class UtilsTemplateTest extends AbstractVKontakteApiTest {
     @Test
-    public void getCity() {
-        mockServer.expect(requestTo("https://api.vk.com/method/database.getCitiesById?access_token=ACCESS_TOKEN&v=5.27&city_ids=1"))
+    public void resolveScreenName() {
+        mockServer.expect(requestTo("https://api.vk.com/method/utils.resolveScreenName?access_token=&v=5.27&screen_name=durov"))
                 .andExpect(method(GET))
-                .andRespond(withSuccess(jsonResource("location-post-response-5_27"), APPLICATION_JSON));
-        City city = vkontakte.locationOperations().getCityById(1);
-        assertEquals("Москва", city.getTitle());
+                .andRespond(withSuccess(jsonResource("utils-resolve-screen-name-5.27"), APPLICATION_JSON));
+        VKObject vkObject = vkontakte.utilsOperations().resolveScreenName("durov");
+        assertEquals("user", vkObject.getType());
+        assertEquals(1, vkObject.getId());
     }
 
-    @Test(expected = VKontakteErrorException.class)
-    public void getCity_expiredToken() {
-	mockServer.expect(requestTo("https://api.vk.com/method/database.getCitiesById?access_token=ACCESS_TOKEN&v=5.27&city_ids=54"))
-		.andExpect(method(GET))
-		.andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
-
-	vkontakte.locationOperations().getCityById(54);
+    @Test
+    public void resolveScreenNameEmpty() {
+        mockServer.expect(requestTo("https://api.vk.com/method/utils.resolveScreenName?access_token=&v=5.27&screen_name=durov"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("utils-resolve-screen-name-empty-5.27"), APPLICATION_JSON));
+        VKObject vkObject = vkontakte.utilsOperations().resolveScreenName("durov");
+        assertEquals(null, vkObject);
     }
 }

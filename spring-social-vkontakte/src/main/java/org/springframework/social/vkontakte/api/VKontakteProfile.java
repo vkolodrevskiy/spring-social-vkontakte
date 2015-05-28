@@ -28,6 +28,7 @@ public class VKontakteProfile {
     private long id;
     private String firstName;
     private String lastName;
+    private String deactivated;
     private String gender; // maybe use name 'sex' as in vk API?
     private String maidenName;
     private String domain;
@@ -82,6 +83,14 @@ public class VKontakteProfile {
     private List<School> schools;
     private List<Relative> relatives;
     private VKontakteProfile relationPartner;
+
+    public String getDeactivated() {
+        return deactivated;
+    }
+
+    public void setDeactivated(String deactivated) {
+        this.deactivated = deactivated;
+    }
 
     public VKontakteProfile getRelationPartner() {
         return relationPartner;
