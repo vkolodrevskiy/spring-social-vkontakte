@@ -16,21 +16,18 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.junit.Test;
-import org.springframework.social.vkontakte.api.City;
 import org.springframework.social.vkontakte.api.VKObject;
-import org.springframework.social.vkontakte.api.VKontakteErrorException;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
- * {@link LocationTemplate} test.
- * @author badbob
+ * {@link UtilsTemplate} test.
+ * @author dIsoVi
  */
 public class UtilsTemplateTest extends AbstractVKontakteApiTest {
     @Test
