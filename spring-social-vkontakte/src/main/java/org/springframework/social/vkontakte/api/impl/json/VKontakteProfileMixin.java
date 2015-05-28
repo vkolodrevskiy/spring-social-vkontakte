@@ -41,6 +41,8 @@ class VKontakteProfileMixin {
     private String firstName;
     @JsonProperty("last_name")
     private String lastName;
+    @JsonProperty("deactivated")
+    private String deactivated;
     @JsonProperty("sex")
     @JsonDeserialize(using = VKGenderDeserializer.class)
     private String gender; // maybe use name 'sex' as in vk API?
