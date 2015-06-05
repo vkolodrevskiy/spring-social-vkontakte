@@ -153,6 +153,8 @@ class VKontakteProfileMixin {
     private List<Relative> relatives;
     @JsonProperty("relation_partner")
     private VKontakteProfile relationPartner;
+    @JsonProperty("last_seen")
+    private LastSeen lastSeen;
 
     static class VKGenderDeserializer extends JsonDeserializer<String> {
         @Override
