@@ -1,0 +1,26 @@
+{
+  "response":[
+    {"id":1,
+      "name":"ВКонтакте API",
+      "screen_name":"apiclub",
+      "is_closed":0,
+      "type":"group",
+      "is_admin":0,
+      "is_member":0,
+      "photo_50":"http:\/\/cs400.vk.me\/g00001\/e_5ba03323.jpg",
+      "photo_100":"http:\/\/cs400.vk.me\/g00001\/d_7bfe2183.jpg",
+      "photo_200":"http:\/\/cs400.vk.me\/g00001\/d_7bfe2183.jpg"
+    },
+    {"id":55293029,
+      "name":"moment of",
+      "screen_name":"mntof",
+      "is_closed":0,
+      "type":"page",
+      "is_admin":0,
+      "is_member":0,
+      "photo_50":"http:\/\/cs408416.vk.me\/v408416748\/1f31\/fW4R7EvjAZQ.jpg",
+      "photo_100":"http:\/\/cs408416.vk.me\/v408416748\/1f30\/6Veq-Ox0S0o.jpg",
+      "photo_200":"http:\/\/cs408416.vk.me\/v408416748\/1f2f\/MEHB-wWZUd4.jpg"
+    }
+  ]
+}
