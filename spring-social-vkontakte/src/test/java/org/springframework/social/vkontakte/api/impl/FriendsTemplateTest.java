@@ -19,6 +19,7 @@ import org.junit.Test;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
+import org.springframework.social.vkontakte.api.impl.json.VKArray;
 
 import java.text.ParseException;
 import java.util.List;
@@ -41,7 +42,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-of-friends-5_27"), APPLICATION_JSON));
 
-		List<VKontakteProfile> friends = vkontakte.friendsOperations().get();
+		VKArray<VKontakteProfile> friends = vkontakte.friendsOperations().get();
         assertFriends(friends);
 	}
 
@@ -49,8 +50,11 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
     public void getFriendsWithoutFields() throws Exception {
         mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27"))
                 .andExpect(method(GET))
-                .andRespond(withSuccess(jsonResource("friends-get-without-fields"), APPLICATION_JSON));
-        List<VKontakteProfile> friends = vkontakte.friendsOperations().get("");
+                .andRespond(withSuccess(jsonResource("friends-get-without-fields-5_35"), APPLICATION_JSON));
+        VKArray<VKontakteProfile> friends = vkontakte.friendsOperations().get("");
+        assertEquals(184760, friends.getItems().get(0).getId());
+        assertEquals(3, friends.getItems().size());
+        assertEquals(718, friends.getCount());
     }
 
     @Test(expected = MissingAuthorizationException.class)
@@ -64,7 +68,7 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-of-friends-5_27"), APPLICATION_JSON));
 
-		List<VKontakteProfile> friends = vkontakte.friendsOperations().get(1L);
+		VKArray<VKontakteProfile> friends = vkontakte.friendsOperations().get(1L);
         assertFriends(friends);
     }
 
@@ -140,7 +144,9 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
         vkontakte.friendsOperations().getOnline(123L, true, 5, 6);
     }
 
-    private void assertFriends(List<VKontakteProfile> profiles) throws ParseException {
+    private void assertFriends(VKArray<VKontakteProfile> profilesArray) throws ParseException {
+        List<VKontakteProfile> profiles = profilesArray.getItems();
+        assertEquals(705, profilesArray.getCount());
         assertEquals(5, profiles.size());
         assertEquals(15439101, profiles.get(0).getId());
     }

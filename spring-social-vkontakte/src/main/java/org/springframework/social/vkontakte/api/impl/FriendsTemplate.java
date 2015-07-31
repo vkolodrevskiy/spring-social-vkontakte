@@ -18,6 +18,7 @@ package org.springframework.social.vkontakte.api.impl;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.social.vkontakte.api.*;
+import org.springframework.social.vkontakte.api.impl.json.VKArray;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
@@ -39,23 +40,23 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
         this.restTemplate = restTemplate;
     }
 
-    public List<VKontakteProfile> get(String fields) {
+    public VKArray<VKontakteProfile> get(String fields) {
         return get(null, fields);
     }
 
-    public List<VKontakteProfile> get() {
+    public VKArray<VKontakteProfile> get() {
         return get(null, IFriendsOperations.DEFAULT_FIELDS);
     }
 
-    public List<VKontakteProfile> get(Long userId) {
+    public VKArray<VKontakteProfile> get(Long userId) {
         return get(userId, IFriendsOperations.DEFAULT_FIELDS);
     }
 
-    public List<VKontakteProfile> get(Long userId, String fields) {
+    public VKArray<VKontakteProfile> get(Long userId, String fields) {
         return get(userId, fields, -1, -1);
     }
 
-    public List<VKontakteProfile> get(Long userId, String fields, int count, int offset) {
+    public VKArray<VKontakteProfile> get(Long userId, String fields, int count, int offset) {
         requireAuthorization();
         Properties props = new Properties();
 
@@ -76,7 +77,7 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
 
-        return deserializeVK50ItemsResponse(response, VKontakteProfile.class).getItems();
+        return deserializeVK50ItemsResponse(response, VKontakteProfile.class);
     }
 
     public List<List<String>> getOnline(boolean onlineMobile, int count, int offset) {
