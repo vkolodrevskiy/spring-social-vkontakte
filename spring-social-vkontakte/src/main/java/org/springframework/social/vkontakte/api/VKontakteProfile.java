@@ -23,6 +23,12 @@ import java.util.List;
  * @author vkolodrevskiy
  */
 public class VKontakteProfile {
+    public VKontakteProfile(long id) {
+        this.id = id;
+    }
+
+    public VKontakteProfile() {
+    }
 
     private final static String PROFILE_URL_EXTESTION = "http://vk.com/";
     private long id;

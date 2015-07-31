@@ -45,7 +45,15 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
         assertFriends(friends);
 	}
 
-	@Test(expected = MissingAuthorizationException.class)
+    @Test
+    public void getFriendsWithoutFields() throws Exception {
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("friends-get-without-fields"), APPLICATION_JSON));
+        List<VKontakteProfile> friends = vkontakte.friendsOperations().get("");
+    }
+
+    @Test(expected = MissingAuthorizationException.class)
 	public void get_currentUser_unauthorized() {
 		unauthorizedVKontakte.friendsOperations().get();
 	}

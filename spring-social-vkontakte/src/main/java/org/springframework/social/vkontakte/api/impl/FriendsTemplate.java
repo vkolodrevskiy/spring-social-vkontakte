@@ -18,6 +18,7 @@ package org.springframework.social.vkontakte.api.impl;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.social.vkontakte.api.*;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -67,7 +68,9 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
         if (offset != -1) {
             props.put("offset", offset);
         }
-        props.put("fields", fields);
+        if (!StringUtils.isEmpty(fields)) {
+            props.put("fields", fields);
+        }
         URI uri = makeOperationURL("friends.get", props, ApiVersion.VERSION_5_27);
 
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
