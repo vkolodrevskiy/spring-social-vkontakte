@@ -84,6 +84,15 @@ public class VKontakteProfile {
     private List<Relative> relatives;
     private VKontakteProfile relationPartner;
     private LastSeen lastSeen;
+    private Counters counters;
+
+    public Counters getCounters() {
+        return counters;
+    }
+
+    public void setCounters(Counters counters) {
+        this.counters = counters;
+    }
 
     public String getDeactivated() {
         return deactivated;

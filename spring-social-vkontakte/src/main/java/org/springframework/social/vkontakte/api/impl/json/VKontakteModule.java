@@ -20,6 +20,7 @@ import org.springframework.social.vkontakte.api.*;
 import org.springframework.social.vkontakte.api.attachment.*;
 import org.springframework.social.vkontakte.api.attachment.Audio;
 import org.springframework.social.vkontakte.api.impl.json.attachment.*;
+import org.w3c.dom.css.Counter;
 
 /**
  * Jackson module for setting up mixin annotations on VKontakte model types.
@@ -71,6 +72,7 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(City.class, CityMixin.class);
         context.setMixInAnnotations(Country.class, CountryMixin.class);
         context.setMixInAnnotations(LastSeen.class, LastSeenMixin.class);
+        context.setMixInAnnotations(Counters.class, CountersMixin.class);
         context.setMixInAnnotations(Occupation.class, OccupationMixin.class);
         context.setMixInAnnotations(Personal.class, PersonalMixin.class);
         context.setMixInAnnotations(University.class, UniversityMixin.class);

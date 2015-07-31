@@ -48,6 +48,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
         assertEquals(1, profile.getId());
         assertEquals("Павел", profile.getFirstName());
         assertEquals("Дуров", profile.getLastName());
+        assertEquals(705, profile.getCounters().getFriends());
     }
 
     @Test
