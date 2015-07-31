@@ -26,6 +26,7 @@ import org.springframework.social.vkontakte.api.VKResponse;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
 import org.springframework.social.vkontakte.api.impl.json.VKArray;
 import org.springframework.util.Assert;
+import org.springframework.util.MultiValueMap;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -71,6 +72,13 @@ class AbstractVKontakteOperations {
         for (Map.Entry<Object, Object> objectObjectEntry : params.entrySet()) {
             uri.queryParam(objectObjectEntry.getKey().toString(), objectObjectEntry.getValue().toString());
         }
+        return uri.build();
+    }
+
+    protected URI makeOperationPOST(String method, MultiValueMap<String, Object> data, ApiVersion apiVersion) {
+        URIBuilder uri = URIBuilder.fromUri(VK_REST_URL + method);
+        data.set("access_token", accessToken);
+        data.set("v", apiVersion.toString());
         return uri.build();
     }
 
