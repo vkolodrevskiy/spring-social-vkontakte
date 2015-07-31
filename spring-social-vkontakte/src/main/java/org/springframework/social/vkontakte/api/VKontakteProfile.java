@@ -83,6 +83,7 @@ public class VKontakteProfile {
     private List<School> schools;
     private List<Relative> relatives;
     private VKontakteProfile relationPartner;
+    private LastSeen lastSeen;
 
     public String getDeactivated() {
         return deactivated;
@@ -553,5 +554,11 @@ public class VKontakteProfile {
         return PROFILE_URL_EXTESTION + screenName;
     }
 
+    public LastSeen getLastSeen() {
+        return lastSeen;
+    }
 
+    public void setLastSeen(LastSeen lastSeen) {
+        this.lastSeen = lastSeen;
+    }
 }

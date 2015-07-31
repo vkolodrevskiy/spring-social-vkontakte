@@ -50,6 +50,9 @@ class AbstractVKontakteOperations {
         this.objectMapper = objectMapper;
     }
 
+    /**
+     * throws {@link MissingAuthorizationException} if not authorized.
+     */
     protected void requireAuthorization() {
         if (!isAuthorized) {
             throw new MissingAuthorizationException("vkontakte");
