@@ -54,9 +54,9 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void getUsers_currentUser() {
         mockServer
-                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids=1%2C2183%2C77478"))
+                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids=durov%2C2183%2C77478"))
                 .andExpect(method(GET)).andRespond(withSuccess(jsonResource("list-of-profiles-5_27"), APPLICATION_JSON));
-        Long[] userIds = {1L, 2183L, 77478L};
+        String[] userIds = {"durov", "2183", "77478"};
         List<VKontakteProfile> profiles = vkontakte.usersOperations().getUsers(Arrays.asList(userIds));
 
         assertProfiles(profiles);
@@ -69,7 +69,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
 
     @Test(expected = MissingAuthorizationException.class)
     public void getUsers_unauthorized() {
-        Long[] userIds = {1L, 2L};
+        String[] userIds = {"1", "2"};
         unauthorizedVKontakte.usersOperations().getUsers(Arrays.asList(userIds));
     }
 
@@ -87,7 +87,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
         mockServer
                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids=1%2C2"))
                 .andExpect(method(GET)).andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
-        Long[] userIds = {1L, 2L};
+        String[] userIds = {"1", "2"};
         vkontakte.usersOperations().getUsers(Arrays.asList(userIds));
     }
 

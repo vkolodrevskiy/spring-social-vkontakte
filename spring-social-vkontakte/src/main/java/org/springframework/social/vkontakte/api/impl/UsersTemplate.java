@@ -39,13 +39,13 @@ class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperati
         this.restTemplate = restTemplate;
     }
 
-    public List<VKontakteProfile> getUsers(List<Long> userIds, String fields) {
+    public List<VKontakteProfile> getUsers(List<String> userIds, String fields) {
         requireAuthorization();
         Properties props = new Properties();
 
         StringBuilder uids = new StringBuilder();
         if(userIds != null) {
-            for(Long uid : userIds) {
+            for(String uid : userIds) {
                 if(uids.toString().isEmpty())
                     uids.append(uid);
                 else uids.append(",").append(uid);
@@ -64,7 +64,7 @@ class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperati
         return profiles.getProfiles();
     }
 
-    public List<VKontakteProfile> getUsers(List<Long> userIds) {
+    public List<VKontakteProfile> getUsers(List<String> userIds) {
         return getUsers(userIds, null);
     }
 
