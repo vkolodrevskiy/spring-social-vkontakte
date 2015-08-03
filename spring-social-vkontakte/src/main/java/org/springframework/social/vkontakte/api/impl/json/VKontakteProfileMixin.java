@@ -155,6 +155,9 @@ class VKontakteProfileMixin {
     private VKontakteProfile relationPartner;
     @JsonProperty("last_seen")
     private LastSeen lastSeen;
+    @JsonProperty("counters")
+    private Counters counters;
+
 
     static class VKGenderDeserializer extends JsonDeserializer<String> {
         @Override

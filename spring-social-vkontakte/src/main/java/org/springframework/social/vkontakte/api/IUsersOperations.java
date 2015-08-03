@@ -22,7 +22,7 @@ import java.util.List;
  * @author vkolodrevskiy
  */
 public interface IUsersOperations {
-    public final static String DEFAULT_FIELDS = "first_name,last_name,photo_50,photo_100,photo_200,contacts,bdate,sex,screen_name";
+    String DEFAULT_FIELDS = "first_name,last_name,photo_50,photo_100,photo_200,contacts,bdate,sex,screen_name";
     /**
 	 * Retrieves the profile for the authenticated user.
 	 * @return the user's profile information.
@@ -51,7 +51,7 @@ public interface IUsersOperations {
 	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
 	 */
-	List<VKontakteProfile> getUsers(List<Long> userIds);
+	List<VKontakteProfile> getUsers(List<String> userIds);
 
     /**
      * Retrieves profiles for specified user unique identifiers.
@@ -63,5 +63,5 @@ public interface IUsersOperations {
      * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
-    List<VKontakteProfile> getUsers(List<Long> userIds, String fields);
+    List<VKontakteProfile> getUsers(List<String> userIds, String fields);
 }
