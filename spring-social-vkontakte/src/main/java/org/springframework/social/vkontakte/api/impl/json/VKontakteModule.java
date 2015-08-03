@@ -20,7 +20,6 @@ import org.springframework.social.vkontakte.api.*;
 import org.springframework.social.vkontakte.api.attachment.*;
 import org.springframework.social.vkontakte.api.attachment.Audio;
 import org.springframework.social.vkontakte.api.impl.json.attachment.*;
-import org.w3c.dom.css.Counter;
 
 /**
  * Jackson module for setting up mixin annotations on VKontakte model types.

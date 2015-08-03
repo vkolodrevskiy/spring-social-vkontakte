@@ -15,10 +15,8 @@
  */
 package org.springframework.social.vkontakte.api.impl.json;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties
 public class CountersMixin {
     private int albums;
     private int videos;
