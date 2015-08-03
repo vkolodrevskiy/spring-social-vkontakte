@@ -566,6 +566,9 @@ public class VKontakteProfile {
     }
 
     public String getProfileURL() {
+        if (screenName == null) {
+            return PROFILE_URL_EXTESTION + "id" + id;
+        }
         return PROFILE_URL_EXTESTION + screenName;
     }
 
