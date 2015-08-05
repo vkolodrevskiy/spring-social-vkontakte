@@ -20,5 +20,18 @@ package org.springframework.social.vkontakte.api;
  * @author dIsoVi
  */
 public interface IUtilsOperations {
-    public VKObject resolveScreenName(String screenName);
+    /**
+     * utils.resolveScreenName
+     * Detects a type of object (e.g., user, community, application) and its ID by screen name.
+     * @param screenName Screen name of the user, community (e.g., apiclub, andrew, or rules_of_war), or application.
+     * @return an object with type and id
+     */
+    VKObject resolveScreenName(String screenName);
+
+    /**
+     * A universal method for calling a sequence of other methods while saving and filtering interim results.
+     * @param code - Algorithm code in VKScript (https://vk.com/dev/execute)
+     * @return data requested by the algorithm
+     */
+    VKGenericResponse execute(String code);
 }
