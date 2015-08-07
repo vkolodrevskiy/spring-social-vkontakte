@@ -97,6 +97,7 @@ class VKontakteProfileMixin {
     private String facebookName;
     @JsonProperty("twitter")
     private String twitter;
+    private String instagram;
     @JsonProperty("site")
     private String site;
     @JsonProperty("status")

@@ -61,6 +61,7 @@ public class VKontakteProfile {
     private String facebook;
     private String facebookName;
     private String twitter;
+    private String instagram;
     private String site;
     private String status;
     private int commonCount;
