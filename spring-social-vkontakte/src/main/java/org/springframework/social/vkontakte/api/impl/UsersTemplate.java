@@ -27,7 +27,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * User operations.
@@ -63,7 +62,7 @@ class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperati
             data.set("user_ids", sb.toString());
         }
         if (nameCase != NameCase.nom) {
-            data.set("name_case", nameCase);
+            data.set("name_case", nameCase.toString());
         }
 
         data.set("fields", fields != null? fields: IUsersOperations.DEFAULT_FIELDS);
