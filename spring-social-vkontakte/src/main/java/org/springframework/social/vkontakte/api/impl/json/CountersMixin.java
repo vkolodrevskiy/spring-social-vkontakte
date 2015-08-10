@@ -15,8 +15,10 @@
  */
 package org.springframework.social.vkontakte.api.impl.json;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CountersMixin {
     private int albums;
     private int videos;
@@ -30,6 +32,10 @@ public class CountersMixin {
     private int onlineFriends;
     @JsonProperty("mutual_friends")
     private int mutualFriends;
+    @JsonProperty("user_photos")
+    private int userPhotos;
+    @JsonProperty("user_videos")
+    private int userVideos;
     private int followers;
     private int subscriptions;
     private int pages;

@@ -15,6 +15,8 @@
  */
 package org.springframework.social.vkontakte.api;
 
+import org.springframework.social.vkontakte.api.vkenums.NameCase;
+
 import java.util.List;
 
 /**
@@ -64,4 +66,17 @@ public interface IUsersOperations {
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     List<VKontakteProfile> getUsers(List<String> userIds, String fields);
+
+    /**
+     * Retrieves profiles for specified user unique identifiers.
+     * @param userIds VKontakte user profile unique identifiers, for which to gt data.
+     * @param fields VKontakte fields to retrieve, comma-delimited.
+     * If <code>null<code/> is passed user profile or the current user will be returned.
+     * @param nameCase case for declension of user name and surname.
+     * @return the user's profile information.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    List<VKontakteProfile> getUsers(List<String> userIds, String fields, NameCase nameCase);
 }

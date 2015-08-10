@@ -16,6 +16,8 @@
 package org.springframework.social.vkontakte.api;
 
 import org.springframework.social.vkontakte.api.impl.json.VKArray;
+import org.springframework.social.vkontakte.api.vkenums.FriendsOrder;
+import org.springframework.social.vkontakte.api.vkenums.NameCase;
 
 import java.util.List;
 
@@ -77,6 +79,21 @@ public interface IFriendsOperations {
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     VKArray<VKontakteProfile> get(Long userId, String fields, int count, int offset);
+
+    /**
+     * Retrieves a list of user friends for specified user unique identifier.
+     * @param userId user unique identifier for which to get friends.
+     * @param fields VKontakte fields to retrieve, comma-delimited.
+     * @param order sort order.
+     * @param nameCase case for declension of user name and surname.
+     * @param count Number(positive number) of friends to return. If you want to return all friends pass negative number.
+     * @param offset Offset(positive number) needed to return a specific subset of friends.
+     * @return a list of user friends profiles.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    VKArray<VKontakteProfile> get(Long userId, String fields, FriendsOrder order, NameCase nameCase, int count, int offset);
 
     /**
      * Retrieves a list of user friends id's that are online for the current authorized user.

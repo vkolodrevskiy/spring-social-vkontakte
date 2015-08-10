@@ -17,8 +17,13 @@ package org.springframework.social.vkontakte.api.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.social.vkontakte.api.*;
+import org.springframework.social.vkontakte.api.ApiVersion;
+import org.springframework.social.vkontakte.api.IFriendsOperations;
+import org.springframework.social.vkontakte.api.VKGenericResponse;
+import org.springframework.social.vkontakte.api.VKontakteProfile;
 import org.springframework.social.vkontakte.api.impl.json.VKArray;
+import org.springframework.social.vkontakte.api.vkenums.FriendsOrder;
+import org.springframework.social.vkontakte.api.vkenums.NameCase;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
@@ -57,6 +62,10 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
     }
 
     public VKArray<VKontakteProfile> get(Long userId, String fields, int count, int offset) {
+        return get(userId, fields, FriendsOrder.NONE, NameCase.nom, count, offset);
+    }
+
+    public VKArray<VKontakteProfile> get(Long userId, String fields, FriendsOrder order, NameCase nameCase, int count, int offset) {
         requireAuthorization();
         Properties props = new Properties();
 
@@ -72,6 +81,13 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
         if (!StringUtils.isEmpty(fields)) {
             props.put("fields", fields);
         }
+        if (order != FriendsOrder.NONE) {
+            props.put("order", order.toString());
+        }
+        if (nameCase != NameCase.nom) {
+            props.put("name_case", nameCase.toString());
+        }
+
         URI uri = makeOperationURL("friends.get", props, ApiVersion.VERSION_5_27);
 
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);

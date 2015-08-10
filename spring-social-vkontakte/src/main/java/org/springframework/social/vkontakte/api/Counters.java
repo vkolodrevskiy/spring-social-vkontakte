@@ -32,9 +32,19 @@ public class Counters {
     private int friends;
     private int onlineFriends;
     private int mutualFriends;
+    private int userPhotos;
+    private int userVideos;
     private int followers;
     private int subscriptions;
     private int pages;
+
+    public int getUserVideos() {
+        return userVideos;
+    }
+
+    public int getUserPhotos() {
+        return userPhotos;
+    }
 
     public int getAlbums() {
         return albums;

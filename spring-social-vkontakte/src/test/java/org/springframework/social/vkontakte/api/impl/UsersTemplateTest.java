@@ -19,13 +19,12 @@ import org.junit.Test;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
+import org.springframework.social.vkontakte.api.vkenums.NameCase;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -50,6 +49,8 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
         assertEquals("Павел", profile.getFirstName());
         assertEquals("Дуров", profile.getLastName());
         assertEquals(705, profile.getCounters().getFriends());
+        assertEquals(12, profile.getCounters().getUserPhotos());
+        assertEquals("durov", profile.getInstagram());
     }
 
     @Test
@@ -58,7 +59,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
                 .expect(requestTo("https://api.vk.com/method/users.get"))
                 .andExpect(method(POST)).andRespond(withSuccess(jsonResource("list-of-profiles-5_27"), APPLICATION_JSON));
         String[] userIds = {"durov", "2183", "77478"};
-        List<VKontakteProfile> profiles = vkontakte.usersOperations().getUsers(Arrays.asList(userIds));
+        List<VKontakteProfile> profiles = vkontakte.usersOperations().getUsers(Arrays.asList(userIds), null, NameCase.abl);
 
         assertProfiles(profiles);
     }

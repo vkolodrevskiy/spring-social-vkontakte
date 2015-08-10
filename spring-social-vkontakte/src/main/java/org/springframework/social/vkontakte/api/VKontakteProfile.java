@@ -61,6 +61,7 @@ public class VKontakteProfile {
     private String facebook;
     private String facebookName;
     private String twitter;
+    private String instagram;
     private String site;
     private String status;
     private int commonCount;
@@ -91,6 +92,14 @@ public class VKontakteProfile {
     private VKontakteProfile relationPartner;
     private LastSeen lastSeen;
     private Counters counters;
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
 
     public Counters getCounters() {
         return counters;
@@ -566,6 +575,9 @@ public class VKontakteProfile {
     }
 
     public String getProfileURL() {
+        if (screenName == null) {
+            return PROFILE_URL_EXTESTION + "id" + id;
+        }
         return PROFILE_URL_EXTESTION + screenName;
     }
 
