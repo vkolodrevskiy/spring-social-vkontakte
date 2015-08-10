@@ -20,12 +20,10 @@ import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -51,6 +49,7 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
         assertEquals("Дуров", profile.getLastName());
         assertEquals(705, profile.getCounters().getFriends());
         assertEquals(12, profile.getCounters().getUserPhotos());
+        assertEquals("durov", profile.getInstagram());
     }
 
     @Test

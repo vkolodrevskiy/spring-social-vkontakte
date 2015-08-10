@@ -93,6 +93,14 @@ public class VKontakteProfile {
     private LastSeen lastSeen;
     private Counters counters;
 
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
+
     public Counters getCounters() {
         return counters;
     }

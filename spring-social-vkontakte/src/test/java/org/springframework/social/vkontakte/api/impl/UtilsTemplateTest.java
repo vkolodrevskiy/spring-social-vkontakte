@@ -15,8 +15,6 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.junit.Test;
 import org.springframework.social.vkontakte.api.VKGenericResponse;
 import org.springframework.social.vkontakte.api.VKObject;
