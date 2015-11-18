@@ -16,8 +16,11 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.vkontakte.api.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -89,5 +92,55 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
         checkForError(response);
 
         return response.getStatus();
+    }
+
+    @Override
+    public CommentsResponse getComments(CommentsRequest request) {
+        MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
+
+        data.set("owner_id", request.ownerId);
+        data.set("post_id", request.postId.toString());
+        if (request.needLikes) {
+            data.set("need_likes", "1");
+        }
+        if (request.startCommentId != null && request.startCommentId > 0) {
+            data.set("start_comment_id", request.startCommentId.toString());
+        }
+        if (request.offset != null && request.offset > 0) {
+            data.set("offset", request.offset.toString());
+        }
+        if (request.count != null && request.count > 0) {
+            data.set("count", request.count.toString());
+        }
+        if (request.sort != null) {
+            data.set("sort", request.sort.toString());
+        }
+        if (request.previewLength != null && request.previewLength > 0) {
+            data.set("preview_length", request.previewLength.toString());
+        } else {
+            //Specify 0 as it does not want to truncate comments.
+            data.set("preview_length", "0");
+        }
+        if (request.extended) {
+            data.set("extended", "1");
+        }
+
+        URI uri = makeOperationPOST("wall.getComments", data, ApiVersion.VERSION_5_33);
+        VKGenericResponse response = restTemplate.postForObject(uri, data, VKGenericResponse.class);
+        checkForError(response);
+
+        List<Comment> comments = deserializeVK50ItemsResponse(response, Comment.class).getItems();
+        List<VKontakteProfile> profiles = null;
+        List<Group> groups = null;
+        if (request.extended) {
+            profiles = deserializeItems((ArrayNode) response.getResponse().get("profiles"), VKontakteProfile.class);
+            groups = deserializeItems((ArrayNode) response.getResponse().get("groups"), Group.class);
+        }
+        long count = response.getResponse().get("count").asLong();
+        Long realOffset = null;
+        if (request.startCommentId != null) {
+            realOffset = response.getResponse().get("real_offset").asLong();
+        }
+        return new CommentsResponse(comments, count, realOffset, profiles, groups);
     }
 }

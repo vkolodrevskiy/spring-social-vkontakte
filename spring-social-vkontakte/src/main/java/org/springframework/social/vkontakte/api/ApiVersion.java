@@ -10,7 +10,8 @@ public enum ApiVersion {
     VERSION_5_7("5.7"),
     VERSION_5_8("5.8"),
     VERSION_5_21("5.21"),
-    VERSION_5_27("5.27");
+    VERSION_5_27("5.27"),
+    VERSION_5_33("5.33");
 
     private String version;
 

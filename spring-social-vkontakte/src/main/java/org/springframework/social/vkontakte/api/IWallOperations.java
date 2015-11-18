@@ -15,6 +15,8 @@
  */
 package org.springframework.social.vkontakte.api;
 
+import org.springframework.social.vkontakte.api.impl.CommentsRequest;
+
 import java.util.List;
 
 /**
@@ -62,4 +64,12 @@ public interface IWallOperations {
 
     PostStatus post(PostData postData);
 
+    /**
+     * Returns a response that contains a list of comments on a post on a user wall or community wall.
+     *
+     * @param request {@link CommentsRequest}
+     * @return a {@link CommentsResponse}, object representing the response on request of comments on a post on a user's or community's wall
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    CommentsResponse getComments(CommentsRequest request);
 }
