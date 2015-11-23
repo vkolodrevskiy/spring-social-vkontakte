@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * Model class representing a comment on a post on a user wall or community wall.
  *
- * @author wiikviz
  * @see <a href="https://vk.com/dev/comment_object">Comment object | Developers | VK</a>
  */
 public class Comment {

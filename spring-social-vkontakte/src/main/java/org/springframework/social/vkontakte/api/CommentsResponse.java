@@ -7,7 +7,6 @@ import java.util.List;
 /**
  * Model class representing a response that contains a list of comments on a post on a user wall or community wall.
  *
- * @author wiikviz
  * @see IWallOperations#getComments(CommentsQuery)
  */
 public class CommentsResponse {

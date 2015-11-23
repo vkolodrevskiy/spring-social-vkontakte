@@ -3,7 +3,6 @@ package org.springframework.social.vkontakte.api.impl.wall;
 /**
  * Model class representing an abstract wall's owner
  *
- * @author wiikviz
  * @see UserWall
  * @see CommunityWall
  * @see CommentsQuery#owner

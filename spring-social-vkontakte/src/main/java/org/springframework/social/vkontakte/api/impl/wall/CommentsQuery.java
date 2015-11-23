@@ -6,7 +6,6 @@ import org.springframework.social.vkontakte.api.vkenums.SortOrder;
 /**
  * Model class representing query for the list of comments on a post on a user wall or community wall.
  *
- * @author wiikviz
  * @see IWallOperations#getComments(CommentsQuery)
  * @see <a href="https://vk.com/dev/wall.getComments">wall.getComments | Developers | VK</a>
  */

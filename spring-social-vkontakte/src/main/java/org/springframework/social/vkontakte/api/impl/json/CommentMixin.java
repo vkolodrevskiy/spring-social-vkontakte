@@ -9,8 +9,6 @@ import java.util.Date;
 
 /**
  * Mixin for {@link org.springframework.social.vkontakte.api.Comment}
- *
- * @author wiikviz
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CommentMixin {
