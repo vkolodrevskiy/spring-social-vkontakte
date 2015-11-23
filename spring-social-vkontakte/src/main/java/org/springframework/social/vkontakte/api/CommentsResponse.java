@@ -1,18 +1,21 @@
 package org.springframework.social.vkontakte.api;
 
+import org.springframework.social.vkontakte.api.impl.wall.CommentsQuery;
+
 import java.util.List;
 
 /**
- * https://vk.com/dev/wall.getComments response
+ * Model class representing a response that contains a list of comments on a post on a user wall or community wall.
  *
  * @author wiikviz
+ * @see IWallOperations#getComments(CommentsQuery)
  */
 public class CommentsResponse {
-    private long count;
-    private List<Comment> comments;
-    private List<VKontakteProfile> profiles;
-    private List<Group> groups;
-    private Long realOffset;
+    private final long count;
+    private final List<Comment> comments;
+    private final List<VKontakteProfile> profiles;
+    private final List<Group> groups;
+    private final Long realOffset;
 
     public CommentsResponse(List<Comment> comments, long count, Long realOffset, List<VKontakteProfile> profiles, List<Group> groups) {
         this.comments = comments;

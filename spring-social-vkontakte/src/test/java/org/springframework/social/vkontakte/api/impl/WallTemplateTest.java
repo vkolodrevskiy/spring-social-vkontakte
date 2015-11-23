@@ -16,19 +16,22 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.junit.Test;
-import org.springframework.core.env.SystemEnvironmentPropertySource;
-import org.springframework.social.InternalServerErrorException;
 import org.springframework.social.vkontakte.api.Comment;
 import org.springframework.social.vkontakte.api.CommentsResponse;
 import org.springframework.social.vkontakte.api.Post;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
-import org.springframework.social.vkontakte.api.attachment.*;
+import org.springframework.social.vkontakte.api.attachment.Attachment;
+import org.springframework.social.vkontakte.api.attachment.AttachmentType;
+import org.springframework.social.vkontakte.api.attachment.PhotosListAttachment;
+import org.springframework.social.vkontakte.api.attachment.StickerAttachment;
+import org.springframework.social.vkontakte.api.impl.wall.CommentsQuery;
+import org.springframework.social.vkontakte.api.impl.wall.CommunityWall;
+import org.springframework.social.vkontakte.api.impl.wall.UserWall;
 import org.springframework.social.vkontakte.api.vkenums.SortOrder;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -40,7 +43,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  * @author vkolodrevskiy
  */
 public class WallTemplateTest extends AbstractVKontakteApiTest {
-
     @Test
     public void getPosts() {
         mockServer.expect(requestTo("https://api.vk.com/method/wall.get?access_token=ACCESS_TOKEN&v=5.27"))
@@ -59,13 +61,27 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
     }
 
     @Test
-    public void getComments() {
+    public void getCommunityWallComments() {
+        mockServer
+                .expect(requestTo("https://api.vk.com/method/wall.getComments"))
+                .andExpect(method(POST))
+                .andExpect(content().string("owner_id=-85635407&post_id=3199&preview_length=0&access_token=ACCESS_TOKEN&v=5.33"))
+                .andRespond(withSuccess(jsonResource("wall-getComments-response-5_33"), APPLICATION_JSON));
+        CommentsQuery request = new CommentsQuery.Builder(new CommunityWall(85635407), 3199).build();
+
+        CommentsResponse response = vkontakte.wallOperations().getComments(request);
+
+        assertEquals(16, response.getCount());
+    }
+
+    @Test
+    public void getUserWallComments() {
         mockServer
                 .expect(requestTo("https://api.vk.com/method/wall.getComments"))
                 .andExpect(method(POST))
                 .andExpect(content().string("owner_id=85635407&post_id=3199&need_likes=1&start_comment_id=3204&offset=2&count=3&sort=desc&preview_length=9999&extended=1&access_token=ACCESS_TOKEN&v=5.33"))
                 .andRespond(withSuccess(jsonResource("wall-getComments-response-5_33"), APPLICATION_JSON));
-        CommentsRequest request = new CommentsRequest("85635407", 3199, true, 3204, 2, 3, SortOrder.desc, 9999, true);
+        CommentsQuery request = new CommentsQuery(new UserWall(85635407), 3199, true, 3204, 2, 3, SortOrder.desc, 9999, true);
 
         CommentsResponse response = vkontakte.wallOperations().getComments(request);
 
