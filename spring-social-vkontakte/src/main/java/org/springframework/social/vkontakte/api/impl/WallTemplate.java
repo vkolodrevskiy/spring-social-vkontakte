@@ -97,7 +97,6 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
         return response.getStatus();
     }
 
-    @Override
     public CommentsResponse getComments(CommentsQuery query) {
         MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 

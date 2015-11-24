@@ -75,6 +75,10 @@ public final class CommentsQuery {
             return this;
         }
 
+        /**
+         * @param count number of comments to return (maximum 100)
+         * @return {@link org.springframework.social.vkontakte.api.impl.wall.CommentsQuery.Builder}
+         */
         public Builder count(int count) {
             this.count = count;
             return this;
