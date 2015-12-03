@@ -18,7 +18,7 @@ package org.springframework.social.vkontakte.api;
 import java.io.Serializable;
 
 /**
- * Model class representing audio.</br>
+ * Model class representing audio.<br>
  * See definition of this object at http://vk.com/dev/audio_object
  *
  * @author vkolodrevskiy
