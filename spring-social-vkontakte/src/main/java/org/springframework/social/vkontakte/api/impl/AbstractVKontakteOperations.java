@@ -108,10 +108,11 @@ class AbstractVKontakteOperations {
 
     /**
      * for responses of VK API 5.0+
-     * @param response
-     * @param itemClass
-     * @param <T>
-     * @return
+     *
+     * @param response  {@link VKGenericResponse response}
+     * @param itemClass class of the item
+     * @param <T> item type
+     * @return array
      */
     protected <T> VKArray<T> deserializeVK50ItemsResponse(VKGenericResponse response, Class<T> itemClass) {
         checkForError(response);
@@ -119,7 +120,7 @@ class AbstractVKontakteOperations {
         JsonNode itemsNode = jsonNode.get("items");
         Assert.isTrue(itemsNode.isArray());
         int count = jsonNode.get("count").asInt();
-        return new VKArray<T>(count, deserializeItems((ArrayNode)itemsNode, itemClass));
+        return new VKArray<T>(count, deserializeItems((ArrayNode) itemsNode, itemClass));
     }
 
     protected <T> List<T> deserializeItems(ArrayNode items, Class<T> itemClass) {
