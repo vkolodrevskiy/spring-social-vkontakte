@@ -23,50 +23,67 @@ import org.springframework.social.ApiBinding;
  * @author vkolodrevskiy
  */
 public interface VKontakte extends ApiBinding {
-
     /**
-	 * API for performing operations on VKontakte user profiles.
-	 */
+     * API for performing operations on VKontakte user profiles.
+     *
+     * @return {@link IUsersOperations}
+     */
     public IUsersOperations usersOperations();
 
-	/**
-	 * API for performing operations on feeds.
-	 */
+    /**
+     * API for performing operations on feeds.
+     *
+     * @return {@link IWallOperations}
+     */
     public IWallOperations wallOperations();
 
-	/**
-	 * API for performing operations with a user's set of friends.
-	 */
+    /**
+     * API for performing operations with a user's set of friends.
+     *
+     * @return {@link IFriendsOperations}
+     */
     public IFriendsOperations friendsOperations();
 
     /**
      * API for performing secure operations.
+     *
+     * @return {@link ISecureOperations}
      */
     public ISecureOperations secureOperations();
 
     /**
      * API for performing operations with a location info.
+     *
+     * @return {@link ILocationOperations}
      */
     public ILocationOperations locationOperations();
 
     /**
      * API for performing operations with audio.
+     *
+     * @return {@link IAudioOperations}
      */
     public IAudioOperations audioOperations();
 
 
     /**
      * API for performing operations with groups.
+     *
+     * @return {@link IGroupsOperations}
      */
     public IGroupsOperations groupsOperations();
 
     /**
      * API for performing operations with newsfeed.
+     *
+     * @return {@link INewsFeedOperations}
      */
     public INewsFeedOperations newsFeedOperations();
 
     /**
      * API for performing operations with utils.
+     *
+     * @return {@link IUtilsOperations}
      */
     public IUtilsOperations utilsOperations();
 }

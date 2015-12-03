@@ -21,61 +21,68 @@ import java.util.List;
 
 /**
  * User operations.
+ *
  * @author vkolodrevskiy
  */
 public interface IUsersOperations {
     String DEFAULT_FIELDS = "first_name,last_name,photo_50,photo_100,photo_200,contacts,bdate,sex,screen_name";
-    /**
-	 * Retrieves the profile for the authenticated user.
-	 * @return the user's profile information.
-	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
-     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
-	 */
-	VKontakteProfile getUser();
 
     /**
      * Retrieves the profile for the authenticated user.
+     *
+     * @return the user's profile information.
+     * @throws org.springframework.social.ApiException                          if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException         if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    VKontakteProfile getUser();
+
+    /**
+     * Retrieves the profile for the authenticated user.
+     *
      * @param fields VKontakte fields to retrieve, comma-delimited.
      * @return the user's profile information.
-     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.ApiException                          if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException         if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     VKontakteProfile getUser(String fields);
 
-	/**
-	 * Retrieves profiles for specified user unique identifiers.
-	 * @param userIds VKontakte user profile unique identifiers, for which to gt data.
-     * If <code>null<code/> is passed user profile or the current user will be returned.
-	 * @return the user's profile information.
-	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+    /**
+     * Retrieves profiles for specified user unique identifiers.
+     *
+     * @param userIds VKontakte user profile unique identifiers, for which to gt data.
+     *                If {@code null} is passed user profile or the current user will be returned.
+     * @return the user's profile information.
+     * @throws org.springframework.social.ApiException                          if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException         if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
-	 */
-	List<VKontakteProfile> getUsers(List<String> userIds);
+     */
+    List<VKontakteProfile> getUsers(List<String> userIds);
 
     /**
      * Retrieves profiles for specified user unique identifiers.
+     *
      * @param userIds VKontakte user profile unique identifiers, for which to gt data.
-     * @param fields VKontakte fields to retrieve, comma-delimited.
-     * If <code>null<code/> is passed user profile or the current user will be returned.
+     * @param fields  VKontakte fields to retrieve, comma-delimited.
+     *                If {@code null} is passed user profile or the current user will be returned.
      * @return the user's profile information.
-     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.ApiException                          if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException         if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     List<VKontakteProfile> getUsers(List<String> userIds, String fields);
 
     /**
      * Retrieves profiles for specified user unique identifiers.
-     * @param userIds VKontakte user profile unique identifiers, for which to gt data.
-     * @param fields VKontakte fields to retrieve, comma-delimited.
-     * If <code>null<code/> is passed user profile or the current user will be returned.
+     *
+     * @param userIds  VKontakte user profile unique identifiers, for which to gt data.
+     * @param fields   VKontakte fields to retrieve, comma-delimited.
+     *                 If {@code null} is passed user profile or the current user will be returned.
      * @param nameCase case for declension of user name and surname.
      * @return the user's profile information.
-     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.ApiException                          if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException         if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     List<VKontakteProfile> getUsers(List<String> userIds, String fields, NameCase nameCase);
