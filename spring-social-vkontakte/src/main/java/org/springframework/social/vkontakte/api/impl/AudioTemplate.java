@@ -54,7 +54,7 @@ public class AudioTemplate extends AbstractVKontakteOperations implements IAudio
         URI uri = makeOperationURL("audio.get", props, ApiVersion.VERSION_5_21);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
-        return deserializeArray(response, Audio.class).getItems();
+        return deserializeVK50ItemsResponse(response, Audio.class).getItems();
     }
 
     public List<Audio> get(Integer ownerId) {
@@ -67,6 +67,6 @@ public class AudioTemplate extends AbstractVKontakteOperations implements IAudio
         URI uri = makeOperationURL("audio.get", props, ApiVersion.VERSION_5_21);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
-        return deserializeArray(response, Audio.class).getItems();
+        return deserializeVK50ItemsResponse(response, Audio.class).getItems();
     }
 }
