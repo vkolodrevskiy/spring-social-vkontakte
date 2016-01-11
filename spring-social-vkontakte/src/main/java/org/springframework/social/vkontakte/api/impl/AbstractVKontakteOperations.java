@@ -26,6 +26,7 @@ import org.springframework.social.vkontakte.api.VKResponse;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
 import org.springframework.social.vkontakte.api.impl.json.VKArray;
 import org.springframework.util.Assert;
+import org.springframework.util.MultiValueMap;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -74,6 +75,13 @@ class AbstractVKontakteOperations {
         return uri.build();
     }
 
+    protected URI makeOperationPOST(String method, MultiValueMap<String, Object> data, ApiVersion apiVersion) {
+        URIBuilder uri = URIBuilder.fromUri(VK_REST_URL + method);
+        data.set("access_token", accessToken);
+        data.set("v", apiVersion.toString());
+        return uri.build();
+    }
+
     protected void preProcessURI(URIBuilder uri) {
         // add access_token
         // TODO: for some methods we do not need access token, so think about it.
@@ -100,10 +108,11 @@ class AbstractVKontakteOperations {
 
     /**
      * for responses of VK API 5.0+
-     * @param response
-     * @param itemClass
-     * @param <T>
-     * @return
+     *
+     * @param response  {@link VKGenericResponse response}
+     * @param itemClass class of the item
+     * @param <T> item type
+     * @return array
      */
     protected <T> VKArray<T> deserializeVK50ItemsResponse(VKGenericResponse response, Class<T> itemClass) {
         checkForError(response);
@@ -111,7 +120,7 @@ class AbstractVKontakteOperations {
         JsonNode itemsNode = jsonNode.get("items");
         Assert.isTrue(itemsNode.isArray());
         int count = jsonNode.get("count").asInt();
-        return new VKArray<T>(count, deserializeItems((ArrayNode)itemsNode, itemClass));
+        return new VKArray<T>(count, deserializeItems((ArrayNode) itemsNode, itemClass));
     }
 
     protected <T> List<T> deserializeItems(ArrayNode items, Class<T> itemClass) {

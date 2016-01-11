@@ -17,7 +17,14 @@ package org.springframework.social.vkontakte.api.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.social.vkontakte.api.*;
+import org.springframework.social.vkontakte.api.ApiVersion;
+import org.springframework.social.vkontakte.api.IFriendsOperations;
+import org.springframework.social.vkontakte.api.VKGenericResponse;
+import org.springframework.social.vkontakte.api.VKontakteProfile;
+import org.springframework.social.vkontakte.api.impl.json.VKArray;
+import org.springframework.social.vkontakte.api.vkenums.FriendsOrder;
+import org.springframework.social.vkontakte.api.vkenums.NameCase;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -38,23 +45,27 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
         this.restTemplate = restTemplate;
     }
 
-    public List<VKontakteProfile> get(String fields) {
+    public VKArray<VKontakteProfile> get(String fields) {
         return get(null, fields);
     }
 
-    public List<VKontakteProfile> get() {
+    public VKArray<VKontakteProfile> get() {
         return get(null, IFriendsOperations.DEFAULT_FIELDS);
     }
 
-    public List<VKontakteProfile> get(Long userId) {
+    public VKArray<VKontakteProfile> get(Long userId) {
         return get(userId, IFriendsOperations.DEFAULT_FIELDS);
     }
 
-    public List<VKontakteProfile> get(Long userId, String fields) {
+    public VKArray<VKontakteProfile> get(Long userId, String fields) {
         return get(userId, fields, -1, -1);
     }
 
-    public List<VKontakteProfile> get(Long userId, String fields, int count, int offset) {
+    public VKArray<VKontakteProfile> get(Long userId, String fields, int count, int offset) {
+        return get(userId, fields, FriendsOrder.NONE, NameCase.nom, count, offset);
+    }
+
+    public VKArray<VKontakteProfile> get(Long userId, String fields, FriendsOrder order, NameCase nameCase, int count, int offset) {
         requireAuthorization();
         Properties props = new Properties();
 
@@ -67,13 +78,22 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
         if (offset != -1) {
             props.put("offset", offset);
         }
-        props.put("fields", fields);
+        if (!StringUtils.isEmpty(fields)) {
+            props.put("fields", fields);
+        }
+        if (order != FriendsOrder.NONE) {
+            props.put("order", order.toString());
+        }
+        if (nameCase != NameCase.nom) {
+            props.put("name_case", nameCase.toString());
+        }
+
         URI uri = makeOperationURL("friends.get", props, ApiVersion.VERSION_5_27);
 
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
 
-        return deserializeVK50ItemsResponse(response, VKontakteProfile.class).getItems();
+        return deserializeVK50ItemsResponse(response, VKontakteProfile.class);
     }
 
     public List<List<String>> getOnline(boolean onlineMobile, int count, int offset) {

@@ -21,7 +21,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.springframework.social.vkontakte.api.*;
 
@@ -97,6 +96,7 @@ class VKontakteProfileMixin {
     private String facebookName;
     @JsonProperty("twitter")
     private String twitter;
+    private String instagram;
     @JsonProperty("site")
     private String site;
     @JsonProperty("status")
@@ -155,6 +155,9 @@ class VKontakteProfileMixin {
     private VKontakteProfile relationPartner;
     @JsonProperty("last_seen")
     private LastSeen lastSeen;
+    @JsonProperty("counters")
+    private Counters counters;
+
 
     static class VKGenderDeserializer extends JsonDeserializer<String> {
         @Override

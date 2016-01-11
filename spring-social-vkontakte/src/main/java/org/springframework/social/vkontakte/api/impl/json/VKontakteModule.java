@@ -50,6 +50,7 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(Post.Comments.class, PostCommentsMixin.class);
         context.setMixInAnnotations(Post.Geo.class, PostGeoMixin.class);
         context.setMixInAnnotations(Place.class, PostGeoPlaceMixin.class);
+        context.setMixInAnnotations(Comment.class, CommentMixin.class);
 
         context.setMixInAnnotations(Group.class, GroupMixin.class);
 
@@ -71,6 +72,7 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(City.class, CityMixin.class);
         context.setMixInAnnotations(Country.class, CountryMixin.class);
         context.setMixInAnnotations(LastSeen.class, LastSeenMixin.class);
+        context.setMixInAnnotations(Counters.class, CountersMixin.class);
         context.setMixInAnnotations(Occupation.class, OccupationMixin.class);
         context.setMixInAnnotations(Personal.class, PersonalMixin.class);
         context.setMixInAnnotations(University.class, UniversityMixin.class);

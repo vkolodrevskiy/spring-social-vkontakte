@@ -16,10 +16,12 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.junit.Test;
+import org.springframework.social.vkontakte.api.VKGenericResponse;
 import org.springframework.social.vkontakte.api.VKObject;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -32,7 +34,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 public class UtilsTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void resolveScreenName() {
-        mockServer.expect(requestTo("https://api.vk.com/method/utils.resolveScreenName?access_token=&v=5.27&screen_name=durov"))
+        mockServer.expect(requestTo("https://api.vk.com/method/utils.resolveScreenName?access_token=ACCESS_TOKEN&v=5.27&screen_name=durov"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("utils-resolve-screen-name-5.27"), APPLICATION_JSON));
         VKObject vkObject = vkontakte.utilsOperations().resolveScreenName("durov");
@@ -42,10 +44,38 @@ public class UtilsTemplateTest extends AbstractVKontakteApiTest {
 
     @Test
     public void resolveScreenNameEmpty() {
-        mockServer.expect(requestTo("https://api.vk.com/method/utils.resolveScreenName?access_token=&v=5.27&screen_name=durov"))
+        mockServer.expect(requestTo("https://api.vk.com/method/utils.resolveScreenName?access_token=ACCESS_TOKEN&v=5.27&screen_name=durov"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("utils-resolve-screen-name-empty-5.27"), APPLICATION_JSON));
         VKObject vkObject = vkontakte.utilsOperations().resolveScreenName("durov");
         assertEquals(null, vkObject);
+    }
+
+    @Test
+    public void testExecute() throws Exception {
+        mockServer.expect(requestTo("https://api.vk.com/method/execute"))
+                .andExpect(method(POST))
+                .andRespond(withSuccess(jsonResource("utils-execute-response-5_35"), APPLICATION_JSON));
+        String code = "var posts = API.wall.get({\"count\": 1});\n" +
+                "\n" +
+                "if (posts.count<0) {\n" +
+                "  return {\"post\": null, \"copy_owner\": null};\n" +
+                "} else {\n" +
+                "  var post = posts.items[0];\n" +
+                "  var copy_owner=null;\n" +
+                "  if (post.copy_history[0]){\n" +
+                "    if (post.copy_history[0].owner_id > 0) {\n" +
+                "      copy_owner = API.users.get({\"user_id\": post.copy_history[0].owner_id})[0];\n" +
+                "    } else\n" +
+                "    if (post.copy_history[0].owner_id  < 0) {\n" +
+                "      copy_owner = API.groups.getById({\"group_ids\": -post.copy_history[0].owner_id})[0];\n" +
+                "    }\n" +
+                "    return {\"post\": post, \"copy_owner\": copy_owner};\n" +
+                "  } else {\n" +
+                "    return {\"post\": post, \"copy_owner\": null};\n" +
+                "  }\n" +
+                "}";
+        VKGenericResponse response = vkontakte.utilsOperations().execute(code);
+        assertEquals(1, response.getResponse().get("post").get("copy_history").size());
     }
 }

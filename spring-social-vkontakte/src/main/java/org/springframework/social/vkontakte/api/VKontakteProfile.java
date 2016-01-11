@@ -23,6 +23,12 @@ import java.util.List;
  * @author vkolodrevskiy
  */
 public class VKontakteProfile {
+    public VKontakteProfile(long id) {
+        this.id = id;
+    }
+
+    public VKontakteProfile() {
+    }
 
     private final static String PROFILE_URL_EXTESTION = "http://vk.com/";
     private long id;
@@ -55,6 +61,7 @@ public class VKontakteProfile {
     private String facebook;
     private String facebookName;
     private String twitter;
+    private String instagram;
     private String site;
     private String status;
     private int commonCount;
@@ -84,6 +91,23 @@ public class VKontakteProfile {
     private List<Relative> relatives;
     private VKontakteProfile relationPartner;
     private LastSeen lastSeen;
+    private Counters counters;
+
+    public String getInstagram() {
+        return instagram;
+    }
+
+    public void setInstagram(String instagram) {
+        this.instagram = instagram;
+    }
+
+    public Counters getCounters() {
+        return counters;
+    }
+
+    public void setCounters(Counters counters) {
+        this.counters = counters;
+    }
 
     public String getDeactivated() {
         return deactivated;
@@ -551,6 +575,9 @@ public class VKontakteProfile {
     }
 
     public String getProfileURL() {
+        if (screenName == null) {
+            return PROFILE_URL_EXTESTION + "id" + id;
+        }
         return PROFILE_URL_EXTESTION + screenName;
     }
 

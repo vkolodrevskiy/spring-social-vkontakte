@@ -20,11 +20,13 @@ import org.springframework.social.vkontakte.api.ApiVersion;
 import org.springframework.social.vkontakte.api.IUsersOperations;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
 import org.springframework.social.vkontakte.api.VKontakteProfiles;
+import org.springframework.social.vkontakte.api.vkenums.NameCase;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * User operations.
@@ -39,33 +41,38 @@ class UsersTemplate extends AbstractVKontakteOperations implements IUsersOperati
         this.restTemplate = restTemplate;
     }
 
-    public List<VKontakteProfile> getUsers(List<Long> userIds, String fields) {
-        requireAuthorization();
-        Properties props = new Properties();
+    public List<VKontakteProfile> getUsers(List<String> userIds) {
+        return getUsers(userIds, null);
+    }
 
-        StringBuilder uids = new StringBuilder();
-        if(userIds != null) {
-            for(Long uid : userIds) {
-                if(uids.toString().isEmpty())
-                    uids.append(uid);
-                else uids.append(",").append(uid);
+    public List<VKontakteProfile> getUsers(List<String> userIds, String fields) {
+        return getUsers(userIds, fields, NameCase.nom);
+    }
+
+    public List<VKontakteProfile> getUsers(List<String> userIds, String fields, NameCase nameCase) {
+        requireAuthorization();
+        MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
+
+        if (userIds != null) {
+            StringBuilder sb = new StringBuilder();
+            for(String uid : userIds){
+                sb.append(uid).append(",");
             }
-            props.put("user_ids", uids.toString());
+            sb.deleteCharAt(sb.length() - 1);
+            data.set("user_ids", sb.toString());
+        }
+        if (nameCase != NameCase.nom) {
+            data.set("name_case", nameCase.toString());
         }
 
-        props.put("fields", fields != null? fields: IUsersOperations.DEFAULT_FIELDS);
+        data.set("fields", fields != null? fields: IUsersOperations.DEFAULT_FIELDS);
 
         // see documentation under http://vk.com/dev/users.get
-        URI uri = makeOperationURL("users.get", props, ApiVersion.VERSION_5_27);
-
-        VKontakteProfiles profiles = restTemplate.getForObject(uri, VKontakteProfiles.class);
+        URI uri = makeOperationPOST("users.get", data, ApiVersion.VERSION_5_27);
+        VKontakteProfiles profiles = restTemplate.postForObject(uri, data, VKontakteProfiles.class);
         checkForError(profiles);
 
         return profiles.getProfiles();
-    }
-
-    public List<VKontakteProfile> getUsers(List<Long> userIds) {
-        return getUsers(userIds, null);
     }
 
     public VKontakteProfile getUser() {

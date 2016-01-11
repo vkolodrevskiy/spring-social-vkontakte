@@ -103,7 +103,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
         audioOperations = new AudioTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         groupsOperations = new GroupsTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         newsFeedOperations = new NewsFeedTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
-        utilsOperations = new UtilsTemplate(getRestTemplate(), objectMapper);
+        utilsOperations = new UtilsTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
     }
 
     public IUsersOperations usersOperations() {
