@@ -93,4 +93,19 @@ public class Audio implements Serializable {
     public Integer getGenreId() {
         return genreId;
     }
+
+    @Override
+    public String toString() {
+        return "Audio{" +
+                "id=" + id +
+                ", ownerId=" + ownerId +
+                ", artist='" + artist + '\'' +
+                ", title='" + title + '\'' +
+                ", duration=" + duration +
+                ", url='" + url + '\'' +
+                ", lyricsId=" + lyricsId +
+                ", albumId=" + albumId +
+                ", genreId=" + genreId +
+                '}';
+    }
 }

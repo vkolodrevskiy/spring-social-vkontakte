@@ -23,6 +23,7 @@ import java.util.List;
  * @author vkolodrevskiy
  */
 public interface IAudioOperations {
+
     /**
      * Returns a list of audio files for current user.
      * You need the following rights to call this method: audio.
@@ -32,7 +33,7 @@ public interface IAudioOperations {
      * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
-    public List<Audio> get();
+    List<Audio> get();
 
     /**
      * Returns a list of audio files of a user or community specified by ownerId.
@@ -45,5 +46,5 @@ public interface IAudioOperations {
      * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
-    public List<Audio> get(Integer ownerId);
+    List<Audio> get(Integer ownerId);
 }

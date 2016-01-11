@@ -61,6 +61,7 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(PostedPhotoAttachment.class, PostedPhotoAttachmentMixin.class);
         context.setMixInAnnotations(Album.class, AlbumAttachmentMixin.class);
         context.setMixInAnnotations(Video.class, VideoAttachmentMixin.class);
+        context.setMixInAnnotations(org.springframework.social.vkontakte.api.Audio.class, AudioAttachmentMixin.class);
         context.setMixInAnnotations(Audio.class, AudioAttachmentMixin.class);
         context.setMixInAnnotations(Document.class, DocumentAttachmentMixin.class);
         context.setMixInAnnotations(Note.class, NoteAttachmentMixin.class);
