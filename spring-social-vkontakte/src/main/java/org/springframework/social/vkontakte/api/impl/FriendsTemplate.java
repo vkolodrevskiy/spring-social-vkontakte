@@ -66,7 +66,9 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
     }
 
     public VKArray<VKontakteProfile> get(Long userId, String fields, FriendsOrder order, NameCase nameCase, int count, int offset) {
-        requireAuthorization();
+        if(userId == null) {
+            requireAuthorization();
+        }
         Properties props = new Properties();
 
         if (userId != null) {
@@ -88,7 +90,12 @@ class FriendsTemplate extends AbstractVKontakteOperations implements IFriendsOpe
             props.put("name_case", nameCase.toString());
         }
 
-        URI uri = makeOperationURL("friends.get", props, ApiVersion.VERSION_5_27);
+        final URI uri;
+        if(userId == null) {
+            uri = makeOperationURL("friends.get", props, ApiVersion.VERSION_5_27);
+        } else {
+            uri = makeOptionalAuthOperationalURL("friends.get", props, ApiVersion.VERSION_5_27);
+        }
 
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);

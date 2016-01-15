@@ -60,6 +60,22 @@ class AbstractVKontakteOperations {
         }
     }
 
+    protected URI makeOptionalAuthOperationalURL(String method, Properties params, ApiVersion apiVersion) {
+        URIBuilder uri = URIBuilder.fromUri(VK_REST_URL + method);
+
+        if(accessToken != null) {
+            preProcessURI(uri);
+        }
+        // add api version
+        // TODO: I think finally we should migrate to latest api
+        uri.queryParam("v", apiVersion.toString());
+
+        for (Map.Entry<Object, Object> objectObjectEntry : params.entrySet()) {
+            uri.queryParam(objectObjectEntry.getKey().toString(), objectObjectEntry.getValue().toString());
+        }
+        return uri.build();
+    }
+
     protected URI makeOperationURL(String method, Properties params, ApiVersion apiVersion) {
         URIBuilder uri = URIBuilder.fromUri(VK_REST_URL + method);
 
