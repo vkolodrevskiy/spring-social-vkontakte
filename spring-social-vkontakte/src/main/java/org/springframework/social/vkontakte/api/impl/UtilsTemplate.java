@@ -27,7 +27,7 @@ public class UtilsTemplate extends AbstractVKontakteOperations implements IUtils
     public VKObject resolveScreenName(String screenName) {
         Properties props = new Properties();
         props.put("screen_name", screenName);
-        URI uri = makeOperationURL("utils.resolveScreenName", props, ApiVersion.VERSION_5_27);
+        URI uri = makeOptionalAuthOperationalURL("utils.resolveScreenName", props, ApiVersion.VERSION_5_27);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         return deserializeVK50Item(response, VKObject.class);
     }

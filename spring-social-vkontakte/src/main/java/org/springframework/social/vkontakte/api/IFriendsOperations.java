@@ -48,41 +48,44 @@ public interface IFriendsOperations {
 
     /**
      * Retrieves a list of user friends for specified user unique identifier.
-     * @param userId user unique identifier for which to get friends.
+     * Does not require authorization if userId is not null
+     * @param userId user unique identifier for which to get friends (null for current user).
      * @return a list of user friends profiles.
 	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token and userId is null.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     VKArray<VKontakteProfile> get(Long userId);
 
     /**
      * Retrieves a list of user friends for specified user unique identifier.
-     * @param userId user unique identifier for which to get friends.
+     * Does not require authorization if userId is not null
+     * @param userId user unique identifier for which to get friends (null for current user).
      * @param fields VKontakte fields to retrieve, comma-delimited.
      * @return a list of user friends profiles.
      * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token and user id is null.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     VKArray<VKontakteProfile> get(Long userId, String fields);
 
     /**
      * Retrieves a list of user friends for specified user unique identifier.
-     * @param userId user unique identifier for which to get friends.
+     * Does not require authorization if userId is not null
+     * @param userId user unique identifier for which to get friends (null for current user).
      * @param fields VKontakte fields to retrieve, comma-delimited.
      * @param count Number(positive number) of friends to return. If you want to return all friends pass negative number.
      * @param offset Offset(positive number) needed to return a specific subset of friends.
      * @return a list of user friends profiles.
      * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token and user id is null.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     VKArray<VKontakteProfile> get(Long userId, String fields, int count, int offset);
 
     /**
      * Retrieves a list of user friends for specified user unique identifier.
-     * @param userId user unique identifier for which to get friends.
+     * @param userId user unique identifier for which to get friends (null for current user).
      * @param fields VKontakte fields to retrieve, comma-delimited.
      * @param order sort order.
      * @param nameCase case for declension of user name and surname.
@@ -90,7 +93,7 @@ public interface IFriendsOperations {
      * @param offset Offset(positive number) needed to return a specific subset of friends.
      * @return a list of user friends profiles.
      * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token and userId is null.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     VKArray<VKontakteProfile> get(Long userId, String fields, FriendsOrder order, NameCase nameCase, int count, int offset);

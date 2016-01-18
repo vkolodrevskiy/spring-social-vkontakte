@@ -48,7 +48,9 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
     }
 
     public List<Post> getPostsForUser(Long userId, int offset, int limit) {
-        requireAuthorization();
+        if(userId == null) {
+            requireAuthorization();
+        }
         Properties props = new Properties();
         if (offset >= 0) {
             props.put("offset", offset);
@@ -60,7 +62,7 @@ public class WallTemplate extends AbstractVKontakteOperations implements IWallOp
             props.put("owner_id", userId);
         }
         // http://vk.com/dev/wall.get
-        URI uri = makeOperationURL("wall.get", props, ApiVersion.VERSION_5_27);
+        URI uri = makeOptionalAuthOperationalURL("wall.get", props, ApiVersion.VERSION_5_27);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
         return deserializeVK50ItemsResponse(response, Post.class).getItems();
