@@ -18,6 +18,7 @@ package org.springframework.social.vkontakte.api.impl;
 import org.junit.Test;
 import org.springframework.social.vkontakte.api.VKGenericResponse;
 import org.springframework.social.vkontakte.api.VKObject;
+import org.springframework.test.web.client.MockRestServiceServer;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.http.HttpMethod.GET;
@@ -34,12 +35,12 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 public class UtilsTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void resolveScreenName() {
-        mockServer.expect(requestTo("https://api.vk.com/method/utils.resolveScreenName?access_token=ACCESS_TOKEN&v=5.27&screen_name=durov"))
-                .andExpect(method(GET))
-                .andRespond(withSuccess(jsonResource("utils-resolve-screen-name-5.27"), APPLICATION_JSON));
-        VKObject vkObject = vkontakte.utilsOperations().resolveScreenName("durov");
-        assertEquals("user", vkObject.getType());
-        assertEquals(1, vkObject.getId());
+        resolveScreenNameImpl(this.mockServer, this.vkontakte, "https://api.vk.com/method/utils.resolveScreenName?access_token=ACCESS_TOKEN&v=5.27&screen_name=durov");
+    }
+
+    @Test
+    public void resolveScreenNameUnauthorized() {
+        resolveScreenNameImpl(unauthorizedMockServer, unauthorizedVKontakte, "https://api.vk.com/method/utils.resolveScreenName?v=5.27&screen_name=durov");
     }
 
     @Test
@@ -77,5 +78,14 @@ public class UtilsTemplateTest extends AbstractVKontakteApiTest {
                 "}";
         VKGenericResponse response = vkontakte.utilsOperations().execute(code);
         assertEquals(1, response.getResponse().get("post").get("copy_history").size());
+    }
+
+    private void resolveScreenNameImpl(MockRestServiceServer mockServer, VKontakteTemplate vkontakte, String expectedUri) {
+        mockServer.expect(requestTo(expectedUri))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("utils-resolve-screen-name-5.27"), APPLICATION_JSON));
+        VKObject vkObject = vkontakte.utilsOperations().resolveScreenName("durov");
+        assertEquals("user", vkObject.getType());
+        assertEquals(1, vkObject.getId());
     }
 }

@@ -71,8 +71,12 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
 
     @Test(expected = MissingAuthorizationException.class)
     public void getUsers_unauthorized() {
-        String[] userIds = {"1", "2"};
-        unauthorizedVKontakte.usersOperations().getUsers(Arrays.asList(userIds));
+        unauthorizedMockServer
+                .expect(requestTo("https://api.vk.com/method/users.get"))
+                .andExpect(method(POST)).andRespond(withSuccess(jsonResource("list-of-profiles-5_27"), APPLICATION_JSON));
+        String[] userIds = {"durov", "2183", "7748"};
+        final List<VKontakteProfile> profiles = unauthorizedVKontakte.usersOperations().getUsers(Arrays.asList(userIds));
+        assertProfiles(profiles);
     }
 
     @Test(expected = VKontakteErrorException.class)

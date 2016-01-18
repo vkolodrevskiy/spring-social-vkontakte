@@ -80,13 +80,11 @@ public class GroupsTemplate extends AbstractVKontakteOperations implements IGrou
 
     @Override
     public List<Group> getByIds(Collection<String> groupIds) {
-        requireAuthorization();
-
         String groupIdsCommaDelimited = StringUtils.collectionToCommaDelimitedString(groupIds);
         Properties props = new Properties();
         props.put("group_ids", groupIdsCommaDelimited);
 
-        URI uri = makeOperationURL("groups.getById", props, ApiVersion.VERSION_5_27);
+        URI uri = makeOptionalAuthOperationalURL("groups.getById", props, ApiVersion.VERSION_5_27);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
 
@@ -105,8 +103,6 @@ public class GroupsTemplate extends AbstractVKontakteOperations implements IGrou
 
     @Override
     public List<VKontakteProfile> getMembers(String groupId, String fields, int count, int offset) {
-        requireAuthorization();
-
         Properties props = new Properties();
         props.put("group_id", groupId);
         props.put("fields", fields != null ? fields : IUsersOperations.DEFAULT_FIELDS);
@@ -119,7 +115,7 @@ public class GroupsTemplate extends AbstractVKontakteOperations implements IGrou
             props.put("offset", offset);
         }
 
-        URI uri = makeOperationURL("groups.getMembers", props, ApiVersion.VERSION_5_27);
+        URI uri = makeOptionalAuthOperationalURL("groups.getMembers", props, ApiVersion.VERSION_5_27);
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
 

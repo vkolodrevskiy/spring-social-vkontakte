@@ -23,7 +23,6 @@ public interface IGroupsOperations {
      * @param groupIds IDs or screen names of communities.
      * @return list of {@link Group} by IDs.
      * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     List<Group> getByIds(Collection<String> groupIds);
@@ -34,7 +33,6 @@ public interface IGroupsOperations {
      * @param groupId ID or screen name of the community.
      * @return list of members.
      * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     List<VKontakteProfile> getMembers(String groupId);
@@ -45,7 +43,6 @@ public interface IGroupsOperations {
      * @param fields VKontakte fields to retrieve, comma-delimited.
      * @return list of members.
      * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     List<VKontakteProfile> getMembers(String groupId, String fields);
@@ -58,7 +55,6 @@ public interface IGroupsOperations {
      * @param offset Offset needed to return a specific subset of community members. (positive number)
      * @return list of members.
      * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     List<VKontakteProfile> getMembers(String groupId, String fields, int count, int offset);

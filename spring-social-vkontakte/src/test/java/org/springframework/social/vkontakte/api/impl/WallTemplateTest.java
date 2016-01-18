@@ -16,6 +16,7 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import org.junit.Test;
+import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.vkontakte.api.Comment;
 import org.springframework.social.vkontakte.api.CommentsResponse;
 import org.springframework.social.vkontakte.api.Post;
@@ -49,15 +50,24 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
             .andExpect(method(GET))
             .andRespond(withSuccess(jsonResource("wall-getposts-response-5_27"), APPLICATION_JSON));
         List<Post> posts = vkontakte.wallOperations().getPosts();
-        assertEquals(23, posts.size());
-        Attachment photosListAttachment = posts.get(1).getAttachments().get(1);
-        assertEquals(AttachmentType.PHOTOS_LIST, photosListAttachment.getType());
-        assertEquals(306810815, ((PhotosListAttachment)photosListAttachment).getPhotosList().get(0).getPhotoId());
-        assertEquals(45555, posts.get(1).getId());
-        assertEquals(22694, posts.get(1).getLikes().getCount());
-        assertEquals(false, posts.get(1).getLikes().isUserLikes());
-        assertEquals(2, posts.get(1).getAttachments().size());
-        assertEquals(3, ((StickerAttachment)posts.get(22).getCopyHistory().get(0).getAttachments().get(0)).getSticker().getProductId());
+        assertPosts(posts);
+    }
+
+    @Test(expected = MissingAuthorizationException.class)
+    public void getCurrentUserPostsUnauthorized() {
+        unauthorizedVKontakte.wallOperations().getPosts();
+    }
+
+    /**
+     * Check if impl can get wall of user by id even if he's not unauthorized
+     */
+    @Test
+    public void getUserPostsUnauthorized() {
+        unauthorizedMockServer.expect(requestTo("https://api.vk.com/method/wall.get?v=5.27&owner_id=1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("wall-getposts-response-5_27"), APPLICATION_JSON));
+        List<Post> posts = unauthorizedVKontakte.wallOperations().getPostsForUser(1L, -1, -1);
+        assertPosts(posts);
     }
 
     @Test
@@ -112,5 +122,17 @@ public class WallTemplateTest extends AbstractVKontakteApiTest {
         assertEquals("suppo", profile.getScreenName());
         assertEquals("M", profile.getGender());
         assertEquals(true, profile.isOnline());
+    }
+
+    private void assertPosts(List<Post> posts) {
+        assertEquals(23, posts.size());
+        Attachment photosListAttachment = posts.get(1).getAttachments().get(1);
+        assertEquals(AttachmentType.PHOTOS_LIST, photosListAttachment.getType());
+        assertEquals(306810815, ((PhotosListAttachment)photosListAttachment).getPhotosList().get(0).getPhotoId());
+        assertEquals(45555, posts.get(1).getId());
+        assertEquals(22694, posts.get(1).getLikes().getCount());
+        assertEquals(false, posts.get(1).getLikes().isUserLikes());
+        assertEquals(2, posts.get(1).getAttachments().size());
+        assertEquals(3, ((StickerAttachment)posts.get(22).getCopyHistory().get(0).getAttachments().get(0)).getSticker().getProductId());
     }
 }
