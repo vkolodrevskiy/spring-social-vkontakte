@@ -15,6 +15,8 @@
  */
 package org.springframework.social.vkontakte.api;
 
+import org.springframework.social.vkontakte.api.impl.wall.CommentsQuery;
+
 import java.util.List;
 
 /**
@@ -38,7 +40,7 @@ public interface IWallOperations {
      * @param limit  the maximum number of posts to return.
      * @return list of wall posts
      */
-    List<Post> getPostsForUser(String userId, int offset, int limit);
+    List<Post> getPostsForUser(Long userId, int offset, int limit);
 
     /**
      * Retrieve wall posts for the authenticated user.
@@ -57,9 +59,17 @@ public interface IWallOperations {
      * @return existing user's wall post
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
-    Post getPost(String userId, String postId);
+    Post getPost(Long userId, String postId);
 
 
     PostStatus post(PostData postData);
 
+    /**
+     * Returns a response that contains a list of comments on a post on a user wall or community wall.
+     *
+     * @param query {@link CommentsQuery}
+     * @return a {@link CommentsResponse}, object representing the response on query of comments on a post on a user's or community's wall
+     * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
+     */
+    CommentsResponse getComments(CommentsQuery query);
 }

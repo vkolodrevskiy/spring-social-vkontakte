@@ -50,6 +50,7 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(Post.Comments.class, PostCommentsMixin.class);
         context.setMixInAnnotations(Post.Geo.class, PostGeoMixin.class);
         context.setMixInAnnotations(Place.class, PostGeoPlaceMixin.class);
+        context.setMixInAnnotations(Comment.class, CommentMixin.class);
 
         context.setMixInAnnotations(Group.class, GroupMixin.class);
 
@@ -60,15 +61,25 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(PostedPhotoAttachment.class, PostedPhotoAttachmentMixin.class);
         context.setMixInAnnotations(Album.class, AlbumAttachmentMixin.class);
         context.setMixInAnnotations(Video.class, VideoAttachmentMixin.class);
+        context.setMixInAnnotations(org.springframework.social.vkontakte.api.Audio.class, AudioAttachmentMixin.class);
         context.setMixInAnnotations(Audio.class, AudioAttachmentMixin.class);
         context.setMixInAnnotations(Document.class, DocumentAttachmentMixin.class);
         context.setMixInAnnotations(Note.class, NoteAttachmentMixin.class);
         context.setMixInAnnotations(Graffiti.class, GraffitiAttachmentMixin.class);
+        context.setMixInAnnotations(Sticker.class, StickerAttachmentMixin.class);
         context.setMixInAnnotations(Application.class, ApplicationAttachmentMixin.class);
         context.setMixInAnnotations(Poll.class, PollAttachmentMixin.class);
         context.setMixInAnnotations(Page.class, PageAttachmentMixin.class);
         context.setMixInAnnotations(City.class, CityMixin.class);
+        context.setMixInAnnotations(Country.class, CountryMixin.class);
+        context.setMixInAnnotations(LastSeen.class, LastSeenMixin.class);
+        context.setMixInAnnotations(Counters.class, CountersMixin.class);
+        context.setMixInAnnotations(Occupation.class, OccupationMixin.class);
+        context.setMixInAnnotations(Personal.class, PersonalMixin.class);
+        context.setMixInAnnotations(University.class, UniversityMixin.class);
+        context.setMixInAnnotations(School.class, SchoolMixin.class);
+        context.setMixInAnnotations(Relative.class, RelativeMixin.class);
 	    context.setMixInAnnotations(CityList.class, CityListMixin.class);
-        context.setMixInAnnotations(Audio.class, AudioMixin.class);
+	    context.setMixInAnnotations(VKObject.class, VKObjectMixin.class);
     }
 }

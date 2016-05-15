@@ -28,7 +28,6 @@ import org.springframework.web.client.HttpClientErrorException;
  * @author vkolodrevskiy
  */
 public class VKontakteAdapter implements ApiAdapter<VKontakte> {
-    @Override
 	public boolean test(VKontakte vkontakte) {
 		try {
 			vkontakte.usersOperations().getUser();
@@ -38,16 +37,14 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
 		}
 	}
 
-    @Override
 	public void setConnectionValues(VKontakte vkontakte, ConnectionValues values) {
 		VKontakteProfile profile = vkontakte.usersOperations().getUser();
-		values.setProviderUserId(profile.getUid());
+		values.setProviderUserId("" + profile.getId());
 		values.setDisplayName(profile.getFirstName() + " " + profile.getLastName());
-		values.setProfileUrl("http://vk.com/id" + profile.getUid());
-		values.setImageUrl(profile.getPhoto());
+		values.setProfileUrl("http://vk.com/id" + profile.getId());
+		values.setImageUrl(profile.getPhoto200());
 	}
 
-    @Override
 	public UserProfile fetchUserProfile(VKontakte vkontakte) {
 		VKontakteProfile profile = vkontakte.usersOperations().getUser();
 		return new UserProfileBuilder()
@@ -59,7 +56,6 @@ public class VKontakteAdapter implements ApiAdapter<VKontakte> {
                 .build();
 	}
 
-    @Override
 	public void updateStatus(VKontakte vkontakte, String message) {
         // vk api does not allow to perform status.set or wall.post methods for websites,
         // so according to method contract we do nothing here

@@ -15,6 +15,7 @@
  */
 package org.springframework.social.vkontakte.api.impl;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -47,6 +48,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     private IAudioOperations audioOperations;
     private IGroupsOperations groupsOperations;
     private INewsFeedOperations newsFeedOperations;
+    private IUtilsOperations utilsOperations;
 
     private ObjectMapper objectMapper;
 
@@ -94,6 +96,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
 
                 objectMapper = new ObjectMapper();
                 objectMapper.registerModule(new VKontakteModule());
+                objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT, true);
                 jsonConverter.setObjectMapper(objectMapper);
             }
         }
@@ -108,6 +111,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
         audioOperations = new AudioTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         groupsOperations = new GroupsTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
         newsFeedOperations = new NewsFeedTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
+        utilsOperations = new UtilsTemplate(getRestTemplate(), accessToken, objectMapper, isAuthorized());
     }
 
     public IUsersOperations usersOperations() {
@@ -140,5 +144,9 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
 
     public INewsFeedOperations newsFeedOperations() {
         return newsFeedOperations;
+    }
+
+    public IUtilsOperations utilsOperations() {
+        return utilsOperations;
     }
 }

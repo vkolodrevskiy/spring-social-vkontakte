@@ -1,6 +1,6 @@
 {
     "response":{
-        "count":22,
+        "count":23,
         "items":[
             {
                 "id": 704,
@@ -888,6 +888,56 @@
                     "count":0,
                     "user_reposted":0
                 }
+            },
+            {
+              "id": 119,
+              "from_id": 16051904,
+              "owner_id": 16051904,
+              "date": 1423749354,
+              "post_type": "post",
+              "text": "",
+              "copy_history": [
+                {
+                  "id": 118,
+                  "owner_id": 16051904,
+                  "from_id": 16051904,
+                  "date": 1423749348,
+                  "post_type": "reply",
+                  "text": "",
+                  "reply_post_id": 117,
+                  "attachments": [
+                    {
+                      "type": "sticker",
+                      "sticker": {
+                        "id": 102,
+                        "product_id": 3,
+                        "photo_64": "https://vk.com/im...ickers/102/64.png",
+                        "photo_128": "https://vk.com/im...ckers/102/128.png",
+                        "photo_256": "https://vk.com/im...ckers/102/256.png",
+                        "photo_352": "https://vk.com/im...ckers/102/352.png",
+                        "width": 240,
+                        "height": 256
+                      }
+                    }
+                  ],
+                  "post_source": {"type": "vk"}
+                }
+              ],
+              "post_source": {"type": "vk"},
+              "comments": {
+                "count": 0,
+                "can_post": 1
+              },
+              "likes": {
+                "count": 0,
+                "user_likes": 0,
+                "can_like": 1,
+                "can_publish": 1
+              },
+              "reposts": {
+                "count": 0,
+                "user_reposted": 0
+              }
             }
         ]
     }

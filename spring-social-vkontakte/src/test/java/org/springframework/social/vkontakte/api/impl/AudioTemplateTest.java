@@ -7,6 +7,7 @@ import org.springframework.social.vkontakte.api.Audio;
 import java.text.ParseException;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -30,7 +31,7 @@ public class AudioTemplateTest extends AbstractVKontakteApiTest {
         unauthorizedVKontakte.audioOperations().get(123);
     }
 
-    // @Test
+    @Test
     public void get() throws ParseException {
         mockServer.expect(requestTo("https://api.vk.com/method/audio.get?access_token=ACCESS_TOKEN&v=5.21&need_user=0"))
                 .andExpect(method(GET))
@@ -38,5 +39,17 @@ public class AudioTemplateTest extends AbstractVKontakteApiTest {
 
         List<Audio> audios = vkontakte.audioOperations().get();
         assertNotNull(audios);
+        assertEquals("audio list size", 10, audios.size());
+    }
+
+    @Test
+    public void getByOwnerId() throws ParseException {
+        mockServer.expect(requestTo("https://api.vk.com/method/audio.get?access_token=ACCESS_TOKEN&v=5.21&owner_id=145&need_user=0"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("audio-valid-response-5_21"), APPLICATION_JSON));
+
+        List<Audio> audios = vkontakte.audioOperations().get(145);
+        assertNotNull(audios);
+        assertEquals("audio list size", 10, audios.size());
     }
 }

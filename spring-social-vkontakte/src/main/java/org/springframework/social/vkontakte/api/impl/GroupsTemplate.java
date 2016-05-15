@@ -16,12 +16,12 @@
 package org.springframework.social.vkontakte.api.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.vkontakte.api.*;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.net.URI;
+import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 
@@ -76,5 +76,49 @@ public class GroupsTemplate extends AbstractVKontakteOperations implements IGrou
         VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
         checkForError(response);
         return deserializeVK50ItemsResponse(response, Group.class).getItems();
+    }
+
+    @Override
+    public List<Group> getByIds(Collection<String> groupIds) {
+        String groupIdsCommaDelimited = StringUtils.collectionToCommaDelimitedString(groupIds);
+        Properties props = new Properties();
+        props.put("group_ids", groupIdsCommaDelimited);
+
+        URI uri = makeOptionalAuthOperationalURL("groups.getById", props, ApiVersion.VERSION_5_27);
+        VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
+        checkForError(response);
+
+        return deserializeArray(response, Group.class).getItems();
+    }
+
+    @Override
+    public List<VKontakteProfile> getMembers(String groupId) {
+        return getMembers(groupId, null, 0, 0);
+    }
+
+    @Override
+    public List<VKontakteProfile> getMembers(String groupId, String fields) {
+        return getMembers(groupId, fields, 0, 0);
+    }
+
+    @Override
+    public List<VKontakteProfile> getMembers(String groupId, String fields, int count, int offset) {
+        Properties props = new Properties();
+        props.put("group_id", groupId);
+        props.put("fields", fields != null ? fields : IUsersOperations.DEFAULT_FIELDS);
+
+        if (count > 0) {
+            props.put("count", count);
+        }
+
+        if (offset > 0) {
+            props.put("offset", offset);
+        }
+
+        URI uri = makeOptionalAuthOperationalURL("groups.getMembers", props, ApiVersion.VERSION_5_27);
+        VKGenericResponse response = restTemplate.getForObject(uri, VKGenericResponse.class);
+        checkForError(response);
+
+        return deserializeVK50ItemsResponse(response, VKontakteProfile.class).getItems();
     }
 }

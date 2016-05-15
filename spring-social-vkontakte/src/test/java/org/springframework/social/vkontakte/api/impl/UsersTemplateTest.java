@@ -19,12 +19,13 @@ import org.junit.Test;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
 import org.springframework.social.vkontakte.api.VKontakteProfile;
+import org.springframework.social.vkontakte.api.vkenums.NameCase;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -39,34 +40,26 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
     @Test
     public void getUser_currentUser() {
         mockServer
-                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids="))
-                .andExpect(method(GET)).andRespond(withSuccess(jsonResource("list-of-profiles-3_0"), APPLICATION_JSON));
+                .expect(requestTo("https://api.vk.com/method/users.get"))
+                .andExpect(method(POST)).andRespond(withSuccess(jsonResource("list-of-profiles-5_27"), APPLICATION_JSON));
 
-        VKontakteProfile profile = vkontakte.usersOperations().getUser();
+        VKontakteProfile profile = vkontakte.usersOperations().getUser("sex, bdate, city, country, photo_50, photo_100, photo_200_orig, photo_200, photo_400_orig, photo_max, photo_max_orig, photo_id, online, online_mobile, domain, has_mobile, contacts, connections, site, education, universities, schools, can_post, can_see_all_posts, can_see_audio, can_write_private_message, status, last_seen, common_count, relation, relatives, counters, screen_name, maiden_name, timezone, occupation,activities, interests, music, movies, tv, books, games, about, quotes, personal, friends_status");
 
-        assertEquals("24840", profile.getUid());
-        assertEquals("John", profile.getFirstName());
-        assertEquals("Doe", profile.getLastName());
-        assertEquals("http://cs9889.vkontakte.ru/u24840/e_5b02b7ad.jpg", profile.getPhoto());
-        assertEquals("http://cs9889.vkontakte.ru/u24840/b_04d9723f.jpg", profile.getPhotoMedium());
-        assertEquals("http://cs9889.vkontakte.ru/u24840/a_f934a8e6.jpg", profile.getPhotoBig());
+        assertEquals(1, profile.getId());
+        assertEquals("Павел", profile.getFirstName());
+        assertEquals("Дуров", profile.getLastName());
+        assertEquals(705, profile.getCounters().getFriends());
+        assertEquals(12, profile.getCounters().getUserPhotos());
+        assertEquals("durov", profile.getInstagram());
     }
 
     @Test
     public void getUsers_currentUser() {
         mockServer
-                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids=1%2C2%2C3"))
-                .andExpect(method(GET)).andRespond(withSuccess(jsonResource("list-of-profiles-3_0"), APPLICATION_JSON));
-
-        List<VKontakteProfile> profiles = vkontakte.usersOperations().getUsers(new ArrayList<String>() {
-            private static final long serialVersionUID = 583451105415032388L;
-
-            {
-                add("1");
-                add("2");
-                add("3");
-            }
-        });
+                .expect(requestTo("https://api.vk.com/method/users.get"))
+                .andExpect(method(POST)).andRespond(withSuccess(jsonResource("list-of-profiles-5_27"), APPLICATION_JSON));
+        String[] userIds = {"durov", "2183", "77478"};
+        List<VKontakteProfile> profiles = vkontakte.usersOperations().getUsers(Arrays.asList(userIds), null, NameCase.abl);
 
         assertProfiles(profiles);
     }
@@ -78,21 +71,19 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
 
     @Test(expected = MissingAuthorizationException.class)
     public void getUsers_unauthorized() {
-        unauthorizedVKontakte.usersOperations().getUsers(new ArrayList<String>() {
-            private static final long serialVersionUID = 9175797703832707981L;
-
-            {
-                add("1");
-                add("2");
-            }
-        });
+        unauthorizedMockServer
+                .expect(requestTo("https://api.vk.com/method/users.get"))
+                .andExpect(method(POST)).andRespond(withSuccess(jsonResource("list-of-profiles-5_27"), APPLICATION_JSON));
+        String[] userIds = {"durov", "2183", "7748"};
+        final List<VKontakteProfile> profiles = unauthorizedVKontakte.usersOperations().getUsers(Arrays.asList(userIds));
+        assertProfiles(profiles);
     }
 
     @Test(expected = VKontakteErrorException.class)
     public void getUser_expiredToken() {
         mockServer
-                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids="))
-                .andExpect(method(GET)).andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
+                .expect(requestTo("https://api.vk.com/method/users.get"))
+                .andExpect(method(POST)).andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
 
         vkontakte.usersOperations().getUser();
     }
@@ -100,41 +91,37 @@ public class UsersTemplateTest extends AbstractVKontakteApiTest {
     @Test(expected = VKontakteErrorException.class)
     public void getUsers_expiredToken() {
         mockServer
-                .expect(requestTo("https://api.vk.com/method/users.get?access_token=ACCESS_TOKEN&v=3.0&fields=uid%2Cfirst_name%2Clast_name%2Cphoto%2Cphoto_medium%2Cphoto_big%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_ids=1%2C2"))
-                .andExpect(method(GET)).andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
-
-        vkontakte.usersOperations().getUsers(new ArrayList<String>() {
-            private static final long serialVersionUID = 4211781776280003660L;
-
-            {
-                add("1");
-                add("2");
-            }
-        });
+               .expect(requestTo("https://api.vk.com/method/users.get"))
+                .andExpect(method(POST)).andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
+        String[] userIds = {"1", "2"};
+        vkontakte.usersOperations().getUsers(Arrays.asList(userIds));
     }
 
     private void assertProfiles(List<VKontakteProfile> profiles) {
-        assertEquals(3, profiles.size());
+        assertEquals(4, profiles.size());
 
-        assertEquals("24840", profiles.get(0).getUid());
-        assertEquals("John", profiles.get(0).getFirstName());
-        assertEquals("Doe", profiles.get(0).getLastName());
-        assertEquals("http://cs9889.vkontakte.ru/u24840/e_5b02b7ad.jpg", profiles.get(0).getPhoto());
-        assertEquals("http://cs9889.vkontakte.ru/u24840/b_04d9723f.jpg", profiles.get(0).getPhotoMedium());
-        assertEquals("http://cs9889.vkontakte.ru/u24840/a_f934a8e6.jpg", profiles.get(0).getPhotoBig());
+        assertEquals(1, profiles.get(0).getId());
+        assertEquals("Павел", profiles.get(0).getFirstName());
+        assertEquals("Дуров", profiles.get(0).getLastName());
+        assertEquals("Telegram", profiles.get(0).getOccupation().getName());
+        assertEquals(2006, profiles.get(0).getGraduation());
+        assertEquals(7, profiles.get(0).getPersonal().getLangs().size());
+        assertEquals(1, profiles.get(0).getUniversities().get(0).getCountryId());
+        assertEquals(1992, profiles.get(0).getSchools().get(0).getYearTo());
 
-        assertEquals("135474", profiles.get(1).getUid());
-        assertEquals("William", profiles.get(1).getFirstName());
-        assertEquals("Peters", profiles.get(1).getLastName());
-        assertEquals("http://cs5596.vkontakte.ru/u135474/e_148bbf42.jpg", profiles.get(1).getPhoto());
-        assertEquals("http://cs5596.vkontakte.ru/u135474/b_176664e7.jpg", profiles.get(1).getPhotoMedium());
-        assertEquals("http://cs5596.vkontakte.ru/u135474/a_ead98900.jpg", profiles.get(1).getPhotoBig());
+        assertEquals(2183, profiles.get(1).getId());
+        assertEquals("Владислав", profiles.get(1).getFirstName());
+        assertEquals("Ефремов", profiles.get(1).getLastName());
+        assertEquals(1988, profiles.get(1).getBirthDate().getYear());
+        assertEquals("№ 239", profiles.get(1).getSchools().get(0).getName());
 
-        assertEquals("501245", profiles.get(2).getUid());
-        assertEquals("Ivan", profiles.get(2).getFirstName());
-        assertEquals("Petrov", profiles.get(2).getLastName());
-        assertEquals("http://vkontakte.ru/images/question_c.gif", profiles.get(2).getPhoto());
-        assertEquals("http://vkontakte.ru/images/question_b.gif", profiles.get(2).getPhotoMedium());
-        assertEquals("http://vkontakte.ru/images/question_a.gif", profiles.get(2).getPhotoBig());
+        assertEquals(77478, profiles.get(2).getId());
+        assertEquals("Егор", profiles.get(2).getFirstName());
+        assertEquals("Иванов", profiles.get(2).getLastName());
+        assertEquals("M", profiles.get(2).getGender());
+        assertEquals(216966, profiles.get(2).getRelationPartner().getId());
+        assertEquals("sibling", profiles.get(2).getRelatives().get(0).getType());
+
+        assertEquals("banned", profiles.get(3).getDeactivated());
     }
 }

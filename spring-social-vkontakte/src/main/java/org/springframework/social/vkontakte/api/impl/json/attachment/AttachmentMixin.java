@@ -40,6 +40,7 @@ import java.io.IOException;
     @JsonSubTypes.Type(name="video", value=VideoAttachment.class),
     @JsonSubTypes.Type(name="audio", value=AudioAttachment.class),
     @JsonSubTypes.Type(name="graffiti", value=GraffitiAttachment.class),
+    @JsonSubTypes.Type(name="sticker", value=StickerAttachment.class),
     @JsonSubTypes.Type(name="doc", value=DocumentAttachment.class),
     @JsonSubTypes.Type(name="note", value=NoteAttachment.class),
     @JsonSubTypes.Type(name="app", value=ApplicationAttachment.class),

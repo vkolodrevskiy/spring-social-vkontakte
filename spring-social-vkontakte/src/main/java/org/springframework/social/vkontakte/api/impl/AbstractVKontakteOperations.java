@@ -26,6 +26,7 @@ import org.springframework.social.vkontakte.api.VKResponse;
 import org.springframework.social.vkontakte.api.VKontakteErrorException;
 import org.springframework.social.vkontakte.api.impl.json.VKArray;
 import org.springframework.util.Assert;
+import org.springframework.util.MultiValueMap;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -50,10 +51,29 @@ class AbstractVKontakteOperations {
         this.objectMapper = objectMapper;
     }
 
+    /**
+     * throws {@link MissingAuthorizationException} if not authorized.
+     */
     protected void requireAuthorization() {
         if (!isAuthorized) {
             throw new MissingAuthorizationException("vkontakte");
         }
+    }
+
+    protected URI makeOptionalAuthOperationalURL(String method, Properties params, ApiVersion apiVersion) {
+        URIBuilder uri = URIBuilder.fromUri(VK_REST_URL + method);
+
+        if(accessToken != null) {
+            preProcessURI(uri);
+        }
+        // add api version
+        // TODO: I think finally we should migrate to latest api
+        uri.queryParam("v", apiVersion.toString());
+
+        for (Map.Entry<Object, Object> objectObjectEntry : params.entrySet()) {
+            uri.queryParam(objectObjectEntry.getKey().toString(), objectObjectEntry.getValue().toString());
+        }
+        return uri.build();
     }
 
     protected URI makeOperationURL(String method, Properties params, ApiVersion apiVersion) {
@@ -68,6 +88,13 @@ class AbstractVKontakteOperations {
         for (Map.Entry<Object, Object> objectObjectEntry : params.entrySet()) {
             uri.queryParam(objectObjectEntry.getKey().toString(), objectObjectEntry.getValue().toString());
         }
+        return uri.build();
+    }
+
+    protected URI makeOperationPOST(String method, MultiValueMap<String, Object> data, ApiVersion apiVersion) {
+        URIBuilder uri = URIBuilder.fromUri(VK_REST_URL + method);
+        data.set("access_token", accessToken);
+        data.set("v", apiVersion.toString());
         return uri.build();
     }
 
@@ -92,20 +119,16 @@ class AbstractVKontakteOperations {
         Assert.isTrue(response.getResponse().isArray());
         ArrayNode items = (ArrayNode) response.getResponse();
         int count = items.get(0).asInt();
-        List<T> elements = new ArrayList<T>();
-        for (int i = 1; i < items.size(); i++) {
-            elements.add(objectMapper.convertValue(items.get(i), itemClass));
-        }
-
-        return new VKArray<T>(count, elements);
+        return new VKArray<T>(count, deserializeItems(items, itemClass));
     }
 
     /**
      * for responses of VK API 5.0+
-     * @param response
-     * @param itemClass
-     * @param <T>
-     * @return
+     *
+     * @param response  {@link VKGenericResponse response}
+     * @param itemClass class of the item
+     * @param <T> item type
+     * @return array
      */
     protected <T> VKArray<T> deserializeVK50ItemsResponse(VKGenericResponse response, Class<T> itemClass) {
         checkForError(response);
@@ -113,12 +136,19 @@ class AbstractVKontakteOperations {
         JsonNode itemsNode = jsonNode.get("items");
         Assert.isTrue(itemsNode.isArray());
         int count = jsonNode.get("count").asInt();
-        ArrayNode items = (ArrayNode) itemsNode;
+        return new VKArray<T>(count, deserializeItems((ArrayNode) itemsNode, itemClass));
+    }
+
+    protected <T> List<T> deserializeItems(ArrayNode items, Class<T> itemClass) {
         List<T> elements = new ArrayList<T>();
         for (int i = 0; i < items.size(); i++) {
             elements.add(objectMapper.convertValue(items.get(i), itemClass));
         }
+        return elements;
+    }
 
-        return new VKArray<T>(count, elements);
+    protected <T> T deserializeVK50Item( VKGenericResponse response, Class<T> itemClass) {
+        checkForError(response);
+        return objectMapper.convertValue(response.getResponse(), itemClass);
     }
 }

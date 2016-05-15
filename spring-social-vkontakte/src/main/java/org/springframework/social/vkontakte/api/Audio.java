@@ -18,7 +18,7 @@ package org.springframework.social.vkontakte.api;
 import java.io.Serializable;
 
 /**
- * Model class representing audio.</br>
+ * Model class representing audio.<br>
  * See definition of this object at http://vk.com/dev/audio_object
  *
  * @author vkolodrevskiy
@@ -92,5 +92,20 @@ public class Audio implements Serializable {
 
     public Integer getGenreId() {
         return genreId;
+    }
+
+    @Override
+    public String toString() {
+        return "Audio{" +
+                "id=" + id +
+                ", ownerId=" + ownerId +
+                ", artist='" + artist + '\'' +
+                ", title='" + title + '\'' +
+                ", duration=" + duration +
+                ", url='" + url + '\'' +
+                ", lyricsId=" + lyricsId +
+                ", albumId=" + albumId +
+                ", genreId=" + genreId +
+                '}';
     }
 }

@@ -19,11 +19,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-abstract class CityMixin extends VKResponseMixin {
+public class CityMixin extends VKResponseMixin {
 
-	@JsonProperty("cid")
-	Integer id;
+	@JsonProperty("id")
+	long id;
 
-	@JsonProperty("name")
-	String name;
+	@JsonProperty("title")
+	String title;
 }
