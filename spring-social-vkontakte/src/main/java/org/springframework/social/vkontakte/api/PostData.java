@@ -5,7 +5,7 @@ import java.util.Properties;
 /**
  * An object that represents a new post to be created.
  * Offers a builder-like way of creating a new post.
- * Given to {@link org.springframework.social.vkontakte.api.WallOperations#post(PostData)}.
+ * Given to {@link org.springframework.social.vkontakte.api.IWallOperations#post(PostData)}.
  *
  * @author Nikolay Papakha
  */
@@ -24,6 +24,20 @@ public class PostData {
     private String services;
 
     private Boolean signed;
+
+    private Integer publishDate;
+
+    private Double lat;
+
+    private Double lon;
+
+    private Integer placeId;
+
+    private Integer postId;
+
+    private String guid;
+
+    private Boolean markAsAds;
 
     public PostData(String ownerId, String message) {
         this.ownerId = ownerId;
@@ -54,6 +68,27 @@ public class PostData {
         }
         if (signed != null) {
             properties.put("signed", signed);
+        }
+        if (publishDate != null) {
+            properties.put("publishDate", publishDate);
+        }
+        if (lat != null) {
+            properties.put("lat", lat);
+        }
+        if (lon != null) {
+            properties.put("lon", lon);
+        }
+        if (placeId != null) {
+            properties.put("placeId", placeId);
+        }
+        if (postId != null) {
+            properties.put("postId", postId);
+        }
+        if (guid != null) {
+            properties.put("guid", guid);
+        }
+        if (markAsAds != null) {
+            properties.put("mark_as_ads", markAsAds ? "1" : "0");
         }
         return properties;
     }
@@ -112,4 +147,66 @@ public class PostData {
         return this;
     }
 
+    /**
+     * @param publishDate Publication date (in Unix time). If used, posting will be delayed until the set time.
+     * @return the PostData object for additional configuration
+     */
+    public PostData publishDate(Integer publishDate) {
+        this.publishDate = publishDate;
+        return this;
+    }
+
+    /**
+     * @param lat Geographical longitude of a check-in, in degrees (from -180 to 180).
+     * @return the PostData object for additional configuration
+     */
+    public PostData lat(Double lat) {
+        this.lat = lat;
+        return this;
+    }
+
+    /**
+     * @param lon Geographical longitude of a check-in, in degrees (from -180 to 180). .
+     * @return the PostData object for additional configuration
+     */
+    public PostData lon(Double lon) {
+        this.lon = lon;
+        return this;
+    }
+
+    /**
+     * @param placeId ID of the location where the user was tagged.
+     * @return the PostData object for additional configuration
+     */
+    public PostData placeId(Integer placeId) {
+        this.placeId = placeId;
+        return this;
+    }
+
+    /**
+     * @param postId Post ID. Used for publishing of scheduled and suggested posts. .
+     * @return the PostData object for additional configuration
+     */
+    public PostData postId(Integer postId) {
+        this.postId = postId;
+        return this;
+    }
+
+    /**
+     * @param guid string
+     * @return the PostData object for additional configuration
+     */
+    public PostData guid(String guid) {
+        this.guid = guid;
+        return this;
+    }
+
+    /**
+     * @param markAsAds, either true or false, default false.
+     * @return the PostData object for additional configuration
+     */
+    public PostData guid(Boolean markAsAds) {
+        this.markAsAds = markAsAds;
+        return this;
+    }
 }
