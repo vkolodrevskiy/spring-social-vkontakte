@@ -92,6 +92,7 @@ public class VKontakteProfile {
     private VKontakteProfile relationPartner;
     private LastSeen lastSeen;
     private Counters counters;
+    private String email;
 
     public String getInstagram() {
         return instagram;
@@ -587,5 +588,13 @@ public class VKontakteProfile {
 
     public void setLastSeen(LastSeen lastSeen) {
         this.lastSeen = lastSeen;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

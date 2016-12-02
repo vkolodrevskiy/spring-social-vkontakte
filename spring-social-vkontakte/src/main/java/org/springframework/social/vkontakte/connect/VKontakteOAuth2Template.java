@@ -16,24 +16,33 @@
 package org.springframework.social.vkontakte.connect;
 
 import org.springframework.social.oauth2.AccessGrant;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.social.oauth2.OAuth2Template;
 
 import java.util.Map;
 
 /**
  * VKontakte-specific extension of OAuth2Template.
+ *
  * @author vkolodrevskiy
  */
 public class VKontakteOAuth2Template extends OAuth2Template {
+    private String email;
 
-	public VKontakteOAuth2Template(String clientId, String clientSecret) {
-		super(clientId, clientSecret, "http://oauth.vk.com/authorize", "https://oauth.vk.com/access_token");
+    public VKontakteOAuth2Template(String clientId, String clientSecret) {
+        super(clientId, clientSecret, "http://oauth.vk.com/authorize", "https://oauth.vk.com/access_token");
         setUseParametersForClientAuthentication(true);
-	}
+    }
 
     // When scope has "offline" option VKontakte returns expires_in=0, setting it to null in this case
     @Override
     protected AccessGrant createAccessGrant(String accessToken, String scope, String refreshToken, Long expiresIn, Map<String, Object> response) {
+        email = (String) response.get("email");
         return super.createAccessGrant(accessToken, scope, refreshToken, expiresIn == 0 ? null : expiresIn, response);
+    }
+
+    public String getEmail() {
+        return this.email;
     }
 }
