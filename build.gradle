@@ -5,32 +5,26 @@ buildscript {
     dependencies {
         classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.2.8'
         classpath 'me.champeau.gradle:gradle-javadoc-hotfix-plugin:0.1'
+        classpath('org.asciidoctor:asciidoctor-gradle-plugin:0.7.0')
+        classpath('org.asciidoctor:asciidoctor-java-integration:0.1.4.preview.1')
     }
 }
 
-configure(allprojects) {
+// Set up different subproject lists for individual configuration
+ext.javaProjects = subprojects.findAll { project -> project.name != 'docs' && project.name != 'manual' }
+ext.docProjects = subprojects.findAll { project -> project.name == 'docs' || project.name == 'manual' }
+ext.coreModuleProjects = javaProjects
+
+configure(allprojects - docProjects) {
     apply plugin: 'java'
     apply plugin: 'eclipse'
     apply plugin: 'idea'
     apply plugin: 'javadocHotfix'
-    tasks.withType(JavaCompile) {
-        options.encoding = 'UTF-8'
-    }
+
     group = 'org.springframework.social'
 
     sourceCompatibility=1.5
     targetCompatibility=1.5
-
-    ext {
-        springSocialVersion = '1.1.0.BUILD-SNAPSHOT'
-        hamcrestVersion = '1.3'
-        jacksonVersion = '2.5.3'
-        junitVersion = '4.11'
-        mockitoVersion = '1.9.5'
-        servletApiVersion = '2.5'
-        springVersion = '3.2.3.RELEASE'
-        springSecurityCryptoVersion = '3.1.4.RELEASE'
-    }
 
     [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
 
@@ -39,17 +33,16 @@ configure(allprojects) {
     test.systemProperty("java.awt.headless", "true")
 
     repositories {
-        maven { url "http://repo.spring.io/libs-release" }
-        maven { url "http://repo.spring.io/libs-milestone" }
         maven { url "http://repo.spring.io/libs-snapshot" }
-        maven { url "http://repo.spring.io/ebr-maven-external" }
+        mavenLocal()
     }
 
     dependencies {
         testCompile ("org.hamcrest:hamcrest-library:$hamcrestVersion")
-        testCompile ("junit:junit-dep:$junitVersion")
+        testCompile ("junit:junit:$junitVersion")
         testCompile ("org.mockito:mockito-core:$mockitoVersion")
         testCompile ("org.springframework:spring-test:$springVersion")
+        testRuntime ("com.jayway.jsonpath:json-path:$jsonPathVersion")
     }
 
     // servlet-api (2.5) and tomcat-servlet-api (3.0) classpath entries should not be
@@ -60,7 +53,11 @@ configure(allprojects) {
     }
 }
 
-configure(subprojects) { subproject ->
+ext.javadocLinks = [
+    "http://docs.jboss.org/jbossas/javadoc/4.0.5/connector"
+] as String[]
+
+configure(subprojects - docProjects) { subproject ->
     apply from: "${rootProject.projectDir}/publish-maven.gradle"
 
     jar {
@@ -101,15 +98,16 @@ configure(subprojects) { subproject ->
 project('spring-social-vkontakte') {
     description = 'VKontakte API'
     dependencies {
-        compile ("org.springframework.social:spring-social-core:$springSocialVersion")
-        compile ("org.springframework.social:spring-social-config:$springSocialVersion")
-        compile ("org.springframework.social:spring-social-security:$springSocialVersion", optional)
-        compile ("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
-        compile ("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
-        compile ("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
-        compile ("javax.servlet:servlet-api:$servletApiVersion", provided)
-        testCompile ("org.springframework:spring-test:$springVersion")
-        testCompile ("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
+      compile ("org.springframework.social:spring-social-core:$springSocialVersion")
+      compile ("org.springframework.social:spring-social-config:$springSocialVersion")
+      compile ("org.springframework.social:spring-social-security:$springSocialVersion", optional)
+      compile ("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
+      compile ("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+      compile ("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
+      compile ("javax.servlet:javax.servlet-api:$servletApiVersion", provided)
+      testCompile ("org.springframework:spring-test:$springVersion")
+      testCompile ("org.springframework.security:spring-security-crypto:$springSecurityVersion")
+      testCompile ("org.apache.httpcomponents:httpclient:4.3.1", optional)
     }
 }
 
@@ -127,122 +125,68 @@ configure(rootProject) {
 
     dependencies { // for integration tests
     }
-    
+
     task api(type: Javadoc) {
-        group = 'Documentation'
-        description = 'Generates aggregated Javadoc API documentation.'
+        group = "Documentation"
+        description = "Generates aggregated Javadoc API documentation."
         title = "${rootProject.description} ${version} API"
         options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
         options.author = true
         options.header = rootProject.description
-        options.overview = 'src/api/overview.html'
-        options.links(
-            'http://docs.jboss.org/jbossas/javadoc/4.0.5/connector'
-        )
+        options.overview = "src/api/overview.html"
+        options.links(project.ext.javadocLinks)
+
         source subprojects.collect { project ->
             project.sourceSets.main.allJava
         }
-        destinationDir = new File(buildDir, "api")
+
         classpath = files(subprojects.collect { project ->
             project.sourceSets.main.compileClasspath
         })
-        maxMemory = '1024m'
+
+        maxMemory = "1024m"
+        destinationDir = new File(buildDir, "api")
     }
 
-    task docsZip(type: Zip) {
-        group = 'Distribution'
-        classifier = 'docs'
-        description = "Builds -${classifier} archive containing api and reference " +
-            "for deployment at static.springframework.org/spring-social/docs."
+    // Task for creating the distro zip
 
-        from('src/dist') {
-            include 'changelog.txt'
-        }
-
-        from (api) {
-            into 'api'
-        }
-
-        from (reference) {
-            into 'reference'
-        }
-    }
-
-    task schemaZip(type: Zip) {
-        group = 'Distribution'
-        classifier = 'schema'
-        description = "Builds -${classifier} archive containing all " +
-            "XSDs for deployment at static.springframework.org/schema."
-
-        subprojects.each { subproject ->
-            def Properties schemas = new Properties();
-
-            subproject.sourceSets.main.resources.find {
-                it.path.endsWith('META-INF/spring.schemas')
-            }?.withInputStream { schemas.load(it) }
-
-            for (def key : schemas.keySet()) {
-                def shortName = key.replaceAll(/http.*schema.(.*).spring-.*/, '$1')
-                assert shortName != key
-                File xsdFile = subproject.sourceSets.main.resources.find {
-                    it.path.endsWith(schemas.get(key))
-                }
-                assert xsdFile != null
-                into (shortName) {
-                    from xsdFile.path
-                }
-            }
-        }
-    }
-
-    task distZip(type: Zip, dependsOn: [docsZip, schemaZip]) {
-        group = 'Distribution'
+    task dist(type: Zip) {
+        dependsOn subprojects*.tasks*.matching { task -> task.name == 'assemble' || task.name.endsWith('Zip') || task.name.endsWith('generatePom') }
         classifier = 'dist'
-        description = "Builds -${classifier} archive, containing all jars and docs, " +
-                      "suitable for community download page."
 
-        ext.baseDir = "${project.name}-${project.version}";
+        evaluationDependsOn(':docs')
+        evaluationDependsOn(':docs:manual')
 
-        from('src/dist') {
-            include 'readme.txt'
-            include 'license.txt'
-            include 'notice.txt'
-            into "${baseDir}"
-            expand(copyright: new Date().format('yyyy'), version: project.version)
-        }
-
-        from(zipTree(docsZip.archivePath)) {
-            into "${baseDir}/docs"
-        }
-
-        from(zipTree(schemaZip.archivePath)) {
-            into "${baseDir}/schema"
-        }
-
-        subprojects.each { subproject ->
-            into ("${baseDir}/libs") {
-                from subproject.jar
-                if (subproject.tasks.findByPath('sourcesJar')) {
-                    from subproject.sourcesJar
-                }
-                if (subproject.tasks.findByPath('javadocJar')) {
-                    from subproject.javadocJar
-                }
+        def zipRootDir = "${project.name}-$version"
+        into(zipRootDir) {
+            from(rootDir) {
+                include '*.txt'
+            }
+            into('docs') {
+                with(project(':docs').apiSpec)
+                with(project(':docs:manual').spec)
+            }
+            into('dist') {
+                from coreModuleProjects.collect {project -> project.libsDir }
             }
         }
     }
 
     artifacts {
-        archives docsZip
-        archives schemaZip
-        archives distZip
+        archives dist
+        archives project(':docs').docsZip
+        archives project(':docs').schemaZip
     }
 
     task wrapper(type: Wrapper) {
         description = 'Generates gradlew[.bat] scripts'
-        gradleVersion = '1.10'
+        gradleVersion = '3.0'
     }
 
+}
+
+configure(docProjects) {
+    tasks.findByPath("artifactoryPublish")?.enabled = false
 }
 
 task updateRootDocs << {
