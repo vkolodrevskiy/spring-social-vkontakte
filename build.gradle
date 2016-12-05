@@ -20,7 +20,10 @@ configure(allprojects - docProjects) {
     apply plugin: 'eclipse'
     apply plugin: 'idea'
     apply plugin: 'javadocHotfix'
-
+    // fix failing tests with Russian characters
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
     group = 'org.springframework.social'
 
     sourceCompatibility=1.5
