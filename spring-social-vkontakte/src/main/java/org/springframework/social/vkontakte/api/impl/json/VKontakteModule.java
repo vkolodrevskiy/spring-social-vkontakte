@@ -79,7 +79,7 @@ public class VKontakteModule extends SimpleModule {
         context.setMixInAnnotations(University.class, UniversityMixin.class);
         context.setMixInAnnotations(School.class, SchoolMixin.class);
         context.setMixInAnnotations(Relative.class, RelativeMixin.class);
-	    context.setMixInAnnotations(CityList.class, CityListMixin.class);
-	    context.setMixInAnnotations(VKObject.class, VKObjectMixin.class);
+        context.setMixInAnnotations(CityList.class, CityListMixin.class);
+        context.setMixInAnnotations(VKObject.class, VKObjectMixin.class);
     }
 }

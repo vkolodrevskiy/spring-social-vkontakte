@@ -36,17 +36,17 @@ import java.util.Properties;
  */
 public class LocationTemplate extends AbstractVKontakteOperations implements ILocationOperations {
 
-	private final RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
-	public LocationTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {
-	        super(isAuthorizedForUser, accessToken, objectMapper);
-		this.restTemplate = restTemplate;
-	}
-	
-	public City getCityById(Integer id) {
-		List<City> cities = getCitiesById(Collections.singletonList(id));
-		return cities.size() > 0 ? cities.get(0) : null;
-	}
+    public LocationTemplate(RestTemplate restTemplate, String accessToken, ObjectMapper objectMapper, boolean isAuthorizedForUser) {
+            super(isAuthorizedForUser, accessToken, objectMapper);
+        this.restTemplate = restTemplate;
+    }
+
+    public City getCityById(Integer id) {
+        List<City> cities = getCitiesById(Collections.singletonList(id));
+        return cities.size() > 0 ? cities.get(0) : null;
+    }
 
     public List<City> getCitiesById(Collection<Integer> ids) {
         String idsString = buildCidsAsString(ids);
@@ -64,15 +64,15 @@ public class LocationTemplate extends AbstractVKontakteOperations implements ILo
     // This method compile a coma-separated string from collection of integer city identifier.
     // Actually, this method do the same thing as org.apache.commons.lang.StringUtils.join(ids, ',').
     // But, I decide, that there is to many overheads to include commons-lang lib to use one single method.
-	private String buildCidsAsString(Collection<Integer> ids) {
-		String delim = "";
-		final StringBuilder sb = new StringBuilder();
+    private String buildCidsAsString(Collection<Integer> ids) {
+        String delim = "";
+        final StringBuilder sb = new StringBuilder();
 
-		for (Integer i : ids) {
-		    sb.append(delim).append(i);
-		    delim = ",";
-		}
+        for (Integer i : ids) {
+            sb.append(delim).append(i);
+            delim = ",";
+        }
 
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 }

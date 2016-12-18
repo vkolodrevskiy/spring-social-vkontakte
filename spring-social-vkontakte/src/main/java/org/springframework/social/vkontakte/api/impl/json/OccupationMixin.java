@@ -20,10 +20,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class OccupationMixin {
-	@JsonProperty("id")
-	long id;
-	@JsonProperty("name")
-	String name;
+    @JsonProperty("id")
+    long id;
+    @JsonProperty("name")
+    String name;
     @JsonProperty("type")
-	String type;
+    String type;
 }

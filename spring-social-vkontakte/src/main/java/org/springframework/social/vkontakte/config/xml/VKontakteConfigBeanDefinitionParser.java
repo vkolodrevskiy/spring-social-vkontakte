@@ -27,12 +27,12 @@ import org.springframework.social.vkontakte.security.VKontakteAuthenticationServ
  */
 class VKontakteConfigBeanDefinitionParser extends AbstractProviderConfigBeanDefinitionParser {
 
-	public VKontakteConfigBeanDefinitionParser() {
-		super(VKontakteConnectionFactory.class, VKontakteApiHelper.class);
-	}
-	
-	@Override
-	protected Class<? extends SocialAuthenticationService<?>> getAuthenticationServiceClass() {
-		return VKontakteAuthenticationService.class;
-	}
+    public VKontakteConfigBeanDefinitionParser() {
+        super(VKontakteConnectionFactory.class, VKontakteApiHelper.class);
+    }
+
+    @Override
+    protected Class<? extends SocialAuthenticationService<?>> getAuthenticationServiceClass() {
+        return VKontakteAuthenticationService.class;
+    }
 }

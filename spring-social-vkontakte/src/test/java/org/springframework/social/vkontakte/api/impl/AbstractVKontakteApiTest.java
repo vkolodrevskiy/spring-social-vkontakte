@@ -27,26 +27,26 @@ import org.springframework.test.web.client.MockRestServiceServer;
  * @author vkolodrevskiy
  */
 public class AbstractVKontakteApiTest {
-	protected VKontakteTemplate vkontakte;
-	protected VKontakteTemplate unauthorizedVKontakte;
-	//
-	protected MockRestServiceServer mockServer;
-	protected MockRestServiceServer unauthorizedMockServer;
-	protected HttpHeaders responseHeaders;
+    protected VKontakteTemplate vkontakte;
+    protected VKontakteTemplate unauthorizedVKontakte;
+    //
+    protected MockRestServiceServer mockServer;
+    protected MockRestServiceServer unauthorizedMockServer;
+    protected HttpHeaders responseHeaders;
 
-	@Before
-	public void setup() {
-		responseHeaders = new HttpHeaders();
-		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
-		//
-		vkontakte = new VKontakteTemplate("ACCESS_TOKEN", "CLIENT_SECRET");
-		mockServer = MockRestServiceServer.createServer(vkontakte.getRestTemplate());
-		// unauthorizedVK can be used to access vk api public methods.
-		unauthorizedVKontakte = new VKontakteTemplate();
-		unauthorizedMockServer = MockRestServiceServer.createServer(unauthorizedVKontakte.getRestTemplate());
-	}
+    @Before
+    public void setup() {
+        responseHeaders = new HttpHeaders();
+        responseHeaders.setContentType(MediaType.APPLICATION_JSON);
+        //
+        vkontakte = new VKontakteTemplate("ACCESS_TOKEN", "CLIENT_SECRET");
+        mockServer = MockRestServiceServer.createServer(vkontakte.getRestTemplate());
+        // unauthorizedVK can be used to access vk api public methods.
+        unauthorizedVKontakte = new VKontakteTemplate();
+        unauthorizedMockServer = MockRestServiceServer.createServer(unauthorizedVKontakte.getRestTemplate());
+    }
 
-	protected Resource jsonResource(String filename) {
-		return new ClassPathResource(filename + ".json", getClass());
-	}
+    protected Resource jsonResource(String filename) {
+        return new ClassPathResource(filename + ".json", getClass());
+    }
 }

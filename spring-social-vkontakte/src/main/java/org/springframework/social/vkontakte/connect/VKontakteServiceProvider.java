@@ -27,12 +27,12 @@ public class VKontakteServiceProvider extends AbstractOAuth2ServiceProvider<VKon
 
     protected final String clientSecret;
 
-	public VKontakteServiceProvider(String clientId, String clientSecret) {
+    public VKontakteServiceProvider(String clientId, String clientSecret) {
         super(new VKontakteOAuth2Template(clientId, clientSecret));
         this.clientSecret = clientSecret;
-	}
+    }
 
     public VKontakte getApi(String accessToken) {
-		return new VKontakteTemplate(accessToken, clientSecret);
-	}
+        return new VKontakteTemplate(accessToken, clientSecret);
+    }
 }

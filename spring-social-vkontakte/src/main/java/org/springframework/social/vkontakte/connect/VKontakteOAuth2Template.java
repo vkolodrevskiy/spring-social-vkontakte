@@ -26,10 +26,10 @@ import java.util.Map;
  */
 public class VKontakteOAuth2Template extends OAuth2Template {
 
-	public VKontakteOAuth2Template(String clientId, String clientSecret) {
-		super(clientId, clientSecret, "http://oauth.vk.com/authorize", "https://oauth.vk.com/access_token");
+    public VKontakteOAuth2Template(String clientId, String clientSecret) {
+        super(clientId, clientSecret, "http://oauth.vk.com/authorize", "https://oauth.vk.com/access_token");
         setUseParametersForClientAuthentication(true);
-	}
+    }
 
     // When scope has "offline" option VKontakte returns expires_in=0, setting it to null in this case
     @Override

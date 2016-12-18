@@ -31,24 +31,24 @@ import static org.junit.Assert.assertNull;
  * @author vkolodrevskiy
  */
 public class VKontakteAdapterTest {
-	private VKontakteAdapter apiAdapter = new VKontakteAdapter();
-	
-	private VKontakte vkontakte = Mockito.mock(VKontakte.class);
+    private VKontakteAdapter apiAdapter = new VKontakteAdapter();
+
+    private VKontakte vkontakte = Mockito.mock(VKontakte.class);
     private IUsersOperations usersOperations = Mockito.mock(IUsersOperations.class);
-	
-	@Test
-	public void fetchProfile() {
+
+    @Test
+    public void fetchProfile() {
         VKontakteProfile tmpProfile = new VKontakteProfile();
         tmpProfile.setScreenName("id123");
         tmpProfile.setFirstName("Viktor");
         tmpProfile.setLastName("Kolodrevskiy");
-		Mockito.when(usersOperations.getUser()).thenReturn(tmpProfile);
+        Mockito.when(usersOperations.getUser()).thenReturn(tmpProfile);
         Mockito.when(vkontakte.usersOperations()).thenReturn(usersOperations);
 
         UserProfile profile = apiAdapter.fetchUserProfile(vkontakte);
         assertEquals("id123", profile.getUsername());
-		assertEquals("Viktor", profile.getFirstName());
-		assertEquals("Kolodrevskiy", profile.getLastName());
-		assertNull(profile.getEmail());
-	}
+        assertEquals("Viktor", profile.getFirstName());
+        assertEquals("Kolodrevskiy", profile.getLastName());
+        assertNull(profile.getEmail());
+    }
 }

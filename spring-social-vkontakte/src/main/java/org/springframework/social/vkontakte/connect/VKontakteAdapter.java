@@ -28,35 +28,35 @@ import org.springframework.web.client.HttpClientErrorException;
  * @author vkolodrevskiy
  */
 public class VKontakteAdapter implements ApiAdapter<VKontakte> {
-	public boolean test(VKontakte vkontakte) {
-		try {
-			vkontakte.usersOperations().getUser();
-			return true;
-		} catch (HttpClientErrorException e) {
-			return false;
-		}
-	}
+    public boolean test(VKontakte vkontakte) {
+        try {
+            vkontakte.usersOperations().getUser();
+            return true;
+        } catch (HttpClientErrorException e) {
+            return false;
+        }
+    }
 
-	public void setConnectionValues(VKontakte vkontakte, ConnectionValues values) {
-		VKontakteProfile profile = vkontakte.usersOperations().getUser();
-		values.setProviderUserId("" + profile.getId());
-		values.setDisplayName(profile.getFirstName() + " " + profile.getLastName());
-		values.setProfileUrl("http://vk.com/id" + profile.getId());
-		values.setImageUrl(profile.getPhoto200());
-	}
+    public void setConnectionValues(VKontakte vkontakte, ConnectionValues values) {
+        VKontakteProfile profile = vkontakte.usersOperations().getUser();
+        values.setProviderUserId("" + profile.getId());
+        values.setDisplayName(profile.getFirstName() + " " + profile.getLastName());
+        values.setProfileUrl("http://vk.com/id" + profile.getId());
+        values.setImageUrl(profile.getPhoto200());
+    }
 
-	public UserProfile fetchUserProfile(VKontakte vkontakte) {
-		VKontakteProfile profile = vkontakte.usersOperations().getUser();
-		return new UserProfileBuilder()
+    public UserProfile fetchUserProfile(VKontakte vkontakte) {
+        VKontakteProfile profile = vkontakte.usersOperations().getUser();
+        return new UserProfileBuilder()
                 .setUsername(profile.getScreenName())
                 .setFirstName(profile.getFirstName())
                 .setLastName(profile.getLastName())
                 .setName(profile.getFirstName() + " " + profile.getLastName())
                 .build();
-	}
+    }
 
-	public void updateStatus(VKontakte vkontakte, String message) {
+    public void updateStatus(VKontakte vkontakte, String message) {
         // vk api does not allow to perform status.set or wall.post methods for websites,
         // so according to method contract we do nothing here
-	}
+    }
 }

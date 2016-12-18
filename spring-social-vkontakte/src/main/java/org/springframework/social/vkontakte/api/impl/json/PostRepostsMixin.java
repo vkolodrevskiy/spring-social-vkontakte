@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PostRepostsMixin {
-	@JsonCreator
+    @JsonCreator
     PostRepostsMixin(@JsonProperty("count") int count) {}
 
     @JsonProperty("count")

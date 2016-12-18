@@ -20,8 +20,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class CountryMixin {
-	@JsonProperty("id")
-	long id;
-	@JsonProperty("title")
-	String title;
+    @JsonProperty("id")
+    long id;
+    @JsonProperty("title")
+    String title;
 }

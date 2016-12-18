@@ -25,8 +25,8 @@ import org.springframework.social.config.xml.AbstractProviderConfigNamespaceHand
  */
 public class VKontakteNamespaceHandler extends AbstractProviderConfigNamespaceHandler {
 
-	@Override
-	protected AbstractProviderConfigBeanDefinitionParser getProviderConfigBeanDefinitionParser() {
-		return new VKontakteConfigBeanDefinitionParser();
-	}
+    @Override
+    protected AbstractProviderConfigBeanDefinitionParser getProviderConfigBeanDefinitionParser() {
+        return new VKontakteConfigBeanDefinitionParser();
+    }
 }

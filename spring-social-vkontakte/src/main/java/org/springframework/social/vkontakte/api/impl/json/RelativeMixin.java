@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class RelativeMixin {
-	@JsonProperty("id")
+    @JsonProperty("id")
     private long id;
     @JsonProperty("type")
     private String type;

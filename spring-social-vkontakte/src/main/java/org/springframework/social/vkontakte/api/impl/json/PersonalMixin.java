@@ -22,7 +22,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class PersonalMixin {
-	@JsonProperty("political")
+    @JsonProperty("political")
     private int political;
     @JsonProperty("langs")
     private List<String> langs;

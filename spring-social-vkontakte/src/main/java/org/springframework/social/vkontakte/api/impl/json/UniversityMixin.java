@@ -22,7 +22,7 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class UniversityMixin {
-	@JsonProperty("id")
+    @JsonProperty("id")
     private long id;
     @JsonProperty("country")
     private long countryId;

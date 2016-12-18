@@ -44,10 +44,10 @@ public class LocationTemplateTest extends AbstractVKontakteApiTest {
 
     @Test(expected = VKontakteErrorException.class)
     public void getCity_expiredToken() {
-	mockServer.expect(requestTo("https://api.vk.com/method/database.getCitiesById?access_token=ACCESS_TOKEN&v=5.27&city_ids=54"))
-		.andExpect(method(GET))
-		.andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
+    mockServer.expect(requestTo("https://api.vk.com/method/database.getCitiesById?access_token=ACCESS_TOKEN&v=5.27&city_ids=54"))
+        .andExpect(method(GET))
+        .andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
 
-	vkontakte.locationOperations().getCityById(54);
+    vkontakte.locationOperations().getCityById(54);
     }
 }

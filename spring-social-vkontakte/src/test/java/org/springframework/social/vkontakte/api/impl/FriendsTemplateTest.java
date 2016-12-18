@@ -37,14 +37,14 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  */
 public class FriendsTemplateTest extends AbstractVKontakteApiTest {
     @Test
-	public void get_currentUser() throws ParseException {
-		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name"))
-			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("list-of-friends-5_27"), APPLICATION_JSON));
+    public void get_currentUser() throws ParseException {
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name"))
+            .andExpect(method(GET))
+            .andRespond(withSuccess(jsonResource("list-of-friends-5_27"), APPLICATION_JSON));
 
-		VKArray<VKontakteProfile> friends = vkontakte.friendsOperations().get();
+        VKArray<VKontakteProfile> friends = vkontakte.friendsOperations().get();
         assertFriends(friends);
-	}
+    }
 
     @Test
     public void getFriendsWithoutFields() throws Exception {
@@ -58,33 +58,33 @@ public class FriendsTemplateTest extends AbstractVKontakteApiTest {
     }
 
     @Test(expected = MissingAuthorizationException.class)
-	public void get_currentUser_unauthorized() {
-		unauthorizedVKontakte.friendsOperations().get();
-	}
+    public void get_currentUser_unauthorized() {
+        unauthorizedVKontakte.friendsOperations().get();
+    }
 
     @Test
-	public void get_byUserId() throws ParseException {
-		unauthorizedMockServer.expect(requestTo("https://api.vk.com/method/friends.get?v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_id=1"))
-			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("list-of-friends-5_27"), APPLICATION_JSON));
+    public void get_byUserId() throws ParseException {
+        unauthorizedMockServer.expect(requestTo("https://api.vk.com/method/friends.get?v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_id=1"))
+            .andExpect(method(GET))
+            .andRespond(withSuccess(jsonResource("list-of-friends-5_27"), APPLICATION_JSON));
 
-		VKArray<VKontakteProfile> friends = unauthorizedVKontakte.friendsOperations().get(1L);
+        VKArray<VKontakteProfile> friends = unauthorizedVKontakte.friendsOperations().get(1L);
         assertFriends(friends);
     }
 
-	@Test(expected = MissingAuthorizationException.class)
-	public void getFriends_byUserId_unauthorized() {
-		unauthorizedVKontakte.friendsOperations().get("123");
-	}
+    @Test(expected = MissingAuthorizationException.class)
+    public void getFriends_byUserId_unauthorized() {
+        unauthorizedVKontakte.friendsOperations().get("123");
+    }
 
-	@Test(expected = VKontakteErrorException.class)
-	public void get_expiredToken() {
-		mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_id=123"))
-			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
+    @Test(expected = VKontakteErrorException.class)
+    public void get_expiredToken() {
+        mockServer.expect(requestTo("https://api.vk.com/method/friends.get?access_token=ACCESS_TOKEN&v=5.27&fields=first_name%2Clast_name%2Cphoto_50%2Cphoto_100%2Cphoto_200%2Ccontacts%2Cbdate%2Csex%2Cscreen_name&user_id=123"))
+            .andExpect(method(GET))
+            .andRespond(withSuccess(jsonResource("error-code-5"), APPLICATION_JSON));
 
-		vkontakte.friendsOperations().get(123L);
-	}
+        vkontakte.friendsOperations().get(123L);
+    }
 
     @Test(expected = VKontakteErrorException.class)
     public void getOnline_expiredToken() {

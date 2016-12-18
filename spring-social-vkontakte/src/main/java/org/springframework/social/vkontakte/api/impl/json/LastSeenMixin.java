@@ -24,9 +24,9 @@ import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class LastSeenMixin {
-	@JsonProperty("time")
+    @JsonProperty("time")
     @JsonDeserialize(using = UnixTimeDeserializer.class)
     private Date time;
-	@JsonProperty("platform")
+    @JsonProperty("platform")
     private int platform;
 }

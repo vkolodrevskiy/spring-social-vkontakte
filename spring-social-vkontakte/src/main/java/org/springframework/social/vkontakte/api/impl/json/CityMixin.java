@@ -21,9 +21,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class CityMixin extends VKResponseMixin {
 
-	@JsonProperty("id")
-	long id;
+    @JsonProperty("id")
+    long id;
 
-	@JsonProperty("title")
-	String title;
+    @JsonProperty("title")
+    String title;
 }

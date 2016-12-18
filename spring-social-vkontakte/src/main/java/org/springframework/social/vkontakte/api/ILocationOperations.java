@@ -20,7 +20,7 @@ import java.util.List;
 
 public interface ILocationOperations {
 
-	List<City> getCitiesById(Collection<Integer> ids);
+    List<City> getCitiesById(Collection<Integer> ids);
 
-	City getCityById(Integer id);
+    City getCityById(Integer id);
 }

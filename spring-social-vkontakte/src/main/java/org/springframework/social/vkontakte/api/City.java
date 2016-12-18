@@ -25,37 +25,37 @@ import java.io.Serializable;
  */
 public class City implements Serializable {
 
-	private static final long serialVersionUID = 162578751841414977L;
+    private static final long serialVersionUID = 162578751841414977L;
 
-	/**
-	 * City identifier in internal Vkontakte format.
-	 * It doesn't correlate with KLADR or FIAS databases.
-	 */
-	private long id;
-	
-	/**
-	 * City title in nominative (russian language).
-	 */
-	private String title;
+    /**
+     * City identifier in internal Vkontakte format.
+     * It doesn't correlate with KLADR or FIAS databases.
+     */
+    private long id;
 
-	public long getId() {
-		return id;
-	}
+    /**
+     * City title in nominative (russian language).
+     */
+    private String title;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	@Override
-	public String toString() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

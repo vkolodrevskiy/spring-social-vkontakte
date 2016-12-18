@@ -24,9 +24,9 @@ import org.springframework.social.vkontakte.api.VKontakte;
  */
 public class VKontakteConnectionFactory extends OAuth2ConnectionFactory<VKontakte> {
 
-	public VKontakteConnectionFactory(String clientId, String clientSecret) {
-		super("vkontakte", new VKontakteServiceProvider(clientId, clientSecret), new VKontakteAdapter());
-	}
+    public VKontakteConnectionFactory(String clientId, String clientSecret) {
+        super("vkontakte", new VKontakteServiceProvider(clientId, clientSecret), new VKontakteAdapter());
+    }
 
     @Override
     public boolean supportsStateParameter() {

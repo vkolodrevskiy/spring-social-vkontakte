@@ -52,13 +52,13 @@ import java.io.IOException;
 public class AttachmentMixin {
 
     @JsonProperty("type")
-   	@JsonDeserialize(using = AttachmentTypeDeserializer.class)
+       @JsonDeserialize(using = AttachmentTypeDeserializer.class)
     AttachmentType type;
 
     private static class AttachmentTypeDeserializer extends JsonDeserializer<AttachmentType> {
-   		@Override
-   		public AttachmentType deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-   			return AttachmentType.valueOf(jp.getText().toUpperCase());
-   		}
-   	}
+           @Override
+           public AttachmentType deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+               return AttachmentType.valueOf(jp.getText().toUpperCase());
+           }
+       }
 }

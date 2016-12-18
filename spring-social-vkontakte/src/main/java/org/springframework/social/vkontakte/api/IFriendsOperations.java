@@ -30,8 +30,8 @@ public interface IFriendsOperations {
     /**
      * Retrieves a list of user friends for the current authorized user.
      * @return a list of user friends profiles.
-	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     VKArray<VKontakteProfile> get();
@@ -51,8 +51,8 @@ public interface IFriendsOperations {
      * Does not require authorization if userId is not null
      * @param userId user unique identifier for which to get friends (null for current user).
      * @return a list of user friends profiles.
-	 * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
-	 * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token and userId is null.
+     * @throws org.springframework.social.ApiException if there is an error while communicating with VKontakte.
+     * @throws org.springframework.social.MissingAuthorizationException if VKontakteTemplate was not created with an access token and userId is null.
      * @throws org.springframework.social.vkontakte.api.VKontakteErrorException if VKontakte returned error.
      */
     VKArray<VKontakteProfile> get(Long userId);
