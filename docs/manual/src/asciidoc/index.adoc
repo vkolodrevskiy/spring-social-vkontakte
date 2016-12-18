@@ -1,29 +1,28 @@
-= Spring Social LinkedIn Reference
-Craig Walls; Keith Donald; Roy Clarkson
+= Spring Social VKontakte Reference
+Viktor Kolodrevskiy
 
-The Spring Social LinkedIn project is an extension to
+The Spring Social VKontakte project is an extension to
 http://www.springframework.org/spring-social[Spring Social] that enables
-integration with LinkedIn.
+integration with VKontakte.
 
 == Introduction
-http://www.linkedin.com[LinkedIn] is a social networking site geared toward professionals. 
-It enables its users to maintain and correspond with a network of contacts they have are professionally linked to.
+http://www.vk.com[VKontakte] is the largest European online social networking service, based in Russia. It is available in several languages, and is especially popular among Russian-speaking users. VK allows users to message each other publicly or privately, to create groups, public pages and events, share and tag images, audio and video, and to play browser-based games.
 
-Spring Social LinkedIn enables integration with LinkedIn with
-`LinkedInConnectionFactory`, a connection factory that can be plugged into
+Spring Social VKontakte enables integration with VKontakte with
+`VKontakteConnectionFactory`, a connection factory that can be plugged into
 Spring Social's service provider connection framework, and with an API
-binding to LinkedIn's REST API.
+binding to VKontakte's REST API.
 
 [[]]
 === How to get
 
-The following Gradle dependency will add Spring Social LinkedIn to your
+The following Gradle dependency will add Spring Social VKontakte to your
 project:
 
 .build.gradle
 [source,groovy,subs="attributes,verbatim"]
 ----
-compile "org.springframework.social:spring-social-linkedin:{spring-social-linkedin-version}"
+compile "org.springframework.social:spring-social-vkontakte:{spring-social-vkontakte-version}"
 ----
 
 Or in Maven:
@@ -33,14 +32,14 @@ Or in Maven:
 ----
 <dependency>
   <groupId>org.springframework.social</groupId>
-  <artifactId>spring-social-linkedin</artifactId>
-  <version>{spring-social-linkedin-version}</version>
+  <artifactId>spring-social-vkontakte</artifactId>
+  <version>{spring-social-vkontakte-version}</version>
 </dependency>
 ----
 
-As an extension to Spring Social, Spring Social LinkedIn depends on
+As an extension to Spring Social, Spring Social VKontakte depends on
 Spring Social. Spring Social's core module will be transitively resolved
-from the Spring Social LinkedIn dependency. If you'll be using Spring
+from the Spring Social VKontakte dependency. If you'll be using Spring
 Social's web module, you'll need to add that dependency yourself.
 In Gradle:
 
@@ -60,11 +59,21 @@ Or in Maven:
   <artifactId>spring-social-web</artifactId>
   <version>{spring-social-version}</version>
 </dependency>
+...
+<repositories>
+  <repository>
+    <id>snapshot</id>
+    <name>Fugru Maven Snapshot Repository</name>
+    <url>http://fugru.com/archiva/repository/snapshots</url>
+    <releases><enabled>false</enabled></releases>
+    <snapshots><enabled>true</enabled></snapshots>
+  </repository>
+</repositories>
 ----
 
-Note that Spring Social LinkedIn may release on a different schedule
+Note that Spring Social VKontakte may release on a different schedule
 than Spring Social. Consequently, Spring Social's version may differ
-from that of Spring Social LinkedIn.
+from that of Spring Social VKontakte.
 
 Consult
 http://docs.spring.io/spring-social/docs/1.0.x/reference/html/overview.html#overview-howtoget[Spring
@@ -73,12 +82,12 @@ dependencies.
 
 
 [[]]
-== Configuring LinkedIn Connectivity
+== Configuring VKontakte Connectivity
 Spring Social's `ConnectController` works with one or more provider-specific `ConnectionFactory` instances to exchange authorization details with the provider and to create connections. 
-Spring Social LinkedIn provides `LinkedInConnectionFactory`, a `ConnectionFactory` for creating connections with LinkedIn.
+Spring Social VKontakte provides `VKontakteConnectionFactory`, a `ConnectionFactory` for creating connections with VKontakte.
 
-So that `ConnectController` can find `LinkedInConnectionFactory`, it must be registered with a `ConnectionFactoryRegistry`. 
-The following configuration class uses Spring Social's Java configuration support to register a `ConnectionFactory` for LinkedIn:
+So that `ConnectController` can find `VKontakteConnectionFactory`, it must be registered with a `ConnectionFactoryRegistry`. 
+The following configuration class uses Spring Social's Java configuration support to register a `ConnectionFactory` for VKontakte:
 
 ```java
 @Configuration
@@ -86,25 +95,25 @@ public class SocialConfig implements SocialConfigurer {
 
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
-        cfConfig.addConnectionFactory(new LinkedInConnectionFactory(
-            env.getProperty("linkedin.clientId"), 
-            env.getProperty("linkedin.clientSecret")));
+        cfConfig.addConnectionFactory(new VKontakteConnectionFactory(
+            env.getProperty("vkontakte.clientId"), 
+            env.getProperty("vkontakte.clientSecret")));
     }
 
     ...
 }
 ```
 
-If we wanted to add support for connecting to other providers, we would simply register their connection factories here in the same way as `LinkedInConnectionFactory`.
+If we wanted to add support for connecting to other providers, we would simply register their connection factories here in the same way as `VKontakteConnectionFactory`.
 
 Because client IDs and secrets may be different across environments (e.g., test, production, etc) it is recommended that these values be externalized. As shown here, Spring's `Environment` abstraction is provided as a parameter to `addConnectionFactories()` so that it can look up the application's client ID and secret.
 
-Optionally, you may also configure `LinkedInConnectionFactory` in XML.
-Using Spring Social LinkedIn's XML configuration namespace:
+Optionally, you may also configure `VKontakteConnectionFactory` in XML.
+Using Spring Social VKontakte's XML configuration namespace:
 
 ```xml
-<linkedin:config app-id="${linkedin.clientId}" 
-                 app-secret="${linkedin.clientSecret}" 
+<vkontakte:config app-id="${vkontakte.clientId}" 
+                 app-secret="${vkontakte.clientSecret}" 
                  app-namespace="socialshowcase" />
 ```
 
@@ -114,108 +123,69 @@ As in the Java-based configuration, the application's client ID and secret are e
 Refer to
 http://docs.spring.io/spring-social/site/docs/1.1.0.RC1/reference/htmlsingle/index.html#connecting[Spring Social's reference documentation] for complete details on configuring `ConnectController` and its dependencies.
 
-== LinkedIn API Binding
-Spring Social LinkedIn offers integration with LinkedIn's REST API with the `LinkedIn` interface and its implementation, `LinkedInTemplate`.
+== VKontakte API Binding
+Spring Social VKontakte offers integration with VKontakte's REST API with the `VKontakte` interface and its implementation, `VKontakteTemplate`.
 
-To create an instance of `LinkedInTemplate`, you may pass in your application's OAuth 2 access token to the constructor:
+To create an instance of `VKontakteTemplate`, you may pass in your application's OAuth 2 access token to the constructor:
 
 ```java
 String accessToken = "..."; // The access token granted after OAuth authorization
-LinkedIn linkedin = new LinkedInTemplate(accessToken);
+VKontakte vkontakte = new VKontakteTemplate(accessToken);
 ```
 
 If you are using Spring Social's
-http://docs.spring.io/spring-social/site/docs/1.1.0.RC1/reference/htmlsingle/index.html#connectFramework[service provider framework], you can get an instance of `LinkedIn` from a `Connection`. For example, the following snippet calls `getApi()` on a connection to retrieve a `LinkedIn`:
+http://docs.spring.io/spring-social/site/docs/1.1.0.RC1/reference/htmlsingle/index.html#connectFramework[service provider framework], you can get an instance of `VKontakte` from a `Connection`. For example, the following snippet calls `getApi()` on a connection to retrieve a `VKontakte`:
 
 ```java
-Connection<LinkedIn> connection = connectionRepository.findPrimaryConnection(LinkedIn.class);
+Connection<VKontakte> connection = connectionRepository.findPrimaryConnection(VKontakte.class);
 if (connection != null) {
-    LinkedIn linkedin = connection.getApi();
+    VKontakte vkontakte = connection.getApi();
 
-    // ... use LinkedIn API binding
+    // ... use VKontakte API binding
 }
 ```
 
-Here, `ConnectionRepository` is being asked for the primary connection that the current user has with LinkedIn. 
-If a connection to LinkedIn is found, it retrieves a `LinkedIn` instance that is configured with the connection details received when the connection was first established.
+Here, `ConnectionRepository` is being asked for the primary connection that the current user has with VKontakte. 
+If a connection to VKontakte is found, it retrieves a `VKontakte` instance that is configured with the connection details received when the connection was first established.
 
-Once you have a `LinkedIn` instance, you can perform a several operations against LinkedIn's API. 
-The `LinkedIn` interface is defined as follows:
+Once you have a `VKontakte` instance, you can perform a several operations against VKontakte's API. 
+The `VKontakte` interface is defined as follows:
 
 ```java
-public interface LinkedIn extends ApiBinding {
-
-  ConnectionOperations connectionOperations();
-  
-  NetworkUpdateOperations networkUpdateOperations();
-  
-  ProfileOperations profileOperations();
-  
-  CompanyOperations companyOperations();
-  
-  CommunicationOperations communicationOperations();
-  
-  JobOperations jobOperations();
-  
-  GroupOperations groupOperations();
-  
-  RestOperations restOperations();
-  
+public interface VKontakte extends ApiBinding {
+    public IUsersOperations usersOperations();
+    public IWallOperations wallOperations();
+    public IFriendsOperations friendsOperations();
+    public ISecureOperations secureOperations();
+    public ILocationOperations locationOperations();
+    public IAudioOperations audioOperations();
+    public IGroupsOperations groupsOperations();
+    public INewsFeedOperations newsFeedOperations();
+    public IUtilsOperations utilsOperations();
 }
 ```
 
-Each method returns sub-APIs, partitioning the LinkedIn service API into divisions targeting specific facets of LinkedIn functionality. 
+Each method returns sub-APIs, partitioning the VKontakte service API into divisions targeting specific facets of VKontakte functionality. 
 These sub-APIs are defined by interfaces described in <<table_subApis>>.
 
 [[table_subApis]]
-.LinkedIn's Sub-APIs
+.VKontakte's Sub-APIs
 [options="header",]
 |=======================================================================
 |Sub-API Interface       |Description
-|ConnectionOperations    |Send and receive connection requests with other LinkedIn users.
-|NetworkUpdateOperations |Retrieve and perform network updates (status updates).
-|ProfileOperations       |Retrieve and update user profiles.
-|CompanyOperations       |Retrieve and update company profiles.
-|CommunicationOperations |Send messages.
-|JobOperations           |Search, retrieve and bookmark job opportunities.
-|GroupOperations         |Work with LinkedIn groups.
+|UsersOperations         |API for performing operations on VKontakte user profiles.
+|WallOperations          |API for performing operations on feeds.
+|FriendsOperations       |API for performing operations with a user's set of friends.
+|SecureOperations        |API for performing secure operations.
+|LocationOperations      |API for performing operations with a location info.
+|AudioOperations         |API for performing operations with audio.
+|GroupsOperations        |API for performing operations with groups.
+|NewsFeedOperations      |API for performing operations with newsfeed.
+|utilsOperations         |API for performing operations with utils.
 |=======================================================================
 
-In addition to the LinkedIn-specific sub-APIs described in table <<table_subApis>>, `LinkedIn` also has a `restOperations()` method that returns a `RestOperations` (e.g., `RestTemplate`).
-The `RestOperations` returned is instrumented to add an OAuth `Authorization` header for all requests it sends to LinkedIn.
+In addition to the VKontakte-specific sub-APIs described in table <<table_subApis>>, `VKontakte` also has a `restOperations()` method that returns a `RestOperations` (e.g., `RestTemplate`).
+The `RestOperations` returned is instrumented to add an OAuth `Authorization` header for all requests it sends to VKontakte.
 
-What follows is a brief survey of common tasks you may perform with LinkedIn and its sub-APIs. 
-For complete details on the Spring Social's entire LinkedIn API binding, refer to the JavaDoc.
-
-[[]]
-=== Retrieving a user's LinkedIn profile data
-To retrieve the authenticated user's profile data, call the `getUserProfile()` method from the `ProfileOperations` interface:
-
-```java
-LinkedInProfile profile = linkedin.profileOperations().getUserProfile();
-```
-
-The data returned in the `LinkedInProfile` includes the user's LinkedIn ID, first and last names, their "headline", the industry they're in, and URLs for the public and standard profile pages.
-
-If it's only the user's LinkedIn ID you need, then you can get that by calling the `getProfileId()` method:
-
-```java
-String profileId = linkedin.profileOperations().getProfileId();
-```
-
-Or if you only need a URL for the user's public profile page, call `getProfileUrl()`:
-
-```java
-String profileUrl = linkedin.profileOperations().getProfileUrl();
-```
-
-[[]]
-=== Getting a user's LinkedIn connections
-To retrieve a list of LinkedIn users to whom the user is connected, call the `ConnectionOperations#getConnections()` method:
-
-```java
-List<LinkedInProfile> connections = linkedin.connectionOperations().getConnections();
-```
-
-This will return a list of `LinkedInProfile` objects for the user's 1st-degree network (those LinkedIn users to whom the user is directly linked--not their extended network).
-
+What follows is a brief survey of common tasks you may perform with VKontakte and its sub-APIs. 
+For complete details on the Spring Social's entire VKontakte API binding, refer to the JavaDoc.
