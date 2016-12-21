@@ -15,7 +15,6 @@
  */
 package org.springframework.social.vkontakte.connect;
 
-import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.UserActor;
 import com.vk.api.sdk.exceptions.ApiException;
@@ -27,8 +26,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.social.vkontakte.api.impl.VKontakteTemplate;
-
-import java.util.List;
 
 /**
  * VKontakte ServiceProvider implementation.

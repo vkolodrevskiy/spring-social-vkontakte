@@ -18,7 +18,7 @@ package org.springframework.social.vkontakte.api.impl;
 import com.vk.api.sdk.client.actors.ServiceActor;
 import com.vk.api.sdk.client.actors.UserActor;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
-import org.springframework.social.vkontakte.api.*;
+import org.springframework.social.vkontakte.api.VKontakte;
 
 /**
  * This is the central class for getting
