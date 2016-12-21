@@ -15,6 +15,8 @@
  */
 package org.springframework.social.vkontakte.api;
 
+import com.vk.api.sdk.client.actors.ServiceActor;
+import com.vk.api.sdk.client.actors.UserActor;
 import org.springframework.social.ApiBinding;
 
 /**
@@ -24,66 +26,16 @@ import org.springframework.social.ApiBinding;
  */
 public interface VKontakte extends ApiBinding {
     /**
-     * API for performing operations on VKontakte user profiles.
+     * Returns instance of {@code ServiceActor}.
      *
-     * @return {@link IUsersOperations}
+     * @return {@link ServiceActor}
      */
-    public IUsersOperations usersOperations();
+    public ServiceActor getServiceActor();
 
     /**
-     * API for performing operations on feeds.
+     * Returns instance of {@code UserActor}.
      *
-     * @return {@link IWallOperations}
+     * @return {@link UserActor}
      */
-    public IWallOperations wallOperations();
-
-    /**
-     * API for performing operations with a user's set of friends.
-     *
-     * @return {@link IFriendsOperations}
-     */
-    public IFriendsOperations friendsOperations();
-
-    /**
-     * API for performing secure operations.
-     *
-     * @return {@link ISecureOperations}
-     */
-    public ISecureOperations secureOperations();
-
-    /**
-     * API for performing operations with a location info.
-     *
-     * @return {@link ILocationOperations}
-     */
-    public ILocationOperations locationOperations();
-
-    /**
-     * API for performing operations with audio.
-     *
-     * @return {@link IAudioOperations}
-     */
-    public IAudioOperations audioOperations();
-
-
-    /**
-     * API for performing operations with groups.
-     *
-     * @return {@link IGroupsOperations}
-     */
-    public IGroupsOperations groupsOperations();
-
-    /**
-     * API for performing operations with newsfeed.
-     *
-     * @return {@link INewsFeedOperations}
-     */
-    public INewsFeedOperations newsFeedOperations();
-
-    /**
-     * API for performing operations with utils.
-     *
-     * @return {@link IUtilsOperations}
-     */
-    public IUtilsOperations utilsOperations();
+    public UserActor getUserActor();
 }

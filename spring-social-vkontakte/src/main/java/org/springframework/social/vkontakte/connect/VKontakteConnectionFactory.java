@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2014 the original author or authors.
+ * Copyright 2011-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package org.springframework.social.vkontakte.connect;
 
 import org.springframework.social.connect.support.OAuth2ConnectionFactory;
+import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.vkontakte.api.VKontakte;
 
 /**
@@ -33,5 +34,10 @@ public class VKontakteConnectionFactory extends OAuth2ConnectionFactory<VKontakt
         // vk.com does not send state parameter in it's OAuth2 callback
         // see https://github.com/vkolodrevskiy/spring-social-vkontakte/issues/14
         return false;
+    }
+
+    @Override
+    protected String extractProviderUserId(AccessGrant accessGrant) {
+        return ((VkAccessGrant) accessGrant).getUserId().toString();
     }
 }

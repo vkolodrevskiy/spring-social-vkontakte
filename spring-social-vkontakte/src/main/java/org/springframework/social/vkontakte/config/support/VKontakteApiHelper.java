@@ -7,6 +7,7 @@ import org.springframework.social.config.xml.ApiHelper;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.vkontakte.api.VKontakte;
+import org.springframework.social.vkontakte.api.impl.VKontakteTemplate;
 
 /**
  * Support class for JavaConfig and XML configuration support.
@@ -33,7 +34,7 @@ public class VKontakteApiHelper implements ApiHelper<VKontakte> {
         if (logger.isDebugEnabled() && connection == null) {
             logger.debug("No current connection; Returning default VKontakteTemplate instance.");
         }
-        return connection != null ? connection.getApi() : null;
+        return connection != null ? connection.getApi() : new VKontakteTemplate();
     }
 
     private final static Log logger = LogFactory.getLog(VKontakteApiHelper.class);

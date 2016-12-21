@@ -111,7 +111,7 @@ project('spring-social-vkontakte') {
       compile ("javax.servlet:javax.servlet-api:$servletApiVersion", provided)
       testCompile ("org.springframework:spring-test:$springVersion")
       testCompile ("org.springframework.security:spring-security-crypto:$springSecurityVersion")
-      testCompile ("org.apache.httpcomponents:httpclient:4.3.1", optional)
+      testCompile ("org.apache.httpcomponents:httpclient:4.5.2", optional)
     }
 }
 
