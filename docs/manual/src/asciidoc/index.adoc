@@ -47,6 +47,11 @@ In Gradle:
 [source,groovy,subs="attributes,verbatim"]
 ----
 compile "org.springframework.social:spring-social-web:{spring-social-version}"
+...
+repositories {
+  maven { url 'http://fugru.com/archiva/repository/snapshots' }
+}
+
 ----
 
 Or in Maven:
@@ -125,12 +130,28 @@ http://docs.spring.io/spring-social/site/docs/1.1.0.RC1/reference/htmlsingle/ind
 
 == VKontakte API Binding
 Spring Social VKontakte offers integration with VKontakte's REST API with the `VKontakte` interface and its implementation, `VKontakteTemplate`.
-
-To create an instance of `VKontakteTemplate`, you may pass in your application's OAuth 2 access token to the constructor:
+Before you start using it, please get familiar with VK Java SDK, check https://github.com/VKCOM/vk-java-sdk[github vk-java-sdk] also https://vk.com/dev/SDK[vk skd page].
+Interaction with VK API is done through VK Java SDK, the main class to work there is `VkApiClient`, to perform most of the operations this class requires `Actor` instances.
+Here comes Spring Social VKontakte -- it will provide instances of `Actor`.
+Here's sample of how you can use `VKontakte` with VK Java SDK `VkApiClient`:
 
 ```java
-String accessToken = "..."; // The access token granted after OAuth authorization
-VKontakte vkontakte = new VKontakteTemplate(accessToken);
+
+    private final VKontakte vkontakte;
+    @Inject
+    public VKontakteFriendsController(VKontakte vkontakte) {
+        this.vkontakte = vkontakte;
+    }
+
+    @RequestMapping(value="/getIds", method=RequestMethod.GET)
+    public String showFeed(Model model) throws ClientException, ApiException {
+        VkApiClient vk = new VkApiClient(HttpTransportClient.getInstance());
+        GetResponse userIds = vk.friends().get(vkontakte.getUserActor()).execute();
+        List<String> ids = userIds.getItems().stream().map(Object::toString).collect(Collectors.toList());
+        model.addAttribute("ids", ids);
+
+        return "getIds";
+    }
 ```
 
 If you are using Spring Social's
@@ -148,44 +169,24 @@ if (connection != null) {
 Here, `ConnectionRepository` is being asked for the primary connection that the current user has with VKontakte. 
 If a connection to VKontakte is found, it retrieves a `VKontakte` instance that is configured with the connection details received when the connection was first established.
 
-Once you have a `VKontakte` instance, you can perform a several operations against VKontakte's API. 
 The `VKontakte` interface is defined as follows:
 
 ```java
 public interface VKontakte extends ApiBinding {
-    public IUsersOperations usersOperations();
-    public IWallOperations wallOperations();
-    public IFriendsOperations friendsOperations();
-    public ISecureOperations secureOperations();
-    public ILocationOperations locationOperations();
-    public IAudioOperations audioOperations();
-    public IGroupsOperations groupsOperations();
-    public INewsFeedOperations newsFeedOperations();
-    public IUtilsOperations utilsOperations();
+    public ServiceActor getServiceActor();
+    public UserActor getUserActor();
+    public String getEmail();
 }
 ```
 
-Each method returns sub-APIs, partitioning the VKontakte service API into divisions targeting specific facets of VKontakte functionality. 
-These sub-APIs are defined by interfaces described in <<table_subApis>>.
+Here's description:
 
 [[table_subApis]]
-.VKontakte's Sub-APIs
+.VKontakte's methods
 [options="header",]
 |=======================================================================
-|Sub-API Interface       |Description
-|UsersOperations         |API for performing operations on VKontakte user profiles.
-|WallOperations          |API for performing operations on feeds.
-|FriendsOperations       |API for performing operations with a user's set of friends.
-|SecureOperations        |API for performing secure operations.
-|LocationOperations      |API for performing operations with a location info.
-|AudioOperations         |API for performing operations with audio.
-|GroupsOperations        |API for performing operations with groups.
-|NewsFeedOperations      |API for performing operations with newsfeed.
-|utilsOperations         |API for performing operations with utils.
+|Method           |Description
+|getServiceActor  |Returns instance of VK Java SDK ServiceActor
+|getUserActor     |Returns instance of VK Java SDK UserActor
+|getEmail         |Returns user email, if `email` scope was specified and user approved to share email.
 |=======================================================================
-
-In addition to the VKontakte-specific sub-APIs described in table <<table_subApis>>, `VKontakte` also has a `restOperations()` method that returns a `RestOperations` (e.g., `RestTemplate`).
-The `RestOperations` returned is instrumented to add an OAuth `Authorization` header for all requests it sends to VKontakte.
-
-What follows is a brief survey of common tasks you may perform with VKontakte and its sub-APIs. 
-For complete details on the Spring Social's entire VKontakte API binding, refer to the JavaDoc.
