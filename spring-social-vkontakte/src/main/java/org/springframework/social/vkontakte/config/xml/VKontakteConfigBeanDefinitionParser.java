@@ -22,8 +22,10 @@ import org.springframework.social.vkontakte.connect.VKontakteConnectionFactory;
 import org.springframework.social.vkontakte.security.VKontakteAuthenticationService;
 
 /**
- * Implementation of {@link AbstractProviderConfigBeanDefinitionParser} that creates a {@link VKontakteConnectionFactory}.
- * @author Craig Walls
+ * Implementation of {@link AbstractProviderConfigBeanDefinitionParser}
+ * that creates a {@link VKontakteConnectionFactory}.
+ *
+ * @author vkolodrevskiy
  */
 class VKontakteConfigBeanDefinitionParser extends AbstractProviderConfigBeanDefinitionParser {
 

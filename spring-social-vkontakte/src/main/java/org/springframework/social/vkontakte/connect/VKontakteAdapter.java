@@ -31,7 +31,8 @@ import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.vkontakte.api.VKontakte;
 
 /**
- * VKontakte ApiAdapter implementation.
+ * VKontakte {@link ApiAdapter} implementation.
+ *
  * @author vkolodrevskiy
  */
 public class VKontakteAdapter implements ApiAdapter<VKontakte> {

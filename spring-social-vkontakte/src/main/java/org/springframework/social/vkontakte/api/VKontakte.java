@@ -20,8 +20,11 @@ import com.vk.api.sdk.client.actors.UserActor;
 import org.springframework.social.ApiBinding;
 
 /**
- * Interface specifying a basic set of operations for interacting with VKontakte.
+ * This is the central place for getting
+ * {@link com.vk.api.sdk.client.actors.Actor} instances to interact with VK SDK,
+ * also it provides user email if corresponding permission was requested and approved.
  * Implemented by {@link org.springframework.social.vkontakte.api.impl.VKontakteTemplate}.
+ *
  * @author vkolodrevskiy
  */
 public interface VKontakte extends ApiBinding {

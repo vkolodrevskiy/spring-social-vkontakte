@@ -20,7 +20,8 @@ import org.springframework.social.oauth2.AccessGrant;
 import org.springframework.social.vkontakte.api.VKontakte;
 
 /**
- * VKontakte ConnectionFactory implementation.
+ * VKontakte {@link org.springframework.social.connect.ConnectionFactory} implementation.
+ *
  * @author vkolodrevskiy
  */
 public class VKontakteConnectionFactory extends OAuth2ConnectionFactory<VKontakte> {

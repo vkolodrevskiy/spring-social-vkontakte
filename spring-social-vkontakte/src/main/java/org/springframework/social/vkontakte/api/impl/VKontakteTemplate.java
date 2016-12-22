@@ -21,8 +21,8 @@ import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.vkontakte.api.VKontakte;
 
 /**
- * This is the central class for getting
- * {@link com.vk.api.sdk.client.actors.Actor} instances to interact with VK SDK.
+ * {@link VKontakte} implementation.
+ *
  * @author vkolodrevskiy
  */
 public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKontakte {

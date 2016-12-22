@@ -19,9 +19,9 @@ import org.springframework.social.config.xml.AbstractProviderConfigBeanDefinitio
 import org.springframework.social.config.xml.AbstractProviderConfigNamespaceHandler;
 
 /**
- * {@link org.springframework.beans.factory.xml.NamespaceHandler} for Spring Social VKontakte
+ * {@link org.springframework.beans.factory.xml.NamespaceHandler} for Spring Social VKontakte.
  * 
- * @author Craig Walls
+ * @author vkolodrevskiy
  */
 public class VKontakteNamespaceHandler extends AbstractProviderConfigNamespaceHandler {
 

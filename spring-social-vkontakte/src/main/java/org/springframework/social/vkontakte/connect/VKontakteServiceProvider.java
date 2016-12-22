@@ -23,7 +23,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * VKontakte ServiceProvider implementation.
+ * VKontakte {@link org.springframework.social.ServiceProvider} implementation.
+ *
  * @author vkolodrevskiy
  */
 public class VKontakteServiceProvider extends AbstractOAuth2ServiceProvider<VKontakte> {

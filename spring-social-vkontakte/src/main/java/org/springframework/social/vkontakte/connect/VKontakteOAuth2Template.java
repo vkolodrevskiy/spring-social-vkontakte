@@ -21,7 +21,8 @@ import org.springframework.social.oauth2.OAuth2Template;
 import java.util.Map;
 
 /**
- * VKontakte-specific extension of OAuth2Template.
+ * VKontakte-specific extension of {@link OAuth2Template}.
+ *
  * @author vkolodrevskiy
  */
 public class VKontakteOAuth2Template extends OAuth2Template {
