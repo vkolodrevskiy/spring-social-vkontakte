@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2014 the original author or authors.
+ * Copyright 2013-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,48 +15,77 @@
  */
 package org.springframework.social.vkontakte.connect;
 
+import com.vk.api.sdk.client.Lang;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
+import com.vk.api.sdk.objects.users.UserXtrCounters;
+import com.vk.api.sdk.queries.users.UserField;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.vkontakte.api.VKontakte;
-import org.springframework.social.vkontakte.api.VKontakteProfile;
-import org.springframework.web.client.HttpClientErrorException;
 
 /**
  * VKontakte ApiAdapter implementation.
  * @author vkolodrevskiy
  */
 public class VKontakteAdapter implements ApiAdapter<VKontakte> {
+    private final static Log log = LogFactory.getLog(VKontakteAdapter.class);
+
+    private final VkApiClient vkApiClient;
+
+    public VKontakteAdapter() {
+        this.vkApiClient = new VkApiClient(HttpTransportClient.getInstance());
+    }
+
     public boolean test(VKontakte vkontakte) {
         try {
-            vkontakte.usersOperations().getUser();
+            UserXtrCounters user = vkApiClient.users().get(vkontakte.getUserActor()).fields(UserField.SCREEN_NAME, UserField.PHOTO_200)
+                    .lang(Lang.EN).execute().get(0);
             return true;
-        } catch (HttpClientErrorException e) {
+        } catch (ApiException | ClientException e) {
             return false;
         }
     }
 
     public void setConnectionValues(VKontakte vkontakte, ConnectionValues values) {
-        VKontakteProfile profile = vkontakte.usersOperations().getUser();
-        values.setProviderUserId("" + profile.getId());
-        values.setDisplayName(profile.getFirstName() + " " + profile.getLastName());
-        values.setProfileUrl("http://vk.com/id" + profile.getId());
-        values.setImageUrl(profile.getPhoto200());
+        try {
+            UserXtrCounters user = vkApiClient.users().get(vkontakte.getUserActor())
+                    .fields(UserField.PHOTO_200)
+                    .lang(Lang.EN).execute().get(0);
+            values.setProviderUserId(String.valueOf(user.getId()));
+            values.setDisplayName(user.getFirstName() + " " + user.getLastName());
+            values.setProfileUrl("https://vk.com/id" + user.getId());
+            values.setImageUrl(user.getPhoto200());
+        } catch (ApiException | ClientException e) {
+            log.error("Error while getting current user info.", e);
+        }
     }
 
     public UserProfile fetchUserProfile(VKontakte vkontakte) {
-        VKontakteProfile profile = vkontakte.usersOperations().getUser();
-        return new UserProfileBuilder()
-                .setUsername(profile.getScreenName())
-                .setFirstName(profile.getFirstName())
-                .setLastName(profile.getLastName())
-                .setName(profile.getFirstName() + " " + profile.getLastName())
-                .build();
+        try {
+            UserXtrCounters user = vkApiClient.users().get(vkontakte.getUserActor())
+                    .fields(UserField.SCREEN_NAME, UserField.PHOTO_200)
+                    .lang(Lang.EN).execute().get(0);
+            return new UserProfileBuilder()
+                    .setId(String.valueOf(user.getId()))
+                    .setUsername(user.getScreenName())
+                    .setFirstName(user.getFirstName())
+                    .setLastName(user.getLastName())
+                    .setName(user.getFirstName() + " " + user.getLastName())
+                    .build();
+        } catch (ApiException | ClientException e) {
+            log.error("Error while getting current user info.", e);
+            return new UserProfileBuilder().build();
+        }
     }
 
     public void updateStatus(VKontakte vkontakte, String message) {
-        // vk api does not allow to perform status.set or wall.post methods for websites,
-        // so according to method contract we do nothing here
+        // It's not good idea to post something.
     }
 }

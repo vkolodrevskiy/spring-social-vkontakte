@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2011-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +19,39 @@ import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.social.vkontakte.api.impl.VKontakteTemplate;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * VKontakte ServiceProvider implementation.
  * @author vkolodrevskiy
  */
 public class VKontakteServiceProvider extends AbstractOAuth2ServiceProvider<VKontakte> {
 
-    protected final String clientSecret;
+    private final String clientSecret;
+    private final Integer clientId;
 
     public VKontakteServiceProvider(String clientId, String clientSecret) {
         super(new VKontakteOAuth2Template(clientId, clientSecret));
         this.clientSecret = clientSecret;
+        this.clientId = Integer.parseInt(clientId);
     }
 
     public VKontakte getApi(String accessToken) {
-        return new VKontakteTemplate(accessToken, clientSecret);
+        Integer providerUserId = null;
+        Matcher idMathcer = Pattern.compile("\\[id=([^\\]]*)\\]").matcher(accessToken);
+        if (idMathcer.find()) {
+            providerUserId = Integer.valueOf(idMathcer.group(1));
+            accessToken = accessToken.replaceAll("\\[id=" + providerUserId + "\\]", "");
+        }
+
+        String email = null;
+        Matcher emailMathcer = Pattern.compile("\\[email=([^\\]]*)\\]").matcher(accessToken);
+        if (emailMathcer.find()) {
+            email = emailMathcer.group(1);
+            accessToken = accessToken.replaceAll("\\[email=" + email + "\\]", "");
+        }
+
+        return new VKontakteTemplate(providerUserId, email, accessToken, clientId, clientSecret);
     }
 }

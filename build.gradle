@@ -26,8 +26,8 @@ configure(allprojects - docProjects) {
     }
     group = 'org.springframework.social'
 
-    sourceCompatibility=1.5
-    targetCompatibility=1.5
+    sourceCompatibility=1.8
+    targetCompatibility=1.8
 
     [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
 
@@ -104,13 +104,11 @@ project('spring-social-vkontakte') {
       compile ("org.springframework.social:spring-social-core:$springSocialVersion")
       compile ("org.springframework.social:spring-social-config:$springSocialVersion")
       compile ("org.springframework.social:spring-social-security:$springSocialVersion", optional)
-      compile ("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
-      compile ("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
-      compile ("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
+      compile ("com.vk.api:sdk:$vkSdkVersion")
       compile ("javax.servlet:javax.servlet-api:$servletApiVersion", provided)
       testCompile ("org.springframework:spring-test:$springVersion")
       testCompile ("org.springframework.security:spring-security-crypto:$springSecurityVersion")
-      testCompile ("org.apache.httpcomponents:httpclient:4.3.1", optional)
+      testCompile ("org.apache.httpcomponents:httpclient:4.5.2", optional)
     }
 }
 
