@@ -1,8 +1,9 @@
-Spring Social VKontakte 1.0.0 Milestone 4 (June 7, 2011)
+Spring Social VKontakte 1.0.0.BUILD-SNAPSHOT (June 7, 2011)
 =======================================================
- - Extracted Spring Social VKontakte module from core Spring Social project.
- - Renamed VKontakteApi to VKontakte.
- - Consume VKontakte resources as JSON instead of XML.
+ - Implemented support for UsersOperations, WallOperations, FriendsOperations, SecureOperations, LocationOperations
+   AudioOperations, GroupsOperations, NewsFeedOperations, UtilsOperations.
 
- Refer to Spring Social's changelog for a history of the VKontakte module
- prior to it being extracted into its own project.
+Spring Social VKontakte 2.0.0.BUILD-SNAPSHOT (January, 2016)
+=======================================================
+ - Removed previous API client implementation
+ - Migrated to VK Java SDK, https://vk.com/dev/Java_SDK
