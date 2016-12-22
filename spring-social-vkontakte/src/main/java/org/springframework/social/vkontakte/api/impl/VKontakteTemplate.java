@@ -1,5 +1,5 @@
 /*
- * Copyright 2011-2014 the original author or authors.
+ * Copyright 2011-2016 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     private ServiceActor serviceActor;
 
     private final Integer providerUserId;
+    private final String email;
     private final String accessToken;
     private final Integer clientId;
     private final String clientSecret;
@@ -39,12 +40,14 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
         this.accessToken = null;
         this.clientId = null;
         this.clientSecret = null;
+        this.email = null;
         initialize();
     }
 
-    public VKontakteTemplate(Integer providerUserId, String accessToken, Integer clientId, String clientSecret) {
+    public VKontakteTemplate(Integer providerUserId, String email, String accessToken, Integer clientId, String clientSecret) {
         super(accessToken);
         this.providerUserId = providerUserId;
+        this.email = email;
         this.accessToken = accessToken;
         this.clientId = clientId;
         this.clientSecret = clientSecret;
@@ -64,5 +67,10 @@ public class VKontakteTemplate extends AbstractOAuth2ApiBinding implements VKont
     @Override
     public UserActor getUserActor() {
         return userActor;
+    }
+
+    @Override
+    public String getEmail() {
+        return email;
     }
 }

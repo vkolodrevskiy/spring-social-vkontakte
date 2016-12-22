@@ -34,6 +34,15 @@ public class VKontakteOAuth2Template extends OAuth2Template {
     // When scope has "offline" option VKontakte returns expires_in=0, setting it to null in this case
     @Override
     protected AccessGrant createAccessGrant(String accessToken, String scope, String refreshToken, Long expiresIn, Map<String, Object> response) {
+        // append id and email to user token
+        // otherwise it would be very hard to change current spring social OAuth2 dance
+        if (response.get("user_id") != null) {
+            accessToken += "[id=" + response.get("user_id") + "]";
+        }
+        if (response.get("email") != null) {
+            accessToken += "[email=" + response.get("email") + "]";
+        }
+
         return new VkAccessGrant(accessToken, scope, refreshToken, expiresIn == 0 ? null : expiresIn, (Integer) response.get("user_id"));
     }
 }

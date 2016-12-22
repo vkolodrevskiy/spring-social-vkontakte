@@ -15,24 +15,18 @@
  */
 package org.springframework.social.vkontakte.connect;
 
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
-import com.vk.api.sdk.objects.users.UserXtrCounters;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
 import org.springframework.social.vkontakte.api.VKontakte;
 import org.springframework.social.vkontakte.api.impl.VKontakteTemplate;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * VKontakte ServiceProvider implementation.
  * @author vkolodrevskiy
  */
 public class VKontakteServiceProvider extends AbstractOAuth2ServiceProvider<VKontakte> {
-    private final static Log log = LogFactory.getLog(VKontakteServiceProvider.class);
 
     private final String clientSecret;
     private final Integer clientId;
@@ -44,16 +38,20 @@ public class VKontakteServiceProvider extends AbstractOAuth2ServiceProvider<VKon
     }
 
     public VKontakte getApi(String accessToken) {
-        VkApiClient vk = new VkApiClient(HttpTransportClient.getInstance());
-
         Integer providerUserId = null;
-        try {
-            UserXtrCounters user = vk.users().get(new UserActor(-1, accessToken)).execute().get(0);
-            providerUserId = user.getId();
-        } catch (ApiException | ClientException e) {
-            log.error("Error while getting current user info.", e);
+        Matcher idMathcer = Pattern.compile("\\[id=([^\\]]*)\\]").matcher(accessToken);
+        if (idMathcer.find()) {
+            providerUserId = Integer.valueOf(idMathcer.group(1));
+            accessToken = accessToken.replaceAll("\\[id=" + providerUserId + "\\]", "");
         }
 
-        return new VKontakteTemplate(providerUserId, accessToken, clientId, clientSecret);
+        String email = null;
+        Matcher emailMathcer = Pattern.compile("\\[email=([^\\]]*)\\]").matcher(accessToken);
+        if (emailMathcer.find()) {
+            email = emailMathcer.group(1);
+            accessToken = accessToken.replaceAll("\\[email=" + email + "\\]", "");
+        }
+
+        return new VKontakteTemplate(providerUserId, email, accessToken, clientId, clientSecret);
     }
 }
