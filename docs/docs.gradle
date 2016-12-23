@@ -31,7 +31,6 @@ project('manual') {
               'spring-social-version' : springSocialVersion,
               'spring-version' : springVersion,
               'spring-security-version' : springSecurityVersion,
-              'jacksonVersion' : jacksonVersion,
               revnumber : project.version
           ]
         ]
