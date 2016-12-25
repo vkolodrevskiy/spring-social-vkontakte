@@ -61,8 +61,8 @@ def customizePom(pom, gradleProject) {
             description = gradleProject.description
             url = 'https://github.com/vkolodrevskiy/spring-social-vkontakte'
             organization {
-                name = 'SpringSource'
-                url = 'http://springsource.org/spring-social'
+                name = 'Fugru'
+                url = 'http://fugru.com'
             }
             licenses {
                 license {
