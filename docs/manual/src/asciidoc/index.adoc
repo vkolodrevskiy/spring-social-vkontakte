@@ -2,7 +2,7 @@
 Viktor Kolodrevskiy
 
 The Spring Social VKontakte project is an extension to
-http://www.springframework.org/spring-social[Spring Social] that enables
+http://projects.spring.io/spring-social[Spring Social] that enables
 integration with VKontakte.
 
 == Introduction
